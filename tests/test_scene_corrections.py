@@ -25,8 +25,9 @@ with sync_playwright() as p:
  before=page.locator('.c1-background').bounding_box();page.locator('[data-fixture=phone]').click();assert not page.locator('.c1-closeup').count();assert before==page.locator('.c1-background').bounding_box();assert page.locator('#sceneFocusOverlay').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgba(0, 0, 0, 0)';assert page.get_by_role('button',name='Use telephone',exact=True).is_visible();page.screenshot(path=str(ROOT/'tests/results/phone-corrected.png'));ev('wardCloseFocus()')
  checks.append('phone opens contextual actions without enlarging or moving room artwork')
  ev("S.room='security';S.prev='lobby';S.f.power=0;S.f.powerOut=0;render()")
- assert page.locator('.c1-plane [data-destination=lobby]').count()==1
- assert 'Entered from' in page.locator('.c1-return-route [data-return-destination=lobby]').inner_text()
+ assert page.locator('.c1-plane [data-destination=lobby]').count()==0
+ assert page.locator('.c1-plane').evaluate('(e)=>!e.inert')
+ assert 'Entry behind you' in page.locator('.c1-entry-direction').inner_text()
  page.get_by_role('button',name='Turn around',exact=True).click();assert page.locator('.c1-rear-travel[data-destination=lobby]').count()==1;ev('wardCloseFocus()')
  # Each edge has a declared destination-light state, including the former entry.
  ev("S.room='lobby';S.prev='security';S.f.power=0;render()")

@@ -11,6 +11,8 @@ python tests/test_regressions.py
 python tests/test_scene_corrections.py
 python tests/test_visual_review.py
 python tests/test_five_room_input.py
+python tests/test_state_layers.py
+python tests/test_portal_weather.py
 python tests/test_art.py
 python tools/package_build.py
 python tests/test_delivery.py
@@ -49,10 +51,10 @@ with all further network access disabled. Other browsers and a human 2–3-hour 
 are not claimed tested. Optional live image-provider generation is not configured.
 
 The visual-review suite exercises desktop/mobile anchored panels and Take/Leave,
-adult actor bounds, four reverse assets, negative removal, file-hotspot cleanup,
+adult actor bounds, five review reverse assets, negative removal, file-hotspot cleanup,
 patient prerequisites/aftermath, three cover frames, and large-map controls.
 These checks verify behavior and supporting layouts; artistic acceptance and
-full remaining-room conversion are still review work.
+remaining collectible-art conversion are still review work.
 
 ## Actual-pointer acceptance checks
 
@@ -66,3 +68,21 @@ in every focus room with working motion controls. See tests/results/five_room_in
 
 A recorded browser preview is in docs/review/animated-scene.mp4. It shows the actual
 layered renderer, not a separately rendered promotional animation.
+
+## Fixed portals and exterior-only rain
+
+The graph has 27 edges / 54 directed transitions. The portal-weather suite clicks
+each edge and its return at 1600×1000 and 390×844, requiring the used entrance
+to be in the opposite camera view after arrival. It verifies every visible view's
+image loads, fixed portal identity, camera migration and retained turned-save view.
+All 40 nearby pursuit routes between non-safe rooms also verify that turning
+reverses the sound bearing. Safe rooms remain excluded from pursuit. Both lobby views are tested for moving weather pixels, with zero pixels outside
+the authored glazing polygons (one pixel antialias tolerance); the other 26 rooms
+have no rain canvas in either view. Reduced motion removes both animation canvases.
+The same suite runs with networking disabled against the packaged HTML.
+Results: `portal_weather.json` and `portal_weather_packaged.json`.
+
+All 27 front and 27 reverse images, plus four state images, were visually inspected
+for doorway placement and persistence. Rear target rectangles were fitted to those
+images individually. OCR and duplicate checks support this review; they are not
+proof of perfect artistic continuity.

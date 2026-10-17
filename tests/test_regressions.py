@@ -21,7 +21,7 @@ with sync_playwright() as p:
  for width,height in [(1600,1000),(1000,800),(390,844)]:
   page.set_viewport_size({'width':width,'height':height})
   for room in rooms:
-   ev("r=>{S.room=r;S.sceneFocus=null;S.f.introComplete=1;S.f.pursuerEncounter=0;S.f.powerOut=0;S.hp=100;S.pursuer.active=false;S.en={};$('m').innerHTML='';render()}",room)
+   ev("r=>{S.room=r;S.sceneView='front';S.sceneViewRoom=r;S.cameraSchema=2;S.sceneFocus=null;S.f.introComplete=1;S.f.pursuerEncounter=0;S.f.powerOut=0;S.hp=100;S.pursuer.active=false;S.en={};$('m').innerHTML='';render()}",room)
    page.wait_for_timeout(35)
    page.wait_for_function("document.querySelector('.c1-background').complete&&document.querySelector('.c1-background').naturalWidth>0")
    result=ev('''()=>{const plane=document.querySelector('.c1-plane'),r=plane.getBoundingClientRect();return [...plane.querySelectorAll('button')].filter(el=>{const a=el.getBoundingClientRect(),target=document.elementFromPoint(a.x+a.width/2,a.y+a.height/2);return a.width<=0||a.height<=0||a.left<r.left-1||a.right>r.right+1||a.top<r.top-1||a.bottom>r.bottom+1||(target!==el&&!el.contains(target))}).map(e=>e.getAttribute('aria-label'))}''')
@@ -40,7 +40,7 @@ with sync_playwright() as p:
  # Actual emergency recovery, no free light in dark rooms.
  ev("S.inv=[{n:'Flashlight',c:1}];S.bat=0;S.lightOn=false;wardFixtureAction('emergencyDynamo')")
  assert ev('S.bat===3&&!S.lightOn')
- ev("S.room='eastcorridor';render();wardInspectFixture('radio')")
+ ev("S.room='eastcorridor';S.sceneView='front';S.sceneViewRoom=S.room;S.cameraSchema=2;render();wardInspectFixture('radio')")
  assert not page.locator('#sceneFocusOverlay:not(.hid)').count()
  ev('toggleLight();wardInspectFixture("radio")')
  assert page.locator('#sceneFocusOverlay:not(.hid)').is_visible()

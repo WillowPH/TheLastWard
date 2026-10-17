@@ -1,8 +1,9 @@
 {
   "rooms": 27,
-  "state_images": 3,
-  "reverse_images": 5,
+  "state_images": 4,
+  "reverse_images": 27,
   "near_duplicates": [],
+  "reverse_near_duplicates": [],
   "ocr_prompts": [
     [
       "archive.webp",
@@ -121,6 +122,10 @@
       []
     ],
     [
+      "tunnel_rear_drained.webp",
+      []
+    ],
+    [
       "isoward_after.webp",
       []
     ],
@@ -129,7 +134,55 @@
       []
     ],
     [
+      "generator.webp",
+      []
+    ],
+    [
+      "pharmacy.webp",
+      []
+    ],
+    [
+      "specimen.webp",
+      []
+    ],
+    [
+      "records.webp",
+      []
+    ],
+    [
+      "residence.webp",
+      []
+    ],
+    [
+      "isolation.webp",
+      []
+    ],
+    [
+      "morgue.webp",
+      []
+    ],
+    [
+      "surgery.webp",
+      []
+    ],
+    [
+      "wardservice.webp",
+      []
+    ],
+    [
       "ward.webp",
+      []
+    ],
+    [
+      "isoward.webp",
+      []
+    ],
+    [
+      "archive.webp",
+      []
+    ],
+    [
+      "stafflounge.webp",
       []
     ],
     [
@@ -137,49 +190,112 @@
       []
     ],
     [
+      "chapel.webp",
+      []
+    ],
+    [
+      "wardnorth.webp",
+      []
+    ],
+    [
+      "laundry.webp",
+      []
+    ],
+    [
       "security.webp",
+      []
+    ],
+    [
+      "observation.webp",
       []
     ],
     [
       "eastcorridor.webp",
       []
+    ],
+    [
+      "powercontrol.webp",
+      []
+    ],
+    [
+      "boiler.webp",
+      []
+    ],
+    [
+      "tunnel.webp",
+      []
+    ],
+    [
+      "coldstore.webp",
+      []
+    ],
+    [
+      "lift.webp",
+      []
+    ],
+    [
+      "children.webp",
+      []
     ]
   ],
   "sha256": {
-    "assets/rooms/archive.webp": "f3d751a8a93cc251a2a1e5fec8e21673b92a4d3003fe489f3e559f6978b42dc0",
-    "assets/rooms/boiler.webp": "8010954179532d8d7c7dfd8f85789d0a082082156b6b1561e0c80c239b00f437",
-    "assets/rooms/chapel.webp": "3646cdd5387226006a305443a79bb141b7e93461f07c36137b8a64aca9b0d760",
-    "assets/rooms/children.webp": "0fc2a5cfda88f50b20df1fadb43619bebe48227a5f2e53cf5d886c7b269ededb",
-    "assets/rooms/coldstore.webp": "cd7250ec85ec105ddc0208acd2d8e00da4c816144706676ee19d9f8b9219c204",
-    "assets/rooms/eastcorridor.webp": "da9d6b73729b5c58e414bb0ffed5922e9146a8c0caaeae345b80d8361f6d939a",
-    "assets/rooms/generator.webp": "8cc504ca62bb6c56a86f73e32a5ac173702860c1bb6aacbed34dbee61b97c5c1",
-    "assets/rooms/isolation.webp": "98f7b9193dac378ae077ed5c13dcc8e520b4a98d66b8258231209a5e87b4e147",
-    "assets/rooms/isoward.webp": "6b1e297694943b704995aeb26c32b4825493b3b6f6d02dd6338d62124dd5f7db",
-    "assets/rooms/laundry.webp": "cfa9f1e3ff5a1194946faaec0ff5ddadfc3c7597bfb05cf8690851d2ff279684",
-    "assets/rooms/lift.webp": "b7d7436cf02fc324d7a2f57ce235a575b4f6749bf146cc6acd84c352d5fc57eb",
-    "assets/rooms/lobby.webp": "36630e9588fb38b8ec5ecb29058aaf6d44c2e5344cda58d214e8f946d5c67065",
-    "assets/rooms/morgue.webp": "bdce0a9c9feed99af6ec3d0b6626797e966c8403fc831199cbeddfc35888315f",
-    "assets/rooms/observation.webp": "149a15a578434fca0c0301f82c921f1ca9bb82e57423efdd7d8daf98de90d18e",
-    "assets/rooms/pharmacy.webp": "dacc1b9937265a5e818aa79588ba90e20bb396fb28d934bff3993b58d93566e8",
-    "assets/rooms/powercontrol.webp": "e39ee4b852cd298673a144c2d07bb60ac6c4b76c9d11412ab2bc3d25bd68827a",
-    "assets/rooms/records.webp": "2216a03ddeebec246b00dd1c86012ad343da2faf2b330f39e1e054cec456e857",
-    "assets/rooms/residence.webp": "e7dee9e1c481c03b800da0b969d89b6c7245857aaf0a8bca69cbe1d87f0e13f4",
-    "assets/rooms/room12.webp": "666130b25825c8064a2389bd1e8d352c1732b69c27281c64a018a16a71ae3835",
-    "assets/rooms/security.webp": "87b2efc194674c05a8f101941322d980ea230ba4ace7a5d6dabef20b49739764",
-    "assets/rooms/specimen.webp": "abd3a0b7b1f40c809a306ac3d9c8983774f2217aca7aacfe6b4912827a8f6b6e",
-    "assets/rooms/stafflounge.webp": "3f8b3483e9b095abd0511766d89cf5863a7faad82537a9ad139a35bdb4647796",
-    "assets/rooms/surgery.webp": "0d8dc88d2b0131c6e6c8f56a1ed922970adb5152b843e9fd95480f1e6b896c08",
-    "assets/rooms/tunnel.webp": "ef782639905f830289c1f7cbe16b98df1c2240cead6fd0e0630e71e9c1552b55",
-    "assets/rooms/ward.webp": "b962f18f2fddaad9fac94ec155751907ce8804bfdaf447ce8df69cdf30777346",
-    "assets/rooms/wardnorth.webp": "51d196470349ef02068f95b671a187603d89000fbe3dbe835f38d7d480828e03",
-    "assets/rooms/wardservice.webp": "1d06b4e1f249eec0e74a61bf0a75777ffaefa06bffa2f160bf05605f8f7ea94f",
-    "assets/states/tunnel_drained.webp": "ca1ae91d3b028a9d188fa333c83c774dc3bef1283c743678cbde050496ed7011",
-    "assets/states/surgery_after.webp": "9fb00b177482aaee5d05a2af49d153f2257bb5b0925a1cc231dcabe620ddcb2b",
-    "assets/states/isoward_after.webp": "2ae9748891e16a4c920e05edc5b8a216c4dcb60dd61c84e1f4341cd07aef0eb3",
-    "assets/reverse/lobby.webp": "c27c436592917e3595c3ac0c7392a83fef8766c79623636c1ce6a940edd39d0d",
-    "assets/reverse/ward.webp": "a7a3e7884540d4ea2e300d344a23b027a395a11e1ab73cb9e97ca5d25ab461bd",
-    "assets/reverse/room12.webp": "7b1a65b4d78e0590d842341a032da9ba350107a6e03d7333e62ed40448e6b343",
-    "assets/reverse/security.webp": "17199a45984d2286e82094a9651c2b8621015ca69ced25a5186a069000dc5ea0",
-    "assets/reverse/eastcorridor.webp": "3abbdbe0f04242264776fd156d1f7cdd61837853d3f3d89cfbdb7c0eb2fea922"
+    "assets/rooms/archive.webp": "250f1c78b870e29ecd7cf60fb0a43265ad488532f9d2532e3b3fc6b96a2c759f",
+    "assets/rooms/boiler.webp": "ea72681fdda9dfcd65ecfc408927e5bc5a95be6fa068251424bc61b0e25290e6",
+    "assets/rooms/chapel.webp": "80324b9fce439b6491e4ac6b044735bf770d06c3b55b008b8f66e268dae8044e",
+    "assets/rooms/children.webp": "3530b4c91cc687737d445115a3850ff869d34098ad8f9ce2781dfcbf5bcdaf33",
+    "assets/rooms/coldstore.webp": "9cb5a1fda072a51e639630a972a94d04ca8dacf82cc8a2ec0c9582e23fe9534c",
+    "assets/rooms/eastcorridor.webp": "9c8041ae3205b2e8f6c81c8c29d32794d35973ca271155b1d21603afb0b72f29",
+    "assets/rooms/generator.webp": "f5b18761e4bc8637e67232d6880c465fc9fa621578956f9102cf03c585acb5a9",
+    "assets/rooms/isolation.webp": "fab226de861b988ee2c6791498a8cdd75bd0cebdeb07d4d9918805888d79d561",
+    "assets/rooms/isoward.webp": "12425e8a9f1b78395a47c5573ad722094f44b6a144004866e013215f1fbef4cd",
+    "assets/rooms/laundry.webp": "37865a4de85a943f0664248f9b73900cb0c994f271768f31f9c322247f9f3485",
+    "assets/rooms/lift.webp": "699a6f8c772a6561acfef4b222cfaeb7492adb4b8b5fdab3c9370d6cae093be8",
+    "assets/rooms/lobby.webp": "e8daa37a6ff9b94f318f5520f77990c5db1f93c6c04be49e1073919a7e6c0bb3",
+    "assets/rooms/morgue.webp": "6fcbbaf52c4007496065a9f31eea964b4135a268cc6304a49faa1aa16ef63e42",
+    "assets/rooms/observation.webp": "558cda2c31acbf48b4b931a073d7d0c88d99f7801966884c835df121fe99da6f",
+    "assets/rooms/pharmacy.webp": "30a817c1a0b230b6e116ef628ec7a2ba73bb488431c4baa66899d1b734ef62eb",
+    "assets/rooms/powercontrol.webp": "6868bd1768e47bd4a8eb654dd621864cad0ac654fb3144a76bec84c0bb12ef92",
+    "assets/rooms/records.webp": "a176755dd81ab13823b3fee892f8b6d52eb7595349cf2bd963079de9c0daa70b",
+    "assets/rooms/residence.webp": "9b91fa8445e216606601246f0cd9d45ddddf0f390a96d87b3fbd159327c1a9dc",
+    "assets/rooms/room12.webp": "01e22321a2adfae73edbeaa38e931793fe802c87cf1d466d801d93a5d6c8324a",
+    "assets/rooms/security.webp": "979d7e95a52770f2bbef2f6044129b8ad39efe2c10ebee2865ee7e82203dc665",
+    "assets/rooms/specimen.webp": "a08fe4368a97b5ce6a251343ce43200f61ae1efea376a69ac516af034b65bf01",
+    "assets/rooms/stafflounge.webp": "c605750f912d4f74ab2bfda8793138e41f4229807ae7a77a695558106fef9136",
+    "assets/rooms/surgery.webp": "5cc98ce6da81bc74f6fc3f0a03d6e4ffbc70b22f7c4552656f4422817cc2ef7a",
+    "assets/rooms/tunnel.webp": "74b182590366e61d94e5a9c25cdabed122a69ae39d719d981f8af81b807968ef",
+    "assets/rooms/ward.webp": "64bfe09597bf4770d0041ad34479b1d43947aa4e161c77d5b58e9f987131030d",
+    "assets/rooms/wardnorth.webp": "200192c84a2b020ca09337fe4ac7b799dcdd3da3dcd10eb17334668f4d236b29",
+    "assets/rooms/wardservice.webp": "e4fbae35cd7c93d9bea725916a328997daac8e38ccc5539f7e11f8d4570b0642",
+    "assets/states/tunnel_drained.webp": "cf6a3cbcb2c100e9867d9f38fcda673320a8317b54c08725341cb075a8d99f17",
+    "assets/states/surgery_after.webp": "daaff5d614d6b7345efa0900e87e0d61e1d4ba7dca094cf49f6226acb4a4afe7",
+    "assets/states/tunnel_rear_drained.webp": "5c2adcd20eaf76c132fba47b35df7d84b68db1bb28f986e9bd6d03b604acdb8f",
+    "assets/states/isoward_after.webp": "3621f4b66d9fd4c35b3e8d475691975718bc6d49133fe028fb75c8bf1e93959b",
+    "assets/reverse/lobby.webp": "d720013791230d3c47d2fcba447cdf8a1b9f8641319e50f1438807f59a604ad9",
+    "assets/reverse/generator.webp": "06ee0e3ad5c7cff2c30ef3725ff5d6fbd680d3937ba2af2e1f5d3bcb8e481264",
+    "assets/reverse/pharmacy.webp": "581dfbc15b9d3cf21794e3dae3716f3657f20e668c8b892332daf12799b5b3ac",
+    "assets/reverse/specimen.webp": "54f4fddfb1c429fc7a0910430966425d442ac6bbe23f51ef2ee6d30d6760e9a0",
+    "assets/reverse/records.webp": "0bb79b6c32324a6a73e9333253da1ec4d3bfa64a0bd27a2f8d1c93beec5ef71c",
+    "assets/reverse/residence.webp": "fd819f499299055886f5fc672b1aebfc2de972c76974cc551484cf2b9cfef238",
+    "assets/reverse/isolation.webp": "008d083762ac126907c98e10745a5990bda687f1e191c60a711a8e1c8402de0e",
+    "assets/reverse/morgue.webp": "eaeadd0e765506daceba617b95e31fb54d5a5356fa589dbf43c7c6be36e33d78",
+    "assets/reverse/surgery.webp": "0843e003c5f2a34d5196958a86108af2ebc1bd08c600b459bf4859cbbf154f2c",
+    "assets/reverse/wardservice.webp": "71af1638c05dc3d8e11cfda173c96f4e827e531f03ef91dc3159924bb942df01",
+    "assets/reverse/ward.webp": "dc533991760987c2f86e5ab92c23aca48b8e454d906358dfc838cdf957136163",
+    "assets/reverse/isoward.webp": "85eeb6bad837c1eb7d3e4d4867566e9de1129712cc8205149debe2c0d8ca61a8",
+    "assets/reverse/archive.webp": "f4a4dfdb9ef6f02a2d6d2668182fbfbfbfbf18b37a2285e1cfa92e5054f612ec",
+    "assets/reverse/stafflounge.webp": "ea27595c5fe3ae22e52927d4117bec54149ccb47d939ef4c8c3011b883bb0b0c",
+    "assets/reverse/room12.webp": "774adb96b72beef2c5da227e6cfa0cf3eff99346053f66b96a29473aeadec02d",
+    "assets/reverse/chapel.webp": "b4cc4f9cb5112d0537b834f2cdc3759d018520a9f913bc6305755c12e426000c",
+    "assets/reverse/wardnorth.webp": "8d286361d556f5081533485792f4280e29e32ed8993150d69fd7f1655fa3e5fd",
+    "assets/reverse/laundry.webp": "8e83556638fa1641be4c427294365169cf898dc6ed60945a1db23c87f500dc93",
+    "assets/reverse/security.webp": "bb3ad269dbb1ef480a1ca24150e65bf11cd3ca368a359ac51fd26cf6afd0aadb",
+    "assets/reverse/observation.webp": "43a599ae83955365de579146a0d534844c53d19f5b7d662d61120cbfacd6ccc7",
+    "assets/reverse/eastcorridor.webp": "41d7dfe4e5bb9d2bfdb275a8d159d7468ff4baa9d84e4a5b8d074740daa687f2",
+    "assets/reverse/powercontrol.webp": "36bc7ca7aec8a128aeb02640f921af8a9e40d16270add4a37fcefac9291a3740",
+    "assets/reverse/boiler.webp": "2dc84248c6bdcdabc425b167a719d1c95681549dcd1e16de5c200a5627b8f408",
+    "assets/reverse/tunnel.webp": "eee2909e02cd76ef80b0ecf4b1a005f4d13389e4ff8e01ae39309a409eabe0de",
+    "assets/reverse/coldstore.webp": "f2627bf2a15057cbdb9f66467609c088899735d70ab09139bd300ea1dce0e821",
+    "assets/reverse/lift.webp": "9e5a5c4a83ede9f3dc12efc395d56e71f0b2731a45230ae279ad84dab7c970b8",
+    "assets/reverse/children.webp": "e310a06c818ef4ae96d360a2b2ee511dafe91ee7d82b679cba2eac2fe0371382"
   }
 }

@@ -6,8 +6,8 @@ merged into it. The complete agreed scope is retained in docs/MASTER_REQUIREMENT
 | Area | Implementation |
 | --- | --- |
 | Chapter boundary and gates | js/chapter1_complete.js; 27 rooms, 27 graph edges, one elevator entrance; no B2/Chapter 3 map nodes |
-| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, entry breadcrumb and return control, five full reverse backgrounds; black doorway-shading patches removed |
-| Art and targets | data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 155 fixtures and explicit door rectangles |
+| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, fixed front/rear portal identities, arrival orientation, 27 reverse backgrounds; black doorway-shading patches removed |
+| Art and targets | data/chapter1_views.json, data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 155 fixtures and explicit door rectangles |
 | Scene/state/inspection | js/chapter1_scene.js; art and targets resize on one uncropped plane; no arbitrary coordinate fallback |
 | Threats and conditions | js/chapter1_survival.js; traversal, encounters, injury aim/movement effects, hiding, rare hallucination, sprinkler recovery and cold/wet recovery |
 | People and evidence | js/chapter1_people.js; named NPCs, coherent aftermath, missing-nurse evidence, non-repeating consequences |
@@ -28,9 +28,14 @@ props or decoration. The elevator's rear doors are operated by its controls; the
 not an invisible doorway into an unfinished Chapter 2. Its side cage returns upstairs.
 
 A changed scene can have changed geometry: Kessler's aftermath uses a separate image
-and the inspection target moves to the visible fallen sleeve. Every visible physical travel door keeps its target; five focus rooms have full reverse
-backgrounds. Other rooms have a return control without the removed door cutout.
-Fixed room compositions do not imply a freely rotating camera. Contextual inspection keeps the original scene scale.
+and the inspection target moves to the visible fallen sleeve. Each room's portal IDs are partitioned into fixed front/rear views. The rear
+portal ID never depends on S.prev. Camera schema 2 chooses the opposite facing on
+arrival and migrates older saves once; manual camera state then persists. The
+front plane is hidden and inert while rear is active. Every physical travel door
+has one target in its own view, with measured per-room geometry. All 27 front
+backgrounds remove the relocated door; all 27 reverse backgrounds show one fixed
+closed doorway. These are two scene views, not a freely rotating 3D camera.
+Contextual inspection keeps the original scene scale.
 Hiding requires confirmation and reveals the room only through a narrow peek gap.
 Other state effects use
 separate overlays and the established save flags. Documents remain physical papers
@@ -53,7 +58,7 @@ The desired 2–3-hour runtime and final human acceptance of pacing remain unver
 
 ## Visual review scope
 
-See docs/VISUAL_REVIEW.md for the five-room review and remaining artwork conversion.
+See docs/VISUAL_REVIEW.md for the full camera pass and remaining collectible-art conversion.
 js/chapter1_review.js provides the enlarged physical-connection map and visible
 patient-action prerequisites. The actual graph is unchanged: North Corridor branches
 to Room 12 and Isolation separately; Children’s Ward connects to Room 12.
@@ -62,7 +67,7 @@ to Room 12 and Isolation separately; Children’s Ward connects to Room 12.
 
 Clara uses an explicitly authored silhouette hit area. Reverse door buttons are
 absolutely positioned inside the art plane and cannot cover footer controls.
-Front views retain all physical door targets; the entry is never silently removed.
+Door targets belong to their fixed view, matching the revised artwork; the entry is behind arrival.
 Door-lock failures are modal, and scene view survives flashlight updates.
 
 The authoring script defines nine explicit collectible image rectangles for the
@@ -71,3 +76,16 @@ artwork is cleared separately using authored edits. Containers can remain open f
 multiple actions without resetting focus. The security cabinet's two empty-case
 inspections are merged into one. `js/chapter1_motion.js` paints frame-driven layers
 on the current front/reverse art plane; targets remain stationary and unobstructed.
+
+## Exterior weather
+
+`js/chapter1_motion.js` owns one independent transparent weather canvas. Hand-authored
+front/rear glazing polygons exclude frames and interior objects. Ambient reflected
+light is a separate canvas; the duplicate rectangular CSS rain and its keyframes
+are removed. Reduced motion disables both. `tests/test_portal_weather.py` checks
+actual doorway clicks and arrival/return facing across all 54 directed edges at
+desktop/mobile sizes, save migration, asset loading, and every rain pixel outside
+the permitted glass areas. It also runs against the packaged HTML offline.
+
+Pursuer panning and sound captions use the fixed portal geometry and current camera
+facing, including ahead/behind cues. Turning reverses the horizontal bearing.

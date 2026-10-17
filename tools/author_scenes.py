@@ -80,6 +80,11 @@ for room_id,fixtures in loose.items():
 for f in rooms['security']['fixtures']:
  if f['id']=='clara':f['actorHit']='46% 2%,59% 3%,64% 8%,63% 17%,70% 23%,73% 50%,72% 57%,70% 65%,72% 91%,75% 99%,60% 99%,55% 71%,51% 61%,48% 76%,45% 92%,47% 96%,32% 96%,30% 92%,36% 72%,37% 61%,29% 54%,30% 32%,35% 22%,43% 18%,42% 10%'
  if f['id']=='cabinet':f['ids']=['rev']
+# Fixed portal identities are independent of the last visited room.
+views=json.loads((ROOT/'data/chapter1_views.json').read_text())
+for room_id,bp in rooms.items():
+ view=views[room_id];assert view['rearDoor'] in bp['doors']
+ bp['views']={'front':{'doors':{k:v for k,v in bp['doors'].items() if k!=view['rearDoor']}},'rear':{'doors':{view['rearDoor']:view['rearRect']}}}
 (ROOT/'data/chapter1_scenes.json').write_text(json.dumps(rooms,indent=2,ensure_ascii=False)+'\n')
 (ROOT/'js/scene_manifest.js').write_text('/* Generated from the explicitly authored data/chapter1_scenes.json. */\nwindow.WardScenes='+json.dumps(rooms,ensure_ascii=False,separators=(',',':'))+';\n')
 print('Authored scenes:',len(rooms))

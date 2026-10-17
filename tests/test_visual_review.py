@@ -16,7 +16,7 @@ with sync_playwright() as p:
  npc=page.locator('img.c1-npc').bounding_box();plane=page.locator('.c1-plane').bounding_box();assert npc['height']>=plane['height']*.58;page.screenshot(path=str(OUT/'review-clara.png'))
  checks.append('Clara uses authored full adult height and floor placement rather than fixture-thumbnail bounds')
  for room,previous in [('lobby','security'),('security','lobby'),('eastcorridor','security'),('ward','eastcorridor'),('room12','wardnorth')]:
-  ev('(a)=>{S.room=a[0];S.prev=a[1];S.sceneFocus=null;render();wardTurnAround()}',[room,previous]);page.wait_for_function("document.querySelector('.c1-reverse-plane img').complete&&document.querySelector('.c1-reverse-plane img').naturalWidth>0")
+  ev('(a)=>{S.room=a[0];S.prev=a[1];S.sceneFocus=null;S.sceneView="front";S.sceneViewRoom=S.room;S.cameraSchema=2;render();wardTurnAround()}',[room,previous]);page.wait_for_function("document.querySelector('.c1-reverse-plane img').complete&&document.querySelector('.c1-reverse-plane img').naturalWidth>0")
   assert page.locator('.c1-reverse-plane img').get_attribute('src')=='assets/reverse/'+room+'.webp';assert page.locator('.c1-rear-travel').get_attribute('data-destination')==previous
   page.screenshot(path=str(OUT/f'review-reverse-{room}.png'));ev('wardCloseFocus()')
  checks.append('all five review rooms load distinct full reverse backgrounds with matching return destination')

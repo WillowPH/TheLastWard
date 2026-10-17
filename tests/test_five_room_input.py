@@ -9,7 +9,7 @@ with sync_playwright() as p:
  for _ in range(3):page.locator('#m button[onclick="nextIntro()"]').click()
  def ev(x,arg=None):return page.evaluate(x,arg)
  def setup(room,previous=None):
-  ev('(a)=>{S.room=a[0];S.prev=a[1];S.sceneFocus=null;S.sceneFocusRoom=S.room;S.sceneView="front";S.sceneViewRoom=S.room;S.hp=100;S.en={};S.pursuer.active=false;S.f.pursuerEncounter=0;S.f.hidingRoom=null;S.lightOn=true;S.bat=30;WardNavigation.until=0;$("m").innerHTML="";render()}',[room,previous])
+  ev('(a)=>{S.room=a[0];S.prev=a[1];S.sceneFocus=null;S.sceneFocusRoom=S.room;S.sceneView="front";S.sceneViewRoom=S.room;S.cameraSchema=2;S.hp=100;S.en={};S.pursuer.active=false;S.f.pursuerEncounter=0;S.f.hidingRoom=null;S.lightOn=true;S.bat=30;WardNavigation.until=0;$("m").innerHTML="";render()}',[room,previous])
  def click_art(rect,plane='.c1-plane'):
   r=page.locator(plane).bounding_box();page.mouse.click(r['x']+r['width']*rect[0]/100,r['y']+r['height']*rect[1]/100)
  # One real click on each visible physical doorway, including the room of entry.
@@ -17,7 +17,7 @@ with sync_playwright() as p:
  for room in ROOMS:
   doors=ev('r=>Object.entries(WardScenes[r].doors)',room)
   for id,rect in doors:
-   destination=ev('a=>D[a[0]].a===a[1]?D[a[0]].b:D[a[0]].a',[id,room]);setup(room,destination);ev('id=>{S.dr[id]=1;S.f["doctor_"+S.room]=1}',id);click_art(rect);assert ev('S.room')==destination,(room,id,destination,ev('S.room'));total+=1
+   destination=ev('a=>D[a[0]].a===a[1]?D[a[0]].b:D[a[0]].a',[id,room]);setup(room,destination);ev('id=>{S.dr[id]=1;S.f["doctor_"+S.room]=1}',id);wanted=ev('a=>WardScene.portalView(a[0],a[1])',[room,id]);ev("v=>{S.sceneView=v;render()}",wanted);click_art(ev('a=>WardScenes[a[0]].views[a[1]].doors[a[2]]',[room,wanted,id]),'.c1-reverse-plane' if wanted=='rear' else '.c1-plane');assert ev('S.room')==destination,(room,id,destination,ev('S.room'));total+=1
  checks.append(f'{total} actual doorway-coordinate clicks traverse the matching edge, including entry doors')
  setup('eastcorridor','security');ev("delete S.dr.ew;S.inv=S.inv.filter(x=>x.n!=='Staff Access Card')");click_art(ev('WardScenes.eastcorridor.doors.ew'));assert ev("S.room==='eastcorridor'");assert 'Staff Access Card' in page.locator('#m').inner_text();page.get_by_role('button',name='Stay here',exact=True).click()
  checks.append('locked doorway click gives a visible requirement dialog rather than silently failing')
@@ -28,7 +28,7 @@ with sync_playwright() as p:
  for width,height in [(1600,1000),(390,844)]:
   page.set_viewport_size({'width':width,'height':height})
   for room in ROOMS:
-   prev=ev('r=>{const d=Object.values(D).find(d=>d.a===r||d.b===r);return d.a===r?d.b:d.a}',room);setup(room,prev);ev('S.sceneView="front";render()');page.get_by_role('button',name='Turn around',exact=True).click();door=page.locator('.c1-rear-travel');assert door.evaluate('(e)=>getComputedStyle(e).position')=='absolute';page.get_by_role('button',name='Face the room',exact=True).click();assert not page.locator('.c1-rear-view').count()
+   prev=ev('r=>{const id=Object.keys(WardScenes[r].views.rear.doors)[0],d=D[id];return d.a===r?d.b:d.a}',room);setup(room,prev);ev('S.sceneView="front";render()');page.get_by_role('button',name='Turn around',exact=True).click();door=page.locator('.c1-rear-travel');assert door.evaluate('(e)=>getComputedStyle(e).position')=='absolute';page.get_by_role('button',name='Face the room',exact=True).click();assert not page.locator('.c1-rear-view').count()
    page.get_by_role('button',name='Turn around',exact=True).click();page.locator('#lightBtn').click();assert page.locator('.c1-rear-view').count()==1;page.keyboard.press('Escape');assert not page.locator('.c1-rear-view').count()
    page.get_by_role('button',name='Turn around',exact=True).click();ev('p=>{S.dr[WardNavigation.edge(S.room,p)]=1;WardNavigation.until=0}',prev);r=door.bounding_box();page.mouse.click(r['x']+r['width']/2,r['y']+r['height']/2);assert ev('S.room')==prev,(width,room,prev)
  checks.append('all five reverse views support actual door clicks, Face the room and Escape at desktop/mobile sizes; flashlight preserves the view')
@@ -51,7 +51,7 @@ with sync_playwright() as p:
  checks.append(f'all {item_count} authored five-room collectibles remain when left and disappear when taken, including after re-render')
  # Compare actual drawn frame pixels, not only the presence of CSS animation names.
  for room in ROOMS:
-  setup(room);ev('WardScene.options.motion=true;WardScene.options.motionOverride=true;render()');page.wait_for_timeout(150);first=page.locator('.c1-motion-canvas').evaluate('(c)=>c.toDataURL()');page.wait_for_timeout(450);second=page.locator('.c1-motion-canvas').evaluate('(c)=>c.toDataURL()');assert first!=second,room;page.get_by_role('button',name='Motion · on',exact=True).click();assert not page.locator('.c1-motion-canvas').count();page.get_by_role('button',name='Motion · off',exact=True).click();assert page.locator('.c1-motion-canvas').count()==1
+  setup(room);ev('WardScene.options.motion=true;WardScene.options.motionOverride=true;render()');page.wait_for_timeout(150);first=page.locator('.c1-weather-rain' if room=='lobby' else '.c1-motion-canvas').evaluate('(c)=>c.toDataURL()');page.wait_for_timeout(450);second=page.locator('.c1-weather-rain' if room=='lobby' else '.c1-motion-canvas').evaluate('(c)=>c.toDataURL()');assert first!=second,room;page.get_by_role('button',name='Motion · on',exact=True).click();assert not page.locator('.c1-motion-canvas').count();page.get_by_role('button',name='Motion · off',exact=True).click();assert page.locator('.c1-motion-canvas').count()==1
  checks.append('all five rooms produce changing animation pixels; on/off control works')
  assert not errors,errors;page.screenshot(path=str(OUT/'five-room-input-final.png'));b.close()
 (OUT/'five_room_input.json').write_text(json.dumps({'passed':checks,'count':len(checks)},indent=2))

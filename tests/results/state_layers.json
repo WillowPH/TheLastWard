@@ -1,7 +1,8 @@
 {
   "passed": [
-    "surgery persistent state image loads",
-    "tunnel persistent state image loads",
-    "surgical aftermath target moves to fallen sleeve"
-  ]
+    "surgery persistent front/rear state images load; fixed rear portal retained",
+    "isoward persistent front/rear state images load; fixed rear portal retained",
+    "tunnel persistent front/rear state images load; fixed rear portal retained"
+  ],
+  "count": 3
 }

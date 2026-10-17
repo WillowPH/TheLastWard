@@ -11,7 +11,15 @@ function play(name,{volume=.45,pan=0,rate=1,bus='fx',loop=false}={}){if(!audio.e
  if(active.size>=12&&!loop){const first=[...active].find(a=>!a.loop);first?.pause();if(first)active.delete(first)}active.add(a);a.addEventListener('ended',()=>active.delete(a),{once:true});a.addEventListener('error',()=>{active.delete(a);console.warn('Missing local recording',name)},{once:true});a.play().catch(()=>active.delete(a));history.push({name,pan,rate,bus});if(history.length>80)history.shift();return a;}
 function loop(key,name,volume){const old=loops.get(key);if(old?.name===name){old.audio.volume=Math.min(.5,volume*(S?.audio?.amb??.3));return;}if(old){old.audio.pause();active.delete(old.audio);loops.delete(key)}if(!name)return;const a=play(name,{volume,bus:'amb',loop:true});if(a)loops.set(key,{name,audio:a});}
 function stop(keepEnding=false){for(const a of [...active])if(!keepEnding||a.dataset.ending!=='true'){a.pause();active.delete(a)}loops.clear();}
-function distance(){if(!S?.pursuer?.active)return {distance:99,pan:0};if(S.pursuer.room===S.room)return {distance:0,pan:0};const path=pursuerPath(S.pursuer.room,S.room);if(!path.length)return {distance:99,pan:0};const reverse=pursuerPath(S.room,S.pursuer.room),next=reverse[1],door=roomConnections().find(d=>d.to===next),rect=door&&window.WardScenes?.[S.room]?.doors[door.id];return {distance:path.length-1,pan:rect?(rect[0]-50)/60:0};}
+function distance(){
+ if(!S?.pursuer?.active)return {distance:99,pan:0};
+ if(S.pursuer.room===S.room)return {distance:0,pan:0};
+ const path=pursuerPath(S.pursuer.room,S.room);if(!path.length)return {distance:99,pan:0};
+ const next=pursuerPath(S.room,S.pursuer.room)[1],door=roomConnections().find(d=>d.to===next);
+ const view=door&&WardScene.portalView(S.room,door.id),rect=door&&WardScenes[S.room].views[view].doors[door.id];
+ const behind=!!view&&S.sceneView!==view,pan=rect?(rect[0]-50)/60*(behind?-1:1):0;
+ return {distance:path.length-1,pan,behind,bearing:behind?'behind you':pan<-.12?'to your left':pan>.12?'to your right':'ahead'};
+}
 function sync(){if(!S||!audio.enabled||S.hp<=0){stop();return;}if(S.f.chapter1Complete){stop(true);return;}const r=S.room;
  if(r!==lastRoom){lastRoom=r;ringAt=0;stepAt=0;infectedAt=0;}
  const water=['lobby','eastcorridor','tunnel','coldstore'].includes(r),machine=['generator','powercontrol','boiler','laundry'].includes(r);
@@ -20,7 +28,7 @@ function sync(){if(!S||!audio.enabled||S.hp<=0){stop();return;}if(S.f.chapter1Co
  if(S.f.sprinklerTriggered&&!S.f.sprinklerStopped&&r==='eastcorridor')loop('sprinkler','water',.4);else loop('sprinkler',null,0);
  if(S.hp<=50)loop('breathing','breathing',S.hp<=25?.25:.12);else loop('breathing',null,0);
  const now=performance.now(),d=distance();
- if(d.distance<=3&&!SAFE_FROM_PURSUER.has(r)&&now>=stepAt){variant=1-variant;play('subject_step_'+(variant+1),{volume:[.85,.55,.28,.13][d.distance],pan:d.pan,rate:.96});stepAt=now+(S.f.pursuerEncounter?1050:1650);caption(d.distance===0?'Heavy boots inside this room':d.distance===1?'Heavy boots beyond the '+(d.pan<0?'left':'right')+' doorway':'Heavy footsteps farther along the passage');}
+ if(d.distance<=3&&!SAFE_FROM_PURSUER.has(r)&&now>=stepAt){variant=1-variant;play('subject_step_'+(variant+1),{volume:[.85,.55,.28,.13][d.distance],pan:d.pan,rate:.96});stepAt=now+(S.f.pursuerEncounter?1050:1650);caption(d.distance===0?'Heavy boots inside this room':d.distance===1?'Heavy boots beyond the doorway '+d.bearing:'Heavy footsteps farther along the passage');}
  if(alive(r)&&now>=infectedAt){play('infected_step',{volume:.22,pan:.3,rate:.88});infectedAt=now+2600;caption('Uneven footsteps nearby');}
  if(S.f.phoneRinging&&S.f.ringingPhoneRoom===r&&now>=ringAt){play('phone_ring',{volume:.65});ringAt=now+5700;caption('A telephone rings in this room');}
 }

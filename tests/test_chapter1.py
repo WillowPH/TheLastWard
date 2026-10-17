@@ -48,7 +48,9 @@ with sync_playwright() as p:
    if current()==target:return
    route=ev('''target=>{const q=[[S.room]],seen=new Set([S.room]);while(q.length){const path=q.shift(),r=path.at(-1);if(r===target)return path;for(const [id,d] of Object.entries(D)){const to=d.a===r?d.b:d.b===r?d.a:null;if(!to||seen.has(to))continue;const open=doorOpen(id)||(d.need&&has(d.need));if(!open)continue;seen.add(to);q.push([...path,to])}}return []}''',target)
    assert len(route)>1,(current(),target,ev('S.inv'))
-   page.locator('[data-destination="'+route[1]+'"]').click()
+   wanted=ev('to=>WardScene.portalView(S.room,WardNavigation.edge(S.room,to))',route[1])
+   if ev('S.sceneView')!=wanted:page.get_by_role('button',name='Turn around',exact=True).click()
+   page.locator(('.c1-reverse-plane' if wanted=='rear' else '.c1-plane')+' [data-destination="'+route[1]+'"]').click()
   raise AssertionError('Could not navigate to '+target)
  def use(id):
   dismiss()
@@ -58,6 +60,7 @@ with sync_playwright() as p:
    if ev('!S.lightOn'):ev('toggleLight()')
   fixture=ev("id=>WardScene.sites().find(f=>f.objects.some(o=>o[0]===id))?.id",id)
   assert fixture,('no fixture',current(),id)
+  if ev('S.sceneView')=='rear':page.get_by_role('button',name='Face the room',exact=True).click()
   page.locator('[data-fixture="'+fixture+'"]').click()
   button=page.locator('button[onclick="wardFixtureAction(\''+id+'\')"]')
   if button.count():button.click()

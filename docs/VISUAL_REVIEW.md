@@ -1,12 +1,13 @@
-# Five-room correction build
+# Doorway and weather correction build
 
 Extract the new ZIP and open `downloads/The_Last_Ward_Chapter_1.html`.
-Focus rooms: Lobby, Security, East Corridor, Patient Wing and Room 12.
+The doorway/camera correction covers every Chapter 1 room.
 All 27 rooms remain playable. No extra rooms were needed to repair these inputs.
 
 ## Verified interactions
 
-- Click the visible doors, including the door of entry. Locked doors explain what is needed.
+- On arrival, the entry door is behind you. Turn around to see it and click to return.
+  Each door keeps its destination regardless of the route used. Locked doors explain what is needed.
 - Click Clara's visible body to talk; her mask follows her silhouette.
 - Turn around, click the rear door, use Face the room, or press Escape. Flashlight changes
   keep the reverse view open.
@@ -25,11 +26,19 @@ layers, not fully animated video backgrounds or animated character performances.
 
 ## Scope
 
-Five focus rooms have reverse artwork and authored removable pickups. The negative
+All 27 rooms have fixed reverse artwork and individually fitted rear door targets.
+The five original focus rooms have nine authored removable pickups; the negative
 in Children's Ward also uses a clean base and separate collectible layer. Other
-rooms still need the full collectible-art and reverse-view conversion before the
-same visual completeness can be claimed for all Chapter 1. Fixed scene views are
+rooms still need the full collectible-art conversion. Fixed scene views are
 not a freely rotating 3D camera. Art has no baked interface labels.
+
+Rain is clipped to the glass panes in both lobby views; indoor surfaces only have
+soft reflected-light animation. The duplicate CSS rain layer is gone. Check the
+window frames and the floor when comparing the two views.
+
+![Lobby glass, front](review/weather-front.png)
+
+![Lobby glass, reverse](review/weather-rear.png)
 
 ## Captures
 

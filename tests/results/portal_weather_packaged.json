@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "54 directed portals across 27 rooms have one permanent view and destination",
+    "1600x1000: all 54 actual doorway clicks and 54 return clicks preserve destination and put entry behind arrival",
+    "390x844: all 54 actual doorway clicks and 54 return clicks preserve destination and put entry behind arrival",
+    "40 valid nearby pursuer routes follow the fixed doorway and reverse bearing when the camera turns; safe rooms excluded",
+    "old-save camera migrates from the entry edge; new saves retain a manually turned view",
+    "1600x1000: moving rain in both lobby views has zero pixels outside glass masks; no duplicate weather layer",
+    "390x844: moving rain in both lobby views has zero pixels outside glass masks; no duplicate weather layer",
+    "the other 26 rooms have no rain overlay in either view"
+  ],
+  "count": 8
+}

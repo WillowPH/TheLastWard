@@ -38,13 +38,24 @@ and are not silently loaded into this different room topology.
   doors, gunfire, reload handling, breathing, water, machinery and room ambience.
 - Exportable Chapter 1 completion record for later Chapter 2 work.
 
-## Five-room correction build
+## Doorway and weather correction build
 
-The focus section is **Emergency Lobby, Security, East Corridor, Patient Wing and
-Room 12**. All five have distinct artwork and reverse views. Every visible travel
-door remains clickable, including the entrance door. Locked doors show a visible
-requirement dialog. The reverse view has working door, Face the room and Escape
-controls, and changing the flashlight preserves the view.
+All **27 rooms** now have fixed front and reverse views. Each travel door belongs
+to exactly one view and has a permanent destination. Entering a room faces away
+from the doorway used. **Turn around** reveals it; click that door to return.
+This applies whichever route you take, including the Lobby/Security/East Corridor
+loop, retreats, and migrated saves. Locked doors explain their requirements.
+The hidden view cannot intercept clicks or keyboard focus.
+
+The relocated doorway is removed from each front background itself. Reverse views
+show the opposite wall, rather than a door cutout or flipped copy. Unconnected
+Records-room door artwork is removed. Closed travel doors do not reveal an
+incorrectly lit neighboring room. Drained tunnel artwork persists in both views.
+
+Rain runs on one transparent canvas clipped to individual exterior glass panes,
+with different masks for the lobby's two views. It does not render over the walls,
+floor, furniture, window frames, or other room interiors. Indoor lobby dust is
+removed to keep the weather unambiguous.
 
 Clara has an authored body-shaped click area, not a small head-only target. The
 empty equipment cabinet has one inspection. Multi-item containers stay open while
@@ -63,9 +74,8 @@ also provides the control. System reduced motion is respected by default; explic
 turning Motion on overrides that preference for scene layers. This is layered scene
 animation, not video animation of every object or character.
 
-All 27 rooms remain playable. The remaining rooms still need the same complete
-collectible-art and reverse-view conversion; this build does not claim that artwork
-pass is finished for the whole chapter. See [the guide](docs/VISUAL_REVIEW.md).
+All 27 rooms have the doorway/reverse-view correction. Full collectible-art
+conversion outside the original five focus rooms remains separate visual work. See [the guide](docs/VISUAL_REVIEW.md).
 
 ## Verification and limits
 

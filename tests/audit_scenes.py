@@ -3,7 +3,10 @@ import json
 R=Path(__file__).resolve().parents[1]
 d=json.loads((R/'data/chapter1_scenes.json').read_text());fail=[]
 for room,bp in d.items():
- regions=[('door:'+k,v) for k,v in bp['doors'].items()]+[(f['id'],f['rect']) for f in bp['fixtures']]
+ front=bp['views']['front']['doors'];rear=bp['views']['rear']['doors']
+ assert set(front).isdisjoint(rear) and set(front)|set(rear)==set(bp['doors']),room
+ assert len(rear)==1,room
+ regions=[('door:'+k,v) for k,v in bp['views']['front']['doors'].items()]+[(f['id'],f['rect']) for f in bp['fixtures']]
  for i,(a,A) in enumerate(regions):
   x,y,w,h=A
   if x-w/2<0 or x+w/2>100 or y-h/2<0 or y+h/2>100:fail.append((room,a,'outside'))
