@@ -9,6 +9,7 @@ go=function(to,confirmed=false){
  if(!S||S.hp<=0||S.f.chapter1Complete||!R[to]||!edge(S.room,to))return;
  if(S.f.hidingRoom)return interaction('Leave your hiding place before moving.');
  const from=S.room,result=baseGo(to,confirmed);
+ if(S.room===from&&S.msg){const reason=S.msg;S.msg=null;modal('Door closed','<p>'+htmlSafe(reason)+'</p><button class="btn" onclick="closeModal()">Stay here</button>');}
  if(S.room!==from){S.sceneFocus=null;S.sceneFocusRoom=S.room;WardNavigation.until=performance.now()+300;renderScene();}
  return result;
 };

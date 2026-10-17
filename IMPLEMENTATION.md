@@ -6,7 +6,7 @@ merged into it. The complete agreed scope is retained in docs/MASTER_REQUIREMENT
 | Area | Implementation |
 | --- | --- |
 | Chapter boundary and gates | js/chapter1_complete.js; 27 rooms, 27 graph edges, one elevator entrance; no B2/Chapter 3 map nodes |
-| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, behind-player return route, four full reverse backgrounds; black doorway-shading patches removed |
+| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, entry breadcrumb and return control, five full reverse backgrounds; black doorway-shading patches removed |
 | Art and targets | data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 155 fixtures and explicit door rectangles |
 | Scene/state/inspection | js/chapter1_scene.js; art and targets resize on one uncropped plane; no arbitrary coordinate fallback |
 | Threats and conditions | js/chapter1_survival.js; traversal, encounters, injury aim/movement effects, hiding, rare hallucination, sprinkler recovery and cold/wet recovery |
@@ -28,7 +28,7 @@ props or decoration. The elevator's rear doors are operated by its controls; the
 not an invisible doorway into an unfinished Chapter 2. Its side cage returns upstairs.
 
 A changed scene can have changed geometry: Kessler's aftermath uses a separate image
-and the inspection target moves to the visible fallen sleeve. The entry route is rendered behind the player; four review rooms have full reverse
+and the inspection target moves to the visible fallen sleeve. Every visible physical travel door keeps its target; five focus rooms have full reverse
 backgrounds. Other rooms have a return control without the removed door cutout.
 Fixed room compositions do not imply a freely rotating camera. Contextual inspection keeps the original scene scale.
 Hiding requires confirmation and reveals the room only through a narrow peek gap.
@@ -53,7 +53,21 @@ The desired 2–3-hour runtime and final human acceptance of pacing remain unver
 
 ## Visual review scope
 
-See docs/VISUAL_REVIEW.md for the four-room review and remaining artwork conversion.
+See docs/VISUAL_REVIEW.md for the five-room review and remaining artwork conversion.
 js/chapter1_review.js provides the enlarged physical-connection map and visible
 patient-action prerequisites. The actual graph is unchanged: North Corridor branches
 to Room 12 and Isolation separately; Children’s Ward connects to Room 12.
+
+## Input and object-layer repair
+
+Clara uses an explicitly authored silhouette hit area. Reverse door buttons are
+absolutely positioned inside the art plane and cannot cover footer controls.
+Front views retain all physical door targets; the entry is never silently removed.
+Door-lock failures are modal, and scene view survives flashlight updates.
+
+The authoring script defines nine explicit collectible image rectangles for the
+five focus rooms. The renderer removes each by its own saved object state. Base
+artwork is cleared separately using authored edits. Containers can remain open for
+multiple actions without resetting focus. The security cabinet's two empty-case
+inspections are merged into one. `js/chapter1_motion.js` paints frame-driven layers
+on the current front/reverse art plane; targets remain stationary and unobstructed.

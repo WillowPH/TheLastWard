@@ -1,10 +1,11 @@
 {
   "passed": [
     "single-file HTML: all 27 room backgrounds load after network is disabled; one HTTP document request",
-    "all five characters, four physical props, four reverse scenes and 26 recordings embedded",
+    "all five characters, four physical props, five reverse scenes and 26 recordings embedded",
+    "standalone offline edition accepts real reverse-view controls and Clara body clicks",
     "hosted PWA installs current cache and reloads the game offline",
     "optional image-provider failure preserves local scene and targets",
     "source ZIP integrity; 27 room images; no recursively bundled downloads"
   ],
-  "count": 5
+  "count": 6
 }

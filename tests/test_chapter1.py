@@ -32,7 +32,9 @@ with sync_playwright() as p:
   raise AssertionError('combat did not resolve')
  def dismiss():
   for _ in range(5):
-   if not page.locator('#m .md').count():return
+   if not page.locator('#m .md').count():
+    if page.locator('.c1-focus').count() and page.locator('.c1-focus').is_visible():page.locator('.c1-focus header button').click()
+    return
    if ev('!!S.f.pursuerEncounter'):ev("escapePursuer('retreat')")
    elif ev('cm&&alive(S.room)'):
     if fight_optional:fight()

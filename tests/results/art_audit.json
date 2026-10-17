@@ -1,7 +1,7 @@
 {
   "rooms": 27,
   "state_images": 3,
-  "reverse_images": 4,
+  "reverse_images": 5,
   "near_duplicates": [],
   "ocr_prompts": [
     [
@@ -133,6 +133,10 @@
       []
     ],
     [
+      "room12.webp",
+      []
+    ],
+    [
       "security.webp",
       []
     ],
@@ -160,13 +164,13 @@
     "assets/rooms/powercontrol.webp": "e39ee4b852cd298673a144c2d07bb60ac6c4b76c9d11412ab2bc3d25bd68827a",
     "assets/rooms/records.webp": "2216a03ddeebec246b00dd1c86012ad343da2faf2b330f39e1e054cec456e857",
     "assets/rooms/residence.webp": "e7dee9e1c481c03b800da0b969d89b6c7245857aaf0a8bca69cbe1d87f0e13f4",
-    "assets/rooms/room12.webp": "9e9fbcc2b710579761a23b4098aa50e00bc4c893641e7715f759cb8cb1d0eabe",
-    "assets/rooms/security.webp": "b221d3e14ed229385a2b218c7e7f37569e1a574c990aafb291ca89576baeabb0",
+    "assets/rooms/room12.webp": "666130b25825c8064a2389bd1e8d352c1732b69c27281c64a018a16a71ae3835",
+    "assets/rooms/security.webp": "87b2efc194674c05a8f101941322d980ea230ba4ace7a5d6dabef20b49739764",
     "assets/rooms/specimen.webp": "abd3a0b7b1f40c809a306ac3d9c8983774f2217aca7aacfe6b4912827a8f6b6e",
     "assets/rooms/stafflounge.webp": "3f8b3483e9b095abd0511766d89cf5863a7faad82537a9ad139a35bdb4647796",
     "assets/rooms/surgery.webp": "0d8dc88d2b0131c6e6c8f56a1ed922970adb5152b843e9fd95480f1e6b896c08",
     "assets/rooms/tunnel.webp": "ef782639905f830289c1f7cbe16b98df1c2240cead6fd0e0630e71e9c1552b55",
-    "assets/rooms/ward.webp": "d6c51c7505f86423609510f5ac574649019bd6c1c4646e2fdeae86edea78def7",
+    "assets/rooms/ward.webp": "b962f18f2fddaad9fac94ec155751907ce8804bfdaf447ce8df69cdf30777346",
     "assets/rooms/wardnorth.webp": "51d196470349ef02068f95b671a187603d89000fbe3dbe835f38d7d480828e03",
     "assets/rooms/wardservice.webp": "1d06b4e1f249eec0e74a61bf0a75777ffaefa06bffa2f160bf05605f8f7ea94f",
     "assets/states/tunnel_drained.webp": "ca1ae91d3b028a9d188fa333c83c774dc3bef1283c743678cbde050496ed7011",
@@ -174,6 +178,7 @@
     "assets/states/isoward_after.webp": "2ae9748891e16a4c920e05edc5b8a216c4dcb60dd61c84e1f4341cd07aef0eb3",
     "assets/reverse/lobby.webp": "c27c436592917e3595c3ac0c7392a83fef8766c79623636c1ce6a940edd39d0d",
     "assets/reverse/ward.webp": "a7a3e7884540d4ea2e300d344a23b027a395a11e1ab73cb9e97ca5d25ab461bd",
+    "assets/reverse/room12.webp": "7b1a65b4d78e0590d842341a032da9ba350107a6e03d7333e62ed40448e6b343",
     "assets/reverse/security.webp": "17199a45984d2286e82094a9651c2b8621015ca69ced25a5186a069000dc5ea0",
     "assets/reverse/eastcorridor.webp": "3abbdbe0f04242264776fd156d1f7cdd61837853d3f3d89cfbdb7c0eb2fea922"
   }

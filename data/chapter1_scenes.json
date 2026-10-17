@@ -41,7 +41,19 @@
         "ids": [
           "desk"
         ],
-        "drawer": true
+        "drawer": true,
+        "collectibles": [
+          {
+            "id": "desk",
+            "asset": "assets/items/key.png",
+            "rect": [
+              86,
+              68,
+              4,
+              3
+            ]
+          }
+        ]
       },
       {
         "id": "locker",
@@ -188,7 +200,8 @@
           66,
           32,
           64
-        ]
+        ],
+        "actorHit": "46% 2%,59% 3%,64% 8%,63% 17%,70% 23%,73% 50%,72% 57%,70% 65%,72% 91%,75% 99%,60% 99%,55% 71%,51% 61%,48% 76%,45% 92%,47% 96%,32% 96%,30% 92%,36% 72%,37% 61%,29% 54%,30% 32%,35% 22%,43% 18%,42% 10%"
       },
       {
         "id": "report",
@@ -213,8 +226,7 @@
           34
         ],
         "ids": [
-          "rev",
-          "reva"
+          "rev"
         ]
       },
       {
@@ -229,7 +241,19 @@
         "ids": [
           "drw"
         ],
-        "drawer": true
+        "drawer": true,
+        "collectibles": [
+          {
+            "id": "drw",
+            "asset": "assets/items/keycard.png",
+            "rect": [
+              29,
+              73,
+              5,
+              4
+            ]
+          }
+        ]
       },
       {
         "id": "roster",
@@ -282,6 +306,18 @@
         ],
         "ids": [
           "mapboard"
+        ],
+        "collectibles": [
+          {
+            "id": "mapboard",
+            "asset": "assets/items/floor_map.png",
+            "rect": [
+              75,
+              58,
+              18,
+              6
+            ]
+          }
         ]
       },
       {
@@ -491,6 +527,18 @@
         ],
         "ids": [
           "gur"
+        ],
+        "collectibles": [
+          {
+            "id": "gur",
+            "asset": "assets/items/ink_ribbon.png",
+            "rect": [
+              90,
+              64,
+              6,
+              4
+            ]
+          }
         ]
       },
       {
@@ -517,6 +565,18 @@
         ],
         "ids": [
           "nightPistol"
+        ],
+        "collectibles": [
+          {
+            "id": "nightPistol",
+            "asset": "assets/items/handgun.png",
+            "rect": [
+              48,
+              40.3,
+              6.8,
+              2.6
+            ]
+          }
         ]
       },
       {
@@ -531,7 +591,18 @@
         "ids": [
           "pistolRounds"
         ],
-        "layer": "paper"
+        "collectibles": [
+          {
+            "id": "pistolRounds",
+            "asset": "assets/items/handgun_ammo.png",
+            "rect": [
+              44,
+              43,
+              4,
+              2
+            ]
+          }
+        ]
       },
       {
         "id": "journal",
@@ -760,6 +831,18 @@
         ],
         "ids": [
           "cab"
+        ],
+        "collectibles": [
+          {
+            "id": "cab",
+            "asset": "assets/items/key.png",
+            "rect": [
+              56,
+              28.5,
+              3,
+              4
+            ]
+          }
         ]
       },
       {
@@ -774,6 +857,18 @@
         "ids": [
           "shf",
           "shf2"
+        ],
+        "collectibles": [
+          {
+            "id": "shf2",
+            "asset": "assets/items/dressing.png",
+            "rect": [
+              54,
+              39,
+              5,
+              4
+            ]
+          }
         ]
       },
       {
@@ -801,7 +896,19 @@
         "ids": [
           "drw12"
         ],
-        "drawer": true
+        "drawer": true,
+        "collectibles": [
+          {
+            "id": "drw12",
+            "asset": "assets/items/battery.png",
+            "rect": [
+              31,
+              50,
+              5,
+              4
+            ]
+          }
+        ]
       },
       {
         "id": "tray",

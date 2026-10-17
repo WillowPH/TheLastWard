@@ -2,6 +2,14 @@
 (function(){
 'use strict';
 const e=htmlSafe;
+R.security.d='Surveillance monitors hum above a cramped security desk. A cold coffee sits beside the controls. The outside locks answer to a remote operator; the local switches have been disabled.';
+R.security.alt=['power','Restored power steadies the surveillance bank. The exterior locks remain under outside control.'];
+R.ward.d='The Patient Wing opens around a tiled nurse station. An open night-shift equipment case rests on the counter. Heavy doors lead back to the East Corridor and onward to the North Patient Corridor. A toppled gurney blocks part of the floor.';
+delete R.ward.alt;
+
+R.security.o=R.security.o.filter(o=>o[0]!=='reva');const equipment=R.security.o.find(o=>o[0]==='rev');equipment[1]='Equipment cabinet';equipment[3]='The sidearm case and ammunition sleeve are both empty.';equipment[4].th='The pistol and its ammunition are gone. The night-shift equipment was taken toward the Patient Wing.';
+const sidearm=R.ward.o.find(o=>o[0]==='nightPistol');sidearm[1]='Secured night-shift sidearm';sidearm[3]='A keyed retaining bracket holds the handgun inside the open equipment case.';
+
 const patientChoice=choosePatientFate;
 choosePatientFate=function(choice){if(!S||S.f.beggingPatientChoice||!['helped','left','killed'].includes(choice))return;
  let failure='';if(choice==='helped'&&!has('Trauma Dressing'))failure='You need a Trauma Dressing to treat him. Your choice has not been made.';

@@ -38,25 +38,34 @@ and are not silently loaded into this different room topology.
   doors, gunfire, reload handling, breathing, water, machinery and room ambience.
 - Exportable Chapter 1 completion record for later Chapter 2 work.
 
-## Visual review build
+## Five-room correction build
 
-The agreed first review section is **Emergency Lobby → Security → East Corridor →
-Patient Wing**. These four rooms have revised closed-door art, complete reverse
-backgrounds, subtle scene animation and corrected Clara scale. North Patient
-Corridor and Isolation also have dark door-glass corrections. The rest of the chapter
-remains playable; full reverse artwork for the other rooms is not claimed complete.
+The focus section is **Emergency Lobby, Security, East Corridor, Patient Wing and
+Room 12**. All five have distinct artwork and reverse views. Every visible travel
+door remains clickable, including the entrance door. Locked doors show a visible
+requirement dialog. The reverse view has working door, Face the room and Escape
+controls, and changing the flashlight preserves the view.
 
-Shared corrections include object-side action popovers, explicit Take/Leave, removal
-of resolved pickup/file hotspots, locker slats and distinct desk/crate cover, visible
-patient-choice failures and persistent covered-bed aftermath, and a large scrollable
-floor plan with zoom and current-room centering. The photographic negative is a
-separate removable object on a clean background; other legacy room props still need
-the same visual review before claiming the entire chapter's item artwork converted.
-The old black doorway patches and isolated turn-around door cutout are removed.
+Clara has an authored body-shaped click area, not a small head-only target. The
+empty equipment cabinet has one inspection. Multi-item containers stay open while
+you inspect or take their remaining contents. Resolved pickups/files lose their
+hotspots; files remain available from Files.
 
-See [the review guide and screenshots](docs/VISUAL_REVIEW.md). Room motion uses
-lightweight layered effects, not full video animation. Scene Animation can be disabled
-in Options; system reduced-motion preferences are also respected.
+Nine collectibles in these five rooms use separate object images. Leave retains the
+item; Take removes its image and preserves that state through save/load. The base
+art has the relevant map, equipment case and drawer/shelf contents cleared. An empty
+case, desk or cabinet stays behind after taking its contents. The photographic
+negative in Children's Ward is also a separate removable object.
+
+Canvas layers visibly animate rain/reflected light, CRT scanning, fluorescent light,
+lamp pools and airborne dust. **Motion · on/off** is available above the room. Options
+also provides the control. System reduced motion is respected by default; explicitly
+turning Motion on overrides that preference for scene layers. This is layered scene
+animation, not video animation of every object or character.
+
+All 27 rooms remain playable. The remaining rooms still need the same complete
+collectible-art and reverse-view conversion; this build does not claim that artwork
+pass is finished for the whole chapter. See [the guide](docs/VISUAL_REVIEW.md).
 
 ## Verification and limits
 

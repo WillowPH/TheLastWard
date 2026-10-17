@@ -10,20 +10,20 @@ with sync_playwright() as p:
   page.set_viewport_size({'width':width,'height':height});ev("S.room='lobby';S.prev=null;S.sceneFocus=null;S.f.power=0;render()")
   page.locator('[data-fixture=window]').click();panel=page.locator('.c1-focus').bounding_box();host=page.locator('#interactiveScene').bounding_box();assert panel['x']>=host['x'] and panel['x']+panel['width']<=host['x']+host['width']+1;assert panel['y']>=host['y'] and panel['y']+panel['height']<=host['y']+host['height']+1
   assert page.get_by_role('button',name='Examine',exact=True).is_visible();page.screenshot(path=str(OUT/f'review-window-{width}.png'));ev('wardCloseFocus()')
-  page.locator('[data-fixture=desk]').click();assert page.get_by_role('button',name='Take',exact=True).is_visible();page.get_by_role('button',name='Leave',exact=True).click();assert ev("!has('Cabinet Key')&&!S.ob.desk")
+  page.locator('[data-fixture=desk]').click();assert page.get_by_role('button',name='Take Cabinet Key',exact=True).is_visible();page.get_by_role('button',name='Leave',exact=True).click();assert ev("!has('Cabinet Key')&&!S.ob.desk")
  checks.append('window actions anchored beside object and inside viewport; Take/Leave preserves uncollected item at desktop/mobile sizes')
  page.set_viewport_size({'width':1600,'height':1000});ev("S.room='security';S.prev='lobby';S.f.power=1;S.f.claraGone=0;render()")
  npc=page.locator('img.c1-npc').bounding_box();plane=page.locator('.c1-plane').bounding_box();assert npc['height']>=plane['height']*.58;page.screenshot(path=str(OUT/'review-clara.png'))
  checks.append('Clara uses authored full adult height and floor placement rather than fixture-thumbnail bounds')
- for room,previous in [('lobby','security'),('security','lobby'),('eastcorridor','security'),('ward','eastcorridor')]:
+ for room,previous in [('lobby','security'),('security','lobby'),('eastcorridor','security'),('ward','eastcorridor'),('room12','wardnorth')]:
   ev('(a)=>{S.room=a[0];S.prev=a[1];S.sceneFocus=null;render();wardTurnAround()}',[room,previous]);page.wait_for_function("document.querySelector('.c1-reverse-plane img').complete&&document.querySelector('.c1-reverse-plane img').naturalWidth>0")
   assert page.locator('.c1-reverse-plane img').get_attribute('src')=='assets/reverse/'+room+'.webp';assert page.locator('.c1-rear-travel').get_attribute('data-destination')==previous
   page.screenshot(path=str(OUT/f'review-reverse-{room}.png'));ev('wardCloseFocus()')
- checks.append('all four review rooms load distinct full reverse backgrounds with matching return destination')
+ checks.append('all five review rooms load distinct full reverse backgrounds with matching return destination')
  ev("S.room='children';S.en.children=0;S.prev='room12';S.inv=S.inv.filter(x=>x.n!=='Photographic Negative');delete S.ob.neg;S.lightOn=true;render()")
  assert page.locator('[data-collectible=neg]').count()==1
  page.locator('[data-fixture=negative]').click();page.get_by_role('button',name='Leave',exact=True).click();assert page.locator('[data-collectible=neg]').count()==1
- page.locator('[data-fixture=negative]').click();page.get_by_role('button',name='Take',exact=True).click();assert ev("has('Photographic Negative')"),(ev("({room:S.room,inv:S.inv,ob:S.ob,hp:S.hp})"),page.locator("#m").inner_text(),errors);assert page.locator('[data-collectible=neg],[data-fixture=negative]').count()==0;ev('render()');assert page.locator('[data-collectible=neg]').count()==0
+ page.locator('[data-fixture=negative]').click();page.get_by_role('button',name='Take Photographic Negative',exact=True).click();assert ev("has('Photographic Negative')"),(ev("({room:S.room,inv:S.inv,ob:S.ob,hp:S.hp})"),page.locator("#m").inner_text(),errors);assert page.locator('[data-collectible=neg],[data-fixture=negative]').count()==0;ev('render()');assert page.locator('[data-collectible=neg]').count()==0
  checks.append('negative is separate physical artwork; Leave retains it, Take removes its image and hotspot persistently')
  ev("S.room='security';S.sceneFocus=null;delete S.ob.rep;render();wardFixtureAction('rep')");assert ev("S.docs.includes('Incident Report 09-17')");ev("$('m').innerHTML='';render()");assert page.locator('[data-fixture=report]').count()==0
  checks.append('read report loses its hotspot, while evidence remains available in Files')

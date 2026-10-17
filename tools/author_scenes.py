@@ -65,6 +65,21 @@ room('coldstore',{'rc':[12,44,16,71]},[
  ('log','Cold storage inventory',[32,32,5,12],'coldlog'),('reel','Continuity reel',[61,55,15,8],'reel'),('medkit','Field medkit',[30,60,6,6],'cachemed')])
 room('lift',{'liftEntry':[9,48,14,78]},[
  ('controls','Elevator controls',[79,37,4,24],'liftpanel'),('manifest','Lift service manifest',[91,33,6,18],'liftlog'),('mirror','Elevator mirror',[30,34,7,24],'liftmirror'),('terminal','Final Continuity Terminal',[90,70,8,10],'finalTerminal',{'layer':'terminal'}),('ribbon','Emergency record spool',[81,74,5,4],'finalRibbon'),('cache','Transfer field cache',[91,82,12,9],'finalBox')])
+# Loose collectible artwork is separate from each base room and uses authored positions.
+loose={
+ 'lobby':{'desk':[('desk','key',[86,68,4,3])]},
+ 'security':{'drawer':[('drw','keycard',[29,73,5,4])],'map':[('mapboard','floor_map',[75,58,18,6])]},
+ 'ward':{'gurney':[('gur','ink_ribbon',[90,64,6,4])],'lockbox':[('nightPistol','handgun',[48,40.3,6.8,2.6])],'ammo':[('pistolRounds','handgun_ammo',[44,43,4,2])]},
+ 'room12':{'cabinet':[('cab','key',[56,28.5,3,4])],'shelf':[('shf2','dressing',[54,39,5,4])],'drawer':[('drw12','battery',[31,50,5,4])]}
+}
+for room_id,fixtures in loose.items():
+ for fixture in rooms[room_id]['fixtures']:
+  if fixture['id'] in fixtures:
+   fixture.pop('layer',None)
+   fixture['collectibles']=[{'id':id,'asset':'assets/items/'+name+'.png','rect':rect} for id,name,rect in fixtures[fixture['id']]]
+for f in rooms['security']['fixtures']:
+ if f['id']=='clara':f['actorHit']='46% 2%,59% 3%,64% 8%,63% 17%,70% 23%,73% 50%,72% 57%,70% 65%,72% 91%,75% 99%,60% 99%,55% 71%,51% 61%,48% 76%,45% 92%,47% 96%,32% 96%,30% 92%,36% 72%,37% 61%,29% 54%,30% 32%,35% 22%,43% 18%,42% 10%'
+ if f['id']=='cabinet':f['ids']=['rev']
 (ROOT/'data/chapter1_scenes.json').write_text(json.dumps(rooms,indent=2,ensure_ascii=False)+'\n')
 (ROOT/'js/scene_manifest.js').write_text('/* Generated from the explicitly authored data/chapter1_scenes.json. */\nwindow.WardScenes='+json.dumps(rooms,ensure_ascii=False,separators=(',',':'))+';\n')
 print('Authored scenes:',len(rooms))

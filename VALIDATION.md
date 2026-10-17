@@ -10,6 +10,7 @@ python tests/test_chapter1.py
 python tests/test_regressions.py
 python tests/test_scene_corrections.py
 python tests/test_visual_review.py
+python tests/test_five_room_input.py
 python tests/test_art.py
 python tools/package_build.py
 python tests/test_delivery.py
@@ -52,3 +53,16 @@ adult actor bounds, four reverse assets, negative removal, file-hotspot cleanup,
 patient prerequisites/aftermath, three cover frames, and large-map controls.
 These checks verify behavior and supporting layouts; artistic acceptance and
 full remaining-room conversion are still review work.
+
+## Actual-pointer acceptance checks
+
+`test_five_room_input.py` clicks artwork coordinates rather than invoking travel or
+actor actions directly: 12 physical doorway positions, Clara at three body locations,
+and five reverse views at desktop/mobile sizes. Isolated tests prepare room/lock
+states for this input matrix; these do not replace the separate real-progression runs.
+It also verifies one cabinet inspection, a multi-item panel remaining open, all nine
+focus-room collectible layers, Room 12 save/load, and different drawn canvas pixels
+in every focus room with working motion controls. See tests/results/five_room_input.json.
+
+A recorded browser preview is in docs/review/animated-scene.mp4. It shows the actual
+layered renderer, not a separately rendered promotional animation.
