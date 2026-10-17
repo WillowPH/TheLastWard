@@ -1,14 +1,42 @@
-## Phase 1 regression results
+# Validation
 
-`python tests/room_layers_smoke.py`: PASS, 20 browser checks across 40 seeds and
-three viewport sizes. See ROOM_ART_PASS.md for exact scope. Original results below
-refer to the supplied build, not a new full-chapter playthrough.
+Run from this project directory with Python Playwright, Pillow, system Chromium,
+FFmpeg and Tesseract installed:
 
-# Verification — 2026-10-17
+```
+python -m http.server 8010
+python tests/audit_scenes.py
+python tests/test_chapter1.py
+python tests/test_regressions.py
+python tests/test_art.py
+python tools/package_build.py
+python tests/test_delivery.py
+```
 
-* Source JavaScript syntax checks using Node: passed.
-* Browser test on locally injected equivalent HTML, CSS, and scripts: **42/42** targeted checks passed, including opening, interactive desk/phone, stage focus, Staff Access Card, partial map, flashlight darkness, generator repair, patient-choice finality, Subject X encounter/escape, reinforced-glass warning and fatal second inspection, mobile layout and no page exceptions.
-* Automated desktop geometry audit across 21 first-floor rooms: 52 door targets and 92 object targets, **zero intersecting click regions** at 1600×930. This does not substitute for art-alignment review of every room.
-* Standalone HTML generation inlines assets; project ZIP integrity verified.
+- The geometry audit checks every authored fixture and door for bounds and overlap.
+- Two complete Standard seeded routes use actual player actions: opening, phone, keys, map,
+  handgun, patient treatment, inventory upgrade, seeded pharmacy code, maintenance
+  tools, failed premature generator attempt, regulator repair, fuse installation,
+  powered photograph puzzle, Rourke/observation evidence, authorization, theatre,
+  shotgun, physical pursuit escape, revelation and elevator completion. Milestone
+  flags are not granted by these route tests. A third Story route visits all 27 rooms,
+  including optional combat, resident breaker, carrying harness, drainage/winch,
+  chapel, specimen, cold store, and isolation branches.
+- Regression tests cover 128 seeds for authored-object coverage; all 27 rooms at
+  1600×1000, 1000×800 and 390×844; visible controls and hit-tested target centers;
+  full-inventory recovery; exhausted-battery recovery and dark inspection; save/load
+  and irreversible choices; warned fatal cell and recovery; nonfatal hallucinations;
+  separate sprinkler recovery/valve actions, cold and shivering recovery;
+  actual pursuer edges/retreat/visibility; locker peeking and waiting; visible infected;
+  decoding all 26 bundled recordings.
+- Art audit compares perceptual signatures, including mirrored comparisons, and OCR
+  checks for accidental INSPECT/EXAMINE/CLICK HERE/BUTTON prompts. This supports,
+  but does not replace, visual inspection of each scene.
+- Packaging checks exercise the single-file edition with network disabled after its
+  sole document load, and verify hosted offline cache/reload and ZIP integrity.
 
-**Not verified:** live online AI provider service (not configured), long-form chapter playtime or balance, all room artwork as independently authored photographs, all natural audio recordings, every optional story branch, full mobile manual usability, or a human end-to-end run.
+Current-run results are in tests/results/*.json. Screenshots are supporting evidence,
+not a substitute for complete interaction checks. Direct file:// launch is restricted
+by the managed test browser; single-file behavior is tested as a single served resource
+with all further network access disabled. Other browsers and a human 2–3-hour session
+are not claimed tested. Optional live image-provider generation is not configured.

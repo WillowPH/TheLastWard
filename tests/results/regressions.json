@@ -1,0 +1,20 @@
+{
+  "passed": [
+    "27 rooms; no Chapter 2/3 nodes or elevator bypass",
+    "128 seeded worlds: every object has authored geometry",
+    "all 27 rooms: loaded art, reachable targets and controls at 1600x1000",
+    "all 27 rooms: loaded art, reachable targets and controls at 1000x800",
+    "all 27 rooms: loaded art, reachable targets and controls at 390x844",
+    "full inventory preserves pickup; collecting later succeeds",
+    "battery recovery is manual; darkness blocks small-object inspection",
+    "sprinkler has separate recovery and valve actions; cold/shivering recovers in warmth",
+    "save/load restores object/choice states; older topology is rejected",
+    "optional fatal cell warns once; second deliberate inspection kills; checkpoint recovers",
+    "imaginary encounter consumes ammo and preserves real health",
+    "Subject X traverses one real edge, is visible, and permits a real retreat",
+    "locker peek/stay/exit uses actual room and pursuer state",
+    "infected appears in the room and central combat presentation",
+    "all 26 bundled recordings decode successfully"
+  ],
+  "count": 15
+}

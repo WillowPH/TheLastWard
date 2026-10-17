@@ -1,0 +1,86 @@
+/* A single art plane owns background, targets, state, lighting and threats.
+   Missing authored geometry is an error, never a search for an empty wall. */
+(function(){
+'use strict';
+const esc=x=>htmlSafe(String(x??''));
+const asset=p=>window.WardEmbeddedAssets?.[p]||p;
+const roomAsset=room=>asset(room==='surgery'&&S?.f.doctorWallSeen?'assets/states/surgery_after.webp':room==='tunnel'&&S?.f.drained?'assets/states/tunnel_drained.webp':'assets/rooms/'+room+'.webp');
+let options={hints:false,shake:true,flashes:true,soundCaptions:true};
+try{options={...options,...JSON.parse(localStorage.getItem('lw_c1_accessibility')||'{}')}}catch(e){}
+window.WardScene={asset,options};
+function matching(o,ids){return ids.includes(o[0])||(ids.includes('@phone')&&/^phone_/.test(o[0]))||(ids.includes('@supply')&&/^seedloot_/.test(o[0]));}
+function sites(){const bp=WardScenes[S.room];if(!bp)throw Error('Missing room blueprint: '+S.room);const objects=availableRoomObjects();const used=new Set();const result=bp.fixtures.map(f=>{const contents=objects.filter(o=>matching(o,f.ids));contents.forEach(o=>used.add(o[0]));return {...f,rect:f.after&&S.f[f.after.flag]?f.after.rect:f.rect,objects:contents};}).filter(f=>f.objects.length&&!(f.id==='clara'&&S.f.claraGone));
+ const missing=objects.filter(o=>!used.has(o[0]));if(missing.length)throw Error('Unmapped fixtures in '+S.room+': '+missing.map(o=>o[0]).join(','));return result;}
+WardScene.sites=sites;
+function labelDoor(d){return (doorOpen(d.id)?'':'Locked · ')+(S.vis[d.to]?R[d.to].n:(R[d.to].short||R[d.to].n));}
+function important(f){return f.objects.some(o=>{const s=o[4];return s.give||s.doc||s.code||s.seq||s.expand||['map','power','clearance','portrait','npc','lift','payphone','regulator'].includes(s.act)})}
+function complete(f){return f.objects.every(o=>['done','read'].includes(S.ob[o[0]]));}
+function rectStyle(rect){const [x,y,w,h]=rect;return `left:${x}%;top:${y}%;width:${w}%;height:${h}%;`;}
+function threat(){const p=initPursuer(),x=p.active&&p.room===S.room,e=alive(S.room),hall=!!S.f.falseEncounterActive;if(!x&&!e&&!hall)return '';const bp=WardScenes[S.room],pos=bp.threat||[53,82,18],type=x?'subject_x':(/Nurse|nurse/.test(E[S.room]?.n||'')?'infected_nurse':'infected_patient'),state=S.f.pursuerEncounter?'searching':S.stag?'staggered':cm?'approaching':'distant';
+ return `<div class="c1-threat ${x?'subject-x':'infected'} ${state}" data-state="${state}" style="left:${pos[0]}%;top:${pos[1]}%;height:${pos[2]}%" role="img" aria-label="${x?'Subject X':hall?'An approaching figure':esc(E[S.room].n)} · ${state}"><img src="${asset('assets/characters/'+type+'.png')}" alt=""><span class="threat-caption">${x?'Subject X':hall?'A figure':esc(E[S.room].n)} · ${state}</span></div>`;}
+function fixtureArt(f){const st=rectStyle(f.rect),done=complete(f),seen=S.f['seen_site_'+S.room+'_'+f.id];let html='';if(f.actor&&!(f.id==='clara'&&S.f.claraGone))html+=`<img class="c1-physical c1-npc" style="${st}" src="${asset('assets/characters/'+f.actor+'.png')}" alt="">`;
+ if(f.layer==='phone')html+=`<div class="c1-physical phone" style="${st}" aria-hidden="true"><i></i><b></b></div>`;
+ if(f.layer==='pouch')html+=`<div class="c1-physical pouch ${done?'empty':''}" style="${st}" aria-hidden="true"></div>`;
+ if(f.layer==='terminal')html+=`<div class="c1-physical terminal" style="${st}" aria-hidden="true"><i></i></div>`;
+ if(f.layer==='dynamo')html+=`<div class="c1-physical dynamo" style="${st}" aria-hidden="true">⚙</div>`;
+ if(f.layer==='paper')html+=`<div class="c1-physical paper" style="${st}" aria-hidden="true"></div>`;
+ if(f.layer==='case')html+=`<div class="c1-physical case ${done?'empty':''}" style="${st}" aria-hidden="true"></div>`;
+ const pickup=f.objects.find(o=>o[4].give&&S.ob[o[0]]!=='done');if(pickup&&f.item!==false){const path=ITEM_ART[pickup[4].give[0][0]];if(path)html+=`<img class="c1-item-overlay" style="left:${f.rect[0]}%;top:${f.rect[1]}%" src="${asset(path)}" alt="">`;}
+ if(seen||done)html+=`<div class="c1-object-state ${f.drawer?'drawer-open':''} ${done?'examined':''}" style="${st}" aria-hidden="true">${done?'<span>✓</span>':''}</div>`;
+ return html;
+}
+function fit(){const host=$('interactiveScene'),plane=host?.querySelector('.c1-plane');if(!plane)return;const n=document.querySelector('.narrative-focus'),r=host.getBoundingClientRect(),bottom=n?Math.min(host.clientHeight,n.getBoundingClientRect().top-r.top-8):host.clientHeight;const top=40,available=Math.max(1,bottom-top),w=Math.min(host.clientWidth,available*4/3),h=w*3/4;Object.assign(plane.style,{width:w+'px',height:h+'px',left:(host.clientWidth-w)/2+'px',top:top+(available-h)/2+'px'});}
+const observer=new ResizeObserver(fit);observer.observe($('interactiveScene'));observer.observe(document.querySelector('.narrative-focus'));
+renderScene=function(){if(!S)return;const host=$('interactiveScene'),room=S.room,bp=WardScenes[room],groups=sites();if(S.sceneFocusRoom!==room){S.sceneFocus=null;S.sceneFocusRoom=room;}
+ const doors=roomConnections();let body=`<img class="c1-background" src="${roomAsset(room)}" alt="${esc(R[room].n)}" draggable="false"><div class="c1-film"></div>`;
+ const mood=window.WardArt?.urlFor?.(room);if(mood)body+=`<img class="c1-atmosphere" src="${esc(mood)}" alt="" onerror="this.remove()">`;
+ for(const d of doors){const rect=bp.doors[d.id];if(!rect)throw Error('Missing door geometry '+room+':'+d.id);body+=`<button class="c1-door ${doorOpen(d.id)?'':'locked'} ${S.prev===d.to?'entry':''}" data-door="${d.id}" data-destination="${d.to}" style="${rectStyle(rect)}" aria-label="${esc(labelDoor(d))}" data-tip="${esc(labelDoor(d))}" onmouseenter="wardRoomTip(this.dataset.tip)" onmouseleave="wardRoomTip()" onfocus="wardRoomTip(this.dataset.tip)" onblur="wardRoomTip()" onclick="sceneDoorTravel('${d.to}')">${doorOpen(d.id)?'':'<span class="c1-lock" aria-hidden="true">▣</span>'}</button>`;}
+ for(const f of groups){const done=complete(f);body+=fixtureArt(f)+`<button class="c1-target ${important(f)&&!done?'important':''} ${done?'complete':''}" data-fixture="${f.id}" style="${rectStyle(f.rect)}${f.polygon?'clip-path:polygon('+f.polygon+');':''}" aria-label="Examine ${esc(f.label)}" data-tip="${esc(f.label)}${done?' · examined':''}" onmouseenter="wardRoomTip(this.dataset.tip)" onmouseleave="wardRoomTip()" onfocus="wardRoomTip(this.dataset.tip)" onblur="wardRoomTip()" onclick="wardInspectFixture('${f.id}')"></button>`;}
+ if(room==='eastcorridor'&&S.f.flashlightDropped)body+=`<img class="c1-dropped-light" src="${asset('assets/items/flashlight.png')}" alt=""><button class="c1-target important dropped-light" style="${rectStyle([55,82,7,6])}" aria-label="Recover dropped flashlight" onclick="wardRecoverFlashlight()"></button>`;
+ if(room==='lobby')body+='<div class="c1-rain-motion" aria-hidden="true"></div>';
+ if(room==='security')body+=`<div class="c1-crt-static" style="${rectStyle([51,30,23,18])}" aria-hidden="true"></div>`;
+ if(room==='eastcorridor')body+=`<div class="c1-fluorescent" style="${rectStyle([50.5,13,4,10])}" aria-hidden="true"></div>`;
+ body+=threat();
+ if(S.f.beggingPatientChoice==='killed'&&room==='isoward')body+='<div class="c1-patient-aftermath" aria-label="The patient remains still beneath a sheet"></div>';
+ if(room==='observation'&&S.f.plexiIncidentSeen)body+='<div class="c1-glass-aftermath" aria-hidden="true"></div>';
+ if(room==='eastcorridor'&&S.f.windowBarricaded)body+='<div class="c1-window-board" aria-hidden="true"></div>';
+ body+=`<div class="c1-lighting ${R[room].dark&&!lit()?'unlit':''} ${S.lightOn&&S.bat>0?'torch':''}"></div><div id="sceneTooltip" class="c1-tooltip" role="status"></div>`;
+ host.innerHTML=`<div class="c1-room-tools"><button onclick="wardToggleRoomHints()" aria-pressed="${options.hints}">Hints · ${options.hints?'strong':'subtle'}</button><span id="c1SoundCaption" role="status"></span></div><div class="c1-plane ${options.hints?'strong-hints':''} ${S.f.power?'powered':''}" role="group" aria-label="${esc(R[room].n)} interactive scene">${body}</div><div id="sceneFocusOverlay" class="scene-focus-overlay hid"></div>`;
+ fit();if(S.f.chapter1Complete)showCompletion();else if(S.hp<=0)showDeath();else if(S.f.hidingRoom===room)showLocker();else renderFocus();
+ const power=$('stagePower');if(power)power.textContent=R[room].dark&&!lit()?'DARK · LIGHT REQUIRED':S.f.power&&!S.f.powerOut?'GENERATOR CIRCUIT ACTIVE':'EMERGENCY LIGHTING';
+ window.WardSound?.sync?.();
+};
+window.wardRoomTip=function(text){const el=$('sceneTooltip');if(!el)return;el.textContent=text||'';el.classList.toggle('visible',!!text)};
+window.wardToggleRoomHints=function(){options.hints=!options.hints;saveOptions();renderScene()};
+function saveOptions(){try{localStorage.setItem('lw_c1_accessibility',JSON.stringify(options))}catch(e){}document.body.classList.toggle('c1-reduced-shake',!options.shake);document.body.classList.toggle('c1-reduced-flash',!options.flashes)}
+window.wardSetAccess=function(key,value){options[key]=!!value;saveOptions();renderScene()};
+window.wardInspectFixture=function(id){if(S.hp<=0||S.f.chapter1Complete)return;if(R[S.room].dark&&!lit())return interaction('I can make out the doorways, but need light to examine small details.');const f=sites().find(f=>f.id===id);if(!f)return;S.f['seen_site_'+S.room+'_'+id]=1;
+ if(f.objects.length===1){const o=f.objects[0],sp=o[4];if(sp.look&&!sp.doc&&!sp.give&&!sp.act&&!sp.code){act(o[0]);return;}}
+ S.sceneFocus=id;renderScene();};
+function renderFocus(){const root=$('sceneFocusOverlay'),f=sites().find(f=>f.id===S.sceneFocus);if(!f){root.classList.add('hid');return;}root.classList.remove('hid');
+ const actions=f.objects.map(o=>{const [id,name,,description,sp]=o,done=S.ob[id]==='done',read=S.ob[id]==='read',repeat=['save','box','charger','handCharge','payphone','lift'].includes(sp.act),verb=done?'Empty':sp.doc?'Read':sp.give?'Take':sp.expand?'Equip':sp.act==='payphone'?'Use telephone':'Examine';return `<div class="c1-finding"><div><strong>${esc(name)}</strong><p>${esc(description)}</p>${sp.give&&!done?sp.give.map(g=>`<span>${itemIconMarkup(g[0])}${esc(g[0])}${g[1]>1?' ×'+g[1]:''}</span>`).join(''):''}</div><button class="btn ${done?'':'p'}" ${done&&!repeat?'disabled':''} onclick="wardFixtureAction('${id}')">${read&&sp.doc?'Read again':verb}</button></div>`}).join('');
+ root.innerHTML=`<section class="c1-focus"><header><h3>${esc(f.label)}</h3><button class="btn" onclick="wardCloseFocus()">Return to room ×</button></header><div class="c1-closeup" style="background-image:url('${roomAsset(S.room)}');background-position:${f.rect[0]}% ${f.rect[1]}%"></div><div class="c1-findings">${actions}</div></section>`;
+}
+window.wardFixtureAction=function(id){S.sceneFocus=null;const o=R[S.room].o.find(o=>o[0]===id);if(!o)return;S.cf=o[4].give?id:null;try{act(id)}finally{S.cf=null}renderScene()};
+wardCloseFocus=function(){if(S)S.sceneFocus=null;renderScene()};
+window.wardV4Close=wardCloseFocus;
+function showLocker(){const p=initPursuer(),near=p.active&&p.room===S.room,peek=S.f.lockerPeeking,root=$('sceneFocusOverlay');root.classList.remove('hid');root.innerHTML=`<div class="c1-locker"><div class="c1-locker-view ${peek?'peeking':''}" style="background-image:url('${roomAsset(S.room)}')">${peek?threat():''}<div class="c1-slats"></div></div><footer><h3>${peek?'Through the slats':'Inside the hiding place'}</h3><p>${near?'Heavy footsteps are inside this room.':'Listen for footsteps beyond the door.'}</p><div><button class="btn" onclick="wardStayHidden()">Stay hidden</button><button class="btn" onclick="wardPeek()">${peek?'Stop peeking':'Peek'}</button><button class="btn" onclick="wardExitHiding()">Exit</button></div></footer></div>`;}
+hideInRoom=function(){if(!HIDING_AREAS.has(S.room))return interaction('There is no physical cover here.');const p=initPursuer();S.f.lockerSeenEntering=!!(p.active&&p.room===S.room&&S.f.pursuerEncounter);S.f.hidingRoom=S.room;S.f.lockerPeeking=false;S.f.lockerPeekCount=0;S.sceneFocus=null;S.f.pursuerEncounter=0;$('m').innerHTML='';renderScene()};
+window.wardPeek=function(){if(!S.f.hidingRoom)return;S.f.lockerPeeking=!S.f.lockerPeeking;const p=initPursuer();if(S.f.lockerPeeking){S.f.lockerPeekCount=(S.f.lockerPeekCount||0)+1;advanceTime(1);if(p.active&&p.room===S.room&&(S.f.lockerSeenEntering||S.f.lockerPeekCount>=3)){S.f.hidingRoom=null;S.f.lockerCaught=1;interaction('The slats catch the light. Subject X turns toward the handle.');pursuerEncounter();return renderScene();}}showLocker()};
+window.wardStayHidden=function(){const p=initPursuer();S.f.lockerPeeking=false;advanceTime(2);if(p.active&&p.room===S.room){if(S.f.lockerSeenEntering){S.f.hidingRoom=null;S.f.lockerCaught=1;pursuerEncounter();renderScene();return;}const to=connectedOnFirstFloor(p.room).find(r=>!SAFE_FROM_PURSUER.has(r));if(to)p.room=to;p.cooldown=3;S.f.pursuerEscapes=(S.f.pursuerEscapes||0)+1;S.f.pursuerChaseComplete=1;interaction('The boots stop beside you. After a long pause, they move back into the corridor.');}showLocker();window.WardSound?.sync?.()};
+window.wardExitHiding=function(){if(!S.f.hidingRoom)return;S.f.hidingRoom=null;S.f.lockerPeeking=false;const p=initPursuer();if(p.active&&p.room===S.room)pursuerEncounter();renderScene()};
+escapePursuer=function(how){if(!S.f.pursuerEncounter)return;const p=initPursuer();if(how==='hide')return hideInRoom();let escaped=false,text='';
+ if(how==='retreat'){const exits=Object.keys(D).filter(id=>(D[id].a===S.room||D[id].b===S.room)&&doorOpen(id)).map(id=>D[id].a===S.room?D[id].b:D[id].a);const to=exits.includes(S.prev)?S.prev:exits[0];if(!to)return interaction('No unlocked retreat. A shot or the nearby cover may buy time.');const before=S.room;S.room=to;S.prev=before;S.vis[to]=1;escaped=true;text='I break contact through the door to '+R[to].n+'.';soundEffect('door');}
+ else if(how==='shoot'){const w=W[S.eq];if(!w||!has(S.eq)||!(S.ld[S.eq]>0))return;S.ld[S.eq]--;soundEffect('shot');p.noise=2;text='The shot staggers Subject X. It is still here. I have time to leave.';}
+ else if(how==='push'){S.hp=Math.max(0,S.hp-Math.round((8+rnd()*7)*S.m));text='Its hand catches my shoulder. I tear free, but the pain is sharp.';soundEffect('hit');}
+ S.f.pursuerEncounter=0;p.cooldown=3;p.lastMoveAt=S.t;S.stag=how==='shoot'?1:0;if(escaped){S.f.pursuerEscapes=(S.f.pursuerEscapes||0)+1;S.f.pursuerChaseComplete=1;}$('m').innerHTML='';advanceTime(1);interaction(text);lg(text);if(S.hp<=0)return die();render();};
+
+function checkpointExists(key){try{return valid(JSON.parse(localStorage.getItem(key)))}catch(e){return false}}
+function showDeath(){const root=$('sceneFocusOverlay');root.classList.remove('hid');const reason=S.f.glassHunterStep===2?'The observation glass failed.':S.f.lockerCaught||S.f.pursuerEncounter?'Subject X found you.':'Blackridge claimed another survivor.';root.innerHTML=`<section class="c1-ending"><small>BLACKRIDGE MEDICAL COMPLEX · 1998</small><h1>GAME OVER</h1><p>${reason}</p><div>${read(K)||read(KB)?'<button class="btn p" onclick="loadGame()">Load last save</button>':''}${checkpointExists('lw_ch1_cinematic_pursuer_checkpoint')?'<button class="btn" onclick="loadFirstFloorCheckpoint()">Pursuit checkpoint</button>':''}${checkpointExists('lw_ch1_finale_checkpoint')?'<button class="btn" onclick="wardLoadFinale()">Finale checkpoint</button>':''}${S.f.glassHunterStep===2?'<button class="btn" onclick="loadCheckpoint()">Observation checkpoint</button>':''}<button class="btn" onclick="location.reload()">Main menu</button></div></section>`;}
+die=function(){cm=0;if(!S)return;S.hp=0;$('m').innerHTML='';render();showDeath()};
+function showCompletion(){const root=$('sceneFocusOverlay');root.classList.remove('hid');root.innerHTML=`<section class="c1-ending completed"><small>THE LAST WARD</small><h1>END OF CHAPTER 1</h1><p>The cage descends past the public basement. Something crosses the roof above you, slowly. Then the motor falls silent.</p><p class="c1-thought">If I helped build this place, why did they make me forget?</p><h3>Chapter 2 · Below Blackridge</h3><p>The underground story continues in the next chapter.</p><p>${S.f.completionSaved?'Your chapter-completion record was saved locally.':'Export your completion record to preserve your progress.'}</p><button class="btn p" onclick="wardExportCompletion()">Export Chapter 1 record</button><button class="btn" onclick="location.reload()">Main menu</button></section>`;}
+const baseOptions=optionsModal;optionsModal=function(){baseOptions();const body=document.querySelector('#m .mb');if(body)body.insertAdjacentHTML('beforeend','<h3>Accessibility</h3>'+[['hints','Stronger interaction hints'],['soundCaptions','Significant sound captions'],['shake','Camera movement'],['flashes','Weapon flashes']].map(([key,label])=>`<label class="c1-option"><input type="checkbox" ${options[key]?'checked':''} onchange="wardSetAccess('${key}',this.checked)">${label}</label>`).join(''))};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S?.sceneFocus){e.preventDefault();wardCloseFocus()}});
+document.addEventListener('pointermove',e=>{const plane=e.target.closest?.('.c1-plane');if(!plane)return;const r=plane.getBoundingClientRect();plane.style.setProperty('--beam-x',100*(e.clientX-r.left)/r.width+'%');plane.style.setProperty('--beam-y',100*(e.clientY-r.top)/r.height+'%')},{passive:true});
+saveOptions();
+})();

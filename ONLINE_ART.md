@@ -1,9 +1,12 @@
-# Optional AI-enhanced environments: integration contract
+# Optional atmospheric texture service
 
-The browser game has a **complete offline baseline**. The `online_art.js` enhancement is off by default until a configured backend is available. No runtime AI, provider credentials or internet are required for the local edition.
+The game is complete offline. Automatic/Online modes may request `/api/ward-art` from
+the optional Python server. No provider is configured or claimed live in this build.
 
-If you deploy an image generation server, enable the option through `WardArt.update(true, '/api/ward-art')` (or a same-origin settings UI). The game POSTs JSON with room, roomName, seed, chapter, power state and style. The endpoint must return JSON such as `{ "image_url":"https://example.com/cache/room-123.png" }`. This image is cosmetic only. All doors, hotspots, room descriptions and puzzle logic remain drawn by the local scene engine. Generation is time-limited and cannot delay movement.
+An online response supplies an abstract dust/light texture. The client accepts only a
+same-origin image and confines it to a faint noninteractive ceiling area. It cannot
+replace a room background, relocate a doorway, cover a clue or change collision targets.
+Failures and connection loss leave local art and gameplay available immediately.
 
-**Important:** Real AI generation is NOT wired to a specific provider or paid service. You'll need to deploy and configure your own backend and persistent image host before online art works. The browser bundle contains no secret API key. The current in-memory cache avoids repeat requests during the session; production persistent caching of remote imagery must be implemented server-side or through a site's PWA cache strategy.
-
-A standalone local HTML file uses its embedded artwork. The hosted version can be installed offline once its assets have been cached through its service worker. When online art fails, local artwork renders without depending on the failed request.
+Configure provider credentials only on the server, as described in server/README.md.
+Never put a provider key into the frontend, a downloadable HTML, or a save record.

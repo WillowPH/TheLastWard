@@ -1,0 +1,214 @@
+{
+  "repository": "https://github.com/lavenderdotpet/CC0-Public-Domain-Sounds",
+  "commit": "f2b6264f9ab89fabc266914c3654685d68c5a39b",
+  "recordings": [
+    {
+      "name": "door_open",
+      "source": "100-CC0-SFX/door_open.ogg",
+      "source_sha256": "62b42cdf0d8b25ef80c0f3bc815aa65977b78b20225481461ea134798172f59d",
+      "output_sha256": "999fa837423ecc652cf2c1cade8d69a8198fae1a3b5c85ee61eadf1011592220",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "door_close",
+      "source": "100-CC0-SFX/door_close_02.ogg",
+      "source_sha256": "3f4ce43f7a676d8907258908c90e88caecffd4526fce43e40df6726bf67ed91b",
+      "output_sha256": "fbd0a49020c005a2dc48171db1aa28e58f8d41949f9d62ec40434d054595c2e2",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "step_tile_1",
+      "source": "100-cc0-sfx-2/sfx100v2_footstep_01.ogg",
+      "source_sha256": "007a96c62d6c335df0d292bdc5cf44fef768b7e2f14378759d03673be6be7ec6",
+      "output_sha256": "8cc87ab424d742914bace1a6149545c424e72750e910743fc0c4e505e04c7a5b",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "step_tile_2",
+      "source": "100-cc0-sfx-2/sfx100v2_footstep_02.ogg",
+      "source_sha256": "8b478a7245bbe358fcddaa5047f8f4e29c8eca52ff79c25d489b5f378747228c",
+      "output_sha256": "227b8af1d117d95edb8e535c5c9cba570da076e04be7f8485a3b0fc896d5ba6f",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "step_wet",
+      "source": "100-cc0-sfx-2/sfx100v2_footstep_wet_02.ogg",
+      "source_sha256": "b2cfbdd75ee970dcb68cc157fec818eda2f5802989b0da684aa67817cb914b52",
+      "output_sha256": "3433c0e0c3a85218ccb3142ae49256349880a45fe6e0c379f8b1217cdfa895b8",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "step_wood",
+      "source": "100-cc0-sfx-2/sfx100v2_footstep_wood_02.ogg",
+      "source_sha256": "e6c35ceaabd50775ba222d8c9566e807b876debf066443626a0a4906849982d4",
+      "output_sha256": "531cf761caf875febccd95b2b38ecf571a9411b7a727cfe485cacd8e4d5093c9",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "subject_step_1",
+      "source": "warfork-cc0/sounds/world/ft_step_met1.ogg",
+      "source_sha256": "d1a20e5e21bef337a0bfe0ace911f8e76e539bb55e4a4883f76f4806846306e6",
+      "output_sha256": "0cf31639caed8873f68930e99f5b793005ed1248696d410f25e00a1b1231e485",
+      "license": "CC0-1.0",
+      "processing": "asetrate=44100*0.72,aresample=44100,lowpass=f=2800,bass=g=5,alimiter=limit=0.85"
+    },
+    {
+      "name": "subject_step_2",
+      "source": "warfork-cc0/sounds/world/ft_step_met2.ogg",
+      "source_sha256": "d693e087cdf560b97a5679d93dd1c693de47eb5ea244095a80d68e96e4045ad9",
+      "output_sha256": "654543b4e73e28b28a6705fc460bda0f46ae8290e53f867468d348b7acc71550",
+      "license": "CC0-1.0",
+      "processing": "asetrate=44100*0.72,aresample=44100,lowpass=f=2800,bass=g=5,alimiter=limit=0.85"
+    },
+    {
+      "name": "infected_step",
+      "source": "100-cc0-sfx-2/sfx100v2_footstep_02.ogg",
+      "source_sha256": "8b478a7245bbe358fcddaa5047f8f4e29c8eca52ff79c25d489b5f378747228c",
+      "output_sha256": "8ca3f3a5e15f212ebffee240083f714c1dcfca48e24323a503e0d45b2142303e",
+      "license": "CC0-1.0",
+      "processing": "asetrate=44100*0.84,aresample=44100,alimiter=limit=0.8"
+    },
+    {
+      "name": "breathing",
+      "source": "80-CC0-creature-SFX/breath.ogg",
+      "source_sha256": "d6ecfd092c261059701fe81581957ce6e67c1737978449bbd98ec6d4f30abb7f",
+      "output_sha256": "e280054f8dfef32e1af071533a9037d5cafdc7d0f68a61de313f476b36363ad2",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "rain",
+      "source": "30-cc0-sfx-loops/rain.ogg",
+      "source_sha256": "8d153f3f6ee266484f679d7149c80a1afcf4dcfeb9f2c1b6206ed780a12273fb",
+      "output_sha256": "e73c0eb188500ba644fd9f4e8b88866b573e9c537c4f725d73ec97a313a3292b",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "water",
+      "source": "30-cc0-sfx-loops/water_flowing.ogg",
+      "source_sha256": "1a431f77d61661becdc87a5b1832d47f83a12a5c0b001077e41a202e739797a7",
+      "output_sha256": "f2cedae5fc220be84376a5664768d41050481f1ead78a41c01d4b13a2ef7f17f",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "machine",
+      "source": "100-cc0-sfx-2/sfx100v2_loop_machine_02.ogg",
+      "source_sha256": "098f3c6ea71eef9ccd1667f36e9bd8cfd51857603ff56f649ab742dd75d8fe98",
+      "output_sha256": "0c3693a3b53980a4a3abb10d40fac66113ad8622a762579f761dc983a7c6adc9",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "room_hum",
+      "source": "100-cc0-sfx-2/sfx100v2_loop_machine_01.ogg",
+      "source_sha256": "18aa96bda8feb81ffa4158545749a4fddbd419124025832d0014bb0ddfaecc8a",
+      "output_sha256": "79c26f5f625193bf1cac5979e68c9d6f3bcc35e045b6df8784bc9776705b44d0",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "generator_start",
+      "source": "100-CC0-SFX/machine_01.ogg",
+      "source_sha256": "9b4ee1e0737a99c63b1ada16766f22231484de244a5deb53986e93957634eff6",
+      "output_sha256": "14d21dd3b90adfceb39a297b99a426863069151f94c925c9b1e5b4c990249904",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "elevator",
+      "source": "100-CC0-SFX/machine_03.ogg",
+      "source_sha256": "41534a39fc6187eb696a851ad0cac5495cafc964eb5195050102fe55b02cf377",
+      "output_sha256": "158091005c397799c8ec2eec7e9cdd006251586c929d9f88457b4d60f9133db1",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "gunshot",
+      "source": "warfork-cc0/sounds/weapons/machinegun_fire.ogg",
+      "source_sha256": "7db5165891ff2011aa36fe297d0f7e9a165e5c8e81b8671c00d4f1a5dac39851",
+      "output_sha256": "afa74ea832997f6436b03b51d50e669df72279d538fa30680bb3a82567ecfe85",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "reload",
+      "source": "warfork-cc0/sounds/weapons/weapon_switch.ogg",
+      "source_sha256": "9f4444e55c0b3b3c9f517f2686543c5f374ba665a5cab45eeb267db050b71981",
+      "output_sha256": "b98e7b08b15827c5f3fc14f053604b43b0fe8a9d214b014ec95a54dc572ef785",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "metal",
+      "source": "100-CC0-SFX/metal_02.ogg",
+      "source_sha256": "545c2d698e72e1a3f0f22407fc0567a1f1041d9dbeff528bef0947284b45fdf2",
+      "output_sha256": "93ba14401d190a302b6330982622cf483c49857fdb44365172876244c91357bf",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "relay",
+      "source": "100-CC0-SFX/key_open_01.ogg",
+      "source_sha256": "47f5317c0e76cb7e5873e24e9a4a6596e06454b7a278c103b3e07ab902001497",
+      "output_sha256": "d7ac5c989dfcce477b04525dff3ab788aad48ef1e40c65b146047816b4834291",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "mechanism",
+      "source": "100-CC0-SFX/machine_02.ogg",
+      "source_sha256": "247891c065b1c487571d7edc9759c4c2394649c8a919a4e525346bc9f376603b",
+      "output_sha256": "064469ce580ffda5f73469f44eefd06eb06e649bc332de1828a607bc507d4be7",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "impact",
+      "source": "100-CC0-SFX/hit_03.ogg",
+      "source_sha256": "c8948294e7885ada74bcab6efb6c60613b74241cc58eacd18e81aa6bd33449b8",
+      "output_sha256": "51f6dd28ab0c1dd72050e5a9131113f51630595aaa6d317e82fbdeb35affd0e1",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "glass",
+      "source": "100-CC0-SFX/glass_02.ogg",
+      "source_sha256": "f93e91479793e618fabd6a1607e3ce6a382a0ccdba09d82cd5e209980feed4d5",
+      "output_sha256": "ba8dada9158c4a7c6d5295e58b7a155b73c7f942996f393e4612f9d8cc626f34",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "cloth",
+      "source": "100-CC0-SFX/dishes_01.ogg",
+      "source_sha256": "9c37a0fd53d0e0c6349df181973a4c7deab40fc37c27e291dfc54830faa1e42c",
+      "output_sha256": "0a88039423cacbcac322cc099d2fdbdd237b8895c89ee3e1fb5e449f86b881f7",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "switch",
+      "source": "100-CC0-SFX/key_open_02.ogg",
+      "source_sha256": "d1bdc1f001837e370902bf332bf3c08eef16bb9356d0c41e8ea1670fca76fa72",
+      "output_sha256": "f2d5d309d758ed02df740fe79b7318f6a1e126a9d02d00a70879b90fa92d9540",
+      "license": "CC0-1.0",
+      "processing": "alimiter=limit=0.9"
+    },
+    {
+      "name": "phone_ring",
+      "source": "100-CC0-SFX/bell_03.ogg",
+      "source_sha256": "9440896c5ffbc85d045b88953057d12019ddbf052f3694615216d83161a9e2d9",
+      "output_sha256": "81c33996742094977f34df59cde242783f124cf6a380c52adfab2138664bc8a9",
+      "license": "CC0-1.0",
+      "processing": "atrim=duration=0.22,afade=t=out:st=0.12:d=0.1,apad=whole_dur=0.28,aloop=loop=9:size=12348,atrim=duration=2.7,alimiter=limit=0.8"
+    }
+  ]
+}

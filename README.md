@@ -1,42 +1,56 @@
-# The Last Ward — Phase 1 Room Art Fix
+# The Last Ward — Chapter 1: Blackridge
 
-The five-room art/hotspot pilot is implemented. See [ROOM_ART_PASS.md](ROOM_ART_PASS.md)
-for changes, checks, and the remaining Phase 2 scope. Run the editable site with
-`python -m http.server 8000`, or open the packaged `The_Last_Ward_Phase_1_Fixed.html`
-for standalone offline play.
+A Chapter 1 rebuild based on the supplied Cinematic Project and master requirements.
+The playable chapter ends inside the restricted service elevator, after the revelation
+and an explicit choice to descend. Chapter 2 exploration is not included.
 
----
+## Download and play
 
-## Original build reference
+Download this branch with **Code → Download ZIP**, extract it, and open
+`downloads/The_Last_Ward_Chapter_1.html` in a modern browser. The single HTML contains
+all room artwork, character cutouts, recorded audio, item art, Roboto, and game code.
+No server, installation, image provider, or internet connection is required to play.
+Allow audio after pressing Begin Investigation. Start a new game for this build.
 
-# The Last Ward — Chapter 1 Approved Cinematic Build
+For source development, run `python -m http.server 8000` in the repository directory
+and open the served `index.html`. The hosted edition caches its required files for
+offline return visits. Saves are local to the browser/origin; export a terminal record
+before moving to another browser. Older builds' saves are kept under their old keys
+and are not silently loaded into this different room topology.
 
-## Playing
+## This build
 
-* Standalone offline game: download `The_Last_Ward_Chapter_1_Approved.html` and open it locally in a modern browser. It embeds the packaged room artwork, item icons, gameplay code, and existing WAV effects.
-* Editable site: extract this project and open `index.html` (or serve the project with HTTP(S)). When the site is hosted via HTTPS or localhost, the service worker precaches baseline assets for offline return visits.
-* Start a **new game** because Chapter 1 progression keys, lighting and event flags have changed substantially since older builds.
+- 27 unique room backgrounds; no mirrored substitutes or legacy room-image fallback.
+- 155 explicitly authored fixtures, separate doors, fixed art coordinates, subtle glints,
+  focus/hover labels, stronger hints, and responsive controls.
+- Separate object, pickup, lighting, actor, and persistent aftermath layers. The surgical
+  aftermath has its own image and matching changed inspection region.
+- Subject X and infected are visible in rooms and central encounter views. Pursuit uses
+  traversable room edges, with positional heavy boot recordings, cover and locker peeking.
+- Clara Whitmore, Evelyn Shaw, Judith Price, Daniel Mercer and Kessler interactions;
+  consistent Rourke evidence and the Monolith/LULLABY story.
+- Actual maintenance tools plus fuse/regulator repair, matching seeded puzzle clues,
+  final clearance, real pursuit escape, and gated elevator completion.
+- Inventory, storage, stacking, optional upgrades and crafting, ribbon saves, checkpoint
+  recovery, irreversible patient choices, one-time incidents, optional warned fatal
+  glass encounter, nonfatal hallucinations, and recoverable environmental conditions.
+- 26 local recorded effects/loops. Distinct footsteps, wet steps, mechanical bell foley,
+  doors, gunfire, reload handling, breathing, water, machinery and room ambience.
+- Exportable Chapter 1 completion record for later Chapter 2 work.
 
-## Exact UI direction
+## Verification and limits
 
-This uses the previously approved Blackridge lobby screenshot as the art/layout reference: left navigation with a findable partial map, large photorealistic central room stage containing the narration and amber THOUGHTS, and right physical/mental status, flashlight, ammunition, inventory and quick actions. There is **no second room-view pane or bottom interaction list**. Inspectable items use subtle hotspots embedded in the illustrated room; inspection close-ups occupy the same stage. Doors use the shared travel graph and transparent targets instead of floating sprite doors.
+See [VALIDATION.md](VALIDATION.md) for exact automated coverage and commands,
+[IMPLEMENTATION.md](IMPLEMENTATION.md) for the implementation map, and
+[audio/README.md](audio/README.md) for recording sources and processing.
 
-## Core Chapter 1 systems included
+Three progression runs—two Standard seeds and a Story route visiting all 27 rooms—
+have been exercised automatically through the actual inventory, puzzles, gates and
+elevator ending. This is not a completed human playtest
+or proof of the requested 2–3-hour playtime. Long-session pacing, difficulty balance,
+and listening quality still need human evaluation. Automated coverage is Chromium;
+other browser engines have not been claimed verified.
 
-* An opening with flashlight OFF and no weapon, findable partial map, chained exterior exits, staff-card and maintenance-item gates, required generator repair, and power-dependent room exploration.
-* Three different, seeded physical telephones; used story calls do not repeat.
-* Later Subject X chase/roaming logic, places to hide, one-use environmental trap, rare reinforced-glass first-warning/second-fatal encounter, sanity-dependent hallucination beats, irreversible patient decisions, scripted horror incidents, photograph puzzle, and the Chapter 1 revelation / elevator gate.
-* Health and mental condition cues, item slot limitations and medical supplies, Ink Ribbon saves, and **portable save-record export/import** from the Save / Load screen.
-
-## Online / offline environment art
-
-**Offline always works:** all required backgrounds, item icons, scripts and bundled sound effects are local. Select **Offline** on the start screen to make no online artwork requests; choose **Automatic** or **Online enhanced** to permit requests only when launched from a compatible website. The local environment loads immediately regardless of network conditions.
-
-The project includes an optional same-origin server endpoint (`server/ward_art_server.py`) which can proxy a separately configured image-generation provider. It uses room/seed/state prompts and caches generated images server-side, while the browser caches successful same-origin assets. It does not determine geometry, doors, puzzles, or items, and runtime failure has no gameplay consequences. **A live paid AI provider is not configured in this deliverable.** See `ONLINE_ART.md` and `server/README.md`.
-
-## Important limitations
-
-* Only the lobby and some areas have polished photorealistic art derived from the approved concept. The other first-floor room backgrounds are **distinct local photographic compositions derived from a limited common base**, rather than independently art-directed complete scenes. They require further artwork for truly unique cinematic interiors.
-* Existing WAV files were retained; many natural recordings requested (phone rings, hospital ambience, footsteps, generator startup) are not yet produced. The game intentionally remains silent when a sound file is absent.
-* The current Chapter 1 is a **playable development build**; the aspirational 2–3-hour runtime has not been validated through manual playtesting. Some Chapter 2/3 legacy content is present in source as carryover, but Chapter 1 is the priority.
-* Browser testing covered targeted functions and routes but not a completed human playthrough of every branch.
+Optional online artwork is limited to a noninteractive atmospheric texture above the
+room. It cannot replace the background or move targets. No paid/live provider is
+configured; the complete offline game is the default reliable path.

@@ -19,7 +19,7 @@ HOST=os.environ.get('WARD_HOST','127.0.0.1')
 PORT=int(os.environ.get('WARD_PORT','8787'))
 UPSTREAM=os.environ.get('WARD_ART_UPSTREAM_URL','')
 KEY=os.environ.get('WARD_ART_UPSTREAM_KEY','')
-VALID_ROOMS={x.stem for x in (ROOT/'assets'/'rooms').glob('*.jpg')}
+VALID_ROOMS={x.stem for x in (ROOT/'assets'/'rooms').glob('*.webp')}
 class Handler(http.server.SimpleHTTPRequestHandler):
  def __init__(self,*args,**kwargs):super().__init__(*args,directory=str(ROOT),**kwargs)
  def response(self,status,body):
@@ -35,9 +35,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
    seed=str(payload.get('seed',''))[:100]
    if not re.fullmatch(r'[A-Za-z0-9_-]{1,100}',seed):return self.response(400,{'error':'Invalid seed'})
    phase='electrified, old fluorescent lights' if bool(payload.get('powered')) else 'emergency lighting, moody darkness'
-   prompt=(f'Original 1998-era survival-horror atmospheric background variation for the room {room!r} '
-    f'in Blackridge Medical Complex. Film-realistic abandoned hospital materials, rain, dirt, and {phase}. '
-    'Monolith Pharmaceuticals industrial-medical aesthetic. NO text, UI, characters or extra functional objects. '
+   prompt=(f'Original 1998-era survival-horror abstract atmospheric dust-and-light texture for the room {room!r} '
+    f'in Blackridge Medical Complex. A nonfigurative texture of dust, mist and {phase}. '
+    'Monolith Pharmaceuticals industrial-medical aesthetic. NO text, UI, characters, architecture, doors or objects. '
     'The room layout and all doors and puzzle objects are defined by the separately-rendered base art; '
     'this generated image is used only as an atmospheric overlay. Landscape image.')
    h=hashlib.sha256((room+'|'+seed+'|'+str(phase)).encode()).hexdigest()[:32]

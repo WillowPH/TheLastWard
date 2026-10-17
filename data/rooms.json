@@ -1,22 +1,16 @@
 {
-  "format": 2,
-  "description": "Generated from playable room and door definitions; the JavaScript is authoritative for rules.",
+  "format": 3,
+  "description": "Chapter 1 active catalog, exported from the playable definitions. JavaScript is authoritative for rules.",
   "rooms": [
     {
       "id": "lobby",
       "name": "Emergency Lobby",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 110,
-        "y": 320
+        "x": 45,
+        "y": 330
       },
       "connections": [
-        {
-          "id": "serviceReturn",
-          "to": "records",
-          "requirement": "researchers"
-        },
         {
           "id": "ls",
           "to": "security",
@@ -24,13 +18,8 @@
         },
         {
           "id": "lw",
-          "to": "ward",
+          "to": "eastcorridor",
           "requirement": null
-        },
-        {
-          "id": "sl",
-          "to": "surgery",
-          "requirement": "power"
         }
       ]
     },
@@ -38,16 +27,20 @@
       "id": "security",
       "name": "Security Office",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 40,
-        "y": 320
+        "x": 45,
+        "y": 280
       },
       "connections": [
         {
           "id": "ls",
           "to": "lobby",
           "requirement": null
+        },
+        {
+          "id": "es",
+          "to": "eastcorridor",
+          "requirement": "power"
         }
       ]
     },
@@ -55,41 +48,20 @@
       "id": "ward",
       "name": "Patient Wing",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 110,
-        "y": 260
+        "x": 170,
+        "y": 300
       },
       "connections": [
         {
-          "id": "lw",
-          "to": "lobby",
-          "requirement": null
-        },
-        {
-          "id": "wr",
-          "to": "room12",
+          "id": "ew",
+          "to": "eastcorridor",
           "requirement": "Staff Access Card"
         },
         {
-          "id": "wa",
-          "to": "archive",
-          "requirement": "Maintenance Key"
-        },
-        {
-          "id": "wp",
-          "to": "pharmacy",
-          "requirement": "pharm"
-        },
-        {
-          "id": "wl",
-          "to": "laundry",
+          "id": "northPassage",
+          "to": "wardnorth",
           "requirement": null
-        },
-        {
-          "id": "ws",
-          "to": "surgery",
-          "requirement": "power"
         }
       ]
     },
@@ -97,15 +69,14 @@
       "id": "room12",
       "name": "Room 12",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 180,
-        "y": 260
+        "x": 230,
+        "y": 345
       },
       "connections": [
         {
           "id": "wr",
-          "to": "ward",
+          "to": "wardnorth",
           "requirement": "Staff Access Card"
         },
         {
@@ -124,15 +95,14 @@
       "id": "archive",
       "name": "The Archives",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 110,
-        "y": 200
+        "x": 220,
+        "y": 210
       },
       "connections": [
         {
           "id": "wa",
-          "to": "ward",
+          "to": "wardservice",
           "requirement": "Maintenance Key"
         },
         {
@@ -156,16 +126,15 @@
       "id": "generator",
       "name": "Generator Room",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 110,
-        "y": 140
+        "x": 220,
+        "y": 145
       },
       "connections": [
         {
           "id": "liftEntry",
           "to": "lift",
-          "requirement": "pursuerStarted"
+          "requirement": "chapter1Ready"
         },
         {
           "id": "ag",
@@ -175,22 +144,12 @@
         {
           "id": "go",
           "to": "observation",
-          "requirement": "underground"
-        },
-        {
-          "id": "gl",
-          "to": "lab",
-          "requirement": "underground"
+          "requirement": "power"
         },
         {
           "id": "gm",
           "to": "morgue",
           "requirement": "Bolt Cutters"
-        },
-        {
-          "id": "gp",
-          "to": "powercontrol",
-          "requirement": "underground"
         }
       ]
     },
@@ -198,48 +157,20 @@
       "id": "observation",
       "name": "Observation Ward",
       "chapter": 1,
-      "location": "underground/restricted",
       "coordinates": {
-        "x": 110,
+        "x": 220,
         "y": 80
       },
       "connections": [
         {
-          "id": "underObservation",
-          "to": "containment",
-          "requirement": null
-        },
-        {
           "id": "go",
           "to": "generator",
-          "requirement": "underground"
+          "requirement": "power"
         },
         {
           "id": "os",
-          "to": "sealgate",
+          "to": "specimen",
           "requirement": "Encrypted Drive"
-        },
-        {
-          "id": "oi",
-          "to": "isolation",
-          "requirement": "power"
-        }
-      ]
-    },
-    {
-      "id": "core",
-      "name": "LULLABY Core",
-      "chapter": 1,
-      "location": "underground/restricted",
-      "coordinates": {
-        "x": 110,
-        "y": 20
-      },
-      "connections": [
-        {
-          "id": "sc",
-          "to": "sealgate",
-          "requirement": "gate"
         }
       ]
     },
@@ -247,15 +178,14 @@
       "id": "pharmacy",
       "name": "Pharmacy",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 40,
+        "x": 350,
         "y": 260
       },
       "connections": [
         {
           "id": "wp",
-          "to": "ward",
+          "to": "wardservice",
           "requirement": "pharm"
         }
       ]
@@ -264,10 +194,9 @@
       "id": "chapel",
       "name": "Hospital Chapel",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 40,
-        "y": 200
+        "x": 150,
+        "y": 210
       },
       "connections": [
         {
@@ -281,10 +210,9 @@
       "id": "morgue",
       "name": "Morgue",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 190,
-        "y": 140
+        "x": 150,
+        "y": 80
       },
       "connections": [
         {
@@ -305,62 +233,12 @@
       ]
     },
     {
-      "id": "lab",
-      "name": "LULLABY Lab",
-      "chapter": 1,
-      "location": "underground/restricted",
-      "coordinates": {
-        "x": 40,
-        "y": 140
-      },
-      "connections": [
-        {
-          "id": "underLaboratory",
-          "to": "containment",
-          "requirement": null
-        },
-        {
-          "id": "gl",
-          "to": "generator",
-          "requirement": "underground"
-        },
-        {
-          "id": "lsb",
-          "to": "specimen",
-          "requirement": "power"
-        }
-      ]
-    },
-    {
-      "id": "sealgate",
-      "name": "Seal Gate",
-      "chapter": 1,
-      "location": "underground/restricted",
-      "coordinates": {
-        "x": 190,
-        "y": 80
-      },
-      "connections": [
-        {
-          "id": "os",
-          "to": "observation",
-          "requirement": "Encrypted Drive"
-        },
-        {
-          "id": "sc",
-          "to": "core",
-          "requirement": "gate"
-        }
-      ]
-    },
-    {
       "id": "residence",
       "name": "Staff Residence",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 260,
-        "y": 260
+        "x": 170,
+        "y": 345
       },
       "connections": [
         {
@@ -379,10 +257,9 @@
       "id": "tunnel",
       "name": "Flooded Tunnel",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 260,
-        "y": 200
+        "x": 85,
+        "y": 80
       },
       "connections": [
         {
@@ -396,10 +273,9 @@
       "id": "boiler",
       "name": "Boiler Room",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 260,
-        "y": 140
+        "x": 150,
+        "y": 30
       },
       "connections": [
         {
@@ -413,10 +289,9 @@
       "id": "laundry",
       "name": "Laundry & Service Wing",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 180,
-        "y": 320
+        "x": 290,
+        "y": 145
       },
       "connections": [
         {
@@ -426,19 +301,18 @@
         },
         {
           "id": "wl",
-          "to": "ward",
+          "to": "wardservice",
           "requirement": null
         }
       ]
     },
     {
       "id": "children",
-      "name": "Children’s Ward",
+      "name": "Children\u2019s Ward",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 250,
-        "y": 300
+        "x": 350,
+        "y": 345
       },
       "connections": [
         {
@@ -452,17 +326,11 @@
       "id": "records",
       "name": "Records Annex",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 180,
-        "y": 200
+        "x": 290,
+        "y": 210
       },
       "connections": [
-        {
-          "id": "serviceReturn",
-          "to": "lobby",
-          "requirement": "researchers"
-        },
         {
           "id": "ar",
           "to": "archive",
@@ -479,42 +347,30 @@
       "id": "surgery",
       "name": "Surgical Theatre 2",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 320,
-        "y": 200
+        "x": 350,
+        "y": 145
       },
       "connections": [
         {
           "id": "lr",
           "to": "laundry",
           "requirement": "power"
-        },
-        {
-          "id": "ws",
-          "to": "ward",
-          "requirement": "power"
-        },
-        {
-          "id": "sl",
-          "to": "lobby",
-          "requirement": "power"
         }
       ]
     },
     {
       "id": "isolation",
-      "name": "Isolation Ward",
+      "name": "Restricted Isolation Room",
       "chapter": 1,
-      "location": "underground/restricted",
       "coordinates": {
-        "x": 260,
-        "y": 40
+        "x": 290,
+        "y": 30
       },
       "connections": [
         {
           "id": "oi",
-          "to": "observation",
+          "to": "powercontrol",
           "requirement": "power"
         }
       ]
@@ -523,16 +379,15 @@
       "id": "specimen",
       "name": "Specimen Laboratory",
       "chapter": 1,
-      "location": "underground/restricted",
       "coordinates": {
-        "x": 320,
-        "y": 140
+        "x": 350,
+        "y": 80
       },
       "connections": [
         {
-          "id": "lsb",
-          "to": "lab",
-          "requirement": "power"
+          "id": "os",
+          "to": "observation",
+          "requirement": "Encrypted Drive"
         },
         {
           "id": "spc",
@@ -545,21 +400,20 @@
       "id": "powercontrol",
       "name": "Emergency Power Control",
       "chapter": 1,
-      "location": "underground/restricted",
       "coordinates": {
-        "x": 320,
-        "y": 100
+        "x": 290,
+        "y": 80
       },
       "connections": [
+        {
+          "id": "oi",
+          "to": "isolation",
+          "requirement": "power"
+        },
         {
           "id": "spc",
           "to": "specimen",
           "requirement": "power"
-        },
-        {
-          "id": "gp",
-          "to": "generator",
-          "requirement": "underground"
         }
       ]
     },
@@ -567,10 +421,9 @@
       "id": "stafflounge",
       "name": "Staff Lounge",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 320,
-        "y": 320
+        "x": 110,
+        "y": 345
       },
       "connections": [
         {
@@ -584,70 +437,15 @@
       "id": "lift",
       "name": "Restricted Service Elevator",
       "chapter": 1,
-      "location": "underground/restricted",
       "coordinates": {
-        "x": 40,
-        "y": 80
+        "x": 150,
+        "y": 145
       },
       "connections": [
         {
           "id": "liftEntry",
           "to": "generator",
-          "requirement": "pursuerStarted"
-        },
-        {
-          "id": "liftDown",
-          "to": "sublevel",
-          "requirement": "liftDescended"
-        }
-      ]
-    },
-    {
-      "id": "sublevel",
-      "name": "Underground Access B2",
-      "chapter": 1,
-      "location": "underground/restricted",
-      "coordinates": {
-        "x": 40,
-        "y": 20
-      },
-      "connections": [
-        {
-          "id": "liftDown",
-          "to": "lift",
-          "requirement": "liftDescended"
-        },
-        {
-          "id": "lowerPassage",
-          "to": "containment",
-          "requirement": null
-        }
-      ]
-    },
-    {
-      "id": "containment",
-      "name": "Lower Containment Passage",
-      "chapter": 1,
-      "location": "underground/restricted",
-      "coordinates": {
-        "x": 190,
-        "y": 20
-      },
-      "connections": [
-        {
-          "id": "lowerPassage",
-          "to": "sublevel",
-          "requirement": null
-        },
-        {
-          "id": "underObservation",
-          "to": "observation",
-          "requirement": null
-        },
-        {
-          "id": "underLaboratory",
-          "to": "lab",
-          "requirement": null
+          "requirement": "chapter1Ready"
         }
       ]
     },
@@ -655,10 +453,9 @@
       "id": "coldstore",
       "name": "Cold Storage",
       "chapter": 1,
-      "location": "hospital",
       "coordinates": {
-        "x": 320,
-        "y": 260
+        "x": 350,
+        "y": 210
       },
       "connections": [
         {
@@ -667,206 +464,110 @@
           "requirement": "photo"
         }
       ]
-    }
-  ],
-  "doors": [
-    {
-      "id": "serviceReturn",
-      "from": "records",
-      "to": "lobby",
-      "requirement": "researchers"
     },
     {
-      "id": "liftEntry",
-      "from": "generator",
-      "to": "lift",
-      "requirement": "pursuerStarted"
+      "id": "eastcorridor",
+      "name": "East Corridor",
+      "chapter": 1,
+      "coordinates": {
+        "x": 110,
+        "y": 300
+      },
+      "connections": [
+        {
+          "id": "lw",
+          "to": "lobby",
+          "requirement": null
+        },
+        {
+          "id": "ew",
+          "to": "ward",
+          "requirement": "Staff Access Card"
+        },
+        {
+          "id": "es",
+          "to": "security",
+          "requirement": "power"
+        }
+      ]
     },
     {
-      "id": "liftDown",
-      "from": "lift",
-      "to": "sublevel",
-      "requirement": "liftDescended"
+      "id": "isoward",
+      "name": "Isolation Treatment Room",
+      "chapter": 1,
+      "coordinates": {
+        "x": 290,
+        "y": 345
+      },
+      "connections": [
+        {
+          "id": "wi",
+          "to": "wardnorth",
+          "requirement": null
+        }
+      ]
     },
     {
-      "id": "lowerPassage",
-      "from": "sublevel",
-      "to": "containment",
-      "requirement": null
+      "id": "wardnorth",
+      "name": "North Patient Corridor",
+      "chapter": 1,
+      "coordinates": {
+        "x": 230,
+        "y": 300
+      },
+      "connections": [
+        {
+          "id": "wr",
+          "to": "room12",
+          "requirement": "Staff Access Card"
+        },
+        {
+          "id": "wi",
+          "to": "isoward",
+          "requirement": null
+        },
+        {
+          "id": "northPassage",
+          "to": "ward",
+          "requirement": null
+        },
+        {
+          "id": "servicePassage",
+          "to": "wardservice",
+          "requirement": null
+        }
+      ]
     },
     {
-      "id": "underObservation",
-      "from": "containment",
-      "to": "observation",
-      "requirement": null
-    },
-    {
-      "id": "underLaboratory",
-      "from": "containment",
-      "to": "lab",
-      "requirement": null
-    },
-    {
-      "id": "lr",
-      "from": "laundry",
-      "to": "surgery",
-      "requirement": "power"
-    },
-    {
-      "id": "ls",
-      "from": "lobby",
-      "to": "security",
-      "requirement": null
-    },
-    {
-      "id": "lw",
-      "from": "lobby",
-      "to": "ward",
-      "requirement": null
-    },
-    {
-      "id": "wr",
-      "from": "ward",
-      "to": "room12",
-      "requirement": "Staff Access Card"
-    },
-    {
-      "id": "wa",
-      "from": "ward",
-      "to": "archive",
-      "requirement": "Maintenance Key"
-    },
-    {
-      "id": "ag",
-      "from": "archive",
-      "to": "generator",
-      "requirement": null
-    },
-    {
-      "id": "go",
-      "from": "generator",
-      "to": "observation",
-      "requirement": "underground"
-    },
-    {
-      "id": "rr",
-      "from": "room12",
-      "to": "residence",
-      "requirement": "power"
-    },
-    {
-      "id": "mt",
-      "from": "morgue",
-      "to": "tunnel",
-      "requirement": "Crank Handle"
-    },
-    {
-      "id": "mb",
-      "from": "morgue",
-      "to": "boiler",
-      "requirement": "Tunnel Key"
-    },
-    {
-      "id": "os",
-      "from": "observation",
-      "to": "sealgate",
-      "requirement": "Encrypted Drive"
-    },
-    {
-      "id": "sc",
-      "from": "sealgate",
-      "to": "core",
-      "requirement": "gate"
-    },
-    {
-      "id": "wp",
-      "from": "ward",
-      "to": "pharmacy",
-      "requirement": "pharm"
-    },
-    {
-      "id": "ac",
-      "from": "archive",
-      "to": "chapel",
-      "requirement": "chapel"
-    },
-    {
-      "id": "gl",
-      "from": "generator",
-      "to": "lab",
-      "requirement": "underground"
-    },
-    {
-      "id": "gm",
-      "from": "generator",
-      "to": "morgue",
-      "requirement": "Bolt Cutters"
-    },
-    {
-      "id": "wl",
-      "from": "ward",
-      "to": "laundry",
-      "requirement": null
-    },
-    {
-      "id": "rc12",
-      "from": "room12",
-      "to": "children",
-      "requirement": null
-    },
-    {
-      "id": "ar",
-      "from": "archive",
-      "to": "records",
-      "requirement": null
-    },
-    {
-      "id": "ws",
-      "from": "ward",
-      "to": "surgery",
-      "requirement": "power"
-    },
-    {
-      "id": "oi",
-      "from": "observation",
-      "to": "isolation",
-      "requirement": "power"
-    },
-    {
-      "id": "lsb",
-      "from": "lab",
-      "to": "specimen",
-      "requirement": "power"
-    },
-    {
-      "id": "spc",
-      "from": "specimen",
-      "to": "powercontrol",
-      "requirement": "power"
-    },
-    {
-      "id": "gp",
-      "from": "generator",
-      "to": "powercontrol",
-      "requirement": "underground"
-    },
-    {
-      "id": "rl",
-      "from": "residence",
-      "to": "stafflounge",
-      "requirement": "power"
-    },
-    {
-      "id": "rc",
-      "from": "records",
-      "to": "coldstore",
-      "requirement": "photo"
-    },
-    {
-      "id": "sl",
-      "from": "surgery",
-      "to": "lobby",
-      "requirement": "power"
+      "id": "wardservice",
+      "name": "Patient Service Crossroads",
+      "chapter": 1,
+      "coordinates": {
+        "x": 290,
+        "y": 260
+      },
+      "connections": [
+        {
+          "id": "wa",
+          "to": "archive",
+          "requirement": "Maintenance Key"
+        },
+        {
+          "id": "wp",
+          "to": "pharmacy",
+          "requirement": "pharm"
+        },
+        {
+          "id": "wl",
+          "to": "laundry",
+          "requirement": null
+        },
+        {
+          "id": "servicePassage",
+          "to": "wardnorth",
+          "requirement": null
+        }
+      ]
     }
   ]
 }

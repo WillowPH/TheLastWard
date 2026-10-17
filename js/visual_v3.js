@@ -30,7 +30,6 @@ if(typeof SCENE_CONFIG!=='undefined'){
 }
 function escapeText(s){return htmlSafe(String(s||''))}
 function listSites(){
- const authored=window.WardRoomLayers?.groups(S.room);if(authored)return authored;
  // Explicit object-to-fixture mapping. No automatic dumping of 'unmatched' items into desks, phones or directories.
  const conf=SCENE_CONFIG[S.room]||{sites:[]},visible=availableRoomObjects(),byID=new Map(visible.map(o=>[o[0],o]));
  const out=[];const used=new Set();
@@ -47,7 +46,6 @@ function listSites(){
  return out;
 }
 function doorSlots(n,room,connections){
- const authored=window.WardRoomLayers?.rooms[room];if(authored)return connections.map(d=>{const rect=authored.doors[d.to];if(!rect)throw Error('Unmapped door '+room+' -> '+d.to);return rect;});
  if(room==='lobby'&&connections)return connections.map(d=>d.to==='security'?[35,52,12,38]:d.to==='eastcorridor'?[78,52,13,38]:d.to==='records'?[7,51,10,38]:[94,51,8,38]);
 
  const prescribed=ROOM_ANCHORS[room]?.doors;
@@ -57,7 +55,6 @@ function doorSlots(n,room,connections){
  return Array.from({length:count},(_,i)=>[count===1?50:8+i*84/(count-1),51,width,39]);
 }
 function propSlots(groups,doors,room){
- if(window.WardRoomLayers?.rooms[room])return groups.map(g=>g.rect);
  // Hit regions are authored where available; a collision-free search is used only for overflow.
  const presets=ROOM_ANCHORS[room]?.props||{};
  const candidates=[[49,49],[14,49],[70,75],[91,57],[31,75],[55,73],[16,74],[82,73],[42,28],[68,29],[52,31],[27,28],[77,32],[8,28],[93,27],[36,61],[63,65],[50,66],[25,66],[76,62],[11,68],[90,69],[59,45],[42,46]];
@@ -71,29 +68,8 @@ function propSlots(groups,doors,room){
   chosen=chosen||[10+((i*13)%82),75];used.push(chosen);return chosen;
  });
 }
-
-let hintsEnabled=false;
-try{hintsEnabled=localStorage.getItem('lw_room_hints')==='strong'}catch(e){}
-window.wardToggleHints=function(){hintsEnabled=!hintsEnabled;try{localStorage.setItem('lw_room_hints',hintsEnabled?'strong':'subtle')}catch(e){}renderScene()};
-function fitArtPlane(host){const plane=host.querySelector('.authored-room');if(!plane)return;const caption=host.parentElement.querySelector('.narrative-focus'),bounds=host.getBoundingClientRect();const bottom=caption?Math.min(host.clientHeight,caption.getBoundingClientRect().top-bounds.top-12):host.clientHeight;const w=host.clientWidth,h=Math.max(1,bottom-40);const width=Math.min(w,h*4/3),height=width*3/4;plane.style.cssText=`width:${width}px;height:${height}px;left:${(w-width)/2}px;top:${40+(h-height)/2}px;right:auto;bottom:auto;`;}
-const planeObserver=new ResizeObserver(()=>{const host=$('interactiveScene');if(host)fitArtPlane(host)});planeObserver.observe($('interactiveScene'));const narrative=document.querySelector('.narrative-focus');if(narrative)planeObserver.observe(narrative);
-
-
-function stateLayers(groups){
- return `<div class="object-state-layer" aria-hidden="true">${groups.map(g=>{
-  const seen=S.f['seen_site_'+S.room+'_'+g.id],done=g.objects.every(o=>['done','read'].includes(S.ob[o[0]]));
-  const [x,y,w,h]=g.rect,style=`left:${x}%;top:${y}%;width:${w}%;height:${h}%`;
-  if(g.ids?.includes('@loot'))return `<span class="layer-cache ${done?'empty':''}" style="${style}"></span>`;
-  const loot=g.objects.find(o=>o[4]?.give&&S.ob[o[0]]!=='done');
-  const item=loot?`<span class="fixture-item" style="left:${x}%;top:${y}%">${itemIconMarkup(loot[4].give[0][0])}</span>`:'';
-  if(!seen&&!done)return item;
-  const drawer=/drawer|reception/.test(g.id);
-  return item+`<span class="object-state ${drawer?'drawer-open':''} ${done?'object-collected':'object-examined'}" style="${style}">${done?'✓':''}</span>`;
- }).join('')}</div>`;
-}
-
-function roomPicture(room){return 'assets/rooms/'+room+(window.WardRoomLayers?.rooms[room]?'.png':'.jpg')}
-function sceneSrc(room){const path=roomPicture(room);if(window.WardEmbeddedAssets&&WardEmbeddedAssets[path])return WardEmbeddedAssets[path];return /^https?:\/\//.test(path)||/^assets\/rooms\/[a-z0-9_-]+\.(jpg|png)$/.test(path)?path:'assets/rooms/lobby.jpg'}
+function roomPicture(room){return 'assets/rooms/'+room+'.jpg'}
+function sceneSrc(room){const path=roomPicture(room);if(window.WardEmbeddedAssets&&WardEmbeddedAssets[path])return WardEmbeddedAssets[path];return /^https?:\/\//.test(path)||/^assets\/rooms\/[a-z0-9_-]+\.jpg$/.test(path)?path:'assets/rooms/lobby.jpg'}
 let recentTip='';
 sceneTooltip=function(t){const el=$('sceneTooltip');if(el){el.textContent=t;el.classList.add('visible')}recentTip=t};
 sceneTooltipClear=function(){const el=$('sceneTooltip');if(el)el.classList.remove('visible')};
@@ -109,7 +85,7 @@ function v3Drawer(){const overlay=$('sceneFocusOverlay');if(!overlay||!S)return;
  if(!group){overlay.classList.add('hid');overlay.innerHTML='';return;}
  overlay.classList.remove('hid');
  // Fixed-size closeup in the same scene. No unrelated items and no permanently visible list.
- const zoom=group.rect||ROOM_ANCHORS[S.room]?.props?.[group.label]||[50,48];const actions=group.objects.map(o=>{const [id,name,,description,sp]=o,state=S.ob[id],done=state==='done'||state==='read';
+ const zoom=ROOM_ANCHORS[S.room]?.props?.[group.label]||[50,48];const actions=group.objects.map(o=>{const [id,name,,description,sp]=o,state=S.ob[id],done=state==='done'||state==='read';
   const verb=done?'Examined':sp.doc?'Read':sp.give?'Take':sp.act==='payphone'?S.f.phoneRinging&&S.f.ringingPhoneRoom===S.room?'Answer':'Check line':sp.act==='npc'?'Speak':sp.act==='hide'?'Hide':sp.act==='map'?'Copy map':sp.look?'Examine':'Use';
   const icon=sp.give&&sp.give[0]?itemIconMarkup(sp.give[0][0]):'';
   const click=`wardSceneAction('${id}')`;
@@ -118,22 +94,21 @@ function v3Drawer(){const overlay=$('sceneFocusOverlay');if(!overlay||!S)return;
  overlay.innerHTML=`<div class="v3-inspect"><div class="v3-inspect-top"><span>EXAMINING · ${escapeText(group.label)}</span><button class="btn" onclick="wardCloseFocus()">Return to room ×</button></div><div class="v3-inspect-image" style="background-image:linear-gradient(180deg,transparent,#0a0d12cc),url('${sceneSrc(S.room)}');background-size:cover,195% 175%;background-position:center,${zoom[0]}% ${zoom[1]}%"><span>${escapeText(group.label)}</span></div><div class="v3-findings">${actions}</div></div>`;
 }
 renderSceneDrawer=v3Drawer;
-function centerShot(src,room){const fallback=(window.WardEmbeddedAssets?.[roomPicture(room)]||roomPicture(room));return `<img class="v3-background" src="${escapeText(src)}" alt="" onerror="this.onerror=null;this.src='${escapeText(fallback)}'">`}
+function centerShot(src,room){const fallback=(window.WardEmbeddedAssets?.['assets/rooms/'+room+'.jpg']||'assets/rooms/'+room+'.jpg');return `<img class="v3-background" src="${escapeText(src)}" alt="" onerror="this.onerror=null;this.src='${escapeText(fallback)}'">`}
 renderScene=function(){if(!S)return;const host=$('interactiveScene');if(!host)return;
  if(S.sceneFocusRoom!==S.room){S.sceneFocus=null;S.sceneFocusRoom=S.room}
- const room=S.room,groups=listSites(),offscreen=roomConnections().filter(d=>window.WardRoomLayers?.rooms[room]?.offscreen?.includes(d.to)&&doorOpen(d.id)),doors=roomConnections().filter(d=>!window.WardRoomLayers?.rooms[room]?.offscreen?.includes(d.to)).filter(d=>!(room==='lobby'&&['serviceReturn','sl'].includes(d.id)&&!doorOpen(d.id))&&!(room==='security'&&d.id==='es'&&!doorOpen(d.id))),slots=doorSlots(doors.length,room,doors),objects=propSlots(groups,slots,room),torch=!!S.lightOn&&S.bat>0,unpowered=!!R[room].dark&&!(S.f.power&&!S.f.powerOut&&WARD_POWERED.has(room)),dark=unpowered&&!torch;
- const authored=!!window.WardRoomLayers?.rooms[room];const live=authored?'':window.WardArt?.urlFor?.(room)||'';const images=centerShot(sceneSrc(room),room)+(live?`<img class="v3-ai-overlay" alt="" src="${escapeText(live)}" onerror="this.remove()">`:'');
+ const room=S.room,groups=listSites(),doors=roomConnections().filter(d=>!(room==='lobby'&&['serviceReturn','sl'].includes(d.id)&&!doorOpen(d.id))&&!(room==='security'&&d.id==='es'&&!doorOpen(d.id))),slots=doorSlots(doors.length,room,doors),objects=propSlots(groups,slots,room),torch=!!S.lightOn&&S.bat>0,unpowered=!!R[room].dark&&!(S.f.power&&!S.f.powerOut&&WARD_POWERED.has(room)),dark=unpowered&&!torch;
+ const live=window.WardArt?.urlFor?.(room)||'';const images=centerShot(sceneSrc(room),room)+(live?`<img class="v3-ai-overlay" alt="" src="${escapeText(live)}" onerror="this.remove()">`:'');
  const doorButtons=doors.map((d,i)=>{const [x,y,w,h]=slots[i],open=doorOpen(d.id),entry=S.prev===d.to&&S.room!==d.to;
   const full=sceneDoorLabel(d.to,d),title=(R[d.to]?.short||R[d.to]?.n||'PASSAGE').replace(/\s+/g,' ').toUpperCase();
   // Sign above doorway. Never wrap into SECUR / ITY / OFFICE.
   const sign=title.length>19?title.slice(0,18)+'…':title;
   const picture='no-sprite';
-  return `<button data-destination="${d.to}" class="v3-door ${open?'':'locked'} ${entry?'entry':''} ${picture}" style="--x:${x}%;--y:${y}%;--w:${w}%;--h:${h}%;" aria-label="${escapeText(full)}" title="${escapeText(full)}" data-tip="${escapeText(full)}" onmouseenter="sceneTooltip(this.dataset.tip)" onmouseleave="sceneTooltipClear()" onfocus="sceneTooltip(this.dataset.tip)" onblur="sceneTooltipClear()" onclick="sceneDoorTravel('${d.to}')"><span class="v3-door-plaque">${escapeText(sign)}</span>${!open?'<span class="v3-locked">▣</span>':''}</button>`;
+  return `<button class="v3-door ${open?'':'locked'} ${entry?'entry':''} ${picture}" style="--x:${x}%;--y:${y}%;--w:${w}%;--h:${h}%;" aria-label="${escapeText(full)}" title="${escapeText(full)}" data-tip="${escapeText(full)}" onmouseenter="sceneTooltip(this.dataset.tip)" onmouseleave="sceneTooltipClear()" onfocus="sceneTooltip(this.dataset.tip)" onblur="sceneTooltipClear()" onclick="sceneDoorTravel('${d.to}')"><span class="v3-door-plaque">${escapeText(sign)}</span>${!open?'<span class="v3-locked">▣</span>':''}</button>`;
  }).join('');
- const sites=groups.map((g,i)=>{const [x,y,w=5,h=7]=objects[i],done=g.objects.every(o=>['done','read'].includes(S.ob[o[0]])),seen=!!S.f['seen_site_'+room+'_'+g.id];return `<button class="v3-prop ${g.important&&!done?'is-important':''} ${done?'is-complete':''} ${seen?'is-seen':''}" data-fixture="${g.id}" style="--x:${x}%;--y:${y}%;--w:${w}%;--h:${h}%;" aria-label="Inspect ${escapeText(g.label)}" title="${escapeText(g.label)}" data-tip="${escapeText(g.label)}" onmouseenter="sceneTooltip(this.dataset.tip)" onmouseleave="sceneTooltipClear()" onfocus="sceneTooltip(this.dataset.tip)" onblur="sceneTooltipClear()" onclick="sceneInspect('${g.id}')"><span class="v3-hotspot-label">${escapeText(g.label)}</span></button>`}).join('');
+ const sites=groups.map((g,i)=>{const [x,y]=objects[i];return `<button class="v3-prop" style="--x:${x}%;--y:${y}%;" aria-label="Inspect ${escapeText(g.label)}" title="${escapeText(g.label)}" data-tip="${escapeText(g.label)}" onmouseenter="sceneTooltip(this.dataset.tip)" onmouseleave="sceneTooltipClear()" onfocus="sceneTooltip(this.dataset.tip)" onblur="sceneTooltipClear()" onclick="sceneInspect('${g.id}')"><span class="v3-hotspot-label">${escapeText(g.label)}</span></button>`}).join('');
  const floor=R[room].ch;
- host.innerHTML=`<div class="v3-room-art ${authored?'authored-room':''} ${unpowered?'is-dark':''} ${torch?'torch-on':''} ${S.f.power?'generator-on':''}" role="group" aria-label="${escapeText(R[room].n)} illustrated scene">${images}<div class="v3-film"></div><div class="v3-scrim"></div>${doorButtons}${sites}${authored?stateLayers(groups):''}<div class="v3-lighting" aria-hidden="true"></div><div id="sceneTooltip" class="v3-tooltip" role="status"></div><span class="v3-room-stamp">${floor===1?'FIRST FLOOR':'BLACKRIDGE'} · ${escapeText(R[room].n)}</span></div><div id="sceneFocusOverlay" class="scene-focus-overlay hid"></div>`;
- if(authored){host.insertAdjacentHTML('beforeend',`<nav class="offscreen-routes" aria-label="Off-screen passages">${offscreen.map(d=>`<button data-destination="${d.to}" onclick="sceneDoorTravel('${d.to}')">Side passage · ${escapeText(R[d.to].n)} ↗</button>`).join('')}</nav><button class="room-hints" aria-pressed="${hintsEnabled}" onclick="wardToggleHints()">Hints: ${hintsEnabled?'strong':'subtle'}</button>`);host.classList.toggle('strong-hints',hintsEnabled);fitArtPlane(host);}
+ host.innerHTML=`<div class="v3-room-art ${unpowered?'is-dark':''} ${torch?'torch-on':''} ${S.f.power?'generator-on':''}" role="group" aria-label="${escapeText(R[room].n)} illustrated scene">${images}<div class="v3-film"></div><div class="v3-scrim"></div>${doorButtons}${sites}<div class="v3-lighting" aria-hidden="true"></div><div id="sceneTooltip" class="v3-tooltip" role="status"></div><span class="v3-room-stamp">${floor===1?'FIRST FLOOR':'BLACKRIDGE'} · ${escapeText(R[room].n)}</span></div><div id="sceneFocusOverlay" class="scene-focus-overlay hid"></div>`;
  v3Drawer();
  const phase=$('stagePower');if(phase)phase.textContent=dark?'DARK · USE FLASHLIGHT':unpowered?'FLASHLIGHT BEAM':S.f.power?'PARTIAL POWER RESTORED':'EMERGENCY LIGHTING';
 };
@@ -198,6 +173,7 @@ const oldNewGame=newGame;
 newGame=function(){artModeApply();oldNewGame();document.body.classList.add('ward-playing');};
 const oldLoadGame=loadGame;
 loadGame=function(...args){artModeApply();oldLoadGame(...args);if(S)document.body.classList.add('ward-playing');};
+window.wardListSites=listSites;
 // Fix visual state on low-light scene entry without moving narration.
 document.addEventListener('pointermove',e=>{const scene=e.target.closest?.('.v3-room-art');if(!scene)return;const r=scene.getBoundingClientRect();scene.style.setProperty('--beam-x',(100*(e.clientX-r.x)/r.width).toFixed(1)+'%');scene.style.setProperty('--beam-y',(100*(e.clientY-r.y)/r.height).toFixed(1)+'%')},{passive:true});
 })();

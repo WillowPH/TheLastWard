@@ -4,7 +4,7 @@ const FIRST_FLOOR=new Set(['lobby','security','eastcorridor','ward','isoward','r
 const SAFE_FROM_PURSUER=new Set(['lobby','chapel','generator','lift','sublevel','containment']);
 const HIDING_AREAS=new Set(['security','room12','isoward','archive','laundry','surgery','records','residence','stafflounge','pharmacy']);
 function initPursuer(){if(!S.pursuer)S.pursuer={active:false,room:'laundry',steps:0,cooldown:0,noise:0};return S.pursuer}
-function makePursuerCheckpoint(){try{localStorage.setItem('lw_chapter1_pursuer_checkpoint',JSON.stringify(S));S.f.pursuerCheckpoint=1}catch(e){/* Browsers may disable storage. Player can still evade. */}}
+function makePursuerCheckpoint(){try{localStorage.setItem('lw_ch1_cinematic_pursuer_checkpoint',JSON.stringify(S));S.f.pursuerCheckpoint=1}catch(e){/* Browsers may disable storage. Player can still evade. */}}
 function awakenPursuer(){
  const p=initPursuer();if(S.f.pursuerStarted)return false;
  S.f.pursuerStarted=1;p.active=true;p.room='laundry';p.steps=0;p.cooldown=2;
@@ -171,7 +171,7 @@ function rechargeAtGenerator(){
 
 function loadFirstFloorCheckpoint(){
  try{
-  const snap=localStorage.getItem('lw_chapter1_pursuer_checkpoint');if(!snap)return toast('No checkpoint is available.');
+  const snap=localStorage.getItem('lw_ch1_cinematic_pursuer_checkpoint');if(!snap)return toast('No checkpoint is available.');
   const state=JSON.parse(snap);if(!valid(state))return toast('This checkpoint is invalid.');
   S=state;S.presentation=S.presentation||{violence:localViolenceChoice()};applyViolenceAppearance();S.hp=Math.max(S.hp,45);S.f.pursuerStarted=1;S.f.pursuerEncounter=0;
   S.pursuer=initPursuer();S.pursuer.active=true;S.pursuer.cooldown=3;

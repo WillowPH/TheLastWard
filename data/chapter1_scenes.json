@@ -1,0 +1,2684 @@
+{
+  "lobby": {
+    "doors": {
+      "ls": [
+        42,
+        35,
+        11,
+        33
+      ],
+      "lw": [
+        74,
+        32,
+        16,
+        28
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "dynamo",
+        "label": "Reception emergency dynamo",
+        "rect": [
+          67,
+          74,
+          5,
+          6
+        ],
+        "ids": [
+          "emergencyDynamo"
+        ],
+        "layer": "dynamo"
+      },
+      {
+        "id": "desk",
+        "label": "Reception desk",
+        "rect": [
+          86,
+          68,
+          15,
+          6
+        ],
+        "ids": [
+          "desk"
+        ],
+        "drawer": true
+      },
+      {
+        "id": "locker",
+        "label": "Staff locker",
+        "rect": [
+          91,
+          34,
+          6,
+          26
+        ],
+        "ids": [
+          "lock"
+        ]
+      },
+      {
+        "id": "coat",
+        "label": "Coat hook",
+        "rect": [
+          97,
+          36,
+          5,
+          23
+        ],
+        "ids": [
+          "coat"
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Continuity Terminal",
+        "rect": [
+          85,
+          51,
+          6,
+          9
+        ],
+        "ids": [
+          "term"
+        ]
+      },
+      {
+        "id": "box",
+        "label": "Field cache",
+        "rect": [
+          75,
+          60,
+          9,
+          9
+        ],
+        "ids": [
+          "box"
+        ]
+      },
+      {
+        "id": "intercom",
+        "label": "Intercom panel",
+        "rect": [
+          63.5,
+          33,
+          3,
+          6
+        ],
+        "ids": [
+          "int"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Public payphone",
+        "rect": [
+          57,
+          31,
+          4,
+          11
+        ],
+        "ids": [
+          "payphone"
+        ]
+      },
+      {
+        "id": "window",
+        "label": "Rain-streaked window",
+        "rect": [
+          24,
+          25,
+          13,
+          24
+        ],
+        "ids": [
+          "win"
+        ]
+      },
+      {
+        "id": "entrance",
+        "label": "Chained main entrance",
+        "rect": [
+          11,
+          43,
+          9,
+          17
+        ],
+        "ids": [
+          "sealedExit"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "security": {
+    "doors": {
+      "ls": [
+        7,
+        37,
+        11,
+        57
+      ],
+      "es": [
+        95,
+        37,
+        8,
+        60
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "clara",
+        "label": "Clara Whitmore",
+        "rect": [
+          83,
+          79,
+          8,
+          25
+        ],
+        "ids": [
+          "clara"
+        ],
+        "actor": "operator_clara"
+      },
+      {
+        "id": "report",
+        "label": "Incident report",
+        "rect": [
+          51,
+          57,
+          14,
+          6
+        ],
+        "ids": [
+          "rep"
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Equipment cabinet",
+        "rect": [
+          26,
+          33,
+          16,
+          34
+        ],
+        "ids": [
+          "rev",
+          "reva"
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Desk drawer",
+        "rect": [
+          29,
+          73,
+          12,
+          13
+        ],
+        "ids": [
+          "drw"
+        ],
+        "drawer": true
+      },
+      {
+        "id": "roster",
+        "label": "Duty roster",
+        "rect": [
+          75,
+          23,
+          9,
+          13
+        ],
+        "ids": [
+          "ros"
+        ]
+      },
+      {
+        "id": "monitors",
+        "label": "Camera monitors",
+        "rect": [
+          51,
+          30,
+          23,
+          18
+        ],
+        "ids": [
+          "cam",
+          "rep2"
+        ]
+      },
+      {
+        "id": "coffee",
+        "label": "Cold coffee",
+        "rect": [
+          46,
+          52,
+          4,
+          4
+        ],
+        "ids": [
+          "cof"
+        ]
+      },
+      {
+        "id": "map",
+        "label": "Folded floor plan",
+        "rect": [
+          75,
+          58,
+          20,
+          6
+        ],
+        "ids": [
+          "mapboard"
+        ]
+      },
+      {
+        "id": "portraits",
+        "label": "Staff portraits",
+        "rect": [
+          54,
+          13,
+          20,
+          10
+        ],
+        "ids": [
+          "staffPortraits"
+        ]
+      },
+      {
+        "id": "diary",
+        "label": "Night attendant journal",
+        "rect": [
+          39,
+          52,
+          8,
+          4
+        ],
+        "ids": [
+          "attendantDiary1"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Desk telephone",
+        "rect": [
+          69,
+          50,
+          8,
+          8
+        ],
+        "ids": [
+          "@phone"
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "rect": [
+          88,
+          58,
+          5,
+          4
+        ],
+        "ids": [
+          "@supply"
+        ],
+        "layer": "pouch"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "eastcorridor": {
+    "doors": {
+      "lw": [
+        11,
+        46,
+        15,
+        65
+      ],
+      "ew": [
+        52,
+        47,
+        8,
+        21
+      ],
+      "es": [
+        95,
+        46,
+        8,
+        68
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "light",
+        "label": "Ceiling light",
+        "rect": [
+          50.5,
+          13,
+          4,
+          10
+        ],
+        "ids": [
+          "fixture"
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Broken trolley",
+        "rect": [
+          74,
+          64,
+          18,
+          17
+        ],
+        "ids": [
+          "trolley"
+        ]
+      },
+      {
+        "id": "directory",
+        "label": "East wing directory",
+        "rect": [
+          28,
+          30,
+          7,
+          28
+        ],
+        "ids": [
+          "directory"
+        ]
+      },
+      {
+        "id": "radio",
+        "label": "Portable staff radio",
+        "rect": [
+          30,
+          52,
+          6,
+          5
+        ],
+        "ids": [
+          "radioHall"
+        ]
+      },
+      {
+        "id": "window",
+        "label": "Cracked ward window",
+        "rect": [
+          77,
+          35,
+          12,
+          27
+        ],
+        "ids": [
+          "windowBoard"
+        ]
+      },
+      {
+        "id": "exit",
+        "label": "Bolted fire exit",
+        "rect": [
+          36,
+          42,
+          3,
+          29
+        ],
+        "ids": [
+          "emergencyExit"
+        ]
+      },
+      {
+        "id": "valve",
+        "label": "Damaged sprinkler valve",
+        "rect": [
+          64,
+          11,
+          5,
+          7
+        ],
+        "ids": [
+          "staffSprinkler"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "ward": {
+    "doors": {
+      "ew": [
+        9,
+        36,
+        14,
+        43
+      ],
+      "northPassage": [
+        91,
+        35,
+        12,
+        26
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "gurney",
+        "label": "Overturned gurney",
+        "rect": [
+          90,
+          64,
+          18,
+          19
+        ],
+        "ids": [
+          "gur"
+        ]
+      },
+      {
+        "id": "names",
+        "label": "Patient name boards",
+        "rect": [
+          33,
+          25,
+          12,
+          16
+        ],
+        "ids": [
+          "nb"
+        ]
+      },
+      {
+        "id": "lockbox",
+        "label": "Night nurse equipment box",
+        "rect": [
+          48,
+          39,
+          8,
+          6
+        ],
+        "ids": [
+          "nightPistol"
+        ]
+      },
+      {
+        "id": "ammo",
+        "label": "Ammunition envelope",
+        "rect": [
+          44,
+          43,
+          4,
+          2
+        ],
+        "ids": [
+          "pistolRounds"
+        ],
+        "layer": "paper"
+      },
+      {
+        "id": "journal",
+        "label": "Night attendant journal",
+        "rect": [
+          39,
+          39,
+          6,
+          3
+        ],
+        "ids": [
+          "nightJournal"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "wardnorth": {
+    "doors": {
+      "wr": [
+        7,
+        51,
+        7,
+        48
+      ],
+      "wi": [
+        25,
+        47,
+        10,
+        36
+      ],
+      "northPassage": [
+        77,
+        47,
+        10,
+        36
+      ],
+      "servicePassage": [
+        93,
+        51,
+        7,
+        48
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "notice",
+        "label": "Patient transfer notice",
+        "rect": [
+          63,
+          39,
+          4,
+          8
+        ],
+        "ids": [
+          "northBoard"
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Linen trolley",
+        "rect": [
+          39,
+          60,
+          13,
+          16
+        ],
+        "ids": [
+          "northTrolley"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "wardservice": {
+    "doors": {
+      "wa": [
+        9,
+        37,
+        11,
+        48
+      ],
+      "wp": [
+        24,
+        39,
+        5,
+        31
+      ],
+      "wl": [
+        75,
+        37,
+        5,
+        29
+      ],
+      "servicePassage": [
+        90,
+        38,
+        8,
+        45
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "map",
+        "label": "Ward service map",
+        "rect": [
+          51,
+          27,
+          8,
+          12
+        ],
+        "ids": [
+          "crossDiagram"
+        ]
+      },
+      {
+        "id": "cupboard",
+        "label": "Staff supply alcove",
+        "rect": [
+          65,
+          37,
+          7,
+          23
+        ],
+        "ids": [
+          "crossCabinet"
+        ]
+      },
+      {
+        "id": "cover",
+        "label": "Supply recess",
+        "rect": [
+          65,
+          68,
+          16,
+          22
+        ],
+        "ids": [
+          "crossHide"
+        ]
+      },
+      {
+        "id": "keypad",
+        "label": "Pharmacy keypad",
+        "rect": [
+          20,
+          31,
+          2.5,
+          7
+        ],
+        "ids": [
+          "kp"
+        ]
+      },
+      {
+        "id": "trail",
+        "label": "Drag marks",
+        "rect": [
+          34,
+          76,
+          10,
+          6
+        ],
+        "ids": [
+          "serviceTrail"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "room12": {
+    "doors": {
+      "wr": [
+        4,
+        30,
+        7,
+        45
+      ],
+      "rr": [
+        75,
+        30,
+        10,
+        30
+      ],
+      "rc12": [
+        96,
+        30,
+        7,
+        45
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "file",
+        "label": "Patient file",
+        "rect": [
+          68,
+          59,
+          6,
+          12
+        ],
+        "ids": [
+          "file"
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Medical cabinet",
+        "rect": [
+          56,
+          28.5,
+          9,
+          15
+        ],
+        "ids": [
+          "cab"
+        ]
+      },
+      {
+        "id": "shelf",
+        "label": "Supply shelves",
+        "rect": [
+          54,
+          39,
+          6,
+          5
+        ],
+        "ids": [
+          "shf",
+          "shf2"
+        ]
+      },
+      {
+        "id": "restraints",
+        "label": "Cut restraints",
+        "rect": [
+          48,
+          55,
+          7,
+          12
+        ],
+        "ids": [
+          "rs"
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Bedside drawer",
+        "rect": [
+          31,
+          50,
+          11,
+          7
+        ],
+        "ids": [
+          "drw12"
+        ],
+        "drawer": true
+      },
+      {
+        "id": "tray",
+        "label": "Instrument tray",
+        "rect": [
+          14,
+          65,
+          18,
+          9
+        ],
+        "ids": [
+          "tray12"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "isoward": {
+    "doors": {
+      "wi": [
+        13,
+        34,
+        17,
+        55
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "patient",
+        "label": "Daniel Mercer",
+        "rect": [
+          66,
+          43,
+          27,
+          22
+        ],
+        "ids": [
+          "beggingPatient"
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Treatment trolley",
+        "rect": [
+          35,
+          49,
+          15,
+          25
+        ],
+        "ids": [
+          "patientTherapy"
+        ]
+      },
+      {
+        "id": "chart",
+        "label": "Isolation admission chart",
+        "rect": [
+          71,
+          17,
+          8,
+          17
+        ],
+        "ids": [
+          "patientFile"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Disconnected telephone",
+        "rect": [
+          58,
+          27,
+          4,
+          7
+        ],
+        "ids": [
+          "@phone"
+        ],
+        "layer": "phone"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "archive": {
+    "doors": {
+      "wa": [
+        8,
+        26,
+        8,
+        38
+      ],
+      "ag": [
+        22,
+        26,
+        7,
+        23
+      ],
+      "ac": [
+        77,
+        26,
+        7,
+        23
+      ],
+      "ar": [
+        92,
+        26,
+        8,
+        38
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "memo",
+        "label": "Research memo",
+        "rect": [
+          61,
+          54,
+          12,
+          5
+        ],
+        "ids": [
+          "memo"
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Long-gun cabinet",
+        "rect": [
+          68,
+          30,
+          10,
+          18
+        ],
+        "ids": [
+          "gun",
+          "tin"
+        ]
+      },
+      {
+        "id": "fuse",
+        "label": "Equipment shelf",
+        "rect": [
+          66,
+          42,
+          6,
+          4
+        ],
+        "ids": [
+          "fus"
+        ]
+      },
+      {
+        "id": "plaque",
+        "label": "Memorial plaque lock",
+        "rect": [
+          50,
+          19,
+          7,
+          14
+        ],
+        "ids": [
+          "cat"
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Hidden index drawer",
+        "rect": [
+          36,
+          69,
+          9,
+          8
+        ],
+        "ids": [
+          "hid"
+        ],
+        "drawer": true
+      },
+      {
+        "id": "folder",
+        "label": "Patient folder",
+        "rect": [
+          70.5,
+          58.5,
+          7,
+          4
+        ],
+        "ids": [
+          "flr"
+        ]
+      },
+      {
+        "id": "survey",
+        "label": "Restricted wing survey",
+        "rect": [
+          33,
+          50,
+          10,
+          5
+        ],
+        "ids": [
+          "eastMap"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "pharmacy": {
+    "doors": {
+      "wp": [
+        9,
+        37,
+        13,
+        66
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "judith",
+        "label": "Nurse Judith Price",
+        "rect": [
+          71,
+          78,
+          8,
+          25
+        ],
+        "ids": [
+          "judith"
+        ],
+        "actor": "infected_nurse"
+      },
+      {
+        "id": "fridge",
+        "label": "Medical fridge",
+        "rect": [
+          79,
+          38,
+          14,
+          39
+        ],
+        "ids": [
+          "med",
+          "shelf5"
+        ]
+      },
+      {
+        "id": "ribbon",
+        "label": "Clerk desk",
+        "rect": [
+          43,
+          44,
+          10,
+          4
+        ],
+        "ids": [
+          "rib"
+        ]
+      },
+      {
+        "id": "cutters",
+        "label": "Maintenance rack",
+        "rect": [
+          93,
+          65,
+          5,
+          27
+        ],
+        "ids": [
+          "bol"
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Dispensing drawer",
+        "rect": [
+          54,
+          53,
+          15,
+          8
+        ],
+        "ids": [
+          "am",
+          "shelf3"
+        ],
+        "drawer": true
+      },
+      {
+        "id": "battery",
+        "label": "Torch rack",
+        "rect": [
+          59,
+          42,
+          7,
+          5
+        ],
+        "ids": [
+          "bat"
+        ]
+      },
+      {
+        "id": "shelves",
+        "label": "Upper shelf",
+        "rect": [
+          42,
+          21,
+          21,
+          12
+        ],
+        "ids": [
+          "shelf2"
+        ]
+      },
+      {
+        "id": "returns",
+        "label": "Returns basket",
+        "rect": [
+          52,
+          42,
+          7,
+          5
+        ],
+        "ids": [
+          "shelf4"
+        ]
+      },
+      {
+        "id": "tools",
+        "label": "Maintenance tool roll",
+        "rect": [
+          64,
+          48,
+          5,
+          3
+        ],
+        "ids": [
+          "maintenanceKit"
+        ],
+        "layer": "pouch"
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "rect": [
+          66,
+          28,
+          4,
+          9
+        ],
+        "ids": [
+          "@phone"
+        ],
+        "layer": "phone"
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "rect": [
+          35,
+          45,
+          4,
+          4
+        ],
+        "ids": [
+          "@supply"
+        ],
+        "layer": "pouch"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "laundry": {
+    "doors": {
+      "lr": [
+        5,
+        32,
+        8,
+        40
+      ],
+      "wl": [
+        94,
+        33,
+        9,
+        39
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "cart",
+        "label": "Laundry cart",
+        "rect": [
+          42,
+          53,
+          15,
+          20
+        ],
+        "ids": [
+          "lau"
+        ]
+      },
+      {
+        "id": "antiseptic",
+        "label": "Antiseptic pouch",
+        "rect": [
+          50,
+          70,
+          5,
+          4
+        ],
+        "ids": [
+          "lauant"
+        ],
+        "layer": "pouch"
+      },
+      {
+        "id": "chute",
+        "label": "Laundry chute",
+        "rect": [
+          76,
+          42,
+          8,
+          13
+        ],
+        "ids": [
+          "chute"
+        ]
+      },
+      {
+        "id": "pouch",
+        "label": "Field equipment pouch",
+        "rect": [
+          13,
+          63,
+          8,
+          6
+        ],
+        "ids": [
+          "pouch"
+        ]
+      },
+      {
+        "id": "map",
+        "label": "Service wing floor plan",
+        "rect": [
+          82,
+          23,
+          7,
+          12
+        ],
+        "ids": [
+          "tag",
+          "serviceMap"
+        ]
+      },
+      {
+        "id": "plank",
+        "label": "Dry wooden plank",
+        "rect": [
+          14,
+          51,
+          5,
+          18
+        ],
+        "ids": [
+          "sparePlank"
+        ]
+      },
+      {
+        "id": "locker",
+        "label": "Supply locker hiding place",
+        "rect": [
+          61,
+          41,
+          12,
+          32
+        ],
+        "ids": [
+          "laundryhide"
+        ]
+      },
+      {
+        "id": "lever",
+        "label": "Overhead hoist release",
+        "rect": [
+          26,
+          32,
+          5,
+          13
+        ],
+        "ids": [
+          "traplever"
+        ]
+      },
+      {
+        "id": "journal",
+        "label": "Loose journal page",
+        "rect": [
+          13,
+          73,
+          7,
+          4
+        ],
+        "ids": [
+          "attendantDiary2"
+        ],
+        "layer": "paper"
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "rect": [
+          85,
+          33,
+          3,
+          7
+        ],
+        "ids": [
+          "@phone"
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "rect": [
+          65,
+          68,
+          6,
+          4
+        ],
+        "ids": [
+          "@supply"
+        ],
+        "layer": "pouch"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "generator": {
+    "doors": {
+      "liftEntry": [
+        23,
+        35,
+        7,
+        23
+      ],
+      "ag": [
+        36,
+        35,
+        7,
+        23
+      ],
+      "go": [
+        70,
+        31,
+        6,
+        12
+      ],
+      "gm": [
+        85,
+        35,
+        6,
+        22
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Maintenance log",
+        "rect": [
+          6,
+          69,
+          11,
+          7
+        ],
+        "ids": [
+          "log"
+        ]
+      },
+      {
+        "id": "panel",
+        "label": "Generator fuse panel",
+        "rect": [
+          7,
+          37,
+          10,
+          21
+        ],
+        "ids": [
+          "pan"
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Continuity Terminal",
+        "rect": [
+          95,
+          44,
+          7,
+          10
+        ],
+        "ids": [
+          "term2"
+        ],
+        "layer": "terminal"
+      },
+      {
+        "id": "box",
+        "label": "Field cache",
+        "rect": [
+          3,
+          56,
+          5,
+          11
+        ],
+        "ids": [
+          "box2"
+        ]
+      },
+      {
+        "id": "cradle",
+        "label": "Charging cradle",
+        "rect": [
+          14,
+          58,
+          8,
+          7
+        ],
+        "ids": [
+          "charger"
+        ]
+      },
+      {
+        "id": "parts",
+        "label": "Parts locker",
+        "rect": [
+          95,
+          61,
+          7,
+          10
+        ],
+        "ids": [
+          "stb"
+        ]
+      },
+      {
+        "id": "tools",
+        "label": "Tool cabinet",
+        "rect": [
+          22,
+          85,
+          8,
+          10
+        ],
+        "ids": [
+          "bt2"
+        ]
+      },
+      {
+        "id": "regulator",
+        "label": "Regulator housing",
+        "rect": [
+          46,
+          54,
+          8,
+          15
+        ],
+        "ids": [
+          "regulator"
+        ]
+      },
+      {
+        "id": "dynamo",
+        "label": "Emergency hand charger",
+        "rect": [
+          22,
+          67,
+          4,
+          6
+        ],
+        "ids": [
+          "handCharge"
+        ],
+        "layer": "dynamo"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "powercontrol": {
+    "doors": {
+      "spc": [
+        9,
+        45,
+        12,
+        48
+      ],
+      "oi": [
+        94,
+        46,
+        11,
+        41
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "memo",
+        "label": "Power control memo",
+        "rect": [
+          48,
+          40,
+          3,
+          8
+        ],
+        "ids": [
+          "pwrmemo"
+        ]
+      },
+      {
+        "id": "relays",
+        "label": "Relay rack",
+        "rect": [
+          62,
+          37,
+          18,
+          21
+        ],
+        "ids": [
+          "relays"
+        ]
+      },
+      {
+        "id": "parts",
+        "label": "Spare parts tray",
+        "rect": [
+          47,
+          52,
+          10,
+          5
+        ],
+        "ids": [
+          "parts2"
+        ]
+      },
+      {
+        "id": "clearance",
+        "label": "Containment authorization console",
+        "rect": [
+          60,
+          66,
+          9,
+          10
+        ],
+        "ids": [
+          "clearance"
+        ],
+        "layer": "terminal"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "boiler": {
+    "doors": {
+      "mb": [
+        9,
+        46,
+        11,
+        46
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Furnace log",
+        "rect": [
+          88,
+          54,
+          12,
+          10
+        ],
+        "ids": [
+          "fl"
+        ]
+      },
+      {
+        "id": "furnace",
+        "label": "Furnace hatch",
+        "rect": [
+          50,
+          49,
+          10,
+          14
+        ],
+        "ids": [
+          "fur"
+        ]
+      },
+      {
+        "id": "pipes",
+        "label": "Pipe rack",
+        "rect": [
+          31,
+          39,
+          13,
+          31
+        ],
+        "ids": [
+          "pip"
+        ]
+      },
+      {
+        "id": "tin",
+        "label": "Tool tin",
+        "rect": [
+          31,
+          64,
+          7,
+          7
+        ],
+        "ids": [
+          "mag"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "tunnel": {
+    "doors": {
+      "mt": [
+        13,
+        24,
+        10,
+        42
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "note",
+        "label": "Diver note",
+        "rect": [
+          13,
+          74,
+          17,
+          14
+        ],
+        "ids": [
+          "dvn"
+        ]
+      },
+      {
+        "id": "winch",
+        "label": "Winch mechanism",
+        "rect": [
+          64,
+          74,
+          19,
+          25
+        ],
+        "ids": [
+          "wnc"
+        ]
+      },
+      {
+        "id": "key",
+        "label": "Chained key",
+        "rect": [
+          87,
+          30,
+          3,
+          10
+        ],
+        "ids": [
+          "tk"
+        ]
+      },
+      {
+        "id": "writing",
+        "label": "Faint wall writing",
+        "rect": [
+          29,
+          24,
+          5,
+          12
+        ],
+        "ids": [
+          "uv"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "morgue": {
+    "doors": {
+      "mt": [
+        42,
+        31,
+        9,
+        29
+      ],
+      "mb": [
+        62,
+        34,
+        11,
+        37
+      ],
+      "gm": [
+        86,
+        35,
+        11,
+        38
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "report",
+        "label": "Autopsy report",
+        "rect": [
+          27,
+          66,
+          24,
+          13
+        ],
+        "ids": [
+          "aut"
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Mortuary drawer",
+        "rect": [
+          23,
+          31,
+          18,
+          13
+        ],
+        "ids": [
+          "dw"
+        ]
+      },
+      {
+        "id": "cart",
+        "label": "Supply cart",
+        "rect": [
+          96,
+          64,
+          7,
+          22
+        ],
+        "ids": [
+          "sh"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "chapel": {
+    "doors": {
+      "ac": [
+        8,
+        37,
+        10,
+        39
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "letter",
+        "label": "Chaplain letter",
+        "rect": [
+          80,
+          41,
+          9,
+          6
+        ],
+        "ids": [
+          "let"
+        ]
+      },
+      {
+        "id": "reliquary",
+        "label": "Reliquary",
+        "rect": [
+          55,
+          37,
+          5,
+          10
+        ],
+        "ids": [
+          "rel"
+        ]
+      },
+      {
+        "id": "chest",
+        "label": "Field cache",
+        "rect": [
+          94,
+          56,
+          11,
+          12
+        ],
+        "ids": [
+          "box3"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Disconnected telephone",
+        "rect": [
+          30,
+          47,
+          4,
+          8
+        ],
+        "ids": [
+          "@phone"
+        ],
+        "layer": "phone"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "children": {
+    "doors": {
+      "rc12": [
+        11,
+        38,
+        14,
+        62
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "drawing",
+        "label": "Children’s drawing",
+        "rect": [
+          32,
+          30,
+          9,
+          15
+        ],
+        "ids": [
+          "draw"
+        ]
+      },
+      {
+        "id": "negative",
+        "label": "Photographic negative",
+        "rect": [
+          46,
+          66,
+          14,
+          8
+        ],
+        "ids": [
+          "neg"
+        ]
+      },
+      {
+        "id": "rabbit",
+        "label": "Wind-up rabbit",
+        "rect": [
+          85,
+          79,
+          12,
+          22
+        ],
+        "ids": [
+          "toy"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "residence": {
+    "doors": {
+      "rr": [
+        7,
+        31,
+        11,
+        49
+      ],
+      "rl": [
+        97,
+        34,
+        6,
+        56
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "diary",
+        "label": "Resident diary",
+        "rect": [
+          71,
+          47,
+          7,
+          4
+        ],
+        "ids": [
+          "dia"
+        ]
+      },
+      {
+        "id": "breaker",
+        "label": "Breaker panel",
+        "rect": [
+          24,
+          23,
+          8,
+          16
+        ],
+        "ids": [
+          "brk"
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Continuity Terminal",
+        "rect": [
+          29,
+          39,
+          8,
+          10
+        ],
+        "ids": [
+          "term4"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "rect": [
+          34,
+          59,
+          5,
+          8
+        ],
+        "ids": [
+          "@phone"
+        ],
+        "layer": "phone"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "stafflounge": {
+    "doors": {
+      "rl": [
+        9,
+        39,
+        13,
+        65
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "shaw",
+        "label": "Nurse Evelyn Shaw",
+        "rect": [
+          78,
+          79,
+          8,
+          27
+        ],
+        "ids": [
+          "shaw"
+        ],
+        "actor": "nurse_shaw"
+      },
+      {
+        "id": "note",
+        "label": "Staff lounge note",
+        "rect": [
+          34,
+          26,
+          9,
+          20
+        ],
+        "ids": [
+          "loungeNote"
+        ]
+      },
+      {
+        "id": "thermos",
+        "label": "Thermos and supplies",
+        "rect": [
+          59,
+          56,
+          10,
+          12
+        ],
+        "ids": [
+          "coffee"
+        ]
+      },
+      {
+        "id": "harness",
+        "label": "Utility harness",
+        "rect": [
+          94,
+          33,
+          8,
+          25
+        ],
+        "ids": [
+          "harness"
+        ]
+      },
+      {
+        "id": "sink",
+        "label": "Utility sink",
+        "rect": [
+          85,
+          38,
+          8,
+          6
+        ],
+        "ids": [
+          "sink"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "rect": [
+          24,
+          27,
+          3,
+          8
+        ],
+        "ids": [
+          "@phone"
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "rect": [
+          63,
+          68,
+          8,
+          6
+        ],
+        "ids": [
+          "@supply"
+        ],
+        "layer": "pouch"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "records": {
+    "doors": {
+      "ar": [
+        50,
+        34,
+        12,
+        40
+      ],
+      "rc": [
+        94,
+        32,
+        9,
+        44
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "ledger",
+        "label": "Memorial ledger",
+        "rect": [
+          20,
+          78,
+          17,
+          12
+        ],
+        "ids": [
+          "ledger"
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Carbon cabinet",
+        "rect": [
+          29,
+          41,
+          14,
+          28
+        ],
+        "ids": [
+          "cab2"
+        ]
+      },
+      {
+        "id": "wall",
+        "label": "Sealed service hatch",
+        "rect": [
+          75,
+          28,
+          6,
+          8
+        ],
+        "ids": [
+          "wall"
+        ]
+      },
+      {
+        "id": "tape",
+        "label": "Field recorder",
+        "rect": [
+          59,
+          48,
+          6,
+          5
+        ],
+        "ids": [
+          "lasttape"
+        ]
+      },
+      {
+        "id": "journal",
+        "label": "Rourke’s final journal",
+        "rect": [
+          73,
+          48,
+          9,
+          5
+        ],
+        "ids": [
+          "finalJournal",
+          "attendantDiary3"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "rect": [
+          61,
+          32,
+          4,
+          8
+        ],
+        "ids": [
+          "@phone"
+        ],
+        "layer": "phone"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "surgery": {
+    "doors": {
+      "lr": [
+        4,
+        30,
+        6,
+        43
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "kessler",
+        "label": "Dr. Adrian Kessler",
+        "rect": [
+          28,
+          43,
+          8,
+          21
+        ],
+        "ids": [
+          "kessler"
+        ],
+        "after": {
+          "flag": "doctorWallSeen",
+          "rect": [
+            26,
+            51,
+            10,
+            5
+          ]
+        }
+      },
+      {
+        "id": "notes",
+        "label": "Operating theatre notes",
+        "rect": [
+          20,
+          25,
+          8,
+          9
+        ],
+        "ids": [
+          "opnote"
+        ]
+      },
+      {
+        "id": "tray",
+        "label": "Instrument tray",
+        "rect": [
+          88,
+          51,
+          12,
+          9
+        ],
+        "ids": [
+          "tray"
+        ]
+      },
+      {
+        "id": "mask",
+        "label": "Anaesthesia mask",
+        "rect": [
+          75,
+          39,
+          6,
+          12
+        ],
+        "ids": [
+          "mask"
+        ]
+      },
+      {
+        "id": "shotgun",
+        "label": "Security shotgun case",
+        "rect": [
+          59,
+          34,
+          18,
+          8
+        ],
+        "ids": [
+          "lateShotgun",
+          "shotShells"
+        ]
+      },
+      {
+        "id": "exit",
+        "label": "Bolted theatre exit",
+        "rect": [
+          97,
+          29,
+          6,
+          41
+        ],
+        "ids": [
+          "surgeryExit"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "observation": {
+    "doors": {
+      "go": [
+        8,
+        33,
+        12,
+        45
+      ],
+      "os": [
+        95,
+        35,
+        9,
+        47
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "transcript",
+        "label": "Transcript 4B",
+        "rect": [
+          37,
+          42,
+          6,
+          3
+        ],
+        "ids": [
+          "tr"
+        ]
+      },
+      {
+        "id": "consent",
+        "label": "Original consent",
+        "rect": [
+          25,
+          26,
+          5,
+          12
+        ],
+        "ids": [
+          "con"
+        ]
+      },
+      {
+        "id": "console",
+        "label": "Archive console",
+        "rect": [
+          27,
+          38,
+          6,
+          10
+        ],
+        "ids": [
+          "dr"
+        ]
+      },
+      {
+        "id": "glass",
+        "label": "Restricted scratched glass",
+        "rect": [
+          82,
+          29,
+          7,
+          23
+        ],
+        "ids": [
+          "glasssound"
+        ]
+      },
+      {
+        "id": "notice",
+        "label": "Viewing safety notice",
+        "rect": [
+          35,
+          37,
+          3,
+          5
+        ],
+        "ids": [
+          "glassNotice"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Desk telephone",
+        "rect": [
+          47,
+          45,
+          5,
+          6
+        ],
+        "ids": [
+          "@phone"
+        ],
+        "layer": "phone"
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "specimen": {
+    "doors": {
+      "os": [
+        6,
+        35,
+        10,
+        48
+      ],
+      "spc": [
+        95,
+        38,
+        9,
+        53
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "register",
+        "label": "Specimen register",
+        "rect": [
+          39,
+          50,
+          11,
+          5
+        ],
+        "ids": [
+          "specdoc"
+        ]
+      },
+      {
+        "id": "fluid",
+        "label": "Developing fluid",
+        "rect": [
+          50,
+          45,
+          4,
+          10
+        ],
+        "ids": [
+          "dev"
+        ]
+      },
+      {
+        "id": "wire",
+        "label": "Wire spool",
+        "rect": [
+          70,
+          52,
+          5,
+          7
+        ],
+        "ids": [
+          "wire"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "isolation": {
+    "doors": {
+      "oi": [
+        10,
+        36,
+        13,
+        54
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Isolation log",
+        "rect": [
+          24,
+          32,
+          3,
+          10
+        ],
+        "ids": [
+          "isolog"
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Medical cabinet",
+        "rect": [
+          95,
+          30,
+          9,
+          25
+        ],
+        "ids": [
+          "medcab",
+          "medgauze"
+        ]
+      },
+      {
+        "id": "mirror",
+        "label": "Covered mirror",
+        "rect": [
+          81,
+          42,
+          10,
+          40
+        ],
+        "ids": [
+          "mirror"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "coldstore": {
+    "doors": {
+      "rc": [
+        12,
+        44,
+        16,
+        71
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Cold storage inventory",
+        "rect": [
+          32,
+          32,
+          5,
+          12
+        ],
+        "ids": [
+          "coldlog"
+        ]
+      },
+      {
+        "id": "reel",
+        "label": "Continuity reel",
+        "rect": [
+          61,
+          55,
+          15,
+          8
+        ],
+        "ids": [
+          "reel"
+        ]
+      },
+      {
+        "id": "medkit",
+        "label": "Field medkit",
+        "rect": [
+          30,
+          60,
+          6,
+          6
+        ],
+        "ids": [
+          "cachemed"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  },
+  "lift": {
+    "doors": {
+      "liftEntry": [
+        9,
+        48,
+        14,
+        78
+      ]
+    },
+    "fixtures": [
+      {
+        "id": "controls",
+        "label": "Elevator controls",
+        "rect": [
+          79,
+          37,
+          4,
+          24
+        ],
+        "ids": [
+          "liftpanel"
+        ]
+      },
+      {
+        "id": "manifest",
+        "label": "Lift service manifest",
+        "rect": [
+          91,
+          33,
+          6,
+          18
+        ],
+        "ids": [
+          "liftlog"
+        ]
+      },
+      {
+        "id": "mirror",
+        "label": "Elevator mirror",
+        "rect": [
+          30,
+          34,
+          7,
+          24
+        ],
+        "ids": [
+          "liftmirror"
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Final Continuity Terminal",
+        "rect": [
+          90,
+          70,
+          8,
+          10
+        ],
+        "ids": [
+          "finalTerminal"
+        ],
+        "layer": "terminal"
+      },
+      {
+        "id": "ribbon",
+        "label": "Emergency record spool",
+        "rect": [
+          81,
+          74,
+          5,
+          4
+        ],
+        "ids": [
+          "finalRibbon"
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Transfer field cache",
+        "rect": [
+          91,
+          82,
+          12,
+          9
+        ],
+        "ids": [
+          "finalBox"
+        ]
+      }
+    ],
+    "threat": [
+      55,
+      85,
+      42
+    ]
+  }
+}

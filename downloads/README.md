@@ -1,9 +1,10 @@
-# Download and play
+# Play Chapter 1
 
-Download this branch with GitHub's **Code → Download ZIP**, then extract it.
-Open `downloads/The_Last_Ward_Phase_1_Fixed.html` in a modern browser to play the
-self-contained edition. No installation or server is required for this edition.
+Extract the downloaded ZIP completely, then open `The_Last_Ward_Chapter_1.html`
+in your browser. Press Begin Investigation to allow sound. Start a new game.
+The HTML includes all game artwork and audio; keep it as one file.
 
-The rest of the repository is the editable project. See `ROOM_ART_PASS.md` in the
-repository root for the five-room scope and validation details. Remaining rooms
-retain their previous artwork and interaction system.
+`The_Last_Ward_Chapter_1_Source.zip` contains the editable source project.
+For source development, extract it and follow its README.
+
+Saves belong to your browser. Export a terminal record before changing browsers.

@@ -1,0 +1,438 @@
+{
+  "runs": [
+    {
+      "seed": "playtest-11",
+      "difficulty": "1",
+      "all_rooms": false
+    },
+    {
+      "seed": "playtest-15",
+      "difficulty": "1",
+      "all_rooms": false
+    },
+    {
+      "seed": "playtest-11",
+      "difficulty": "0.7",
+      "all_rooms": true
+    }
+  ],
+  "trace": [
+    {
+      "step": "opening playtest-11",
+      "room": "lobby",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 8,
+      "inv": [
+        "Flashlight"
+      ],
+      "flags": {
+        "power": null,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "generator prerequisites",
+      "room": "generator",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Cabinet Key",
+        "Staff Access Card",
+        "Handgun",
+        "Maintenance Key",
+        "Maintenance Tools",
+        "Bolt Cutters",
+        "Power Fuse"
+      ],
+      "flags": {
+        "power": null,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "power restored",
+      "room": "generator",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Cabinet Key",
+        "Staff Access Card",
+        "Handgun",
+        "Maintenance Key",
+        "Maintenance Tools",
+        "Bolt Cutters"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "clearance",
+      "room": "powercontrol",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Encrypted Drive"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "pursuit escaped",
+      "room": "archive",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Encrypted Drive",
+        "Shotgun",
+        "Shotgun Shells"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 2
+      }
+    },
+    {
+      "step": "elevator ending",
+      "room": "lift",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Shotgun",
+        "Shotgun Shells"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 2
+      }
+    },
+    {
+      "step": "opening playtest-15",
+      "room": "lobby",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 8,
+      "inv": [
+        "Flashlight"
+      ],
+      "flags": {
+        "power": null,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "generator prerequisites",
+      "room": "generator",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Cabinet Key",
+        "Staff Access Card",
+        "Handgun",
+        "Maintenance Key",
+        "Maintenance Tools",
+        "Bolt Cutters",
+        "Power Fuse"
+      ],
+      "flags": {
+        "power": null,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "power restored",
+      "room": "generator",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Cabinet Key",
+        "Staff Access Card",
+        "Handgun",
+        "Maintenance Key",
+        "Maintenance Tools",
+        "Bolt Cutters"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "clearance",
+      "room": "powercontrol",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Encrypted Drive"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "pursuit escaped",
+      "room": "archive",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Encrypted Drive",
+        "Shotgun",
+        "Shotgun Shells"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 2
+      }
+    },
+    {
+      "step": "elevator ending",
+      "room": "lift",
+      "hp": 100,
+      "difficulty": 1,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Shotgun",
+        "Shotgun Shells"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 2
+      }
+    },
+    {
+      "step": "opening playtest-11",
+      "room": "lobby",
+      "hp": 100,
+      "difficulty": 0.7,
+      "slots": 8,
+      "inv": [
+        "Flashlight"
+      ],
+      "flags": {
+        "power": null,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "generator prerequisites",
+      "room": "generator",
+      "hp": 100,
+      "difficulty": 0.7,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Cabinet Key",
+        "Staff Access Card",
+        "Handgun",
+        "Maintenance Key",
+        "Maintenance Tools",
+        "Bolt Cutters",
+        "Power Fuse"
+      ],
+      "flags": {
+        "power": null,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "power restored",
+      "room": "generator",
+      "hp": 100,
+      "difficulty": 0.7,
+      "slots": 10,
+      "inv": [
+        "Flashlight",
+        "Cabinet Key",
+        "Staff Access Card",
+        "Handgun",
+        "Maintenance Key",
+        "Maintenance Tools",
+        "Bolt Cutters"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "optional branches explored",
+      "room": "generator",
+      "hp": 68,
+      "difficulty": 0.7,
+      "slots": 12,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Field Medkit",
+        "Trauma Dressing",
+        "Encrypted Drive",
+        "Developed Photograph"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": null,
+        "clearance": null,
+        "x": null,
+        "escaped": null
+      }
+    },
+    {
+      "step": "clearance",
+      "room": "powercontrol",
+      "hp": 68,
+      "difficulty": 0.7,
+      "slots": 12,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Field Medkit",
+        "Trauma Dressing",
+        "Encrypted Drive",
+        "Developed Photograph"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 1
+      }
+    },
+    {
+      "step": "pursuit escaped",
+      "room": "archive",
+      "hp": 68,
+      "difficulty": 0.7,
+      "slots": 12,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Maintenance Key",
+        "Bolt Cutters",
+        "Field Medkit",
+        "Trauma Dressing",
+        "Encrypted Drive",
+        "Developed Photograph",
+        "Shotgun",
+        "Shotgun Shells"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 3
+      }
+    },
+    {
+      "step": "elevator ending",
+      "room": "lift",
+      "hp": 68,
+      "difficulty": 0.7,
+      "slots": 12,
+      "inv": [
+        "Flashlight",
+        "Handgun",
+        "Field Medkit",
+        "Trauma Dressing",
+        "Developed Photograph",
+        "Shotgun",
+        "Shotgun Shells"
+      ],
+      "flags": {
+        "power": 1,
+        "photo": 1,
+        "clearance": 1,
+        "x": 1,
+        "escaped": 3
+      }
+    }
+  ]
+}
