@@ -21,7 +21,7 @@ and are not silently loaded into this different room topology.
 ## This build
 
 - 27 unique room backgrounds; no mirrored substitutes or legacy room-image fallback.
-- 155 explicitly authored fixtures, separate doors, fixed art coordinates, subtle glints,
+- 154 explicitly authored fixtures, separate doors, fixed art coordinates, subtle glints,
   focus/hover labels, stronger hints, and responsive controls.
 - Separate object, pickup, lighting, actor, and persistent aftermath layers. The surgical
   aftermath has its own image and matching changed inspection region.
@@ -57,12 +57,13 @@ with different masks for the lobby's two views. It does not render over the wall
 floor, furniture, window frames, or other room interiors. Indoor lobby dust is
 removed to keep the weather unambiguous.
 
-Clara has an authored body-shaped click area, not a small head-only target. The
-empty equipment cabinet has one inspection. Multi-item containers stay open while
+Clara is a recorded message at the surveillance monitors; her transcript is kept
+in Files. The equipment cabinet has one case inspection and a separate utility
+knife pickup. Multi-item containers stay open while
 you inspect or take their remaining contents. Resolved pickups/files lose their
 hotspots; files remain available from Files.
 
-Nine collectibles in these five rooms use separate object images. Leave retains the
+Ten collectibles in these five rooms use separate object images. Leave retains the
 item; Take removes its image and preserves that state through save/load. The base
 art has the relevant map, equipment case and drawer/shelf contents cleared. An empty
 case, desk or cabinet stays behind after taking its contents. The photographic
@@ -93,3 +94,28 @@ other browser engines have not been claimed verified.
 Optional online artwork is limited to a noninteractive atmospheric texture above the
 room. It cannot replace the background or move targets. No paid/live provider is
 configured; the complete offline game is the default reliable path.
+
+## Interaction refinement build
+
+Inspection panels open without replacing or resizing the room image. The room
+viewport stays fixed when narration changes. Flashlight light adds illumination;
+it cannot dim an already lit room. Every unresolved fixture has a subtle idle
+marker, hover/focus feedback and its object label. Missing inventory icons now
+use bundled item-specific artwork or clear vector symbols.
+
+The laundry hoist can be armed in advance, with confirmation and persistent
+armed/spent artwork. It catches Subject X in Laundry without teleporting it.
+Manual release is also available after a separate warning; an empty release uses
+the one-use trap. Its passages remain open.
+
+Locked doors and map exits state their actual key, code, power or clearance.
+Archive Key and Boiler Key now match their destinations; older saves migrate
+the former Maintenance Key and Tunnel Key names in both inventory and storage.
+
+Struggle costs health and buys an escape opening, leaving the infected alive
+for your return. A knife attack requires the utility knife and risks injury.
+Daniel’s irreversible choice supports the knife or a loaded firearm, asks for
+confirmation, and preserves a covered-sheet aftermath through save/load.
+
+Eight focused acceptance passes run against both source and offline HTML; see
+`tests/test_refinements.py` and its JSON results.

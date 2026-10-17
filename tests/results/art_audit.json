@@ -1,6 +1,6 @@
 {
   "rooms": 27,
-  "state_images": 4,
+  "state_images": 6,
   "reverse_images": 27,
   "near_duplicates": [],
   "reverse_near_duplicates": [],
@@ -118,6 +118,10 @@
       []
     ],
     [
+      "laundry_trap_spent.webp",
+      []
+    ],
+    [
       "surgery_after.webp",
       []
     ],
@@ -127,6 +131,10 @@
     ],
     [
       "isoward_after.webp",
+      []
+    ],
+    [
+      "laundry_trap_armed.webp",
       []
     ],
     [
@@ -267,9 +275,11 @@
     "assets/rooms/wardnorth.webp": "200192c84a2b020ca09337fe4ac7b799dcdd3da3dcd10eb17334668f4d236b29",
     "assets/rooms/wardservice.webp": "e4fbae35cd7c93d9bea725916a328997daac8e38ccc5539f7e11f8d4570b0642",
     "assets/states/tunnel_drained.webp": "cf6a3cbcb2c100e9867d9f38fcda673320a8317b54c08725341cb075a8d99f17",
+    "assets/states/laundry_trap_spent.webp": "eedf9ef78aa11af51173f4bd3733a0f325f0093516a2dc94afdd0637c2ea998a",
     "assets/states/surgery_after.webp": "daaff5d614d6b7345efa0900e87e0d61e1d4ba7dca094cf49f6226acb4a4afe7",
     "assets/states/tunnel_rear_drained.webp": "5c2adcd20eaf76c132fba47b35df7d84b68db1bb28f986e9bd6d03b604acdb8f",
     "assets/states/isoward_after.webp": "3621f4b66d9fd4c35b3e8d475691975718bc6d49133fe028fb75c8bf1e93959b",
+    "assets/states/laundry_trap_armed.webp": "a4dfb0f04e8b813e20b67e2ff3b43af27327169550cae981ff65e1a10b984b28",
     "assets/reverse/lobby.webp": "d720013791230d3c47d2fcba447cdf8a1b9f8641319e50f1438807f59a604ad9",
     "assets/reverse/generator.webp": "06ee0e3ad5c7cff2c30ef3725ff5d6fbd680d3937ba2af2e1f5d3bcb8e481264",
     "assets/reverse/pharmacy.webp": "581dfbc15b9d3cf21794e3dae3716f3657f20e668c8b892332daf12799b5b3ac",

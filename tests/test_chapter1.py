@@ -85,9 +85,9 @@ with sync_playwright() as p:
   ev("seed=>{S.seed=seed;S.rngState=hashSeed(seed);S.puzzles=generatePuzzles();configureWorld(seed,false);placeTelephones(seed);render()}",seed)
   record('opening '+seed)
   use('payphone');dismiss();assert ev('S.f.phoneStep===1')
-  take('desk','Cabinet Key');move('security');use('clara');dismiss();take('drw','Staff Access Card');use('ros');dismiss();use('mapboard');dismiss();assert ev('S.mapParts===1')
+  take('desk','Cabinet Key');move('security');use('clara');dismiss();take('utilityKnife','Utility Knife');take('drw','Staff Access Card');use('ros');dismiss();use('mapboard');dismiss();assert ev('S.mapParts===1')
   ev('toggleLight()');move('ward');take('nightPistol','Handgun');take('pistolRounds','Handgun Ammo');ev("equipWeapon('Handgun');reload()");dismiss()
-  move('room12');take('cab','Maintenance Key');take('shf2','Trauma Dressing');use('file');dismiss()
+  move('room12');take('cab','Archive Key');take('shf2','Trauma Dressing');use('file');dismiss()
   move('isoward');use('beggingPatient');page.get_by_role('button',name='Try to treat him').click();dismiss();assert ev("S.f.beggingPatientChoice==='helped'")
   # Upgrade capacity before collecting maintenance equipment.
   move('laundry');use('pouch');dismiss();assert ev('carryLimit()===10');use('serviceMap');dismiss()
@@ -106,8 +106,8 @@ with sync_playwright() as p:
    move('stafflounge');use('harness');dismiss();assert ev('carryLimit()===12');use('loungeNote');dismiss();use('shaw');dismiss()
    move('children');take('neg','Photographic Negative');use('draw');dismiss()
    move('pharmacy');take('med','Field Medkit');take('am','Handgun Ammo')
-   move('morgue');use('aut');dismiss();use('dw');dismiss();move('tunnel');use('wnc');dismiss();assert ev('!!S.f.drained');take('tk','Tunnel Key')
-   move('boiler');take('fur','Stabilizer Part');use('fl');dismiss();move('generator');store_named(['Tunnel Key','Stabilizer Part']);use('charger');dismiss()
+   move('morgue');use('aut');dismiss();use('dw');dismiss();move('tunnel');use('wnc');dismiss();assert ev('!!S.f.drained');take('tk','Boiler Key')
+   move('boiler');take('fur','Stabilizer Part');use('fl');dismiss();move('generator');store_named(['Boiler Key','Stabilizer Part']);use('charger');dismiss()
    move('records');dismiss();use('ledger');dismiss();move('archive');use('cat');page.locator('#cin').fill(ev('S.puzzles.memorialCode'));page.get_by_role('button',name='Enter',exact=True).click();dismiss();move('chapel');take('rel','Trauma Dressing');use('let');dismiss()
    move('observation');dismiss();take('dr','Encrypted Drive');move('specimen');take('dev','Developing Fluid');use('specdoc');dismiss()
    ev('invModal()');page.locator('#combineA').select_option(str(ev("S.inv.findIndex(x=>x.n==='Photographic Negative')")));page.locator('#combineB').select_option(str(ev("S.inv.findIndex(x=>x.n==='Developing Fluid')")));page.get_by_role('button',name='Combine',exact=True).click();dismiss();assert ev('!!S.f.photo')
@@ -130,7 +130,7 @@ with sync_playwright() as p:
    dismiss()
   assert ev('(S.f.pursuerEscapes||0)>0'),'No real pursuit escape'
   record('pursuit escaped')
-  move('generator');dismiss();store_named(['Maintenance Key','Bolt Cutters','Encrypted Drive']);move('lift')
+  move('generator');dismiss();store_named(['Archive Key','Bolt Cutters','Encrypted Drive']);move('lift')
   # Arrival opens the revelation; close-up actions then offer the explicit descent.
   if page.get_by_role('button',name='Face the elevator').count():page.get_by_role('button',name='Face the elevator').click()
   assert ev('!!S.f.chapter1Revelation')

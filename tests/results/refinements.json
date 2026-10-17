@@ -1,0 +1,13 @@
+{
+  "count": 8,
+  "passed": [
+    "1. Eight inspection open/close cycles per scene at three viewport sizes keep the art plane and image node unchanged",
+    "2. Hoist cancel/arm/save/reload/capture/manual-release states work before pursuit; one-use aftermath does not teleport Subject X",
+    "3. All gated doors name their key/code/power/clearance; old Archive and Boiler keys migrate in inventory and storage",
+    "4. In all 27 rooms, powered/unpowered and front/rear, switching the flashlight on never reduces rendered brightness",
+    "5. No floating Clara actor; her recording remains available at the monitors and records the evidence",
+    "6. Every unresolved fixture has a subtle marker; all 33 runtime item icons load, including previously missing tools/evidence",
+    "7. Struggle costs health without killing; infected survives retreat, return and save/load with its remaining health",
+    "8. Knife can be collected and used after confirmation; cancellation preserves life; covered aftermath and outcome survive save/load"
+  ]
+}

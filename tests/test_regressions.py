@@ -60,7 +60,7 @@ with sync_playwright() as p:
  ev("S.room='lobby';S.f.beggingPatientChoice='helped';S.f.seen_site_lobby_desk=1;S.ob.desk='done';add('Ink Ribbon');confirmSave();")
  saved=ev('JSON.stringify(S)');ev("S.ob={};S.f={introComplete:1};loadGame()")
  assert ev("S.ob.desk==='done'&&S.f.beggingPatientChoice==='helped'&&S.f.seen_site_lobby_desk===1")
- ev("choosePatientFate('killed')")
+ ev("choosePatientFate('killed');wardConfirmPatient('firearm')")
  assert ev("S.f.beggingPatientChoice==='helped'")
  assert not ev("valid({...S,buildId:'older-build'})")
  passed('save/load restores object/choice states; older topology is rejected')

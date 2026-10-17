@@ -28,7 +28,7 @@ function sync(){if(!S||!audio.enabled||S.hp<=0){stop();return;}if(S.f.chapter1Co
  if(S.f.sprinklerTriggered&&!S.f.sprinklerStopped&&r==='eastcorridor')loop('sprinkler','water',.4);else loop('sprinkler',null,0);
  if(S.hp<=50)loop('breathing','breathing',S.hp<=25?.25:.12);else loop('breathing',null,0);
  const now=performance.now(),d=distance();
- if(d.distance<=3&&!SAFE_FROM_PURSUER.has(r)&&now>=stepAt){variant=1-variant;play('subject_step_'+(variant+1),{volume:[.85,.55,.28,.13][d.distance],pan:d.pan,rate:.96});stepAt=now+(S.f.pursuerEncounter?1050:1650);caption(d.distance===0?'Heavy boots inside this room':d.distance===1?'Heavy boots beyond the doorway '+d.bearing:'Heavy footsteps farther along the passage');}
+ if(d.distance<=3&&!SAFE_FROM_PURSUER.has(r)&&now>=stepAt&&!(S.pursuer.trappedUntil>S.t)){variant=1-variant;play('subject_step_'+(variant+1),{volume:[.85,.55,.28,.13][d.distance],pan:d.pan,rate:.96});stepAt=now+(S.f.pursuerEncounter?1050:1650);caption(d.distance===0?'Heavy boots inside this room':d.distance===1?'Heavy boots beyond the doorway '+d.bearing:'Heavy footsteps farther along the passage');}
  if(alive(r)&&now>=infectedAt){play('infected_step',{volume:.22,pan:.3,rate:.88});infectedAt=now+2600;caption('Uneven footsteps nearby');}
  if(S.f.phoneRinging&&S.f.ringingPhoneRoom===r&&now>=ringAt){play('phone_ring',{volume:.65});ringAt=now+5700;caption('A telephone rings in this room');}
 }

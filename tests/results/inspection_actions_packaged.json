@@ -1,0 +1,8 @@
+{
+  "count": 3,
+  "passed": [
+    "1600x1000: actual Examine and long narration preserve scene bounds",
+    "1000x800: actual Examine and long narration preserve scene bounds",
+    "390x844: actual Examine and long narration preserve scene bounds"
+  ]
+}

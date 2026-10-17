@@ -62,7 +62,7 @@ function advanceTime(n=1){
  }
  advancePowerOutage();maybeAmbientHorror();
 }
-function itemCue(n){if(['Power Fuse','Battery'].includes(n))return 'cue-power';if(HEALS[n])return 'cue-medical';if(['Cabinet Key','Staff Access Card','Maintenance Key','Crank Handle','Tunnel Key','Bolt Cutters','Encrypted Drive'].includes(n))return 'cue-access';if(['Chapel Seal','Morgue Seal','Lab Seal','Boiler Seal'].includes(n))return 'cue-puzzle';return ''}
+function itemCue(n){if(['Power Fuse','Battery'].includes(n))return 'cue-power';if(HEALS[n])return 'cue-medical';if(['Cabinet Key','Staff Access Card','Archive Key','Crank Handle','Boiler Key','Bolt Cutters','Encrypted Drive'].includes(n))return 'cue-access';if(['Chapel Seal','Morgue Seal','Lab Seal','Boiler Seal'].includes(n))return 'cue-puzzle';return ''}
 function objectCue(id,sp){if(sp.need)return itemCue(sp.need);if(sp.code||sp.seq||sp.need3)return 'cue-puzzle';if(sp.expand)return 'cue-access';if(sp.give&&sp.give[0])return itemCue(sp.give[0][0]);if(['pan','brk','fus','bt2'].includes(id))return 'cue-power';return ''}
 function doorCue(d){if(d.need)return itemCue(d.need);if(d.flag==='power')return 'cue-power';if(d.flag)return 'cue-puzzle';return ''}
 function canonicalItem(n){return ({'Medkit':'Field Medkit','Magnum Ammo':'Magnum Rounds','Magnum Ammunition':'Magnum Rounds','.44 Magnum Rounds':'Magnum Rounds','Magnum Bullets':'Magnum Rounds','Reinforced Cell':'Reinforced Battery'})[n]||n}

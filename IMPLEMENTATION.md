@@ -7,7 +7,7 @@ merged into it. The complete agreed scope is retained in docs/MASTER_REQUIREMENT
 | --- | --- |
 | Chapter boundary and gates | js/chapter1_complete.js; 27 rooms, 27 graph edges, one elevator entrance; no B2/Chapter 3 map nodes |
 | Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, fixed front/rear portal identities, arrival orientation, 27 reverse backgrounds; black doorway-shading patches removed |
-| Art and targets | data/chapter1_views.json, data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 155 fixtures and explicit door rectangles |
+| Art and targets | data/chapter1_views.json, data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 154 fixtures and explicit door rectangles |
 | Scene/state/inspection | js/chapter1_scene.js; art and targets resize on one uncropped plane; no arbitrary coordinate fallback |
 | Threats and conditions | js/chapter1_survival.js; traversal, encounters, injury aim/movement effects, hiding, rare hallucination, sprinkler recovery and cold/wet recovery |
 | People and evidence | js/chapter1_people.js; named NPCs, coherent aftermath, missing-nurse evidence, non-repeating consequences |
@@ -65,12 +65,12 @@ to Room 12 and Isolation separately; Children’s Ward connects to Room 12.
 
 ## Input and object-layer repair
 
-Clara uses an explicitly authored silhouette hit area. Reverse door buttons are
+Clara is an archived recording at the monitor fixture, without a standing sprite. Reverse door buttons are
 absolutely positioned inside the art plane and cannot cover footer controls.
 Door targets belong to their fixed view, matching the revised artwork; the entry is behind arrival.
 Door-lock failures are modal, and scene view survives flashlight updates.
 
-The authoring script defines nine explicit collectible image rectangles for the
+The authoring script defines ten explicit collectible image rectangles for the
 five focus rooms. The renderer removes each by its own saved object state. Base
 artwork is cleared separately using authored edits. Containers can remain open for
 multiple actions without resetting focus. The security cabinet's two empty-case
@@ -89,3 +89,13 @@ the permitted glass areas. It also runs against the packaged HTML offline.
 
 Pursuer panning and sound captions use the fixed portal geometry and current camera
 facing, including ahead/behind cues. Turning reverses the horizontal bearing.
+
+## Interaction refinements
+
+`js/chapter1_refinements.js` owns named lock requirements, legacy key-name migration,
+trap confirmation/arming/one-use outcomes, paid struggle and knife choice. Trap
+art and displaced loose pouches use authored persistent states; no doorway is
+blocked. `chapter1_scene.js` opens/closes focus panels without remounting the image,
+and uses a fixed scene viewport. Ambient darkness uses `WardNavigation.isDark`,
+while the flashlight beam is additive in lit rooms. All pending fixtures have
+visible idle markers. Local inventory artwork covers the complete item catalog.

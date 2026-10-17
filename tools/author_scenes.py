@@ -85,6 +85,16 @@ views=json.loads((ROOT/'data/chapter1_views.json').read_text())
 for room_id,bp in rooms.items():
  view=views[room_id];assert view['rearDoor'] in bp['doors']
  bp['views']={'front':{'doors':{k:v for k,v in bp['doors'].items() if k!=view['rearDoor']}},'rear':{'doors':{view['rearDoor']:view['rearRect']}}}
+# Clara is present through a recording at the monitor bank, not a standing cutout.
+rooms['security']['fixtures']=[f for f in rooms['security']['fixtures'] if f['id']!='clara']
+for f in rooms['security']['fixtures']:
+ if f['id']=='monitors':f['ids'].append('clara')
+ if f['id']=='cabinet':
+  f['ids'].append('utilityKnife')
+  f['collectibles']=[{'id':'utilityKnife','asset':'assets/items/utility_knife.png','rect':[27,37,7,3]}]
+for f in rooms['laundry']['fixtures']:
+ if f['id']=='antiseptic':f['after']={'flag':'trapUsed','rect':[42,79,5,4]}
+ if f['id']=='cache':f['after']={'flag':'trapUsed','rect':[78,82,6,4]}
 (ROOT/'data/chapter1_scenes.json').write_text(json.dumps(rooms,indent=2,ensure_ascii=False)+'\n')
 (ROOT/'js/scene_manifest.js').write_text('/* Generated from the explicitly authored data/chapter1_scenes.json. */\nwindow.WardScenes='+json.dumps(rooms,ensure_ascii=False,separators=(',',':'))+';\n')
 print('Authored scenes:',len(rooms))

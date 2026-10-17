@@ -2,10 +2,10 @@
   "passed": [
     "12 actual doorway-coordinate clicks traverse the matching edge, including entry doors",
     "locked doorway click gives a visible requirement dialog rather than silently failing",
-    "clicking Clara at chest, waist and leg opens her conversation",
+    "Clara is an inspectable recording at the monitors; no standing figure",
     "all five reverse views support actual door clicks, Face the room and Escape at desktop/mobile sizes; flashlight preserves the view",
     "equipment cabinet has one inspection; multi-item shelf stays open for its remaining action after a pickup",
-    "all 9 authored five-room collectibles remain when left and disappear when taken, including after re-render",
+    "all 10 authored five-room collectibles remain when left and disappear when taken, including after re-render",
     "all five rooms produce changing animation pixels; on/off control works"
   ],
   "count": 7

@@ -21,10 +21,8 @@ with sync_playwright() as p:
  checks.append(f'{total} actual doorway-coordinate clicks traverse the matching edge, including entry doors')
  setup('eastcorridor','security');ev("delete S.dr.ew;S.inv=S.inv.filter(x=>x.n!=='Staff Access Card')");click_art(ev('WardScenes.eastcorridor.doors.ew'));assert ev("S.room==='eastcorridor'");assert 'Staff Access Card' in page.locator('#m').inner_text();page.get_by_role('button',name='Stay here',exact=True).click()
  checks.append('locked doorway click gives a visible requirement dialog rather than silently failing')
- setup('security','lobby');ev('S.f.claraGone=0;render()')
- for x,y in [(55,32),(53,52),(61,70)]:
-  r=page.locator('img.c1-npc').bounding_box();page.mouse.click(r['x']+r['width']*x/100,r['y']+r['height']*y/100);assert 'Clara Whitmore' in page.locator('#m').inner_text();page.get_by_role('button',name='Leave her to the monitors',exact=True).click()
- checks.append('clicking Clara at chest, waist and leg opens her conversation')
+ setup('security','lobby');assert not page.locator('img.c1-npc').count();page.locator('[data-fixture=monitors]').click();page.locator('button[onclick="wardFixtureAction(\'clara\')"]').click();assert 'recorded message' in page.locator('#m').inner_text();page.get_by_role('button',name='Stop playback',exact=True).click();ev('wardCloseFocus()')
+ checks.append('Clara is an inspectable recording at the monitors; no standing figure')
  for width,height in [(1600,1000),(390,844)]:
   page.set_viewport_size({'width':width,'height':height})
   for room in ROOMS:
@@ -32,7 +30,7 @@ with sync_playwright() as p:
    page.get_by_role('button',name='Turn around',exact=True).click();page.locator('#lightBtn').click();assert page.locator('.c1-rear-view').count()==1;page.keyboard.press('Escape');assert not page.locator('.c1-rear-view').count()
    page.get_by_role('button',name='Turn around',exact=True).click();ev('p=>{S.dr[WardNavigation.edge(S.room,p)]=1;WardNavigation.until=0}',prev);r=door.bounding_box();page.mouse.click(r['x']+r['width']/2,r['y']+r['height']/2);assert ev('S.room')==prev,(width,room,prev)
  checks.append('all five reverse views support actual door clicks, Face the room and Escape at desktop/mobile sizes; flashlight preserves the view')
- page.set_viewport_size({'width':1600,'height':1000});setup('security','lobby');page.locator('[data-fixture=cabinet]').click();assert page.locator('.c1-finding').count()==1;page.get_by_role('button',name='Examine',exact=True).click();assert ev("S.ob.rev==='read'")
+ page.set_viewport_size({'width':1600,'height':1000});setup('security','lobby');page.locator('[data-fixture=cabinet]').click();assert page.locator('.c1-finding').count()==2;page.get_by_role('button',name='Examine',exact=True).click();assert ev("S.ob.rev==='read'")
  setup('room12','wardnorth');ev("S.inv=[{n:'Cabinet Key',c:1},{n:'Flashlight',c:1}];delete S.ob.shf;delete S.ob.shf2;render()");page.locator('[data-fixture=shelf]').click();page.get_by_role('button',name='Take Trauma Dressing',exact=True).click();assert page.locator('.c1-focus').count()==1;assert page.get_by_role('button',name='Examine',exact=True).is_visible();page.get_by_role('button',name='Examine',exact=True).click()
  checks.append('equipment cabinet has one inspection; multi-item shelf stays open for its remaining action after a pickup')
  item_count=0

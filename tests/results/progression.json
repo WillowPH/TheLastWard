@@ -43,9 +43,10 @@
       "inv": [
         "Flashlight",
         "Cabinet Key",
+        "Utility Knife",
         "Staff Access Card",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Maintenance Tools",
         "Bolt Cutters",
         "Power Fuse"
@@ -67,9 +68,10 @@
       "inv": [
         "Flashlight",
         "Cabinet Key",
+        "Utility Knife",
         "Staff Access Card",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Maintenance Tools",
         "Bolt Cutters"
       ],
@@ -89,8 +91,9 @@
       "slots": 10,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Encrypted Drive"
       ],
@@ -110,8 +113,9 @@
       "slots": 10,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Encrypted Drive",
         "Shotgun",
@@ -133,6 +137,7 @@
       "slots": 10,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
         "Shotgun",
         "Shotgun Shells"
@@ -171,9 +176,10 @@
       "inv": [
         "Flashlight",
         "Cabinet Key",
+        "Utility Knife",
         "Staff Access Card",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Maintenance Tools",
         "Bolt Cutters",
         "Power Fuse"
@@ -195,9 +201,10 @@
       "inv": [
         "Flashlight",
         "Cabinet Key",
+        "Utility Knife",
         "Staff Access Card",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Maintenance Tools",
         "Bolt Cutters"
       ],
@@ -217,8 +224,9 @@
       "slots": 10,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Encrypted Drive"
       ],
@@ -238,8 +246,9 @@
       "slots": 10,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Encrypted Drive",
         "Shotgun",
@@ -261,6 +270,7 @@
       "slots": 10,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
         "Shotgun",
         "Shotgun Shells"
@@ -299,9 +309,10 @@
       "inv": [
         "Flashlight",
         "Cabinet Key",
+        "Utility Knife",
         "Staff Access Card",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Maintenance Tools",
         "Bolt Cutters",
         "Power Fuse"
@@ -323,9 +334,10 @@
       "inv": [
         "Flashlight",
         "Cabinet Key",
+        "Utility Knife",
         "Staff Access Card",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Maintenance Tools",
         "Bolt Cutters"
       ],
@@ -340,13 +352,14 @@
     {
       "step": "optional branches explored",
       "room": "generator",
-      "hp": 68,
+      "hp": 67,
       "difficulty": 0.7,
       "slots": 12,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Field Medkit",
         "Trauma Dressing",
@@ -364,13 +377,14 @@
     {
       "step": "clearance",
       "room": "powercontrol",
-      "hp": 68,
+      "hp": 67,
       "difficulty": 0.7,
       "slots": 12,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Field Medkit",
         "Trauma Dressing",
@@ -388,13 +402,14 @@
     {
       "step": "pursuit escaped",
       "room": "archive",
-      "hp": 68,
+      "hp": 67,
       "difficulty": 0.7,
       "slots": 12,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
-        "Maintenance Key",
+        "Archive Key",
         "Bolt Cutters",
         "Field Medkit",
         "Trauma Dressing",
@@ -414,11 +429,12 @@
     {
       "step": "elevator ending",
       "room": "lift",
-      "hp": 68,
+      "hp": 67,
       "difficulty": 0.7,
       "slots": 12,
       "inv": [
         "Flashlight",
+        "Utility Knife",
         "Handgun",
         "Field Medkit",
         "Trauma Dressing",

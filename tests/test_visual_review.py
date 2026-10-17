@@ -13,8 +13,8 @@ with sync_playwright() as p:
   page.locator('[data-fixture=desk]').click();assert page.get_by_role('button',name='Take Cabinet Key',exact=True).is_visible();page.get_by_role('button',name='Leave',exact=True).click();assert ev("!has('Cabinet Key')&&!S.ob.desk")
  checks.append('window actions anchored beside object and inside viewport; Take/Leave preserves uncollected item at desktop/mobile sizes')
  page.set_viewport_size({'width':1600,'height':1000});ev("S.room='security';S.prev='lobby';S.f.power=1;S.f.claraGone=0;render()")
- npc=page.locator('img.c1-npc').bounding_box();plane=page.locator('.c1-plane').bounding_box();assert npc['height']>=plane['height']*.58;page.screenshot(path=str(OUT/'review-clara.png'))
- checks.append('Clara uses authored full adult height and floor placement rather than fixture-thumbnail bounds')
+ assert not page.locator('img.c1-npc').count();assert ev("R.security.o.some(o=>o[0]==='clara')");page.screenshot(path=str(OUT/'review-clara.png'))
+ checks.append('Clara is mentioned through the security recorder; no floating standing sprite')
  for room,previous in [('lobby','security'),('security','lobby'),('eastcorridor','security'),('ward','eastcorridor'),('room12','wardnorth')]:
   ev('(a)=>{S.room=a[0];S.prev=a[1];S.sceneFocus=null;S.sceneView="front";S.sceneViewRoom=S.room;S.cameraSchema=2;render();wardTurnAround()}',[room,previous]);page.wait_for_function("document.querySelector('.c1-reverse-plane img').complete&&document.querySelector('.c1-reverse-plane img').naturalWidth>0")
   assert page.locator('.c1-reverse-plane img').get_attribute('src')=='assets/reverse/'+room+'.webp';assert page.locator('.c1-rear-travel').get_attribute('data-destination')==previous
@@ -28,7 +28,7 @@ with sync_playwright() as p:
  ev("S.room='security';S.sceneFocus=null;delete S.ob.rep;render();wardFixtureAction('rep')");assert ev("S.docs.includes('Incident Report 09-17')");ev("$('m').innerHTML='';render()");assert page.locator('[data-fixture=report]').count()==0
  checks.append('read report loses its hotspot, while evidence remains available in Files')
  ev("S.room='isoward';S.prev='wardnorth';delete S.f.beggingPatientChoice;S.eq='Handgun';S.ld.Handgun=0;S.inv=[{n:'Handgun',c:1},{n:'Flashlight',c:1}];render();choosePatientFate('killed')")
- assert 'empty' in page.locator('#m').inner_text().lower();assert not ev('S.f.beggingPatientChoice');ev("$('m').innerHTML='';S.ld.Handgun=1;choosePatientFate('killed')");assert ev("S.f.beggingPatientChoice==='killed'&&S.ld.Handgun===0");assert page.locator('.c1-background').get_attribute('src').endswith('isoward_after.webp');ev("$('m').innerHTML='';render()");assert page.locator('.c1-background').get_attribute('src').endswith('isoward_after.webp')
+ assert 'loaded firearm' in page.locator('#m').inner_text().lower();assert not ev('S.f.beggingPatientChoice');ev("$('m').innerHTML='';S.ld.Handgun=1;choosePatientFate('killed');wardConfirmPatient('firearm')");assert ev("S.f.beggingPatientChoice==='killed'&&S.ld.Handgun===0");assert page.locator('.c1-background').get_attribute('src').endswith('isoward_after.webp');ev("$('m').innerHTML='';render()");assert page.locator('.c1-background').get_attribute('src').endswith('isoward_after.webp')
  checks.append('unloaded weapon gives visible explanation; successful patient choice consumes one round and persists covered-bed aftermath')
  for room,kind,holes in [('laundry','locker',7),('wardservice','crates',2),('security','desk',2)]:
   ev('(a)=>{S.room=a[0];S.f.pendingHideType=a[1];S.f.hidingRoom=null;S.f.pursuerEncounter=0;S.pursuer.active=false;render();hideInRoom();wardConfirmHide();wardPeek()}',[room,kind]);assert page.locator('.c1-cover-frame mask rect').count()==holes
