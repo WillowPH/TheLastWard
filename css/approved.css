@@ -1,0 +1,60 @@
+/* Approved 2026-10-17 cinematic UI; extends the EXACT existing three-column layout. */
+body.ward-playing .app{padding:0!important}
+body.ward-playing .lay{grid-template-columns:clamp(212px,18.7vw,320px) minmax(0,1fr) clamp(216px,19vw,326px)!important;gap:1px!important;background:#343b42}
+.ward-playing .left-rail,.ward-playing .right-rail,.ward-center.story-panel{border-radius:0!important;border-color:#303a42!important;background:#0b1015!important}
+.ward-playing .left-rail,.ward-playing .right-rail{padding:clamp(10px,1.2vw,18px);gap:13px}
+.ward-brand{padding:13px 7px 22px}
+.ward-brand span{font-size:clamp(19px,1.75vw,29px);letter-spacing:.18em}
+.ward-brand small{font-size:11px;letter-spacing:.025em;line-height:1.55;color:#a8abad}
+.ward-playing .nav-list .btn{height:45px!important;font-size:14px!important}
+.ward-playing .map-shell{order:2!important;flex:1!important}
+.ward-playing .objective-card{order:3!important}
+.ward-playing .right-rail .status-panel{order:0!important}
+.ward-playing .right-rail .unified-inventory-panel{order:1!important}
+.ward-playing .right-rail .survival-controls{order:2!important;width:100%!important}
+.ward-playing .right-rail #fieldCacheBtn{order:3!important}
+.ward-playing .right-rail .survival-controls:before{content:'QUICK ACTIONS';display:block;font-size:11px;letter-spacing:.11em;color:#b2a397;margin-bottom:8px;border-top:1px solid #363d44;padding-top:12px}
+.ward-playing .survival-controls .story-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+.ward-playing .survival-controls .story-actions .btn{min-height:38px!important;font-size:11px!important}
+.ward-playing .survival-controls .story-actions #lightBtn{grid-column:1/-1!important}
+.ward-center .stage-heading{height:36px!important;min-height:36px!important;background:linear-gradient(90deg,#12171eeb,#151922db)!important}
+.stage-heading strong{font-size:clamp(14px,1.18vw,19px)}
+.v3-background{object-fit:cover!important;filter:brightness(1.12) contrast(1.06) saturate(.94)!important}
+.v3-film{background:linear-gradient(180deg,#03060a05 0%,transparent 37%,#05080a3b 74%,#06070a78 100%)!important}
+.v3-scrim{background:radial-gradient(ellipse at 51% 44%,transparent 43%,#06090c25 96%)!important}
+.v3-room-art.is-dark:not(.torch-on) .v3-lighting{background:#010205e8!important}
+.v3-room-art.is-dark.torch-on .v3-lighting{background:radial-gradient(ellipse 32% 40% at var(--beam-x) var(--beam-y),#0000 0%,#01020523 35%,#010207dd 76%,#000a 100%)!important}
+.v3-door,.v3-door:nth-of-type(2n){background:transparent!important;box-shadow:none!important;border-radius:3px!important;opacity:1!important;z-index:6!important;min-width:0!important}
+.v3-door:hover,.v3-door:focus-visible{background:linear-gradient(90deg,transparent,#e9c7a522,transparent)!important;outline:2px solid #ecd3b090!important;outline-offset:-2px;box-shadow:0 0 14px #bb947541!important}
+.v3-door.entry,.v3-door.entry.no-sprite{outline:2px solid #e4c19c55!important;outline-offset:-3px;box-shadow:inset 0 0 17px #c29d7a21!important}
+.v3-door .v3-door-plaque{display:none!important}
+.v3-door .v3-locked{top:72%;left:50%;border:1px solid #a8818166;border-radius:3px;padding:2px 6px;font-size:15px;opacity:.83}
+.v3-prop{z-index:5!important;width:clamp(28px,3.7vw,52px)!important;height:clamp(27px,3.7vw,52px)!important;outline:0!important}
+.v3-prop:hover,.v3-prop:focus-visible{border-color:transparent!important;background:#d2b68c10!important;outline:1px solid #e9cf9a75!important;box-shadow:0 0 13px #d7ba8344!important}
+.v3-hotspot-label{display:none!important}
+.v3-tooltip{top:46px!important;font-size:13px!important;max-width:min(70%,360px);padding:8px 12px!important}
+.v3-room-stamp{top:48px;left:16px;color:#f1ede4;font-size:10px}
+.ward-center .narrative-focus{bottom:16px!important;left:16px!important;right:16px!important}
+.story-caption{background:#090c11e9!important;border:1px solid #606169ba!important;border-radius:7px!important;min-height:96px!important;max-height:166px!important}
+.ward-center .story-caption #rd{color:#f0eee7!important;font-size:clamp(12px,1.03vw,15px)!important;line-height:1.53!important;padding:13px 16px 6px!important}
+.ward-center .story-caption .scene-thought{background:#100e0fe3!important;border-left:1px solid #876341!important;padding:13px 17px!important}
+.ward-center .story-caption .scene-thought span{color:#f5be6c!important;letter-spacing:.08em!important}
+.ward-center .story-caption .scene-thought p{color:#f4c17d!important;font-size:clamp(12px,.96vw,15px)!important}
+.ward-center .narration-block .message-stream .message-box p{color:#f0c49f!important;font-size:12px!important;line-height:1.4!important}
+.ward-playing .vital-card{border-bottom:1px solid #343a40!important;padding:11px 0 16px!important}
+.ward-playing .mental-status{padding:15px 0 13px;margin:11px 0}
+.ward-playing .mental-bar{height:3px}
+.ward-playing .inventory-cell{aspect-ratio:1.06!important}
+.ward-playing .inventory-hint{display:none}
+.ward-playing .cache-shortcut{display:none!important}
+.ward-playing .inventory-cell .item-art{max-width:85px;max-height:85px}
+.ward-playing .ph{font-size:12px!important}
+.v3-inspect-image{height:clamp(130px,25vh,242px)!important}
+@media(max-width:1024px){body.ward-playing .lay{grid-template-columns:minmax(170px,21%) minmax(0,1fr)!important}.ward-playing .right-rail{grid-column:1/-1!important}.ward-playing .right-rail .survival-controls{order:2!important}.ward-playing .right-rail .status-panel{order:0!important}.ward-playing .right-rail .unified-inventory-panel{order:1!important}}
+@media(max-width:650px){body.ward-playing .lay{display:flex!important;flex-direction:column!important}.ward-playing .right-rail{display:flex!important;flex-direction:row!important}.ward-playing .right-rail .status-panel,.ward-playing .right-rail .survival-controls{width:48%!important}.ward-playing .right-rail .unified-inventory-panel{order:3!important;width:100%!important}.ward-playing .ward-center{height:clamp(510px,74svh,670px)!important}.ward-brand{padding:3px!important}.ward-brand span{font-size:18px}.ward-playing .story-caption #rd{font-size:11px!important}.ward-center .narrative-focus{bottom:7px!important;left:7px!important;right:7px!important}.v3-room-stamp{top:49px;font-size:8px}}
+.record-backup{margin-top:18px;padding:12px 0;border-top:1px solid #4b515a;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.record-backup strong{width:100%;color:#e8c2a1;font-size:13px}.record-backup .micro{width:100%;margin:0 0 4px;color:#b7b7ba;font-size:12px}.record-backup .btn{font-size:11px;padding:8px 12px;cursor:pointer}
+.backup-import{display:inline-flex;align-items:center}
+/* Brand fits its rail even on 1280px displays; no broken wrapping. */
+.ward-brand span{font-size:clamp(19px,1.48vw,25px)!important;letter-spacing:.11em!important;overflow:hidden;text-overflow:clip;white-space:nowrap}
+@media(min-width:1500px){.ward-brand span{font-size:clamp(22px,1.48vw,27px)!important;letter-spacing:.14em!important}}

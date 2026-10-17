@@ -1,0 +1,1 @@
+Audio source status: only door.wav, gunshot.wav and reload.wav remain enabled. The other older procedural-sounding effects are intentionally silent. No synthetic fallbacks or phone beeps are generated. Real, commercially usable recordings with verified rights should replace these before release.

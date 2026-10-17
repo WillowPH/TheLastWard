@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>The Last Ward</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/visual_v3.css"><link rel="stylesheet" href="css/approved.css"><link rel="stylesheet" href="css/room_layers.css"></head><body><div class="app">
+<h1>THE LAST WARD</h1>
+<section id="setup" class="pn" style="max-width:720px;margin:6vh auto"><div class="hero"><div class="k">Blackridge Medical Complex · 1998</div><h2>NOBODY IS COMING.</h2></div><div class="bd">
+<p>You wake on the cold lobby floor with a flickering flashlight, no weapon, no name, and no memory of how you arrived. Rain hits the windows. The building is silent except for a distant metallic knock. Explore the hospital, examine what you find, and decide what to carry.</p>
+<div class="content-warning" role="note" aria-label="Content warning"><strong>CONTENT WARNING</strong><p>This game contains scenes of explicit violence and gore, disturbing medical imagery, psychological distress and references to suicide. It also uses sudden sounds, frightening encounters and unreliable perceptions.</p><p>Reduced Graphic Violence changes explicit imagery and descriptions. It does <b>not</b> remove the horror, audio cues, story events, or their consequences.</p></div>
+<fieldset class="violence-choice" aria-label="Graphic violence presentation"><legend class="k">Graphic violence</legend><label><input type="radio" name="graphicViolence" value="full" checked> <span><b>Full</b><small>Intended horror presentation</small></span></label><label><input type="radio" name="graphicViolence" value="reduced"> <span><b>Reduced</b><small>Less explicit detail, same story and gameplay</small></span></label></fieldset>
+<label class="k">Environment artwork</label>
+<div class="art-mode-choices" role="radiogroup" aria-label="Graphics mode">
+<label><input type="radio" name="artMode" value="auto" checked><span><b>Automatic</b><small>Use online AI artwork if configured; fall back instantly to local artwork</small></span></label>
+<label><input type="radio" name="artMode" value="online"><span><b>Online enhanced</b><small>Request optional AI imagery; never required to play</small></span></label>
+<label><input type="radio" name="artMode" value="offline"><span><b>Offline</b><small>Use downloaded artwork only; works without internet</small></span></label>
+</div>
+<p class="micro">Live AI environment generation requires a separate hosted server. This download includes the complete offline art.</p>
+<label class="k">Difficulty</label><select id="diff"><option value="0.7">Story — forgiving damage, more ammo</option><option value="1" selected>Standard — scarce supplies</option><option value="1.3">Nightmare — harder hits, less ammo</option></select><br><br><button class="btn p" onclick="newGame()">BEGIN INVESTIGATION</button><button class="btn" onclick="loadGame(1)">CONTINUE LAST SAVE</button><p class="k" id="setmsg"></p></div></section>
+<section id="game" class="hid"><div class="lay">
+<aside class="left-rail"><div class="ward-brand"><span>THE LAST <em>WARD</em></span><small>CHAPTER 1 · BLACKRIDGE MEDICAL COMPLEX<br>1998</small></div><div class="pn map-shell" id="mapPanel"><div class="ph"><span id="mapTitle">FIRST FLOOR PLAN</span><span id="mc"></span></div><div class="bd"><div id="mapUnfound" class="map-unfound"><span class="lost-symbol">?</span><b>No map found</b><small>Find a floor plan to chart the corridors.</small></div><div id="mapKnown" class="hid"><div class="map-legend"><span class="legend-current">Here</span><span class="legend-open">Open</span><span class="legend-locked">Locked</span></div><svg id="map" class="map side-map" viewBox="0 0 360 250" aria-label="Discovered map of Blackridge" role="img"></svg><p id="mapHint" class="micro">Select a known adjacent room or use the doors in the scene.</p></div></div></div>
+<div class="pn nav-panel"><div class="ph">NAVIGATION</div><div class="bd nav-list"><button class="btn mobile-map-action" onclick="mapModal()">Map</button><button class="btn" onclick="evidenceModal()">Files</button><button class="btn" onclick="journal()">Journal</button><button class="btn" onclick="optionsModal()">Options</button><button class="btn" onclick="saveMenu()">Save / Load</button></div></div>
+<div class="objective-card"><span class="k">CURRENT OBJECTIVE</span><div id="obj"></div><span id="seedLabel" class="hid"></span></div></aside>
+<main class="story-panel ward-center">
+ <div id="wardStage" class="ward-stage" aria-label="The Last Ward interactive game view">
+  <div class="stage-heading"><span class="k" id="ch"></span><strong id="rt">Emergency Lobby</strong><span id="stagePower" class="stage-power"></span><button id="mobileLight" class="stage-torch" onclick="toggleLight()">LIGHT OFF</button></div>
+  <div class="stage-world">
+   <div id="interactiveScene" class="interactive-scene" aria-label="Interactive illustrated room"></div>
+   <section class="narrative-focus" aria-label="Narration and thoughts">
+    <div class="story-caption"><div class="narration-block"><p id="rd" class="desc"></p>
+      <div class="message-stream"><div class="message-box" id="feedbackBox"><span class="k">OBSERVATION</span><p id="interactionText"></p></div><div class="message-box combat-message"><span class="k">ENCOUNTER</span><p id="combatText"></p></div></div>
+     </div><div id="sceneThought" class="scene-thought"><span>THOUGHTS</span><p id="sceneThoughtText"></p></div></div>
+   </section>
+  </div>
+  <div id="sceneDrawer" class="scene-drawer hid"></div><div id="ev" class="ev hid"></div>
+ </div>
+ <div class="story-actions" aria-label="Survival actions"><button class="btn hid" id="combatBtn" onclick="combat()">Defend yourself</button><button class="btn" onclick="toggleLight()" id="lightBtn">Flashlight: off</button><button class="btn" onclick="reload()">Reload</button><button class="btn" id="hideBtn" onclick="hideInRoom()">Hide</button></div>
+ <div id="areaList" class="hid"></div><div id="areaDetail" class="hid"></div><div id="og" class="grid hid"></div><div id="lg" class="log hid"></div>
+ </main>
+ <aside class="right-rail"><div id="survivalControls" class="survival-controls"></div><div class="pn status-panel"><div class="ph"><span>SURVIVAL STATUS</span></div><div class="bd"><div class="vital-card"><div class="vital-head"><strong id="conditionLabel">FINE</strong><small>HEALTH MONITOR</small></div><svg class="heartbeat" viewBox="0 0 220 35" aria-hidden="true"><path id="heartLine" d="M0 22 H40 L49 17 L56 27 L67 4 L78 30 L89 22 H220" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg><span id="conditionHint" class="condition-hint">Breathing steady</span><span id="condition" class="hid">●</span></div><div class="mental-status"><span class="small-heading">MENTAL CONDITION</span><strong id="mentalLabel">STABLE</strong><div class="mental-bar"><div id="mentalBar"></div></div><svg viewBox="0 0 170 35" aria-hidden="true"><path d="M0 21H33l6-10 8 19 8-15 9 10 8-12 8 8h90" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></div><div class="st"><div>Time<b id="clk"></b></div><div>Sanity<b id="sn"></b></div><div>Light<b id="bt"></b></div><div>Loaded<b id="ld"></b></div><div>Reserve<b id="rs"></b></div></div><h3>Equipped: <span id="eqn"></span></h3></div></div>
+<section class="unified-inventory-panel"><div class="panel-heading">INVENTORY <span id="packCount">0 / 8</span></div><div id="inventorySlots" class="inventory-slots" aria-label="Carried items"></div><p class="micro inventory-hint">Select an item to equip, use or inspect.</p></section>
+<button id="fieldCacheBtn" class="btn cache-shortcut" onclick="storage()">Field Cache</button>
+</aside></div></section></div><div id="m"></div><div id="t"></div><div id="conditionFX" class="conditionFX" aria-hidden="true"></div>
+</div>
+
+<script src="js/bootstrap.js"></script>
+<script src="js/data.js"></script>
+<script src="js/world_expansion.js"></script>
+<script src="js/core.js"></script>
+<script src="js/save.js"></script>
+<script src="js/exploration.js"></script>
+<script src="js/item_art.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/inventory.js"></script>
+<script src="js/events.js"></script>
+<script src="js/chapter_events.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/ending.js"></script>
+<script src="js/chapter1_overhaul.js"></script>
+<script src="js/online_art.js"></script><script src="js/room_layers.js"></script><script src="js/visual_v3.js"></script><script src="js/approved.js"></script><script>if(location.protocol.startsWith("http")&&"serviceWorker" in navigator)navigator.serviceWorker.register("./sw.js").catch(()=>{});</script></body></html>

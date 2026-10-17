@@ -1,0 +1,11 @@
+/* Recording-only audio bus: no oscillators, random sweeps, generated digital tones or fallback bleeps. */
+const audio={enabled:false,sounds:{},lastFx:{},activeBus:{},missing:new Set(),amb:null};
+const SOUND_FILES=window.LW_AUDIO_ASSETS||{door:'audio/door.wav',reload:'audio/reload.wav',shot:'audio/gunshot.wav'};
+const SOUND_BUS={click:'ui',door:'fx',pickup:'fx',reload:'fx',heal:'fx',hit:'fx',shot:'fx',knife:'fx',kill:'fx',escape:'fx',combine:'ui',phone:'fx'};
+const SOUND_BASE={click:.14,door:.48,pickup:.22,reload:.42,heal:.22,hit:.38,shot:.65,knife:.28,kill:.4,escape:.36,combine:.18,phone:.55};
+function preloadSoundAssets(){if(Object.keys(audio.sounds).length)return;for(const kind in SOUND_FILES){let el=new Audio(SOUND_FILES[kind]);el.preload='auto';el.loop=false;el.addEventListener('error',()=>{if(!audio.missing.has(kind)){audio.missing.add(kind);console.warn('[The Last Ward] Missing recording:',kind)}},{once:true});audio.sounds[kind]=el;audio.activeBus[kind]=SOUND_BUS[kind]||'fx'}}
+function initAudio(){preloadSoundAssets();audio.enabled=true;setAudioUI()}
+function toggleAudio(){audio.enabled=!audio.enabled;if(audio.enabled)preloadSoundAssets();else Object.values(audio.sounds).forEach(el=>{el.pause();try{el.currentTime=0}catch(e){}});setAudioUI()}
+function setAudioUI(){const b=$('audioBtn'),st=$('audioStatus');if(b)b.textContent=audio.enabled?'Disable audio':'Enable audio';if(st)st.textContent=audio.enabled?'ON':'OFF'}
+function setVolume(which,value){if(!S)return;S.audio=S.audio||{amb:.30,fx:.45,ui:.22};S.audio[which]=Math.max(0,Math.min(1,Number(value)/100));const label=$(which==='amb'?'ambVal':which==='fx'?'fxVal':'uiVal');if(label)label.textContent=Math.round(S.audio[which]*100)+'%'}
+function soundEffect(kind){if(!audio.enabled)return;const now=performance.now()/1000,limits={shot:.12,hit:.15,knife:.15,click:.10,pickup:.18,reload:.25,heal:.35,kill:.4,escape:.2,combine:.2,door:.3,phone:2};if(now-(audio.lastFx[kind]||0)<(limits[kind]||.1))return;audio.lastFx[kind]=now;const clip=audio.sounds[kind];if(!clip)return;const bus=audio.activeBus[kind]||'fx',level=S?.audio?.[bus]??(bus==='ui'?.22:.45);clip.volume=Math.min(.75,Math.max(0,level*(SOUND_BASE[kind]||.35)));try{clip.pause();clip.currentTime=0;const promise=clip.play();promise?.catch?.(()=>{})}catch(e){/* missing recording: deliberately remain silent */}}
