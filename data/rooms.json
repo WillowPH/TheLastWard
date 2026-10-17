@@ -1,14 +1,14 @@
 {
   "format": 3,
-  "description": "Chapter 1 active catalog, exported from the playable definitions. JavaScript is authoritative for rules.",
+  "description": "Active Chapter 1 room catalog; map positions exported from the revised physical-connection plan.",
   "rooms": [
     {
       "id": "lobby",
       "name": "Emergency Lobby",
       "chapter": 1,
       "coordinates": {
-        "x": 45,
-        "y": 330
+        "x": 57.5,
+        "y": 347.5
       },
       "connections": [
         {
@@ -28,8 +28,8 @@
       "name": "Security Office",
       "chapter": 1,
       "coordinates": {
-        "x": 45,
-        "y": 280
+        "x": 120,
+        "y": 347.5
       },
       "connections": [
         {
@@ -49,8 +49,8 @@
       "name": "Patient Wing",
       "chapter": 1,
       "coordinates": {
-        "x": 170,
-        "y": 300
+        "x": 88.75,
+        "y": 277.5
       },
       "connections": [
         {
@@ -70,8 +70,8 @@
       "name": "Room 12",
       "chapter": 1,
       "coordinates": {
-        "x": 230,
-        "y": 345
+        "x": 45,
+        "y": 202.5
       },
       "connections": [
         {
@@ -96,8 +96,8 @@
       "name": "The Archives",
       "chapter": 1,
       "coordinates": {
-        "x": 220,
-        "y": 210
+        "x": 232.5,
+        "y": 192.5
       },
       "connections": [
         {
@@ -127,8 +127,8 @@
       "name": "Generator Room",
       "chapter": 1,
       "coordinates": {
-        "x": 220,
-        "y": 145
+        "x": 232.5,
+        "y": 117.5
       },
       "connections": [
         {
@@ -158,8 +158,8 @@
       "name": "Observation Ward",
       "chapter": 1,
       "coordinates": {
-        "x": 220,
-        "y": 80
+        "x": 232.5,
+        "y": 75
       },
       "connections": [
         {
@@ -179,8 +179,8 @@
       "name": "Pharmacy",
       "chapter": 1,
       "coordinates": {
-        "x": 350,
-        "y": 260
+        "x": 295,
+        "y": 277.5
       },
       "connections": [
         {
@@ -195,8 +195,8 @@
       "name": "Hospital Chapel",
       "chapter": 1,
       "coordinates": {
-        "x": 150,
-        "y": 210
+        "x": 170,
+        "y": 157.5
       },
       "connections": [
         {
@@ -211,8 +211,8 @@
       "name": "Morgue",
       "chapter": 1,
       "coordinates": {
-        "x": 150,
-        "y": 80
+        "x": 295,
+        "y": 117.5
       },
       "connections": [
         {
@@ -237,8 +237,8 @@
       "name": "Staff Residence",
       "chapter": 1,
       "coordinates": {
-        "x": 170,
-        "y": 345
+        "x": 45,
+        "y": 160
       },
       "connections": [
         {
@@ -258,8 +258,8 @@
       "name": "Flooded Tunnel",
       "chapter": 1,
       "coordinates": {
-        "x": 85,
-        "y": 80
+        "x": 357.5,
+        "y": 117.5
       },
       "connections": [
         {
@@ -274,8 +274,8 @@
       "name": "Boiler Room",
       "chapter": 1,
       "coordinates": {
-        "x": 150,
-        "y": 30
+        "x": 295,
+        "y": 75
       },
       "connections": [
         {
@@ -290,8 +290,8 @@
       "name": "Laundry & Service Wing",
       "chapter": 1,
       "coordinates": {
-        "x": 290,
-        "y": 145
+        "x": 295,
+        "y": 242.5
       },
       "connections": [
         {
@@ -311,8 +311,8 @@
       "name": "Children\u2019s Ward",
       "chapter": 1,
       "coordinates": {
-        "x": 350,
-        "y": 345
+        "x": 107.5,
+        "y": 160
       },
       "connections": [
         {
@@ -327,8 +327,8 @@
       "name": "Records Annex",
       "chapter": 1,
       "coordinates": {
-        "x": 290,
-        "y": 210
+        "x": 295,
+        "y": 192.5
       },
       "connections": [
         {
@@ -348,8 +348,8 @@
       "name": "Surgical Theatre 2",
       "chapter": 1,
       "coordinates": {
-        "x": 350,
-        "y": 145
+        "x": 357.5,
+        "y": 242.5
       },
       "connections": [
         {
@@ -364,8 +364,8 @@
       "name": "Restricted Isolation Room",
       "chapter": 1,
       "coordinates": {
-        "x": 290,
-        "y": 30
+        "x": 357.5,
+        "y": 32.5
       },
       "connections": [
         {
@@ -380,8 +380,8 @@
       "name": "Specimen Laboratory",
       "chapter": 1,
       "coordinates": {
-        "x": 350,
-        "y": 80
+        "x": 232.5,
+        "y": 32.5
       },
       "connections": [
         {
@@ -401,8 +401,8 @@
       "name": "Emergency Power Control",
       "chapter": 1,
       "coordinates": {
-        "x": 290,
-        "y": 80
+        "x": 295,
+        "y": 32.5
       },
       "connections": [
         {
@@ -422,8 +422,8 @@
       "name": "Staff Lounge",
       "chapter": 1,
       "coordinates": {
-        "x": 110,
-        "y": 345
+        "x": 45,
+        "y": 117.5
       },
       "connections": [
         {
@@ -438,8 +438,8 @@
       "name": "Restricted Service Elevator",
       "chapter": 1,
       "coordinates": {
-        "x": 150,
-        "y": 145
+        "x": 170,
+        "y": 117.5
       },
       "connections": [
         {
@@ -454,8 +454,8 @@
       "name": "Cold Storage",
       "chapter": 1,
       "coordinates": {
-        "x": 350,
-        "y": 210
+        "x": 357.5,
+        "y": 192.5
       },
       "connections": [
         {
@@ -470,8 +470,8 @@
       "name": "East Corridor",
       "chapter": 1,
       "coordinates": {
-        "x": 110,
-        "y": 300
+        "x": 88.75,
+        "y": 312.5
       },
       "connections": [
         {
@@ -496,8 +496,8 @@
       "name": "Isolation Treatment Room",
       "chapter": 1,
       "coordinates": {
-        "x": 290,
-        "y": 345
+        "x": 107.5,
+        "y": 202.5
       },
       "connections": [
         {
@@ -512,8 +512,8 @@
       "name": "North Patient Corridor",
       "chapter": 1,
       "coordinates": {
-        "x": 230,
-        "y": 300
+        "x": 88.75,
+        "y": 242.5
       },
       "connections": [
         {
@@ -543,8 +543,8 @@
       "name": "Patient Service Crossroads",
       "chapter": 1,
       "coordinates": {
-        "x": 290,
-        "y": 260
+        "x": 232.5,
+        "y": 242.5
       },
       "connections": [
         {

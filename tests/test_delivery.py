@@ -26,8 +26,9 @@ with sync_playwright() as p:
  # Important new characters and audio are embedded, not merely the base room files.
  assert page.evaluate("['subject_x','infected_patient','infected_nurse','nurse_shaw','operator_clara'].every(x=>WardEmbeddedAssets['assets/characters/'+x+'.png'])")
  assert page.evaluate("Object.keys(WardEmbeddedAssets).filter(x=>x.startsWith('audio/chapter1/')).length===26")
- assert page.evaluate("['telephone','dynamo','terminal','closed_door'].every(x=>WardEmbeddedAssets['assets/props/'+x+'.png'])")
- checks.append('all five character cutouts, four new prop images and 26 recordings embedded')
+ assert page.evaluate("['telephone','dynamo','terminal','negative'].every(x=>WardEmbeddedAssets['assets/props/'+x+'.png'])")
+ assert page.evaluate("['lobby','security','eastcorridor','ward'].every(x=>WardEmbeddedAssets['assets/reverse/'+x+'.webp'])")
+ checks.append('all five characters, four physical props, four reverse scenes and 26 recordings embedded')
  page.close()
  context=b.new_context();page=context.new_page();page.add_init_script("localStorage.setItem('lw_art_mode','offline')");page.goto('http://127.0.0.1:8010');page.evaluate('navigator.serviceWorker.ready');page.reload();page.wait_for_function('navigator.serviceWorker.controller!==null');context.set_offline(True);page.reload();page.evaluate('newGame();nextIntro();nextIntro();nextIntro()');page.wait_for_function("document.querySelector('.c1-background').complete&&document.querySelector('.c1-background').naturalWidth>0");assert page.locator('#lightBtn').is_visible()
  checks.append('hosted PWA installs current cache and reloads the game offline')

@@ -174,15 +174,21 @@
         "id": "clara",
         "label": "Clara Whitmore",
         "rect": [
-          83,
-          79,
+          85,
+          39,
           8,
-          25
+          16
         ],
         "ids": [
           "clara"
         ],
-        "actor": "operator_clara"
+        "actor": "operator_clara",
+        "actorRect": [
+          84,
+          66,
+          32,
+          64
+        ]
       },
       {
         "id": "report",

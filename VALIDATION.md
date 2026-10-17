@@ -9,6 +9,7 @@ python tests/audit_scenes.py
 python tests/test_chapter1.py
 python tests/test_regressions.py
 python tests/test_scene_corrections.py
+python tests/test_visual_review.py
 python tests/test_art.py
 python tools/package_build.py
 python tests/test_delivery.py
@@ -32,8 +33,8 @@ python tests/test_delivery.py
   decoding all 26 bundled recordings.
 - Reported-issue regressions reject 1,944 nonadjacent attempts across door, map and
   core travel without state/time changes; verify hide/cancel/confirm, black cover,
-  limited peeking, disabled concealed light, unchanged phone scale, rear entry view,
-  destination lighting, and loaded physical object images across all 27 rooms.
+  limited peeking, disabled concealed light, unchanged phone scale, full review-room reverse views,
+  absence of door masks, and loaded physical object images across all 27 rooms.
 - Art audit compares perceptual signatures, including mirrored comparisons, and OCR
   checks for accidental INSPECT/EXAMINE/CLICK HERE/BUTTON prompts. This supports,
   but does not replace, visual inspection of each scene.
@@ -45,3 +46,9 @@ not a substitute for complete interaction checks. Direct file:// launch is restr
 by the managed test browser; single-file behavior is tested as a single served resource
 with all further network access disabled. Other browsers and a human 2–3-hour session
 are not claimed tested. Optional live image-provider generation is not configured.
+
+The visual-review suite exercises desktop/mobile anchored panels and Take/Leave,
+adult actor bounds, four reverse assets, negative removal, file-hotspot cleanup,
+patient prerequisites/aftermath, three cover frames, and large-map controls.
+These checks verify behavior and supporting layouts; artistic acceptance and
+full remaining-room conversion are still review work.

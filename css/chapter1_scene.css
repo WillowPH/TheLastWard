@@ -42,7 +42,6 @@
 .c1-finding{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #3d4445;color:#f0e8d9}
 .c1-finding p{font-size:12px;line-height:1.5;color:#c3c4ba}.c1-finding .item-art{width:40px;height:40px;object-fit:contain;vertical-align:middle;margin-right:10px}
 .c1-locker{position:absolute;inset:0;background:#070b0e;display:flex;flex-direction:column}.c1-locker-view{position:relative;flex:1;background-size:cover;background-position:center;filter:brightness(.15);overflow:hidden}.c1-locker-view.peeking{filter:brightness(.7)}
-.c1-slats{position:absolute;inset:0;z-index:12;background:repeating-linear-gradient(#141b1d 0 50px,#020405 50px 68px,transparent 68px 76px,#040709 76px 81px)}
 .c1-locker footer{padding:15px;border-top:1px solid #536064;background:#0b1218;color:#d1d7cf}.c1-locker footer h3{font-size:14px}.c1-locker footer p{font-size:12px}.c1-locker footer div{display:flex;gap:10px}
 .c1-ending{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 25%,#392227,#080d14 70%);padding:clamp(20px,5vw,65px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#ddd4c6;overflow:auto}
 .c1-ending h1{font-size:clamp(24px,3.3vw,52px);color:#cf9a8a;letter-spacing:.1em;margin:20px 0}.c1-ending.completed h1{color:#ddc69b}.c1-ending p{max-width:560px;line-height:1.65;font-size:14px}.c1-ending button{margin:6px}.c1-thought{color:#e9bc7a;font-style:italic}.c1-ending small{letter-spacing:.15em}
@@ -138,7 +137,6 @@ body.ward-playing .lay{height:100svh!important;min-height:0!important;max-height
 @media(prefers-reduced-motion:reduce){.c1-crt-static,.c1-fluorescent,.c1-rain-motion{animation:none!important}}
 /* Physical cutouts replace CSS boxes and inventory thumbnails in the world. */
 .c1-prop{object-fit:contain;filter:brightness(.72) saturate(.7) drop-shadow(1px 3px 2px #0009)}
-.c1-door-shade{position:absolute;transform:translate(-50%,-50%);z-index:2;pointer-events:none;background:#01030466;backdrop-filter:brightness(.045);mask-image:linear-gradient(90deg,transparent,#000 10% 90%,transparent)}
 .c1-return-route{position:absolute;top:36px;left:12px;right:12px;z-index:17;display:flex;justify-content:center;gap:5px;pointer-events:none}
 .c1-return-route button{pointer-events:auto;font-size:10px!important;padding:5px 8px!important;min-height:25px!important;background:#0c151bea!important}
 .c1-focus{inset:auto 3% 3%;max-height:68%;background:#0c131bfa}
@@ -147,13 +145,39 @@ body.ward-playing .lay{height:100svh!important;min-height:0!important;max-height
 .c1-peek-scene{position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;visibility:hidden;clip-path:polygon(35% 44%,65% 44%,65% 53%,35% 53%);filter:brightness(.5)}
 .peeking .c1-peek-scene{visibility:visible}
 .c1-peek-darkness{position:absolute;inset:0;background:#0003}.c1-peek-darkness.dark-room{background:#000c}
-.c1-slats{background:#000;opacity:1}
-.peeking .c1-slats{background:linear-gradient(#000 0 44%,transparent 44% 53%,#000 53%);pointer-events:none}
 .c1-rear-view{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,#202522,#030607 75%);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#c5c9bc;padding:12px;text-align:center}
 .c1-rear-view h3{font-size:15px}.c1-rear-view p{font-size:12px;max-width:420px}
-.c1-rear-door{position:relative;min-height:0;height:62%;max-width:80%;aspect-ratio:1/1.7}.c1-rear-door img{width:100%;height:100%;object-fit:contain;filter:brightness(.65)}
-.c1-rear-travel{position:absolute;inset:5% 18%;background:transparent!important;border:0!important;cursor:alias}.c1-rear-travel:focus-visible,.c1-rear-travel:hover{outline:1px solid #c1b28d}
 @media(max-width:650px){.c1-return-route{left:4px;right:4px;gap:3px}.c1-return-route button{font-size:8px!important;padding:3px 5px!important}.c1-focus{max-height:75%}}
 
 .scene-focus-overlay:has(.c1-focus){background:transparent;pointer-events:none}.c1-focus{pointer-events:auto}
 .ward-center #sceneFocusOverlay:has(.c1-focus){background:transparent!important}
+
+/* Review pass: anchored actions, physically scaled actors and full room reverse views. */
+.c1-focus{inset:auto;right:auto;bottom:auto;max-height:380px;border-radius:5px;box-shadow:0 8px 30px #000b}
+.c1-focus h3{font-size:13px}.c1-focus header{padding:8px}.c1-focus header .btn{font-size:10px;padding:5px}
+.c1-finding{display:flex;flex-wrap:wrap;justify-content:flex-start;padding:8px 0;gap:7px}.c1-finding>div{flex:1 0 100%}.c1-finding p{margin:6px 0}.c1-finding .btn{min-width:65px}
+.c1-npc{z-index:5;filter:brightness(.69) saturate(.8) drop-shadow(0 7px 5px #0009)}
+.c1-rear-view{padding:0;justify-content:center;background:#060a0d}
+.c1-reverse-plane{width:100%;aspect-ratio:4/3;max-height:calc(100% - 85px);position:relative}
+.c1-reverse-plane img{width:100%;height:100%;object-fit:contain}
+.c1-reverse-plane .c1-rear-travel{inset:18% 39% 15%;width:22%;height:67%}
+.c1-rear-view footer{height:80px;padding:7px;text-align:center}.c1-rear-view footer p{margin:3px auto 7px}
+.c1-peek-scene{clip-path:none;mask-image:none;filter:brightness(.65);background-size:cover}
+.c1-cover-frame{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:12;pointer-events:none}
+.peeking .c1-cover-frame{display:block}
+.c1-map-modal{width:min(1250px,96vw)!important;max-width:96vw!important;height:92svh!important;max-height:92svh!important;display:flex;flex-direction:column}
+.c1-map-modal .mb{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden!important;padding:10px!important}
+.c1-map-scroll{flex:1;min-height:180px;overflow:auto;border:1px solid #465457;background:#10191d;touch-action:pan-x pan-y;overscroll-behavior:contain}
+.c1-large-map{display:block;max-width:none!important;flex:none;background:linear-gradient(#ffffff03 1px,transparent 1px),linear-gradient(90deg,#ffffff03 1px,transparent 1px);background-size:40px 40px}
+.c1-map-links path{stroke:#7d9799;stroke-width:4;fill:none}.c1-map-links path.sealed{stroke:#a17767;stroke-dasharray:10 7}
+.c1-map-rooms rect{fill:#1b292f;stroke:#647a7c;stroke-width:2}.c1-map-rooms text{font-family:Roboto,Arial,sans-serif;font-size:16px;fill:#d7ded8}.c1-map-rooms .unknown rect{fill:#172024;stroke:#3e4d50}.c1-map-rooms .unknown text{fill:#869491}.c1-map-rooms .here rect{fill:#5e5033;stroke:#e1c38a;stroke-width:4}.c1-map-rooms .adjacent{cursor:pointer}.c1-map-rooms .adjacent rect{fill:#183d47;stroke:#79b5c2}.c1-map-rooms .adjacent:hover rect,.c1-map-rooms .adjacent:focus rect{stroke:#eed49d;stroke-width:4}.c1-map-rooms .map-you{fill:#e4c589;font-size:14px}
+.c1-map-controls{display:flex;gap:7px;align-items:center;padding:0 0 8px}.c1-map-controls span,.c1-map-legend{font-size:11px;color:#aabbb8}.c1-map-exits{display:flex;flex-wrap:wrap;gap:6px;align-items:center;max-height:110px;overflow:auto}.c1-map-exits strong{font-size:12px;margin-right:5px}.c1-map-exits .btn{font-size:11px}
+@media(max-width:650px){.c1-focus{max-height:60%}.c1-map-controls span{display:none}.c1-map-modal .mb{padding:5px!important}.c1-map-controls .btn{font-size:10px;padding:5px}.c1-map-exits{max-height:90px}.c1-map-legend{font-size:9px}}
+.c1-ward-light{position:absolute;left:29%;top:9%;width:37%;height:15%;pointer-events:none;z-index:2;background:radial-gradient(ellipse,#e7dfb026,transparent 70%);animation:c1-ward-lamp 9s ease-in-out infinite}
+@keyframes c1-ward-lamp{0%,80%,100%{opacity:.2}82%{opacity:.1}84%{opacity:.45}86%{opacity:.2}}
+.c1-reduced-motion .c1-plane *{animation:none!important}
+@media(prefers-reduced-motion:reduce){.c1-ward-light{animation:none!important}}
+.ward-playing #m:has(.c1-map-modal){position:fixed!important;inset:0!important;z-index:1000!important}
+.ward-playing #m .md.c1-map-modal{height:92svh!important;max-height:92svh!important;width:min(1250px,96vw)!important;max-width:96vw!important}
+
+.c1-reverse-plane{flex:none;max-height:none}.c1-reverse-plane .c1-rear-travel{inset:auto;transform:translate(-50%,-50%);background:transparent!important;border:0!important;cursor:alias}

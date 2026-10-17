@@ -18,8 +18,8 @@ def ocr(path):
  env=os.environ.copy();env['OMP_THREAD_LIMIT']='1'
  text=subprocess.check_output(['tesseract',str(path),'stdout','--psm','11'],text=True,stderr=subprocess.DEVNULL,env=env)
  return path.name,re.findall(r'\b(?:INSPECT|EXAMINE|CLICK HERE|BUTTON)\b',text.upper())
-files=rooms+list((ROOT/'assets/states').glob('*.webp'))
+states=list((ROOT/'assets/states').glob('*.webp'));reverse=list((ROOT/'assets/reverse').glob('*.webp'));files=rooms+states+reverse
 results=list(concurrent.futures.ThreadPoolExecutor(3).map(ocr,files))
 assert all(not match for _,match in results),results
 print('PASS: no baked interaction prompts detected in room or aftermath artwork.',flush=True)
-(ROOT/'tests/results/art_audit.json').write_text(json.dumps({'rooms':len(rooms),'state_images':len(files)-len(rooms),'near_duplicates':duplicates,'ocr_prompts':results,'sha256':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files}},indent=2))
+(ROOT/'tests/results/art_audit.json').write_text(json.dumps({'rooms':len(rooms),'state_images':len(states),'reverse_images':len(reverse),'near_duplicates':duplicates,'ocr_prompts':results,'sha256':{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files}},indent=2))

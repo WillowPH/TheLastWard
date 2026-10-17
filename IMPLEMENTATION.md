@@ -6,7 +6,7 @@ merged into it. The complete agreed scope is retained in docs/MASTER_REQUIREMENT
 | Area | Implementation |
 | --- | --- |
 | Chapter boundary and gates | js/chapter1_complete.js; 27 rooms, 27 graph edges, one elevator entrance; no B2/Chapter 3 map nodes |
-| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, behind-player return route, closed rear-door view, destination-circuit shading |
+| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, behind-player return route, four full reverse backgrounds; black doorway-shading patches removed |
 | Art and targets | data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 155 fixtures and explicit door rectangles |
 | Scene/state/inspection | js/chapter1_scene.js; art and targets resize on one uncropped plane; no arbitrary coordinate fallback |
 | Threats and conditions | js/chapter1_survival.js; traversal, encounters, injury aim/movement effects, hiding, rare hallucination, sprinkler recovery and cold/wet recovery |
@@ -28,8 +28,9 @@ props or decoration. The elevator's rear doors are operated by its controls; the
 not an invisible doorway into an unfinished Chapter 2. Its side cage returns upstairs.
 
 A changed scene can have changed geometry: Kessler's aftermath uses a separate image
-and the inspection target moves to the visible fallen sleeve. The entry route is rendered behind the player; fixed room compositions do not imply
-a freely rotating camera. Contextual inspection keeps the original scene scale.
+and the inspection target moves to the visible fallen sleeve. The entry route is rendered behind the player; four review rooms have full reverse
+backgrounds. Other rooms have a return control without the removed door cutout.
+Fixed room compositions do not imply a freely rotating camera. Contextual inspection keeps the original scene scale.
 Hiding requires confirmation and reveals the room only through a narrow peek gap.
 Other state effects use
 separate overlays and the established save flags. Documents remain physical papers
@@ -49,3 +50,10 @@ Chapter 2/3 content is not accessible or mapped. Source baseline functions relat
 later chapters remain in inherited modules where harmless, but their locations and
 routes are removed from the active graph. No Chapter 2 completion is claimed.
 The desired 2–3-hour runtime and final human acceptance of pacing remain unverified.
+
+## Visual review scope
+
+See docs/VISUAL_REVIEW.md for the four-room review and remaining artwork conversion.
+js/chapter1_review.js provides the enlarged physical-connection map and visible
+patient-action prerequisites. The actual graph is unchanged: North Corridor branches
+to Room 12 and Isolation separately; Children’s Ward connects to Room 12.

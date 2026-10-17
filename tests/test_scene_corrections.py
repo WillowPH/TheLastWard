@@ -17,7 +17,7 @@ with sync_playwright() as p:
  assert page.locator('.c1-peek-scene').evaluate('(e)=>getComputedStyle(e).visibility')=='hidden';ev('toggleLight()');assert not ev('S.lightOn')
  ev("go('wardservice')");assert ev("S.room==='laundry'")
  page.get_by_role('button',name='Peek',exact=True).click();assert page.locator('.c1-peek-scene').evaluate('(e)=>getComputedStyle(e).visibility')=='visible'
- clip=page.locator('.c1-peek-scene').evaluate('(e)=>getComputedStyle(e).clipPath');assert '35%' in clip and '53%' in clip,clip
+ assert page.locator('.c1-cover-frame mask rect').count()==7
  page.get_by_role('button',name='Stop peeking',exact=True).click();assert page.locator('.c1-peek-scene').evaluate('(e)=>getComputedStyle(e).visibility')=='hidden'
  page.screenshot(path=str(ROOT/'tests/results/hidden-corrected.png'));page.get_by_role('button',name='Exit',exact=True).click()
  checks.append('cover requires consent; cancel preserves position/light; hidden view black; peek narrow; torch and travel blocked while hidden')
@@ -30,10 +30,10 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Turn around',exact=True).click();assert page.locator('.c1-rear-travel[data-destination=lobby]').count()==1;ev('wardCloseFocus()')
  # Each edge has a declared destination-light state, including the former entry.
  ev("S.room='lobby';S.prev='security';S.f.power=0;render()")
- assert page.locator('[data-door-light=dark]').count()>=1
+ assert page.locator('.c1-door-shade,[data-door-light]').count()==0
  assert ev("WardNavigation.isDark('eastcorridor')")
  ev('S.f.power=1;render()');assert not ev("WardNavigation.isDark('eastcorridor')")
- checks.append('entry route is behind player; turn-around view uses closed door; doorway shading follows destination circuit')
+ checks.append('all physical exits remain usable; full reverse scene replaces cutout; no door shading patches')
  for room in ev('WardChapter.rooms'):
   ev('r=>{S.room=r;render()}',room)
   assert not page.locator('.c1-item-overlay,.c1-physical:not(img)').count(),room

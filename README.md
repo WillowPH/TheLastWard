@@ -38,19 +38,25 @@ and are not silently loaded into this different room topology.
   doors, gunfire, reload handling, breathing, water, machinery and room ambience.
 - Exportable Chapter 1 completion record for later Chapter 2 work.
 
-## Interaction corrections
+## Visual review build
 
-- World props use transparent object artwork; inventory thumbnails stay in UI.
-- Inspecting the phone or furniture opens actions without zooming the background.
-- Hiding asks first, switches the light off, and blacks out the view. Peek reveals
-  only a narrow gap; the flashlight and room travel stay blocked while concealed.
-- The return route is marked **Behind you**. **Turn around** shows its closed door;
-  forward targets omit that entry. Doorway shading follows the destination circuit.
-- Every travel entry point checks physical adjacency before any time/state change.
-  Briefly disabled travel buttons prevent a rapid click from crossing a second room.
+The agreed first review section is **Emergency Lobby → Security → East Corridor →
+Patient Wing**. These four rooms have revised closed-door art, complete reverse
+backgrounds, subtle scene animation and corrected Clara scale. North Patient
+Corridor and Isolation also have dark door-glass corrections. The rest of the chapter
+remains playable; full reverse artwork for the other rooms is not claimed complete.
 
-The room art uses fixed camera compositions; the turn-around view is a separate
-closed-door view, not a freely rotating 3D camera.
+Shared corrections include object-side action popovers, explicit Take/Leave, removal
+of resolved pickup/file hotspots, locker slats and distinct desk/crate cover, visible
+patient-choice failures and persistent covered-bed aftermath, and a large scrollable
+floor plan with zoom and current-room centering. The photographic negative is a
+separate removable object on a clean background; other legacy room props still need
+the same visual review before claiming the entire chapter's item artwork converted.
+The old black doorway patches and isolated turn-around door cutout are removed.
+
+See [the review guide and screenshots](docs/VISUAL_REVIEW.md). Room motion uses
+lightweight layered effects, not full video animation. Scene Animation can be disabled
+in Options; system reduced-motion preferences are also respected.
 
 ## Verification and limits
 

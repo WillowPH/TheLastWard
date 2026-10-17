@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "window actions anchored beside object and inside viewport; Take/Leave preserves uncollected item at desktop/mobile sizes",
+    "Clara uses authored full adult height and floor placement rather than fixture-thumbnail bounds",
+    "all four review rooms load distinct full reverse backgrounds with matching return destination",
+    "negative is separate physical artwork; Leave retains it, Take removes its image and hotspot persistently",
+    "read report loses its hotspot, while evidence remains available in Files",
+    "unloaded weapon gives visible explanation; successful patient choice consumes one round and persists covered-bed aftermath",
+    "locker slats, crate gap and desk opening use distinct physical frames; no floating rectangular peek mask",
+    "large scrollable map has all 27 rooms/edges; isolation and children are separate branches; only adjacent rooms offer travel"
+  ],
+  "count": 8
+}
