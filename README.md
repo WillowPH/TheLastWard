@@ -38,6 +38,20 @@ and are not silently loaded into this different room topology.
   doors, gunfire, reload handling, breathing, water, machinery and room ambience.
 - Exportable Chapter 1 completion record for later Chapter 2 work.
 
+## Interaction corrections
+
+- World props use transparent object artwork; inventory thumbnails stay in UI.
+- Inspecting the phone or furniture opens actions without zooming the background.
+- Hiding asks first, switches the light off, and blacks out the view. Peek reveals
+  only a narrow gap; the flashlight and room travel stay blocked while concealed.
+- The return route is marked **Behind you**. **Turn around** shows its closed door;
+  forward targets omit that entry. Doorway shading follows the destination circuit.
+- Every travel entry point checks physical adjacency before any time/state change.
+  Briefly disabled travel buttons prevent a rapid click from crossing a second room.
+
+The room art uses fixed camera compositions; the turn-around view is a separate
+closed-door view, not a freely rotating 3D camera.
+
 ## Verification and limits
 
 See [VALIDATION.md](VALIDATION.md) for exact automated coverage and commands,

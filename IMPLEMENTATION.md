@@ -6,6 +6,7 @@ merged into it. The complete agreed scope is retained in docs/MASTER_REQUIREMENT
 | Area | Implementation |
 | --- | --- |
 | Chapter boundary and gates | js/chapter1_complete.js; 27 rooms, 27 graph edges, one elevator entrance; no B2/Chapter 3 map nodes |
+| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, behind-player return route, closed rear-door view, destination-circuit shading |
 | Art and targets | data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 155 fixtures and explicit door rectangles |
 | Scene/state/inspection | js/chapter1_scene.js; art and targets resize on one uncropped plane; no arbitrary coordinate fallback |
 | Threats and conditions | js/chapter1_survival.js; traversal, encounters, injury aim/movement effects, hiding, rare hallucination, sprinkler recovery and cold/wet recovery |
@@ -27,7 +28,10 @@ props or decoration. The elevator's rear doors are operated by its controls; the
 not an invisible doorway into an unfinished Chapter 2. Its side cage returns upstairs.
 
 A changed scene can have changed geometry: Kessler's aftermath uses a separate image
-and the inspection target moves to the visible fallen sleeve. Other state effects use
+and the inspection target moves to the visible fallen sleeve. The entry route is rendered behind the player; fixed room compositions do not imply
+a freely rotating camera. Contextual inspection keeps the original scene scale.
+Hiding requires confirmation and reveals the room only through a narrow peek gap.
+Other state effects use
 separate overlays and the established save flags. Documents remain physical papers
 after reading; inventory pickups leave their item layer after collection.
 

@@ -1,0 +1,11 @@
+{
+  "passed": [
+    "1944 nonadjacent travel attempts rejected without state/time changes",
+    "rapid consecutive door activations cross only one room",
+    "cover requires consent; cancel preserves position/light; hidden view black; peek narrow; torch and travel blocked while hidden",
+    "phone opens contextual actions without enlarging or moving room artwork",
+    "entry route is behind player; turn-around view uses closed door; doorway shading follows destination circuit",
+    "all rooms omit CSS prop boxes and pasted inventory-thumbnail badges"
+  ],
+  "count": 6
+}

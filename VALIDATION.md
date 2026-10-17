@@ -8,6 +8,7 @@ python -m http.server 8010
 python tests/audit_scenes.py
 python tests/test_chapter1.py
 python tests/test_regressions.py
+python tests/test_scene_corrections.py
 python tests/test_art.py
 python tools/package_build.py
 python tests/test_delivery.py
@@ -29,6 +30,10 @@ python tests/test_delivery.py
   separate sprinkler recovery/valve actions, cold and shivering recovery;
   actual pursuer edges/retreat/visibility; locker peeking and waiting; visible infected;
   decoding all 26 bundled recordings.
+- Reported-issue regressions reject 1,944 nonadjacent attempts across door, map and
+  core travel without state/time changes; verify hide/cancel/confirm, black cover,
+  limited peeking, disabled concealed light, unchanged phone scale, rear entry view,
+  destination lighting, and loaded physical object images across all 27 rooms.
 - Art audit compares perceptual signatures, including mirrored comparisons, and OCR
   checks for accidental INSPECT/EXAMINE/CLICK HERE/BUTTON prompts. This supports,
   but does not replace, visual inspection of each scene.

@@ -89,9 +89,9 @@ with sync_playwright() as p:
  assert ev("S.room!=='wardnorth'&&S.f.pursuerEscapes>0")
  passed('Subject X traverses one real edge, is visible, and permits a real retreat')
  # Locker peeking shows the current room; waiting can break contact if unseen.
- ev("S.room='laundry';S.f.pursuerEncounter=0;S.pursuer.room='laundry';S.pursuer.active=true;hideInRoom();wardPeek()")
+ ev("S.room='laundry';S.f.pursuerEncounter=0;S.pursuer.room='laundry';S.pursuer.active=true;hideInRoom();wardConfirmHide();wardPeek()")
  assert page.get_by_role('button',name='Stop peeking').is_visible()
- assert 'laundry.webp' in page.locator('.c1-locker-view').get_attribute('style')
+ assert 'laundry.webp' in page.locator('.c1-peek-scene').get_attribute('style')
  ev('wardStayHidden();wardExitHiding()')
  assert ev("!S.f.hidingRoom&&S.pursuer.room!=='laundry'")
  passed('locker peek/stay/exit uses actual room and pursuer state')

@@ -1,7 +1,7 @@
 {
   "passed": [
     "single-file HTML: all 27 room backgrounds load after network is disabled; one HTTP document request",
-    "all five character cutouts and 26 recordings embedded",
+    "all five character cutouts, four new prop images and 26 recordings embedded",
     "hosted PWA installs current cache and reloads the game offline",
     "optional image-provider failure preserves local scene and targets",
     "source ZIP integrity; 27 room images; no recursively bundled downloads"
