@@ -1,0 +1,290 @@
+{
+  "checks": [
+    "Reference, tablet and mobile layouts retain all Thoughts text, no narration scrolling, no bottom control bar, and fit whole native art without cropping, stretching or enlargement.",
+    "Native mouse clicks on left and right edge chevrons change room-facing views and return; no keyboard input is required.",
+    "Options/modal surfaces use neutral charcoal instead of a dark green fill.",
+    "Real handwritten and typed records retain dark readable text on damaged parchment; modal colours do not leak into document ink."
+  ],
+  "screens": [
+    {
+      "path": "reference-theme-1672.png",
+      "width": 1672,
+      "height": 941,
+      "scrollWidth": 1672,
+      "thought": {
+        "display": "flex",
+        "height": 110,
+        "scrollHeight": 110,
+        "width": 322,
+        "scrollWidth": 322,
+        "x": 1002.609375,
+        "y": 801,
+        "right": 1326.328125,
+        "bottom": 913,
+        "background": "rgba(16, 13, 8, 0.91)"
+      },
+      "narration": {
+        "display": "flex",
+        "height": 110,
+        "scrollHeight": 110,
+        "width": 645,
+        "scrollWidth": 645,
+        "x": 343.171875,
+        "y": 801,
+        "right": 990.609375,
+        "bottom": 913,
+        "background": "rgba(9, 9, 9, 0.91)"
+      },
+      "heading": {
+        "display": "flex",
+        "height": 58,
+        "scrollHeight": 58,
+        "width": 268,
+        "scrollWidth": 268,
+        "x": 1379.328125,
+        "y": 460.5,
+        "right": 1647,
+        "bottom": 518.5,
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "frame": {
+        "display": "block",
+        "height": 779,
+        "scrollHeight": 779,
+        "width": 1039,
+        "scrollWidth": 1039,
+        "x": 315.25,
+        "y": 5,
+        "right": 1354.25,
+        "bottom": 784,
+        "background": "rgb(7, 7, 7)"
+      },
+      "viewport": {
+        "display": "grid",
+        "height": 789,
+        "scrollHeight": 789,
+        "width": 1039,
+        "scrollWidth": 1039,
+        "x": 315.171875,
+        "y": 0,
+        "right": 1354.328125,
+        "bottom": 789,
+        "background": "rgb(7, 7, 7)"
+      },
+      "center": {
+        "display": "block",
+        "height": 941,
+        "scrollHeight": 941,
+        "width": 1039,
+        "scrollWidth": 1039,
+        "x": 315.171875,
+        "y": 0,
+        "right": 1354.328125,
+        "bottom": 941,
+        "background": "rgb(8, 8, 8)"
+      },
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "toolbar": "none"
+    },
+    {
+      "path": "reference-theme-1000.png",
+      "width": 1000,
+      "height": 800,
+      "scrollWidth": 1000,
+      "thought": {
+        "display": "flex",
+        "height": 110,
+        "scrollHeight": 110,
+        "width": 224,
+        "scrollWidth": 224,
+        "x": 547.59375,
+        "y": 668,
+        "right": 773.984375,
+        "bottom": 780,
+        "background": "rgba(16, 13, 8, 0.91)"
+      },
+      "narration": {
+        "display": "flex",
+        "height": 110,
+        "scrollHeight": 110,
+        "width": 338,
+        "scrollWidth": 338,
+        "x": 196,
+        "y": 668,
+        "right": 535.59375,
+        "bottom": 780,
+        "background": "rgba(9, 9, 9, 0.91)"
+      },
+      "heading": {
+        "display": "flex",
+        "height": 58,
+        "scrollHeight": 58,
+        "width": 184,
+        "scrollWidth": 184,
+        "x": 803,
+        "y": 458,
+        "right": 987,
+        "bottom": 516,
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "frame": {
+        "display": "block",
+        "height": 458,
+        "scrollHeight": 458,
+        "width": 610,
+        "scrollWidth": 610,
+        "x": 180,
+        "y": 91,
+        "right": 790,
+        "bottom": 549,
+        "background": "rgb(7, 7, 7)"
+      },
+      "viewport": {
+        "display": "grid",
+        "height": 640,
+        "scrollHeight": 640,
+        "width": 610,
+        "scrollWidth": 610,
+        "x": 180,
+        "y": 0,
+        "right": 790,
+        "bottom": 640,
+        "background": "rgb(7, 7, 7)"
+      },
+      "center": {
+        "display": "block",
+        "height": 800,
+        "scrollHeight": 800,
+        "width": 610,
+        "scrollWidth": 610,
+        "x": 180,
+        "y": 0,
+        "right": 790,
+        "bottom": 800,
+        "background": "rgb(8, 8, 8)"
+      },
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "toolbar": "none"
+    },
+    {
+      "path": "reference-theme-390.png",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "thought": {
+        "display": "flex",
+        "height": 98,
+        "scrollHeight": 98,
+        "width": 368,
+        "scrollWidth": 368,
+        "x": 10,
+        "y": 548,
+        "right": 380,
+        "bottom": 648,
+        "background": "rgba(16, 13, 8, 0.91)"
+      },
+      "narration": {
+        "display": "flex",
+        "height": 74,
+        "scrollHeight": 74,
+        "width": 368,
+        "scrollWidth": 368,
+        "x": 10,
+        "y": 464,
+        "right": 380,
+        "bottom": 540,
+        "background": "rgba(9, 9, 9, 0.91)"
+      },
+      "heading": {
+        "display": "flex",
+        "height": 36,
+        "scrollHeight": 36,
+        "width": 264,
+        "scrollWidth": 264,
+        "x": 120,
+        "y": 674,
+        "right": 384,
+        "bottom": 710,
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "frame": {
+        "display": "block",
+        "height": 293,
+        "scrollHeight": 293,
+        "width": 390,
+        "scrollWidth": 390,
+        "x": 0,
+        "y": 104,
+        "right": 390,
+        "bottom": 397,
+        "background": "rgb(7, 7, 7)"
+      },
+      "viewport": {
+        "display": "grid",
+        "height": 411,
+        "scrollHeight": 411,
+        "width": 390,
+        "scrollWidth": 390,
+        "x": 0,
+        "y": 45,
+        "right": 390,
+        "bottom": 456,
+        "background": "rgb(7, 7, 7)"
+      },
+      "center": {
+        "display": "block",
+        "height": 619,
+        "scrollHeight": 619,
+        "width": 390,
+        "scrollWidth": 390,
+        "x": 0,
+        "y": 45,
+        "right": 390,
+        "bottom": 664,
+        "background": "rgb(8, 8, 8)"
+      },
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "toolbar": "none"
+    }
+  ],
+  "documents": [
+    {
+      "title": "Heller\u2019s winter maintenance note",
+      "background": "rgb(203, 191, 168)",
+      "color": "rgb(40, 45, 37)",
+      "font": "26px / 40.3px Caveat, cursive",
+      "textLength": 934
+    },
+    {
+      "title": "Nursing personnel amendment",
+      "background": "rgb(203, 191, 168)",
+      "color": "rgb(40, 45, 37)",
+      "font": "15px / 26.25px \"Courier New\", monospace",
+      "textLength": 442
+    }
+  ],
+  "javascript_errors": [],
+  "surfaces": [
+    {
+      "selector": "#m .md",
+      "bg": "rgba(16, 16, 16, 0.97)"
+    },
+    {
+      "selector": "#m .mh",
+      "bg": "rgb(25, 23, 20)"
+    },
+    {
+      "selector": ".options-violence",
+      "bg": "rgb(25, 23, 20)"
+    }
+  ]
+}

@@ -54,7 +54,7 @@ for(let i=0;i<3;i++){
  W.fixture('wardnorth','coldWindow'+i,'Window '+(i+1)+' brass catch',[[18,35,11,28],[32,35,11,28],[77,35,11,28]][i],'rear',{windowIndex:i});
  register('wardnorth','coldWindow'+i,'coldWindow'+i,'Window '+(i+1)+' catch','A brass catch closes this window independently.',{act:'coldWindow',index:i});
 }
-register('lobby','window','lobbyShutters','Lobby window shutters','A rolling shutter handle controls the exterior glazing.',{act:'shutters'});
+register('lobby','window','lobbyShutters','Upper window shutters','A rolling shutter handle closes the three clear upper panes. The lower windows remain barricaded.',{act:'shutters'});
 register('chapel','letter','chapelRegister','Candle register','A page explains the memorial candles.',{doc:'Chapel candle register'});
 W.fixture('chapel','candles','Memorial candles',[15,43,9,12],'rear',{art:'assets/props/candles.svg'});
 register('chapel','candles','chapelCandles','Three votive candles','The sheltered wicks can be lit with a filled lighter.',{act:'candles'});

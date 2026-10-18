@@ -15,7 +15,7 @@ func TestRootRequiresExtractedGame(t *testing.T) {
 	if _, err := gameRoot(r); err == nil {
 		t.Fatal("accepted incomplete folder")
 	}
-	for _, f := range []string{"index.html", "js/panorama_renderer.js", "assets/panoramic360/lobby.webp"} {
+	for _, f := range []string{"index.html", "js/bootstrap.js", "assets/rooms/lobby.webp"} {
 		p := filepath.Join(r, f)
 		os.MkdirAll(filepath.Dir(p), 0755)
 		os.WriteFile(p, []byte("local"), 0644)

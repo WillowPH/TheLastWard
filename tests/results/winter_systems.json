@@ -2,7 +2,7 @@
   "checks": [
     "local recorded sound advances and produces nonzero WebAudio output",
     "Normal drains faster than Story; lit rooms stay lit; exhaustion updates the actual flashlight beam",
-    "hoist requires confirmation and persists armed/spent artwork",
+    "hoist requires confirmation and actual rendered pixels match its persistent armed/spent artwork",
     "hiding asks first, is dark while concealed and uses narrow slits when peeking",
     "reading a document preserves the existing room image and camera",
     "window confirmation, individual catches, local health/sanity exposure, one-use resolution and lighter recovery",
@@ -14,9 +14,551 @@
     "three once-only story calls use three different seeded phones and preserve transcripts",
     "rare lethal encounter warns on first inspection, permits retreat and restores its checkpoint after deliberate second inspection",
     "high-resolution photographs have inspectable dated backs",
-    "every directed doorway arrival faces away from its fixed entrance portal",
+    "all 54 directed doorway arrivals face away from the real entrance; looking back exposes the correct return destination",
     "128 seeded worlds retain authored geometry for every object and telephone",
-    "27 distinct panoramas, all pickup icon files, and usable front/rear controls at desktop, tablet and mobile widths"
+    "54 distinct native room views, all pickup icons, and working mouse view arrows at desktop, tablet and mobile widths"
+  ],
+  "directed_arrivals": [
+    {
+      "door": "liftEntry",
+      "room": "lift",
+      "from": "generator",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "lift",
+      "renderView": "front"
+    },
+    {
+      "door": "liftEntry",
+      "room": "generator",
+      "from": "lift",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "generator",
+      "renderView": "rear"
+    },
+    {
+      "door": "lr",
+      "room": "surgery",
+      "from": "laundry",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "surgery",
+      "renderView": "front"
+    },
+    {
+      "door": "lr",
+      "room": "laundry",
+      "from": "surgery",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "laundry",
+      "renderView": "rear"
+    },
+    {
+      "door": "ls",
+      "room": "security",
+      "from": "lobby",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "security",
+      "renderView": "front"
+    },
+    {
+      "door": "ls",
+      "room": "lobby",
+      "from": "security",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "lobby",
+      "renderView": "front"
+    },
+    {
+      "door": "lw",
+      "room": "eastcorridor",
+      "from": "lobby",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "eastcorridor",
+      "renderView": "rear"
+    },
+    {
+      "door": "lw",
+      "room": "lobby",
+      "from": "eastcorridor",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "lobby",
+      "renderView": "rear"
+    },
+    {
+      "door": "wr",
+      "room": "room12",
+      "from": "wardnorth",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "room12",
+      "renderView": "front"
+    },
+    {
+      "door": "wr",
+      "room": "wardnorth",
+      "from": "room12",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "wardnorth",
+      "renderView": "rear"
+    },
+    {
+      "door": "wa",
+      "room": "archive",
+      "from": "wardservice",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "archive",
+      "renderView": "front"
+    },
+    {
+      "door": "wa",
+      "room": "wardservice",
+      "from": "archive",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "wardservice",
+      "renderView": "rear"
+    },
+    {
+      "door": "ag",
+      "room": "generator",
+      "from": "archive",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "generator",
+      "renderView": "front"
+    },
+    {
+      "door": "ag",
+      "room": "archive",
+      "from": "generator",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "archive",
+      "renderView": "rear"
+    },
+    {
+      "door": "go",
+      "room": "observation",
+      "from": "generator",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "observation",
+      "renderView": "front"
+    },
+    {
+      "door": "go",
+      "room": "generator",
+      "from": "observation",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "generator",
+      "renderView": "rear"
+    },
+    {
+      "door": "rr",
+      "room": "residence",
+      "from": "room12",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "residence",
+      "renderView": "front"
+    },
+    {
+      "door": "rr",
+      "room": "room12",
+      "from": "residence",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "room12",
+      "renderView": "rear"
+    },
+    {
+      "door": "mt",
+      "room": "tunnel",
+      "from": "morgue",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "tunnel",
+      "renderView": "front"
+    },
+    {
+      "door": "mt",
+      "room": "morgue",
+      "from": "tunnel",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "morgue",
+      "renderView": "rear"
+    },
+    {
+      "door": "mb",
+      "room": "boiler",
+      "from": "morgue",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "boiler",
+      "renderView": "front"
+    },
+    {
+      "door": "mb",
+      "room": "morgue",
+      "from": "boiler",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "morgue",
+      "renderView": "rear"
+    },
+    {
+      "door": "os",
+      "room": "specimen",
+      "from": "observation",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "specimen",
+      "renderView": "front"
+    },
+    {
+      "door": "os",
+      "room": "observation",
+      "from": "specimen",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "observation",
+      "renderView": "rear"
+    },
+    {
+      "door": "wp",
+      "room": "pharmacy",
+      "from": "wardservice",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "pharmacy",
+      "renderView": "front"
+    },
+    {
+      "door": "wp",
+      "room": "wardservice",
+      "from": "pharmacy",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "wardservice",
+      "renderView": "rear"
+    },
+    {
+      "door": "ac",
+      "room": "chapel",
+      "from": "archive",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "chapel",
+      "renderView": "front"
+    },
+    {
+      "door": "ac",
+      "room": "archive",
+      "from": "chapel",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "archive",
+      "renderView": "rear"
+    },
+    {
+      "door": "gm",
+      "room": "morgue",
+      "from": "generator",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "morgue",
+      "renderView": "front"
+    },
+    {
+      "door": "gm",
+      "room": "generator",
+      "from": "morgue",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "generator",
+      "renderView": "rear"
+    },
+    {
+      "door": "wl",
+      "room": "laundry",
+      "from": "wardservice",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "laundry",
+      "renderView": "front"
+    },
+    {
+      "door": "wl",
+      "room": "wardservice",
+      "from": "laundry",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "wardservice",
+      "renderView": "rear"
+    },
+    {
+      "door": "rc12",
+      "room": "children",
+      "from": "room12",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "children",
+      "renderView": "front"
+    },
+    {
+      "door": "rc12",
+      "room": "room12",
+      "from": "children",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "room12",
+      "renderView": "rear"
+    },
+    {
+      "door": "ar",
+      "room": "records",
+      "from": "archive",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "records",
+      "renderView": "front"
+    },
+    {
+      "door": "ar",
+      "room": "archive",
+      "from": "records",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "archive",
+      "renderView": "rear"
+    },
+    {
+      "door": "oi",
+      "room": "isolation",
+      "from": "powercontrol",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "isolation",
+      "renderView": "front"
+    },
+    {
+      "door": "oi",
+      "room": "powercontrol",
+      "from": "isolation",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "powercontrol",
+      "renderView": "rear"
+    },
+    {
+      "door": "spc",
+      "room": "powercontrol",
+      "from": "specimen",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "powercontrol",
+      "renderView": "front"
+    },
+    {
+      "door": "spc",
+      "room": "specimen",
+      "from": "powercontrol",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "specimen",
+      "renderView": "rear"
+    },
+    {
+      "door": "rl",
+      "room": "stafflounge",
+      "from": "residence",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "stafflounge",
+      "renderView": "front"
+    },
+    {
+      "door": "rl",
+      "room": "residence",
+      "from": "stafflounge",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "residence",
+      "renderView": "rear"
+    },
+    {
+      "door": "rc",
+      "room": "coldstore",
+      "from": "records",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "coldstore",
+      "renderView": "front"
+    },
+    {
+      "door": "rc",
+      "room": "records",
+      "from": "coldstore",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "records",
+      "renderView": "rear"
+    },
+    {
+      "door": "ew",
+      "room": "ward",
+      "from": "eastcorridor",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "ward",
+      "renderView": "front"
+    },
+    {
+      "door": "ew",
+      "room": "eastcorridor",
+      "from": "ward",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "eastcorridor",
+      "renderView": "rear"
+    },
+    {
+      "door": "es",
+      "room": "security",
+      "from": "eastcorridor",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "security",
+      "renderView": "rear"
+    },
+    {
+      "door": "es",
+      "room": "eastcorridor",
+      "from": "security",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "eastcorridor",
+      "renderView": "front"
+    },
+    {
+      "door": "wi",
+      "room": "isoward",
+      "from": "wardnorth",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "isoward",
+      "renderView": "front"
+    },
+    {
+      "door": "wi",
+      "room": "wardnorth",
+      "from": "isoward",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "wardnorth",
+      "renderView": "rear"
+    },
+    {
+      "door": "northPassage",
+      "room": "wardnorth",
+      "from": "ward",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "wardnorth",
+      "renderView": "front"
+    },
+    {
+      "door": "northPassage",
+      "room": "ward",
+      "from": "wardnorth",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "ward",
+      "renderView": "rear"
+    },
+    {
+      "door": "servicePassage",
+      "room": "wardservice",
+      "from": "wardnorth",
+      "entry": "rear",
+      "view": "front",
+      "entranceVisible": false,
+      "renderRoom": "wardservice",
+      "renderView": "front"
+    },
+    {
+      "door": "servicePassage",
+      "room": "wardnorth",
+      "from": "wardservice",
+      "entry": "front",
+      "view": "rear",
+      "entranceVisible": false,
+      "renderRoom": "wardnorth",
+      "renderView": "rear"
+    }
   ],
   "javascript_errors": []
 }

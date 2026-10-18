@@ -1,0 +1,27 @@
+{
+  "native_size": [
+    1448,
+    1086
+  ],
+  "originals_preserved_in": "/workspace/generated_images",
+  "edits": {
+    "lobby_front": {
+      "source": "assets/rooms/lobby.webp",
+      "generated": "exec-a544a910-e540-4b77-9017-69f4404f2d84.png",
+      "output": "assets/room_views/lobby_front.webp",
+      "change": "Barricaded exit and snowy exterior; interior geometry retained"
+    },
+    "laundry_rear": {
+      "source": "assets/reverse/laundry.webp",
+      "generated": "exec-056ffea1-2ec6-4dac-bf7d-81043baa653c.png",
+      "output": "assets/room_views/laundry_rear.webp",
+      "change": "Integrated cast-iron drying stove"
+    },
+    "stafflounge_rear": {
+      "source": "assets/reverse/stafflounge.webp",
+      "generated": "exec-7cf96c18-67ec-4c4e-9db4-8d73c78607d9.png",
+      "output": "assets/room_views/stafflounge_rear.webp",
+      "change": "Physical 1998 CRT resting on filing cabinet"
+    }
+  }
+}

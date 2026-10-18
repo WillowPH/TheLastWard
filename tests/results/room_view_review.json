@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "no bottom navigation/hint strip, POI dropdown or Turn Around button",
+    "whole native 1448\u00d71086 art fits its aspect ratio without cropping, enlargement or a WebGL panorama crop",
+    "native mouse drag and side-arrow clicks change views without firing object clicks",
+    "portraits remain inspectable before power, reveal photo backs, solve after power and then lose their target",
+    "ordinary document inspection keeps the same canvas, facing, pose and image scale",
+    "the selected room-facing view survives actual save and reload",
+    "hint strength remains in Options and requires no keyboard controls"
+  ],
+  "javascript_errors": [],
+  "failed_resources": []
+}

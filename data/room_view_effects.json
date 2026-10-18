@@ -1,0 +1,2182 @@
+{
+  "lobby": {
+    "front": {
+      "source": "assets/room_views/lobby_front.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            0.3453,
+            0.36832
+          ],
+          [
+            7.11326,
+            0.36832
+          ],
+          [
+            7.11326,
+            5.70902
+          ],
+          [
+            0.3453,
+            3.77532
+          ]
+        ],
+        [
+          [
+            10.70442,
+            0.46041
+          ],
+          [
+            19.75138,
+            0.46041
+          ],
+          [
+            19.75138,
+            8.93186
+          ],
+          [
+            10.70442,
+            5.89319
+          ]
+        ],
+        [
+          [
+            22.85912,
+            2.94659
+          ],
+          [
+            28.72928,
+            4.69613
+          ],
+          [
+            28.72928,
+            12.89134
+          ],
+          [
+            22.85912,
+            10.95764
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Only the unobstructed upper transoms. Lower exit glass, chains, handles, wheelchair, plants and barricade remain outside all snow/shutter masks.",
+      "shutters": {
+        "material": "assets/panoramic360/materials/aged_steel_shutter.png",
+        "panels": [
+          [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              7.59669,
+              0.0
+            ],
+            [
+              7.59669,
+              6.44567
+            ],
+            [
+              0.0,
+              4.14365
+            ]
+          ],
+          [
+            [
+              10.22099,
+              0.0
+            ],
+            [
+              20.30387,
+              0.0
+            ],
+            [
+              20.30387,
+              9.66851
+            ],
+            [
+              10.22099,
+              6.53775
+            ]
+          ],
+          [
+            [
+              22.30663,
+              2.02578
+            ],
+            [
+              29.28177,
+              4.14365
+            ],
+            [
+              29.28177,
+              13.53591
+            ],
+            [
+              22.30663,
+              11.41805
+            ]
+          ]
+        ]
+      }
+    },
+    "rear": {
+      "source": "assets/reverse/lobby.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            83.6326,
+            0.73665
+          ],
+          [
+            97.03039,
+            0.73665
+          ],
+          [
+            97.03039,
+            7.2744
+          ],
+          [
+            83.6326,
+            14.82505
+          ]
+        ],
+        [
+          [
+            83.77072,
+            19.06077
+          ],
+          [
+            97.09945,
+            11.69429
+          ],
+          [
+            97.09945,
+            37.93738
+          ],
+          [
+            83.77072,
+            38.12155
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Upper clear transom and unobstructed upper main window; frame rails, plant silhouettes and lower sill excluded.",
+      "shutters": {
+        "material": "assets/panoramic360/materials/aged_steel_shutter.png",
+        "panels": [
+          [
+            [
+              83.28729,
+              0.0
+            ],
+            [
+              97.72099,
+              0.0
+            ],
+            [
+              97.72099,
+              8.10313
+            ],
+            [
+              83.28729,
+              16.20626
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "security": {
+    "front": {
+      "source": "assets/rooms/security.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [
+        {
+          "rect": [
+            42.12707,
+            25.78269,
+            4.97238,
+            5.24862
+          ],
+          "feed": "eastcorridor"
+        },
+        {
+          "rect": [
+            50.89779,
+            25.78269,
+            4.97238,
+            5.24862
+          ],
+          "feed": "ward"
+        },
+        {
+          "rect": [
+            59.53039,
+            25.78269,
+            4.97238,
+            5.24862
+          ],
+          "feed": "room12"
+        },
+        {
+          "rect": [
+            42.12707,
+            35.9116,
+            4.97238,
+            5.24862
+          ],
+          "feed": "laundry"
+        },
+        {
+          "rect": [
+            50.89779,
+            35.9116,
+            4.97238,
+            5.24862
+          ],
+          "feed": "observation"
+        },
+        {
+          "rect": [
+            59.53039,
+            35.9116,
+            4.97238,
+            5.24862
+          ],
+          "feed": "wardnorth"
+        }
+      ],
+      "reviewNote": "Six monitor glass rectangles are inset from the painted CRT bezels. Scanlines and monochrome feeds are local to each screen."
+    },
+    "rear": {
+      "source": "assets/reverse/security.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "ward": {
+    "front": {
+      "source": "assets/rooms/ward.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/ward.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "room12": {
+    "front": {
+      "source": "assets/rooms/room12.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            17.74862,
+            4.41989
+          ],
+          [
+            20.58011,
+            4.41989
+          ],
+          [
+            20.58011,
+            11.1418
+          ],
+          [
+            17.74862,
+            11.1418
+          ]
+        ],
+        [
+          [
+            22.92818,
+            5.24862
+          ],
+          [
+            26.86464,
+            5.89319
+          ],
+          [
+            26.86464,
+            11.97053
+          ],
+          [
+            22.92818,
+            11.69429
+          ]
+        ],
+        [
+          [
+            17.81768,
+            14.5488
+          ],
+          [
+            20.58011,
+            14.5488
+          ],
+          [
+            20.58011,
+            25.2302
+          ],
+          [
+            17.81768,
+            25.2302
+          ]
+        ],
+        [
+          [
+            22.99724,
+            15.19337
+          ],
+          [
+            26.86464,
+            15.19337
+          ],
+          [
+            26.86464,
+            25.50645
+          ],
+          [
+            22.99724,
+            25.50645
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Four true panes; cross rails, vertical mullion, curtain, plant and lower sill excluded."
+    },
+    "rear": {
+      "source": "assets/reverse/room12.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "archive": {
+    "front": {
+      "source": "assets/rooms/archive.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/archive.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "generator": {
+    "front": {
+      "source": "assets/rooms/generator.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/generator.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "observation": {
+    "front": {
+      "source": "assets/rooms/observation.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/observation.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "pharmacy": {
+    "front": {
+      "source": "assets/rooms/pharmacy.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/pharmacy.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "chapel": {
+    "front": {
+      "source": "assets/rooms/chapel.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/chapel.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "morgue": {
+    "front": {
+      "source": "assets/rooms/morgue.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/morgue.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "residence": {
+    "front": {
+      "source": "assets/rooms/residence.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            61.11878,
+            10.58932
+          ],
+          [
+            64.70994,
+            9.48435
+          ],
+          [
+            64.70994,
+            34.99079
+          ],
+          [
+            61.11878,
+            34.80663
+          ]
+        ],
+        [
+          [
+            66.50552,
+            9.2081
+          ],
+          [
+            69.68232,
+            8.19521
+          ],
+          [
+            69.68232,
+            35.17495
+          ],
+          [
+            66.50552,
+            34.99079
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Two tall exterior panes; curtain, central sash, sill and lamp are excluded."
+    },
+    "rear": {
+      "source": "assets/reverse/residence.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "tunnel": {
+    "front": {
+      "source": "assets/rooms/tunnel.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/tunnel.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "boiler": {
+    "front": {
+      "source": "assets/rooms/boiler.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/boiler.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "laundry": {
+    "front": {
+      "source": "assets/rooms/laundry.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/room_views/laundry_rear.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "A real cast-iron stove is painted into this room. Warm fire is restricted to the inset front firebox; frame, towel trolley, walls and floor are protected.",
+      "firebox": [
+        83.3,
+        64.4,
+        4.9,
+        9
+      ]
+    }
+  },
+  "children": {
+    "front": {
+      "source": "assets/rooms/children.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "The right-edge window is mostly occluded by its curtain. No moving snow is painted into this uncertain sliver."
+    },
+    "rear": {
+      "source": "assets/reverse/children.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "records": {
+    "front": {
+      "source": "assets/rooms/records.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/records.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "surgery": {
+    "front": {
+      "source": "assets/rooms/surgery.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/surgery.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "isolation": {
+    "front": {
+      "source": "assets/rooms/isolation.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            57.73481,
+            7.82689
+          ],
+          [
+            59.04696,
+            7.82689
+          ],
+          [
+            59.04696,
+            11.60221
+          ],
+          [
+            57.73481,
+            11.60221
+          ]
+        ],
+        [
+          [
+            57.73481,
+            13.35175
+          ],
+          [
+            59.04696,
+            13.35175
+          ],
+          [
+            59.04696,
+            17.21915
+          ],
+          [
+            57.73481,
+            17.21915
+          ]
+        ],
+        [
+          [
+            57.73481,
+            19.06077
+          ],
+          [
+            59.04696,
+            19.06077
+          ],
+          [
+            59.04696,
+            22.8361
+          ],
+          [
+            57.73481,
+            22.8361
+          ]
+        ],
+        [
+          [
+            59.80663,
+            7.82689
+          ],
+          [
+            60.98066,
+            7.82689
+          ],
+          [
+            60.98066,
+            11.60221
+          ],
+          [
+            59.80663,
+            11.60221
+          ]
+        ],
+        [
+          [
+            59.80663,
+            13.35175
+          ],
+          [
+            60.98066,
+            13.35175
+          ],
+          [
+            60.98066,
+            17.21915
+          ],
+          [
+            59.80663,
+            17.21915
+          ]
+        ],
+        [
+          [
+            59.80663,
+            19.06077
+          ],
+          [
+            60.98066,
+            19.06077
+          ],
+          [
+            60.98066,
+            22.8361
+          ],
+          [
+            59.80663,
+            22.8361
+          ]
+        ],
+        [
+          [
+            61.87845,
+            7.82689
+          ],
+          [
+            63.05249,
+            7.82689
+          ],
+          [
+            63.05249,
+            11.60221
+          ],
+          [
+            61.87845,
+            11.60221
+          ]
+        ],
+        [
+          [
+            61.87845,
+            13.35175
+          ],
+          [
+            63.05249,
+            13.35175
+          ],
+          [
+            63.05249,
+            17.21915
+          ],
+          [
+            61.87845,
+            17.21915
+          ]
+        ],
+        [
+          [
+            61.87845,
+            19.06077
+          ],
+          [
+            63.05249,
+            19.06077
+          ],
+          [
+            63.05249,
+            22.8361
+          ],
+          [
+            61.87845,
+            22.8361
+          ]
+        ],
+        [
+          [
+            63.95028,
+            7.82689
+          ],
+          [
+            65.05525,
+            7.82689
+          ],
+          [
+            65.05525,
+            11.60221
+          ],
+          [
+            63.95028,
+            11.60221
+          ]
+        ],
+        [
+          [
+            63.95028,
+            13.35175
+          ],
+          [
+            65.05525,
+            13.35175
+          ],
+          [
+            65.05525,
+            17.21915
+          ],
+          [
+            63.95028,
+            17.21915
+          ]
+        ],
+        [
+          [
+            63.95028,
+            19.06077
+          ],
+          [
+            65.05525,
+            19.06077
+          ],
+          [
+            65.05525,
+            22.8361
+          ],
+          [
+            63.95028,
+            22.8361
+          ]
+        ],
+        [
+          [
+            65.95304,
+            7.82689
+          ],
+          [
+            67.12707,
+            7.82689
+          ],
+          [
+            67.12707,
+            11.60221
+          ],
+          [
+            65.95304,
+            11.60221
+          ]
+        ],
+        [
+          [
+            65.95304,
+            13.35175
+          ],
+          [
+            67.12707,
+            13.35175
+          ],
+          [
+            67.12707,
+            17.21915
+          ],
+          [
+            65.95304,
+            17.21915
+          ]
+        ],
+        [
+          [
+            65.95304,
+            19.06077
+          ],
+          [
+            67.12707,
+            19.06077
+          ],
+          [
+            67.12707,
+            22.8361
+          ],
+          [
+            65.95304,
+            22.8361
+          ]
+        ],
+        [
+          [
+            68.02486,
+            7.82689
+          ],
+          [
+            69.12983,
+            7.82689
+          ],
+          [
+            69.12983,
+            11.60221
+          ],
+          [
+            68.02486,
+            11.60221
+          ]
+        ],
+        [
+          [
+            68.02486,
+            13.35175
+          ],
+          [
+            69.12983,
+            13.35175
+          ],
+          [
+            69.12983,
+            17.21915
+          ],
+          [
+            68.02486,
+            17.21915
+          ]
+        ],
+        [
+          [
+            68.02486,
+            19.06077
+          ],
+          [
+            69.12983,
+            19.06077
+          ],
+          [
+            69.12983,
+            22.8361
+          ],
+          [
+            68.02486,
+            22.8361
+          ]
+        ],
+        [
+          [
+            70.16575,
+            7.82689
+          ],
+          [
+            71.20166,
+            7.82689
+          ],
+          [
+            71.20166,
+            11.60221
+          ],
+          [
+            70.16575,
+            11.60221
+          ]
+        ],
+        [
+          [
+            70.16575,
+            13.35175
+          ],
+          [
+            71.20166,
+            13.35175
+          ],
+          [
+            71.20166,
+            17.21915
+          ],
+          [
+            70.16575,
+            17.21915
+          ]
+        ],
+        [
+          [
+            70.16575,
+            19.06077
+          ],
+          [
+            71.20166,
+            19.06077
+          ],
+          [
+            71.20166,
+            22.8361
+          ],
+          [
+            70.16575,
+            22.8361
+          ]
+        ],
+        [
+          [
+            72.16851,
+            7.82689
+          ],
+          [
+            73.13536,
+            7.82689
+          ],
+          [
+            73.13536,
+            11.60221
+          ],
+          [
+            72.16851,
+            11.60221
+          ]
+        ],
+        [
+          [
+            72.16851,
+            13.35175
+          ],
+          [
+            73.13536,
+            13.35175
+          ],
+          [
+            73.13536,
+            17.21915
+          ],
+          [
+            72.16851,
+            17.21915
+          ]
+        ],
+        [
+          [
+            72.16851,
+            19.06077
+          ],
+          [
+            73.13536,
+            19.06077
+          ],
+          [
+            73.13536,
+            22.8361
+          ],
+          [
+            72.16851,
+            22.8361
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Twenty-four inset cells exclude all horizontal/vertical metal bars, wall, curtain and bed."
+    },
+    "rear": {
+      "source": "assets/reverse/isolation.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "specimen": {
+    "front": {
+      "source": "assets/rooms/specimen.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/specimen.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "powercontrol": {
+    "front": {
+      "source": "assets/rooms/powercontrol.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/powercontrol.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "stafflounge": {
+    "front": {
+      "source": "assets/rooms/stafflounge.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            49.79282,
+            20.99448
+          ],
+          [
+            58.01105,
+            20.99448
+          ],
+          [
+            58.01105,
+            24.95396
+          ],
+          [
+            49.79282,
+            24.95396
+          ]
+        ],
+        [
+          [
+            56.62983,
+            26.24309
+          ],
+          [
+            58.01105,
+            26.24309
+          ],
+          [
+            58.01105,
+            31.76796
+          ],
+          [
+            56.62983,
+            31.76796
+          ]
+        ],
+        [
+          [
+            59.80663,
+            21.08656
+          ],
+          [
+            60.63536,
+            21.08656
+          ],
+          [
+            60.63536,
+            33.9779
+          ],
+          [
+            59.80663,
+            33.9779
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Only clear glass below the existing blind and beside the plants; all leaves, pots, blind slats and sill are protected."
+    },
+    "rear": {
+      "source": "assets/room_views/stafflounge_rear.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [
+        {
+          "rect": [
+            24.4,
+            24.6,
+            5.8,
+            6.0
+          ],
+          "feed": null
+        }
+      ],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "lift": {
+    "front": {
+      "source": "assets/rooms/lift.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/lift.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "coldstore": {
+    "front": {
+      "source": "assets/rooms/coldstore.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/coldstore.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "eastcorridor": {
+    "front": {
+      "source": "assets/rooms/eastcorridor.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow.",
+      "sprinkler": {
+        "origin": [
+          75,
+          7
+        ],
+        "width": 12,
+        "length": 48
+      }
+    },
+    "rear": {
+      "source": "assets/reverse/eastcorridor.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "isoward": {
+    "front": {
+      "source": "assets/rooms/isoward.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/isoward.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  },
+  "wardnorth": {
+    "front": {
+      "source": "assets/rooms/wardnorth.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    },
+    "rear": {
+      "source": "assets/reverse/wardnorth.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            15.12431,
+            22.46777
+          ],
+          [
+            21.06354,
+            22.46777
+          ],
+          [
+            21.06354,
+            31.86004
+          ],
+          [
+            15.12431,
+            31.86004
+          ]
+        ],
+        [
+          [
+            15.12431,
+            34.99079
+          ],
+          [
+            20.99448,
+            34.99079
+          ],
+          [
+            20.99448,
+            43.73849
+          ],
+          [
+            15.12431,
+            43.73849
+          ]
+        ],
+        [
+          [
+            29.62707,
+            22.46777
+          ],
+          [
+            35.49724,
+            22.46777
+          ],
+          [
+            35.49724,
+            31.95212
+          ],
+          [
+            29.62707,
+            31.95212
+          ]
+        ],
+        [
+          [
+            29.69613,
+            34.99079
+          ],
+          [
+            35.42818,
+            34.99079
+          ],
+          [
+            35.42818,
+            43.73849
+          ],
+          [
+            29.69613,
+            43.73849
+          ]
+        ],
+        [
+          [
+            74.93094,
+            22.46777
+          ],
+          [
+            81.00829,
+            22.46777
+          ],
+          [
+            81.00829,
+            31.86004
+          ],
+          [
+            74.93094,
+            31.86004
+          ]
+        ],
+        [
+          [
+            74.93094,
+            34.99079
+          ],
+          [
+            81.00829,
+            34.99079
+          ],
+          [
+            81.00829,
+            43.73849
+          ],
+          [
+            74.93094,
+            43.73849
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "The six actual glass panes in the three sashes. Catch, sash rails, walls, trolley, door and radiator excluded.",
+      "windowGlass": [
+        {
+          "closed": [
+            [
+              [
+                15.12431,
+                22.46777
+              ],
+              [
+                21.06354,
+                22.46777
+              ],
+              [
+                21.06354,
+                31.86004
+              ],
+              [
+                15.12431,
+                31.86004
+              ]
+            ],
+            [
+              [
+                15.12431,
+                34.99079
+              ],
+              [
+                20.99448,
+                34.99079
+              ],
+              [
+                20.99448,
+                43.73849
+              ],
+              [
+                15.12431,
+                43.73849
+              ]
+            ]
+          ],
+          "open": [
+            [
+              [
+                15.124309392265193,
+                22.467771639042358
+              ],
+              [
+                21.06353591160221,
+                22.467771639042358
+              ],
+              [
+                21.06353591160221,
+                27.348066298342545
+              ],
+              [
+                15.124309392265193,
+                27.348066298342545
+              ]
+            ],
+            [
+              [
+                15.124309392265193,
+                32.22836095764273
+              ],
+              [
+                21.06353591160221,
+                32.22836095764273
+              ],
+              [
+                21.06353591160221,
+                43.73848987108656
+              ],
+              [
+                15.124309392265193,
+                43.73848987108656
+              ]
+            ]
+          ]
+        },
+        {
+          "closed": [
+            [
+              [
+                29.62707,
+                22.46777
+              ],
+              [
+                35.49724,
+                22.46777
+              ],
+              [
+                35.49724,
+                31.95212
+              ],
+              [
+                29.62707,
+                31.95212
+              ]
+            ],
+            [
+              [
+                29.69613,
+                34.99079
+              ],
+              [
+                35.42818,
+                34.99079
+              ],
+              [
+                35.42818,
+                43.73849
+              ],
+              [
+                29.69613,
+                43.73849
+              ]
+            ]
+          ],
+          "open": [
+            [
+              [
+                29.62707182320442,
+                22.467771639042358
+              ],
+              [
+                35.49723756906077,
+                22.467771639042358
+              ],
+              [
+                35.49723756906077,
+                27.348066298342545
+              ],
+              [
+                29.62707182320442,
+                27.348066298342545
+              ]
+            ],
+            [
+              [
+                29.62707182320442,
+                32.22836095764273
+              ],
+              [
+                35.49723756906077,
+                32.22836095764273
+              ],
+              [
+                35.49723756906077,
+                43.73848987108656
+              ],
+              [
+                29.62707182320442,
+                43.73848987108656
+              ]
+            ]
+          ]
+        },
+        {
+          "closed": [
+            [
+              [
+                74.93094,
+                22.46777
+              ],
+              [
+                81.00829,
+                22.46777
+              ],
+              [
+                81.00829,
+                31.86004
+              ],
+              [
+                74.93094,
+                31.86004
+              ]
+            ],
+            [
+              [
+                74.93094,
+                34.99079
+              ],
+              [
+                81.00829,
+                34.99079
+              ],
+              [
+                81.00829,
+                43.73849
+              ],
+              [
+                74.93094,
+                43.73849
+              ]
+            ]
+          ],
+          "open": [
+            [
+              [
+                74.93093922651933,
+                22.467771639042358
+              ],
+              [
+                81.00828729281768,
+                22.467771639042358
+              ],
+              [
+                81.00828729281768,
+                27.348066298342545
+              ],
+              [
+                74.93093922651933,
+                27.348066298342545
+              ]
+            ],
+            [
+              [
+                74.93093922651933,
+                32.22836095764273
+              ],
+              [
+                81.00828729281768,
+                32.22836095764273
+              ],
+              [
+                81.00828729281768,
+                43.73848987108656
+              ],
+              [
+                74.93093922651933,
+                43.73848987108656
+              ]
+            ]
+          ]
+        }
+      ],
+      "windowState": {
+        "asset": "assets/states/wardnorth_windows_open.webp",
+        "masks": [
+          [
+            [
+              [
+                14.433701657458563,
+                21.54696132596685
+              ],
+              [
+                21.616022099447513,
+                21.54696132596685
+              ],
+              [
+                21.616022099447513,
+                45.21178637200737
+              ],
+              [
+                14.433701657458563,
+                45.21178637200737
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                29.005524861878452,
+                21.54696132596685
+              ],
+              [
+                35.98066298342542,
+                21.54696132596685
+              ],
+              [
+                35.98066298342542,
+                45.21178637200737
+              ],
+              [
+                29.005524861878452,
+                45.21178637200737
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                74.37845303867402,
+                21.54696132596685
+              ],
+              [
+                81.56077348066299,
+                21.54696132596685
+              ],
+              [
+                81.56077348066299,
+                45.21178637200737
+              ],
+              [
+                74.37845303867402,
+                45.21178637200737
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "wardservice": {
+    "front": {
+      "source": "assets/rooms/wardservice.webp",
+      "reviewed": true,
+      "glass": [
+        [
+          [
+            33.42541436464088,
+            13.627992633517497
+          ],
+          [
+            33.83977900552486,
+            13.627992633517497
+          ],
+          [
+            33.83977900552486,
+            20.165745856353592
+          ],
+          [
+            33.42541436464088,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            33.42541436464088,
+            22.007366482504604
+          ],
+          [
+            33.83977900552486,
+            22.007366482504604
+          ],
+          [
+            33.83977900552486,
+            29.097605893186003
+          ],
+          [
+            33.42541436464088,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            34.530386740331494,
+            13.627992633517497
+          ],
+          [
+            35.01381215469613,
+            13.627992633517497
+          ],
+          [
+            35.01381215469613,
+            20.165745856353592
+          ],
+          [
+            34.530386740331494,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            34.530386740331494,
+            22.007366482504604
+          ],
+          [
+            35.01381215469613,
+            22.007366482504604
+          ],
+          [
+            35.01381215469613,
+            29.097605893186003
+          ],
+          [
+            34.530386740331494,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            35.704419889502766,
+            13.627992633517497
+          ],
+          [
+            36.11878453038674,
+            13.627992633517497
+          ],
+          [
+            36.11878453038674,
+            20.165745856353592
+          ],
+          [
+            35.704419889502766,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            35.704419889502766,
+            22.007366482504604
+          ],
+          [
+            36.11878453038674,
+            22.007366482504604
+          ],
+          [
+            36.11878453038674,
+            29.097605893186003
+          ],
+          [
+            35.704419889502766,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            36.87845303867403,
+            13.627992633517497
+          ],
+          [
+            37.22375690607735,
+            13.627992633517497
+          ],
+          [
+            37.22375690607735,
+            20.165745856353592
+          ],
+          [
+            36.87845303867403,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            36.87845303867403,
+            22.007366482504604
+          ],
+          [
+            37.22375690607735,
+            22.007366482504604
+          ],
+          [
+            37.22375690607735,
+            29.097605893186003
+          ],
+          [
+            36.87845303867403,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            36.87845303867403,
+            31.031307550644566
+          ],
+          [
+            37.22375690607735,
+            31.031307550644566
+          ],
+          [
+            37.22375690607735,
+            35.17495395948435
+          ],
+          [
+            36.87845303867403,
+            35.17495395948435
+          ]
+        ],
+        [
+          [
+            37.98342541436464,
+            13.627992633517497
+          ],
+          [
+            38.39779005524862,
+            13.627992633517497
+          ],
+          [
+            38.39779005524862,
+            20.165745856353592
+          ],
+          [
+            37.98342541436464,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            37.98342541436464,
+            22.007366482504604
+          ],
+          [
+            38.39779005524862,
+            22.007366482504604
+          ],
+          [
+            38.39779005524862,
+            29.097605893186003
+          ],
+          [
+            37.98342541436464,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            37.98342541436464,
+            31.031307550644566
+          ],
+          [
+            38.39779005524862,
+            31.031307550644566
+          ],
+          [
+            38.39779005524862,
+            35.17495395948435
+          ],
+          [
+            37.98342541436464,
+            35.17495395948435
+          ]
+        ],
+        [
+          [
+            39.15745856353591,
+            13.627992633517497
+          ],
+          [
+            39.571823204419886,
+            13.627992633517497
+          ],
+          [
+            39.571823204419886,
+            20.165745856353592
+          ],
+          [
+            39.15745856353591,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            39.15745856353591,
+            22.007366482504604
+          ],
+          [
+            39.571823204419886,
+            22.007366482504604
+          ],
+          [
+            39.571823204419886,
+            29.097605893186003
+          ],
+          [
+            39.15745856353591,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            39.15745856353591,
+            31.031307550644566
+          ],
+          [
+            39.571823204419886,
+            31.031307550644566
+          ],
+          [
+            39.571823204419886,
+            35.17495395948435
+          ],
+          [
+            39.15745856353591,
+            35.17495395948435
+          ]
+        ],
+        [
+          [
+            40.331491712707184,
+            13.627992633517497
+          ],
+          [
+            40.74585635359116,
+            13.627992633517497
+          ],
+          [
+            40.74585635359116,
+            20.165745856353592
+          ],
+          [
+            40.331491712707184,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            40.331491712707184,
+            22.007366482504604
+          ],
+          [
+            40.74585635359116,
+            22.007366482504604
+          ],
+          [
+            40.74585635359116,
+            29.097605893186003
+          ],
+          [
+            40.331491712707184,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            40.331491712707184,
+            31.031307550644566
+          ],
+          [
+            40.74585635359116,
+            31.031307550644566
+          ],
+          [
+            40.74585635359116,
+            35.17495395948435
+          ],
+          [
+            40.331491712707184,
+            35.17495395948435
+          ]
+        ],
+        [
+          [
+            41.50552486187845,
+            13.627992633517497
+          ],
+          [
+            41.91988950276243,
+            13.627992633517497
+          ],
+          [
+            41.91988950276243,
+            20.165745856353592
+          ],
+          [
+            41.50552486187845,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            41.50552486187845,
+            22.007366482504604
+          ],
+          [
+            41.91988950276243,
+            22.007366482504604
+          ],
+          [
+            41.91988950276243,
+            29.097605893186003
+          ],
+          [
+            41.50552486187845,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            41.50552486187845,
+            31.031307550644566
+          ],
+          [
+            41.91988950276243,
+            31.031307550644566
+          ],
+          [
+            41.91988950276243,
+            35.17495395948435
+          ],
+          [
+            41.50552486187845,
+            35.17495395948435
+          ]
+        ],
+        [
+          [
+            42.67955801104972,
+            13.627992633517497
+          ],
+          [
+            43.02486187845304,
+            13.627992633517497
+          ],
+          [
+            43.02486187845304,
+            20.165745856353592
+          ],
+          [
+            42.67955801104972,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            42.67955801104972,
+            22.007366482504604
+          ],
+          [
+            43.02486187845304,
+            22.007366482504604
+          ],
+          [
+            43.02486187845304,
+            29.097605893186003
+          ],
+          [
+            42.67955801104972,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            42.67955801104972,
+            31.031307550644566
+          ],
+          [
+            43.02486187845304,
+            31.031307550644566
+          ],
+          [
+            43.02486187845304,
+            35.17495395948435
+          ],
+          [
+            42.67955801104972,
+            35.17495395948435
+          ]
+        ],
+        [
+          [
+            43.784530386740336,
+            13.627992633517497
+          ],
+          [
+            44.129834254143645,
+            13.627992633517497
+          ],
+          [
+            44.129834254143645,
+            20.165745856353592
+          ],
+          [
+            43.784530386740336,
+            20.165745856353592
+          ]
+        ],
+        [
+          [
+            43.784530386740336,
+            22.007366482504604
+          ],
+          [
+            44.129834254143645,
+            22.007366482504604
+          ],
+          [
+            44.129834254143645,
+            29.097605893186003
+          ],
+          [
+            43.784530386740336,
+            29.097605893186003
+          ]
+        ],
+        [
+          [
+            43.784530386740336,
+            31.031307550644566
+          ],
+          [
+            44.129834254143645,
+            31.031307550644566
+          ],
+          [
+            44.129834254143645,
+            35.17495395948435
+          ],
+          [
+            43.784530386740336,
+            35.17495395948435
+          ]
+        ]
+      ],
+      "screens": [],
+      "reviewNote": "Confirmed exterior trees behind a barred back-wall window. Twenty-seven narrow inset cells protect each vertical/horizontal bar, the outer frame, sill, radiator and lower-left medical trolley/tube silhouettes. The indoor doors are on separate side walls."
+    },
+    "rear": {
+      "source": "assets/reverse/wardservice.webp",
+      "reviewed": true,
+      "glass": [],
+      "screens": [],
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+    }
+  }
+}

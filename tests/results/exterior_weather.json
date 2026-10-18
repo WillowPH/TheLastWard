@@ -1,0 +1,219 @@
+{
+  "exterior_snow": [
+    {
+      "room": "lobby",
+      "painted": 61,
+      "outside": 0,
+      "changed": 121,
+      "contaminated": []
+    },
+    {
+      "room": "security",
+      "painted": 181,
+      "outside": 0,
+      "changed": 350,
+      "contaminated": []
+    },
+    {
+      "room": "room12",
+      "painted": 120,
+      "outside": 0,
+      "changed": 242,
+      "contaminated": []
+    },
+    {
+      "room": "residence",
+      "painted": 143,
+      "outside": 0,
+      "changed": 294,
+      "contaminated": []
+    },
+    {
+      "room": "children",
+      "painted": 277,
+      "outside": 0,
+      "changed": 551,
+      "contaminated": []
+    },
+    {
+      "room": "stafflounge",
+      "painted": 64,
+      "outside": 0,
+      "changed": 123,
+      "contaminated": []
+    },
+    {
+      "room": "wardnorth",
+      "painted": 135,
+      "outside": 0,
+      "changed": 285,
+      "contaminated": []
+    }
+  ],
+  "shutters": {
+    "painted": 11211,
+    "outside": 0,
+    "snow": false
+  },
+  "protected_source_points": {
+    "lobby": [
+      [
+        173,
+        307
+      ],
+      [
+        279,
+        346
+      ],
+      [
+        335,
+        367
+      ],
+      [
+        220,
+        480
+      ],
+      [
+        380,
+        500
+      ],
+      [
+        512,
+        400
+      ]
+    ],
+    "security": [
+      [
+        348,
+        340
+      ],
+      [
+        285,
+        420
+      ],
+      [
+        255,
+        550
+      ],
+      [
+        280,
+        600
+      ],
+      [
+        500,
+        420
+      ]
+    ],
+    "room12": [
+      [
+        100,
+        320
+      ],
+      [
+        155,
+        367
+      ],
+      [
+        90,
+        480
+      ],
+      [
+        110,
+        539
+      ],
+      [
+        360,
+        480
+      ]
+    ],
+    "residence": [
+      [
+        286,
+        420
+      ],
+      [
+        219,
+        300
+      ],
+      [
+        345,
+        505
+      ],
+      [
+        1495,
+        393
+      ],
+      [
+        1565,
+        440
+      ]
+    ],
+    "children": [
+      [
+        149,
+        400
+      ],
+      [
+        275,
+        450
+      ],
+      [
+        250,
+        321
+      ],
+      [
+        110,
+        570
+      ],
+      [
+        500,
+        420
+      ]
+    ],
+    "stafflounge": [
+      [
+        105,
+        400
+      ],
+      [
+        178,
+        425
+      ],
+      [
+        240,
+        465
+      ],
+      [
+        310,
+        480
+      ],
+      [
+        650,
+        440
+      ]
+    ],
+    "wardnorth": [
+      [
+        108,
+        400
+      ],
+      [
+        107,
+        428
+      ],
+      [
+        245,
+        432
+      ],
+      [
+        371,
+        476
+      ],
+      [
+        480,
+        450
+      ]
+    ]
+  },
+  "javascript_errors": []
+}

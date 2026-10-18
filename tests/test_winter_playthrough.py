@@ -13,15 +13,31 @@ with sync_playwright() as p:
  page=context.new_page();page.set_default_timeout(6500)
  errors=[];page.on('pageerror',lambda error:errors.append(str(error)))
  def ev(code,arg=None):return page.evaluate(code,arg)
+ def aim_point(point_id):
+  """Use a native side-arrow click to expose the authored object's full view."""
+  if page.locator('#m .md').count():close()
+  page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy&&!WardWinter.travelling')
+  point=ev('id=>WardWinter.orbit.points().find(p=>p.id===id)',point_id)
+  if not point and point_id=='fixture:dropped-light':point={'view':'front'}
+  assert point,('Missing authored mouse target',ev('S.room'),point_id)
+  if ev('S.roomView')!=point['view']:
+   page.get_by_role('button',name='Look right',exact=True).click()
+   page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
+  assert ev('S.roomView')==point['view'],('Side arrow did not expose requested view',point_id)
+ def click_visible(selector):
+  # A live enemy may cover part of a visible object. Click a genuinely exposed
+  # part of the target, exactly as a player can; never click through the enemy.
+  point=ev('''selector=>{const node=document.querySelector(selector);if(!node)return null;const r=node.getBoundingClientRect();for(const [u,v]of [[.5,.5],[.9,.1],[.1,.1],[.9,.9],[.1,.9],[.9,.5],[.1,.5],[.5,.1],[.5,.9]]){const x=r.left+r.width*u,y=r.top+r.height*v;if(document.elementFromPoint(x,y)===node)return {x,y};}return null;}''',selector)
+  assert point,('No unobstructed mouse target',ev('S.room'),selector,ev('({pursuer:S.pursuer,combat:cm,modal:document.querySelector("#m .md")?.innerText})'))
+  page.mouse.click(point['x'],point['y'])
  def close():
   for _ in range(12):
    if not page.locator('#m .md').count():
     if ev('!!S.sceneFocus'):ev('wardCloseFocus()')
     if ev('S.room==="eastcorridor"&&S.f.flashlightDropped'):
-     if ev('S.sceneView')!='front':ev("WardWinter.orbit.face('front')")
-     page.wait_for_function('WardWinter.panoramaRenderer().loaded');page.get_by_role('combobox',name='Look at a point of interest').select_option('fixture:dropped-light');page.wait_for_function('!WardWinter.orbit.busy');page.get_by_role('button',name='Recover dropped flashlight',exact=True).click()
+     aim_point('fixture:dropped-light');page.get_by_role('button',name='Recover dropped flashlight',exact=True).click()
     if ev('S.room==="eastcorridor"&&S.f.sprinklerTriggered&&!S.f.sprinklerStopped'):
-     ev("WardWinter.reveal(WardScene.sites().find(f=>f.id==='valve').rect)");page.locator('[data-fixture=valve]').click();page.locator("button[onclick=\"wardFixtureAction('staffSprinkler')\"]").click()
+     aim_point('fixture:valve');page.locator('[data-fixture=valve]').click();page.locator("button[onclick=\"wardFixtureAction('staffSprinkler')\"]").click()
     return
    if ev('!!S.f.pursuerEncounter'):ev("escapePursuer('retreat')")
    elif ev('!!S.hallCombat'):ev("wardResolveFalseEncounter('hold')")
@@ -41,10 +57,9 @@ with sync_playwright() as p:
    path=ev('''target=>{const q=[[S.room]],seen=new Set([S.room]);while(q.length){const p=q.shift(),r=p.at(-1);if(r===target)return p;for(const [id,d]of Object.entries(D)){const to=d.a===r?d.b:d.b===r?d.a:null;if(!to||seen.has(to)||!(doorOpen(id)||(d.need&&has(d.need))))continue;seen.add(to);q.push([...p,to]);}}return [];}''',target)
    assert len(path)>1,(ev('S.room'),target,ev('S.inv'),ev('WardChapter.requirements()'))
    destination=path[1];edge=ev('to=>WardNavigation.edge(S.room,to)',destination)
-   page.wait_for_function('WardWinter.panoramaRenderer()?.loaded')
-   page.get_by_role('combobox',name='Look at a point of interest').select_option('door:'+edge)
-   page.wait_for_function('!WardWinter.orbit.busy')
-   page.locator('[data-destination="'+destination+'"]').click()
+   page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
+   aim_point('door:'+edge)
+   click_visible('[data-destination="'+destination+'"]')
    skip=page.get_by_role('button',name='Skip transition',exact=True)
    ev("[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Skip transition')?.click()")
    page.wait_for_timeout(360)
@@ -56,10 +71,9 @@ with sync_playwright() as p:
    if ev('!S.lightOn'):ev('toggleLight()')
   f=ev('id=>{const f=WardScene.sites().find(f=>f.objects.some(o=>o[0]===id));return f?{id:f.id,view:f.view||"front",rect:f.rect}:null;}',id)
   assert f,('No fixture',ev('S.room'),id)
-  page.wait_for_function('WardWinter.panoramaRenderer()?.loaded')
-  page.get_by_role('combobox',name='Look at a point of interest').select_option('fixture:'+f['id'])
-  page.wait_for_function('!WardWinter.orbit.busy')
-  page.locator('[data-fixture="'+f['id']+'"]').click()
+  page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
+  aim_point('fixture:'+f['id'])
+  click_visible('[data-fixture="'+f['id']+'"]')
   button=page.locator('button[onclick="wardFixtureAction(\''+id+'\')"]')
   if button.count():button.click()
  def take(id,name):
@@ -101,6 +115,9 @@ with sync_playwright() as p:
   for c in ['A','B','C','D']:
    page.get_by_role('button',name='Lead '+c,exact=False).click();page.get_by_role('button',name='Terminal '+c,exact=True).click()
   close();use('pan');close();assert ev('!!S.f.power');note(seed+' power restored');store(['Maintenance Tools','Archive Key']);use('charger');close()
+  # Collect the Archives interlock plug while this early route is still clear.
+  # Returning for it after Subject X appears can leave the shelf physically blocked.
+  move('archive');take('elevatorFuseA','Rook Interlock Fuse');move('generator')
   move('stafflounge');use('harness');close();use('shaw');close();use('loungeNote');close();assert ev('carryLimit()===12')
   move('residence');use('dia');close();use('brk')
   for color in ev('S.puzzles.breaker'):page.get_by_role('button',name=color,exact=True).click()
@@ -138,4 +155,4 @@ with sync_playwright() as p:
  assert not errors,errors
  browser.close()
 (OUT/'winter_progression.json').write_text(json.dumps({'runs':seeds,'transport':URL,'multi_file':True,'trace':report},indent=2))
-print('PASS: two complete all-27-room routes using earned progression and actual controls.')
+print('PASS: two complete all-27-room routes using earned progression, native side-arrow turns and ordinary object clicks.')

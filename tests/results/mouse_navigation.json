@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "no bottom room-hint or POI control strip",
+    "mouse drag rotates yaw and pitch, without activating the object underneath",
+    "mouse-only side arrow turns exactly 90 degrees and unlocks",
+    "ordinary object click opens the portraits without moving or zooming"
+  ],
+  "javascript_errors": []
+}

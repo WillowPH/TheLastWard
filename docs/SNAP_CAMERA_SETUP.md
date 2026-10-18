@@ -1,3 +1,6 @@
+> Historical spherical-view controller. The current user-approved build uses native
+> room-facing views; see [ROOM_VIEW_SETUP.md](ROOM_VIEW_SETUP.md).
+
 # Click-to-snap camera setup
 
 The project uses JavaScript/WebGL. The optimized controller is

@@ -1,47 +1,48 @@
 # The Last Ward — Chapter 1
 
-A multi-file browser survival horror game set in Blackridge Medical Complex, 1998.
+A multi-file survival horror game set in Blackridge Medical Complex, 1998.
 Chapter 1 ends at the service elevator; Chapter 2 is not playable.
 
 ## Play
 
-Download `downloads/The_Last_Ward_Chapter_1_Project.zip` and extract the entire folder.
-Windows 10/11: double-click **`START_GAME.exe`** (or `START_GAME.bat`). No Python
-installation is needed. Keep the EXE beside the extracted game files.
-macOS/Linux: `python3 start_game.py` (Python 3 standard library).
-A modern browser with WebGL enabled is required. Do not open `index.html` directly.
-Keep the launcher terminal open. No external internet connection is required.
-Start a new game: this build has a new save namespace, preserving earlier saves.
+Extract the entire `The_Last_Ward_Chapter_1_Project.zip` folder.
+Windows 10/11: double-click **START_GAME.exe** or **START_GAME.bat**. No Python
+installation or external internet connection is needed. Keep the launcher window open.
+macOS/Linux: `python3 start_game.py` (Python 3 standard library only).
+Use the same local port/browser for saved games. Start a new game for this build;
+older builds' saves are preserved in their own namespaces.
 
-Use the lower **Look At** direction buttons, named points or object/door selector.
-A/D and arrow keys turn 90°. Clicking an object examines it without moving the camera.
-Hints (Subtle/Strong), smooth glides, speed, motion and flashes are in **Options**.
-Map travel is adjacent only. Door labels name required keys or clearance.
+**Click objects to examine them. Drag sideways or click a side arrow to see the
+other side of the room. No keyboard is needed.** Hints (Subtle/Strong), motion and
+flashes are in Options. The right-side flashlight button shows its battery percentage.
+Inventory → Manage → Inspect exposes confirmed Discard for supplies, keepsakes and
+spent keys/tools. Items needed for unfinished progression remain protected.
 
-## This correction pass
+## Visual correction
 
-- 27 replacement continuous equirectangular room images, each projected on a spherical
-  WebGL view. No four-image strip or Turn Around button. These are painted 2048×1024
-  panoramas, not walkable modeled 3D rooms or native 4K artwork.
-- Shortest-path, frame-independent click-to-snap camera; exact arrival and input lock
-  while moving. Ordinary inspection keeps the same canvas and camera pose.
-- Hand-authored room targets, real return-door orientation, persistent item removal,
-  usable portraits, single window prompts, completed phone/read state and item icons.
-- Exterior snow clipped to actual glazing; enclosed corridors have no outdoor weather.
-  Real shutter and stove artwork replaces schematic lines. Local CRT feeds and scanlines
-  remain within the glass. Interior light flicker respects the flashes option.
-- Three-column reference layout, fixed paginated narration/thought cards, architectural
-  floor plan with physical shared doors, right-side status and icon inventory.
+The user chose sharper room-facing artwork over the limited-resolution 360° format.
+The active renderer uses **54 distinct 1448×1086 native room paintings** across 27 rooms.
+Each complete painting fits inside the scene without cropping, stretching or digital
+zoom. Mouse turns use a brief fade between authored views; no images are joined into
+a pretend continuous panorama. This is game artwork, not native 4K or walkable 3D.
 
-Gameplay includes finite noise-responsive enemies, Subject X in the later chapter,
-confirmed traps, once-only story incidents and cold/sprinkler hazards, lighter/fluid,
-handwritten files, generator power/outages and four named elevator interlocks.
-See [design notes](docs/DESIGN_NOTES.md) for the retained story requirements.
+- Neutral charcoal HUD, warm grey text, brass rules and amber Thoughts follow the
+  supplied three-column reference. Green is reserved for physical health feedback.
+- No bottom navigation/hint strip or required keyboard controls. Ordinary inspection
+  preserves the same image and scale. Side arrows sit outside the artwork and targets.
+- Corrected lobby furniture barricade, integrated laundry stove and actual 1998 CRT.
+  Shutters fit real glass, with local snow beyond windows and scanlines inside screens.
+- Practical light, power, key and supply requirements appear in Thoughts. Story and
+  puzzle dialogs retain their own presentation. Long narration uses pages, not scrollbars.
+
+Finite noise-responsive enemies, later Subject X pursuit, confirmed traps, once-only
+story/cold/sprinkler incidents, handwritten records, generator outages, lighter/fluid,
+shared access keys and four elevator interlocks remain in Chapter 1.
 
 ## Development
 
 Run `python3 start_game.py --no-browser --port 8010`.
-Run `python3 tools/build_panorama_world.py` after editing authored room metadata.
-See [camera setup](docs/SNAP_CAMERA_SETUP.md), [implementation](IMPLEMENTATION.md),
-[art rules](docs/PANORAMA_ART_RULES.md), and [validation](VALIDATION.md).
-The delivery preserves separate code, assets, audio, fonts, data and documentation.
+Author native targets in `data/room_views.json`, then run
+`python3 tools/build_room_views.py`. Effects use `data/room_view_effects.json`.
+See [view setup](docs/ROOM_VIEW_SETUP.md), [implementation](IMPLEMENTATION.md),
+[design notes](docs/DESIGN_NOTES.md) and [verified checks](VALIDATION.md).

@@ -1,0 +1,380 @@
+{
+  "views": [
+    {
+      "room": "lobby",
+      "view": "front",
+      "painted": 172,
+      "outside": 0
+    },
+    {
+      "room": "lobby",
+      "view": "rear",
+      "painted": 226,
+      "outside": 0
+    },
+    {
+      "room": "security",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "security",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "ward",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "ward",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "room12",
+      "view": "front",
+      "painted": 122,
+      "outside": 0
+    },
+    {
+      "room": "room12",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "archive",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "archive",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "generator",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "generator",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "observation",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "observation",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "pharmacy",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "pharmacy",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "chapel",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "chapel",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "morgue",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "morgue",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "residence",
+      "view": "front",
+      "painted": 194,
+      "outside": 0
+    },
+    {
+      "room": "residence",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "tunnel",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "tunnel",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "boiler",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "boiler",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "laundry",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "laundry",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "children",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "children",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "records",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "records",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "surgery",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "surgery",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "isolation",
+      "view": "front",
+      "painted": 182,
+      "outside": 0
+    },
+    {
+      "room": "isolation",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "specimen",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "specimen",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "powercontrol",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "powercontrol",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "stafflounge",
+      "view": "front",
+      "painted": 52,
+      "outside": 0
+    },
+    {
+      "room": "stafflounge",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "lift",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "lift",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "coldstore",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "coldstore",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "eastcorridor",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "eastcorridor",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "isoward",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "isoward",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "wardnorth",
+      "view": "front",
+      "painted": 0,
+      "outside": 0
+    },
+    {
+      "room": "wardnorth",
+      "view": "rear",
+      "painted": 370,
+      "outside": 0
+    },
+    {
+      "room": "wardservice",
+      "view": "front",
+      "painted": 196,
+      "outside": 0
+    },
+    {
+      "room": "wardservice",
+      "view": "rear",
+      "painted": 0,
+      "outside": 0
+    }
+  ],
+  "window_states": [
+    {
+      "closed": [
+        false,
+        false,
+        false
+      ],
+      "rail_pixel_alpha": [
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "closed": [
+        true,
+        false,
+        false
+      ],
+      "rail_pixel_alpha": [
+        0,
+        255,
+        255
+      ]
+    },
+    {
+      "closed": [
+        true,
+        true,
+        false
+      ],
+      "rail_pixel_alpha": [
+        0,
+        0,
+        255
+      ]
+    },
+    {
+      "closed": [
+        true,
+        true,
+        true
+      ],
+      "rail_pixel_alpha": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "javascript_errors": [],
+  "resource_errors": []
+}

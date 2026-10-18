@@ -26,7 +26,7 @@ func gameRoot(override string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	for _, name := range []string{"index.html", "js/panorama_renderer.js", "assets/panoramic360/lobby.webp"} {
+	for _, name := range []string{"index.html", "js/bootstrap.js", "assets/rooms/lobby.webp"} {
 		info, err := os.Stat(filepath.Join(root, filepath.FromSlash(name)))
 		if err != nil || info.IsDir() {
 			return "", fmt.Errorf("missing %s: extract the WHOLE project ZIP first, then run START_GAME.exe from that folder", name)

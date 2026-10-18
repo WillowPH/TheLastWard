@@ -11,14 +11,15 @@ with tempfile.TemporaryDirectory(prefix='last-ward-package-') as tmp:
  project=Path(tmp)/'The_Last_Ward_Project'
  assert (project/'index.html').stat().st_size<100000
  for folder in ['js','css','assets','audio','data']:assert any((project/folder).rglob('*'))
- assert len(list((project/'assets/panoramic360').glob('*.webp')))==27
+ world=json.loads((project/'data/room_views.json').read_text());assert len(world)==27
+ assert all((project/view['asset']).exists() for room in world.values() for view in room['views'].values())
  exe=(project/'START_GAME.exe').read_bytes();assert exe[:2]==b'MZ';pe=struct.unpack_from('<I',exe,0x3c)[0];assert exe[pe:pe+4]==b'PE\0\0' and struct.unpack_from('<H',exe,pe+4)[0]==0x8664
  checks.append('Windows x64 native launcher is included with valid PE headers')
  for folder in ['js','css','assets','audio','data']:
   for f in (ROOT/folder).rglob('*'):
    if f.is_file():assert hashlib.sha256(f.read_bytes()).digest()==hashlib.sha256((project/f.relative_to(ROOT)).read_bytes()).digest(),str(f)
  checks.append('archive matches tested runtime source and assets byte for byte')
- checks.append('archive extracts with separate code, data, audio, 27 continuous panoramas and launchers')
+ checks.append('archive extracts with separate code, data, audio, 54 native room-facing views and launchers')
  command=([sys.argv[2],'--root',str(project)] if len(sys.argv)>2 else [sys.executable,str(project/'start_game.py')])+['--no-browser','--port','8124']
  proc=subprocess.Popen(command,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
  try:
@@ -32,9 +33,10 @@ with tempfile.TemporaryDirectory(prefix='last-ward-package-') as tmp:
    assert max(values)>.00001;checks.append('separate local audio produces measured output after Begin')
    page.evaluate("S.enemyActors.forEach(a=>a.hp=0);S.pursuer.active=false")
    for room in page.evaluate('Object.keys(R)'):
-    page.evaluate('r=>{S.room=r;S.panoramaRoom=null;renderScene()}',room);page.wait_for_function("WardWinter.panoramaRenderer()?.loaded")
-    for face in ['front','right','rear','left']:page.evaluate('v=>WardWinter.orbit.face(v)',face)
-   page.evaluate('document.fonts.load("20px Caveat")');assert page.evaluate('document.fonts.check("20px Caveat")');assert not page.get_by_role('button',name='Turn around',exact=True).count();checks.append('all 27 spherical rooms and handwriting font load from the extracted package')
+    page.evaluate('r=>{S.room=r;S.roomViewRoom=null;renderScene()}',room);page.wait_for_function("WardWinter.roomViewRenderer()?.loaded")
+    for face in ['front','rear']:
+     page.evaluate('v=>WardWinter.orbit.face(v)',face);page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
+   page.evaluate('document.fonts.load("20px Caveat")');assert page.evaluate('document.fonts.check("20px Caveat")');assert not page.get_by_role('button',name='Turn around',exact=True).count();checks.append('all 54 native room-facing views and handwriting font load from the extracted package')
    assert not errors,errors;assert not failures,failures;b.close()
  finally:proc.terminate();proc.wait(timeout=5)
 result={'format':'multi-file project','files':len(names),'checks':checks,'javascript_errors':errors,'failed_requests':failures,'zip_bytes':archive.stat().st_size,'zip_sha256':hashlib.sha256(archive.read_bytes()).hexdigest()}

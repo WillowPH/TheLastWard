@@ -1,3 +1,6 @@
+> Historical360 artwork rules. The active native-view pipeline is documented in
+> [ROOM_VIEW_SETUP.md](ROOM_VIEW_SETUP.md).
+
 # Room artwork and spatial rules
 
 Each room uses one coherent 2:1 equirectangular painting from one fixed eye position.

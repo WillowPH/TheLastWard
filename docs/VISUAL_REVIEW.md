@@ -1,21 +1,15 @@
-# Current visual review
+# Native-view visual review
 
-Use the complete Project ZIP and its Python launcher. The old embedded HTML and
-four-card room strip are superseded by the continuous panorama renderer.
+The active art is54 distinct1448×1086 room-facing paintings, fitted without cropping or
+magnification. All54 source views were inspected, with per-view doors and fixture maps.
+The three targeted edits retain original geometry: furniture barricades the lobby exit,
+a real drying stove replaces the laundry placeholder, and a proper CRT occupies the
+staff-room cabinet. Generated originals remain in the development workspace.
 
-All 27 room rear views were inspected. Corrected exports include Morgue (extra false
-door removed), Service Crossroads (opaque hatch instead of an outside view) and
-Surgery (usable route no longer barred). Actual rendered Security feeds were checked
-against the CRT glass after UV adjustment. Shutters, stove, spent hoist, Mercer cover
-and Kessler aftermath were inspected as local state overlays in the live viewer.
+Actual screenshots cover the neutral HUD at1672/1000/390, dark ink on handwritten/typed
+paper, matching upper-pane shutters, six surveillance feeds, stove fire and independent
+window patches. Snow masks exclude walls, mullions, plants and foreground medical gear.
 
-The fixed scene/HUD was reviewed at the supplied screenshot's 1672×941 proportions;
-automated bounds checks also cover tablet and phone widths. This follows the reference
-layout while using the new room art. It does not reproduce the reference painting.
-
-World effects and targets share the panorama's projection. Snow is limited to authored
-exterior panes, lamp dips exclude outside glass, and CRT scanlines stay inside screens.
-The floor plan uses room polygons and actual shared doorways. Its unexplored/locked
-state is intentional until the player finds the map.
-
-For measured checks and limits, see ../VALIDATION.md.
+Source-resolution limitation is handled by presenting complete native views instead of
+stretching a small section of an equirectangular texture. No native4K claim is made.
+The full game and asset/hash checks are recorded in ../VALIDATION.md.

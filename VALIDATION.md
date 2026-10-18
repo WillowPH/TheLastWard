@@ -1,49 +1,34 @@
-# Chapter 1 panoramic validation — 18 October 2026
+# Native room-view validation — 18 October 2026
 
-Python Playwright with system Chromium and software WebGL. Service workers blocked
-for browser checks to prevent stale caches. Reports live in `tests/results/`.
+Chromium and Python Playwright with service workers blocked. The active renderer uses
+2D canvas and native room views; it does not depend on WebGL. Reports are in tests/results.
 
-| Command | Evidence |
+| Check | Result |
 | --- | --- |
-| `python tools/build_panorama_world.py` | 27 unique images, complete reviewed fixture/door targets, valid state masks and physical floor-plan adjacency |
-| `node tests/test_snap_camera.js` | Both wrap directions, 350→10 forward 20°, exact stop, no overshoot/idle jitter, equal elapsed-time results at 30/60/144 FPS, long frames, pitch, retarget lock, reduced motion |
-| `python tests/test_panorama_targets.py` | 204 available object/door centers receive the expected ordinary mouse hit |
-| `python tests/test_panorama_review.py` | 14 focused input, persistence, pixel and responsive presentation checks; no JS errors or failed resources |
-| `python tests/test_winter_systems.py` | 17 mechanics checks; all 54 directed arrivals face away from the entrance, 128 seeded placements, all 27 rooms at desktop/tablet/mobile |
-| `python tests/test_winter_playthrough.py` | Normal and Story earned routes visit all 27 rooms and reach the explicit four-interlock elevator ending using native POI controls and mouse clicks |
-| `python tests/test_winter_package.py` | Extracted ZIP, byte-identical runtime, local launcher, all 27 panoramas, icons/font and measured audio with external internet blocked |
+| `python tools/build_room_views.py` | 54 unique native 1448×1086 paintings, 27 rooms, 54 directed doors, 162 fixture definitions |
+| `python tests/test_room_view_review.py` | 7 focused checks: no toolbar/keyboard dependency, whole-image fit, drag versus click, portraits/backs/completion, stable inspection, saved facing and Options-only hints |
+| `python tests/test_reference_theme.py` | 4 groups: neutral HUD, native mouse turns, readable typed/handwritten paper, full art and Thoughts at 1672/1000/390 widths |
+| `python tests/test_inventory_discard.py` | 9 groups: safe/spent inventory policy, shared-key/tool guards, confirmation, stale-request protection, capacity, actual save/reload and practical Thoughts |
+| `python tests/test_exterior_weather.py` | All 54 views; 8 confirmed exterior views and 71 glass cells; zero weather pixels outside protected glass; four independent window states |
+| `python tests/test_panorama_targets.py` | Compatibility-named native test: 206–207 actionable target centers (seeded phone placement varies) receive the expected mouse hit, including active catches |
+| `python tests/test_winter_systems.py` | 17 groups including all 54 directed entrances, 128 seeds and pixel-level lighting/object-state checks |
+| `python tests/test_winter_playthrough.py` | Normal and Story routes visit all 27 rooms, earn progression and reach the four-interlock elevator ending through ordinary mouse controls |
+| `python tests/test_winter_package.py <zip> /tmp/ward-launcher` | Required delivery check: extract, compare every runtime file/asset hash, native local server, all 54 views and measured audio with external internet blocked |
 
-The presentation suite verifies unpowered/powered portraits, photo backs, removal on
-completion, single catch prompts, exterior snow pixels, shutter art, stove firebox,
-fixed paginated captions preserving all text, the 27-room shared-wall floor plan,
-one-click adjacent travel, phone completion and camera pose through save/reload,
-actual atmosphere frames/lamp dips respecting Options, 28 obtainable item icons,
-0°/360° GPU pixel comparisons in every room and 1672/1000/390px HUD bounds.
+The mechanics checks cover actual audio, Normal/Story battery drain, illuminated rooms
+unchanged by the flashlight, battery exhaustion, confirmed hoist states, hiding/peek gaps,
+no inspection zoom, once-only cold/sprinkler incidents, dropped flashlight, lighter/fluid,
+plank confirmation, covered Mercer, finite enemies, imaginary combat, phones and fair
+fatal warnings. All directed arrivals face away from the entry and can return correctly.
 
-The systems suite exercises recorded audio energy, Normal/Story battery drain,
-lighting, confirmed hoist states, dark hiding/peek slots, no inspection zoom,
-once-only cold/sprinkler incidents, dropped flashlight recovery, lighter/fluid and
-warming, plank confirmation, Mercer outcomes, finite noise enemies, knockdown/re-entry,
-nonlethal hallucinated combat, payphone progression and fair fatal-encounter warning.
+The earned routes collect the Archives fuse before later Subject X occupation; the
+pursuit/escape still occurs and is required. Enemies can physically obstruct objects.
+Normal ended at 70 HP and Story at 92 HP; both completed every progression requirement.
 
-Manual visual review covered all 27 rear views plus shutter, stove, hoist aftermath,
-Mercer cover, Kessler aftermath, corrected service hatch, Morgue and Security CRTs.
-Three stale corrected exports were found and re-exported before the final archive.
-This validates implemented behavior and observed art; it is not a promise of perfect
-first-time puzzle pacing, seamless painting at every pole, or identical performance
-on every browser/GPU. The game uses painted 2K spherical scenes, not walkable 3D.
-
-## Python-free Windows launch correction
-
-The reported artwork failure came from opening index.html directly. Browsers block
-file-origin images from WebGL textures. `START_GAME.exe` now provides a standard-library
-local server with separate assets; `START_GAME.bat` invokes it without Python. Direct
-HTML opening displays launcher instructions before gameplay.
-
-`GO111MODULE=off go test -v ./launcher` covers extracted-folder validation, actual
-HTTP/index serving, audio byte ranges, loopback binding and occupied-port fallback.
-`node tests/test_launch_guard.js` checks file-origin guidance versus normal HTTP.
-The extracted-package test can use the same native server source compiled for Linux:
-`python tests/test_winter_package.py downloads/The_Last_Ward_Chapter_1_Project.zip /tmp/ward-launcher`.
-The shipped Windows executable's PE/x64 headers are checked. Its Windows desktop
-browser-opening path has not been executed in this Linux environment.
+Manual review covered all 54 source views and actual integrated shutters, CRTs, stove,
+window states and the reference HUD. Native paintings remain 1448×1086; no native4K claim
+is made. First-time puzzle pacing and every Windows/GPU configuration are not guaranteed.
+The Windows x64 executable is built and its PE headers checked; its standard-library
+server is tested from the same source on Linux. Windows desktop browser opening has
+not been executed in this Linux environment. `go test ./launcher` covers complete-folder
+validation, audio ranges, local binding and occupied-port fallback.

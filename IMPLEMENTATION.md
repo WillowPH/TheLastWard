@@ -1,25 +1,23 @@
-# Chapter 1 implementation
+# Native room-view implementation
 
-Build: `last-ward-ch1-panorama360-3`. The latest user authorization replaces artwork
-with genuine continuous panoramic rooms. This is a multi-file JavaScript/WebGL game.
+Build: `last-ward-ch1-roomviews-4`. The user explicitly selected sharper room-facing
+views after the 1774px-wide 360° source limitation was measured. The spherical renderer
+and joined-strip renderer are inactive. Their sources remain as historical references.
 
-| Responsibility | Authoritative implementation |
+| Area | Active implementation |
 | --- | --- |
-| Room art/UV data | `data/panorama360_world.json`, `assets/panoramic360/`, emitted `js/panorama360_world.js` |
-| Spherical rendering | `js/panorama_renderer.js`: one texture, yaw/pitch ray projection, stable FOV, light cone |
-| Snap camera/input | `js/snap_camera.js`, `js/room_orbit.js`: elapsed-time exponential glide, shortest wrap, input lock |
-| Targets/states | `js/panorama_scene.js`: measured fixtures/doors, spherical projection, arrival orientation, persistent object layers |
-| Atmosphere | `js/panorama_effects.js`: UV-clipped snow, local state art, CRT feeds/scanlines, lamp dips, fire and sprinkler |
-| HUD | `js/review_ui.js`, `css/review_ui.css`, `js/caption_ui.js`: three columns, stable flashlight button, fixed text pages |
-| Floor plan | `data/floorplan.json`, `js/floorplan_ui.js`: room-cell architecture and shared door gaps, adjacent-only travel |
-| Findings/inspection | `js/finding_icons.js`, `js/winter_examination.js`: icons, physical items, photos/backs, completed reads |
-| Chapter mechanics | `winter_content.js`, `winter_gameplay.js`, `winter_threats.js`, `winter_story.js` |
-| Sound | `js/chapter1_audio.js`, `audio/SOURCES.json`: local recordings and WebAudio |
-| Delivery | `start_game.py`, platform launchers, `tools/package_build.py`, local service-worker cache |
+| Room art/geometry | `data/room_views.json`, `js/room_views_data.js`, `assets/rooms/`, `assets/reverse/`, `assets/room_views/`: 54 distinct native 1448×1086 views and centered-percent targets |
+| Rendering | `js/room_view_renderer.js`: 2D canvas, whole-image fit capped at native source size, no crop or zoom; flashlight only adds light in dark rooms |
+| Scene | `js/room_view_scene.js`: one fitted art/target plane, state assets, entrance-facing logic, saved view, click priority, persistent items and hiding slots |
+| Mouse | `js/room_orbit.js`: click arrows outside the art or drag sideways to change view; 8px click/drag threshold, 55px turn threshold, no click-through, no bottom POIs |
+| Atmosphere | `data/room_view_effects.json`, `js/room_view_effects.js`: 71 protected glass cells across 8 exterior views, fitted shutter material, CRT feeds/messages, stove fire and independent open-window patches |
+| HUD | `css/review_ui.css`, `css/reference_theme.css`, `css/room_views.css`, `js/review_ui.js`, `js/caption_ui.js`: charcoal/brass reference layout, fixed paginated text cards, responsive Thoughts |
+| Inventory/requirements | `js/inventory_discard.js`: protected progression equipment, shared-key last-use checks, confirmation, capacity/persistence and practical Thoughts |
+| Game systems | `winter_content.js`, `winter_gameplay.js`, `winter_threats.js`, `winter_story.js`: progression, hazards, sanity, finite enemies and one-time incidents |
+| Delivery | `START_GAME.exe`, `launcher/`, platform launchers and `start_game.py`: local-only standard-library servers, separate source/assets/audio/data |
 
-Legacy artwork/modules remain as baseline references and mechanics dependencies.
-`panorama_scene.js` is the active scene renderer; it does not use the old four-view strip.
-No remote artwork backend is required or enabled by default.
-
-Run `python3 tools/build_panorama_world.py` after metadata edits. It validates every
-room target and graph door, unique artwork, state masks and physical floor-plan adjacency.
+Regenerate metadata with `python3 tools/build_room_views.py`. It checks unique image
+hashes and dimensions, all 162 fixture IDs and 54 directed graph-door assignments.
+The original generated image edits are preserved in the development workspace;
+`data/room_view_art_edits.json` records the three native asset edits and provenance.
+Historical review screenshots are omitted from the ZIP; every game asset is retained.

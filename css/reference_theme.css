@@ -1,0 +1,71 @@
+/* Shared surface palette. Gameplay greens belong to the physical health display only. */
+:root{--ward-black:#080909;--ward-panel:#101010;--ward-panel-raised:#191817;--ward-rule:#665e4d66;--ward-brass:#b5a482;--ward-text:#d0cdc6;--ward-muted:#a39d92;--bg:#080909;--pn:#101010;--pn2:#191817;--ln:#544e43;--tx:#d0cdc6;--mu:#a39d92;--rd:#c45d53;--gr:#65b58a;--bl:#b5a482;--go:#c8ae79;--vbg:#080909;--vpanel:#101010;--vborder:#544e43;--vtext:#d0cdc6;--vmuted:#a39d92;--vamber:#c8ae79;--winter-gold:#c8ae79;--winter-line:#665e4d66;--winter-ink:#d0cdc6;color-scheme:dark}
+html,body{background:#080909!important;color:var(--ward-text)!important}
+body{background-image:none!important}
+button,input,select,textarea{accent-color:#b5a482}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:1px solid #d0b98c;outline-offset:3px}
+.pn,.hero,.md,.mh,.message-box,.ob,.sl,.row,.storage-card,.combine-panel,.medical-choice,.main-weapon-panel,.direct-travel-panel,.weapon-slot,.travel-door,.tst{border-color:#625a4b;background-color:#101010}
+.pn,.hero,.md,.mh,.message-box,.ob,.sl,.row,.combine-panel,.medical-choice,.main-weapon-panel,.direct-travel-panel,.weapon-slot,.travel-door,.tst{background-image:none}
+.hero{background:linear-gradient(180deg,#191716,#0c0c0c)!important}
+.hero .k,.k,h3,.panel-heading,.ph{color:#b7a78a}
+.desc,.message-box p{color:var(--ward-text)}
+.micro,.storage-help,.storage-card small,.medical-info small,.recipe-note,.audio-label,.combine-grid label{color:var(--ward-muted)}
+.btn{background:#201e1b!important;border-color:#76684e!important;color:#d5cec0!important;box-shadow:none!important}
+.btn:hover:not(:disabled),.btn:focus-visible{background:#322c23!important;border-color:#c0a87a!important;color:#f1e6cf!important}
+.btn.p{background:#432726!important;border-color:#a16156!important;color:#e6c8bb!important}
+.btn.p:hover:not(:disabled){background:#5b302b!important;border-color:#c98775!important}
+.btn.g{background:#29261f!important;border-color:#9c8960!important}
+select,textarea,input[type=text],input[type=number]{background:#0d0d0d!important;color:#d4cec2!important;border:1px solid #72654d!important}
+select option{background:#12110f;color:#ddd5c5}
+input[type=range]{accent-color:#b5a482}
+.sl,.sl.f,.sl.cue-access,.sl.cue-power,.sl.cue-medical,.sl.cue-puzzle{background:#161513!important;border-color:#635b4c!important}
+.sl.eq,.weapon-slot.selected,.inv-tabs .btn.active{background:#30291e!important;border-color:#c5aa77!important}
+.ob,.ob.door,.ob.done{background:#171613!important;border-color:#635b4c!important}.ob i{background:#0c0c0c!important;border-color:#665e50!important}.ob.done small{color:#b7a78a!important}
+.ob.lock,.ob.enemy{border-color:#a35c52!important}.ob.enemy{background:#281817!important}
+.ev,.ev.g{background:#201c16;border-color:#a88c5b;color:#ddcfb4}
+.map-unfound,body.ward-playing #mapUnfound{background:#101010!important;border-color:#605a4f!important;color:#aaa49a!important}
+.map-unfound small,.map-unfound b{color:#aaa49a!important}
+.ov,body.ward-playing #m .ov{background:#030303d9!important}
+.md,body.ward-playing #m .md,.floorplan-modal{background:#101010f7!important;border:1px solid #8d7c5e!important;border-radius:6px!important;box-shadow:0 18px 55px #000c!important;color:#d2cdc1!important}
+.mh,body.ward-playing #m .mh,.floorplan-modal .mh{background:#191714!important;border-bottom:1px solid #6e614c!important}
+.mh h2,body.ward-playing #m .mh h2{color:#d6c7ab!important;font-weight:400;letter-spacing:.04em}
+.mb,.floorplan-modal .mb{background:transparent!important}
+body.ward-playing #m .mb .micro,.floorplan-legend{color:#aaa296!important}
+.c1-focus{background:#10100ff7!important;border:1px solid #8d7c5e99!important;box-shadow:0 16px 50px #000b!important}
+.c1-focus header{background:#191714!important;border-color:#6e614c!important}
+.c1-focus h3,.c1-focus header h3{color:#d6c7ab!important}
+.c1-finding,.c1-finding p{border-color:#524b3f!important;color:#cec7b9!important}
+.c1-finding strong{color:#e1d5bf!important}
+.winter-drawer-item{background:#10100fd4!important}
+.winter-drawer-item strong{color:#e0d7bf!important}.winter-drawer-item p{color:#c3bcad!important}
+.winter-document-tools{color:#b6ad9b!important}
+.winter-document-transcript{border-color:#71644a!important;background:#13120f!important}.winter-document-transcript pre{color:#d6cdbb!important}
+.winter-document .monolith-letterhead{border-color:#5c503c66!important}
+.room-local-notice{background:#17140f!important;color:#e2d9c6!important;border-color:#b0a486!important}
+.inventory-item-row,.storage-card,.medical-choice,.row{border-color:#625a4b!important;background-color:#171613!important}
+.storage-card{background-image:linear-gradient(160deg,#25221d,#10100f)!important}
+.storage-empty,.inv-scroll{border-color:#625a4b!important;color:#aaa296!important}
+.inventory-menu-copy b,.inventory-item-row strong{color:#e0d2b9!important}
+.inventory-menu-copy small,.inventory-item-row small{color:#aaa296!important}
+.winter-combat-modal{background:#11100ff5!important;border:1px solid #8d7c5e99!important}
+.c1-encounter{background:radial-gradient(ellipse at 22% 60%,#302923,#11100f 70%)!important;border-color:#6e614c!important}
+.c1-locker footer,.panorama-locker footer{background:#060606f5!important;border-color:#6e614c!important;color:#d0c8b8!important}
+.c1-ending,.winter-ending{background:radial-gradient(ellipse at 50% 25%,#302121,#080808 70%)!important;color:#ddd4c6!important}
+.winter-map-view,.c1-map-scroll{background:#101010!important;border-color:#72654d!important}
+.winter-map-room rect,.winter-map-room.unknown rect{fill:#1a1a1a!important;stroke:#68645a!important}.winter-map-room.visited rect{fill:#656567!important}.winter-map-room.here rect{fill:#858586!important;stroke:#ddd0b7!important}.winter-map-room text{fill:#cdc7ba!important}.winter-map-edge{stroke:#78756c!important}.winter-map-arrow{fill:#cc5951!important;stroke:none!important}
+.architectural-map{background:radial-gradient(ellipse,#72716b08,transparent 70%)!important}.floorplan-fill{fill:#101112!important}.floorplan-room.explored .floorplan-fill{fill:#5c5e60!important}.floorplan-room.current .floorplan-fill{fill:#858789!important}.floorplan-door{stroke:#636466!important}.floorplan-door.locked{stroke:#b7a06f!important}.floorplan-wall{stroke:#a8a7a1!important}.floorplan-room:hover .floorplan-wall,.floorplan-room:focus-visible .floorplan-wall{stroke:#ded1b6!important}
+#winterMapSelection,#floorplanSelection{color:#c4bcad!important}
+.winter-wire-panel{background:#171612!important;border-color:#6e614c!important}.winter-wire{background:#2a2720!important;border-color:#9a8863!important;color:#dfd3b9!important}.winter-wire.connected{color:#d5bd8b!important}.winter-wire.selected{outline-color:#e2c486!important}
+.winter-fuse-socket{background:#1b1915!important;color:#8b806a!important;border-color:#6b6049!important}.winter-fuse-socket.fitted{color:#dec492!important;border-color:#b39a65!important;box-shadow:inset 0 0 20px #c6a56e26!important}
+.winter-radio{background:#3b3529!important;border-color:#5e513b!important;color:#e3d7bb!important}.winter-radio-dial{background:#191712!important;color:#dbc18b!important}.winter-signal{background:#211e17!important}.winter-signal i{background:#c3a971!important}
+.art-mode-choices label,.violence-choice label{background:#191714!important;border-color:#625a4b!important}.art-mode-choices label:has(input:checked),.violence-choice label:has(input:checked){background:#30271b!important;border-color:#bfa579!important}.art-mode-choices label small,.violence-choice label small{color:#b4a994!important}
+.options-violence{background:#191714!important;border-color:#625a4b!important}
+.content-warning{background:#211715!important;border-color:#7a5146!important;color:#d8c4b7!important}
+.violence-choice{border-color:#625a4b!important}
+.record-backup{border-color:#625a4b!important}.record-backup strong{color:#d6c7ab!important}.record-backup .micro{color:#aaa296!important}
+.tst{background:#1b1813!important;border-color:#8d7c5e!important;color:#dfd3bd!important}
+/* Battery and map are neutral; the green physical ECG retains its familiar meaning. */
+body.ward-playing .winter-battery{border-color:#a4a19a!important}body.ward-playing .winter-battery:after,body.ward-playing .winter-battery b{background:#a4a19a!important}
+body.ward-playing .inventory-cell.empty span{color:#47433c!important}
+body.ward-playing .ward-center #sceneFocusOverlay{background:#080808f2!important}
+body.ward-playing .ward-center #sceneFocusOverlay:has(.c1-focus){background:transparent!important}

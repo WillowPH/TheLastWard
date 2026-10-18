@@ -22,6 +22,7 @@ with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
  for p in sorted(ROOT.rglob('*')):
   rel=p.relative_to(ROOT)
   if not p.is_file() or any(part in ['.git','__pycache__','downloads'] for part in rel.parts) or p.suffix=='.pyc':continue
-  if rel.parts[:2]==('tests','results') and (p.suffix!='.json' or p.name=='winter_package.json'):continue # package hash report lives outside its own archive
+  if rel.parts[:2]==('docs','review') and p.suffix.lower() in ['.png','.jpg','.jpeg','.webp']:continue # historical review captures are not game assets
+  if rel.parts[:2]==('tests','results') and (p.suffix!='.json' or p.name in ['winter_package.json','visual_update.json']):continue # package hash report lives outside its own archive
   z.write(p,'The_Last_Ward_Project/'+rel.as_posix());count+=1
 print(json.dumps({'cache':cache,'runtime_files':len(runtime),'project_zip':str(archive),'project_zip_bytes':archive.stat().st_size,'project_files':count,'format':'multi-file source and assets; no embedded standalone generated'},indent=2))

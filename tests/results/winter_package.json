@@ -1,16 +1,16 @@
 {
   "format": "multi-file project",
-  "files": 423,
+  "files": 430,
   "checks": [
     "Windows x64 native launcher is included with valid PE headers",
     "archive matches tested runtime source and assets byte for byte",
-    "archive extracts with separate code, data, audio, 27 continuous panoramas and launchers",
+    "archive extracts with separate code, data, audio, 54 native room-facing views and launchers",
     "native server starts the extracted playable game without external internet",
     "separate local audio produces measured output after Begin",
-    "all 27 spherical rooms and handwriting font load from the extracted package"
+    "all 54 native room-facing views and handwriting font load from the extracted package"
   ],
   "javascript_errors": [],
   "failed_requests": [],
-  "zip_bytes": 102635963,
-  "zip_sha256": "f604484498606dcb3d2360e8c5ce7661e77953f148eb5d87b33a08933dcf178c"
+  "zip_bytes": 83249990,
+  "zip_sha256": "c7a3212d8cb135cecefb00f8542a8d66dfe97f0b7d0ba91300cf6635c3be76dc"
 }

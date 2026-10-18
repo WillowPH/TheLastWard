@@ -1,3 +1,6 @@
+> Current presentation:54 native room-facing paintings; see [ROOM_VIEW_SETUP.md](ROOM_VIEW_SETUP.md)
+> and `data/room_view_art_edits.json`. The outpainted/spherical notes below are historical.
+
 # Winter artwork provenance and presentation
 
 All newly generated visuals are fictional game artwork produced for this project;

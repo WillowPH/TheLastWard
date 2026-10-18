@@ -1,14 +1,60 @@
-from playwright.sync_api import sync_playwright
+"""Native whole-room artwork: every active object/door center accepts a mouse hit.
+
+The filename is retained for existing validation commands. No panoramic camera
+test hooks or keyboard controls are used: side-arrow mouse clicks expose views.
+"""
 from pathlib import Path
 import json
-r=Path(__file__).resolve().parents[1];fail=[];counts=0
+import sys
+from playwright.sync_api import sync_playwright
+
+ROOT = Path(__file__).resolve().parents[1]
+URL = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:8010'
+OUT = ROOT / 'tests/results'
+OUT.mkdir(exist_ok=True)
+failures = []
+errors = []
+counts = 0
+
 with sync_playwright() as p:
- b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--enable-unsafe-swiftshader']);q=b.new_page(viewport={'width':1672,'height':941});errors=[];q.on('pageerror',lambda e:errors.append(str(e)));q.goto('http://127.0.0.1:8010');q.get_by_role('button',name='BEGIN INVESTIGATION').click();q.evaluate('nextIntro();nextIntro();nextIntro()');q.evaluate('WardScene.options.snapMotion=false;S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.pursuer.active=false;S.f.power=1;S.f.pharm=1;S.f.chapel=1;S.f.photoPuzzleSolved=0;S.f.researchers=1;S.f.drained=1')
- for room in q.evaluate('Object.keys(R)'):
-  q.evaluate('r=>{S.room=r;S.prev=r;S.panoramaRoom=null;S.sceneFocus=null;render()}',room);q.wait_for_function('WardWinter.panoramaRenderer().loaded');points=q.evaluate('WardWinter.orbit.points()')
-  for point in points:
-   q.get_by_role('combobox',name='Look at a point of interest').select_option(point['id']);result=q.evaluate('''p=>{const selector=p.id.startsWith('door:')?'[data-door="'+p.id.slice(5)+'"]':'[data-fixture="'+p.id.slice(8)+'"]',n=document.querySelector(selector),r=n.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2,h=document.elementFromPoint(x,y);return {wanted:p.id,hit:h?.dataset.fixture||h?.dataset.door||h?.id||h?.tagName,ok:h===n,rect:[r.x,r.y,r.width,r.height]}}''',point);counts+=1
-   if not result['ok']:fail.append({'room':room,**result})
-  print(room,'checked',len(points),flush=True)
- b.close()
-(r/'tests/results/panorama_targets.json').write_text(json.dumps({'count':counts,'failures':fail,'errors':errors},indent=2));assert not fail,fail;assert not errors,errors;print('PASS',counts,'available target centers receive the expected ordinary mouse hit')
+    browser = p.chromium.launch(executable_path='/usr/bin/chromium', args=['--no-sandbox', '--enable-unsafe-swiftshader'])
+    context = browser.new_context(viewport={'width': 1672, 'height': 941}, service_workers='block', reduced_motion='reduce')
+    context.route('**/*', lambda route: route.continue_() if route.request.url.startswith(URL.rstrip('/') + '/') else route.abort())
+    page = context.new_page()
+    page.on('pageerror', lambda error: errors.append(str(error)))
+    page.goto(URL)
+    page.get_by_role('button', name='BEGIN INVESTIGATION').click()
+    page.evaluate('nextIntro();nextIntro();nextIntro()')
+    page.evaluate('WardScene.options.snapMotion=false;S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.pursuer.active=false;S.f.power=1;S.f.pharm=1;S.f.chapel=1;S.f.photoPuzzleSolved=0;S.f.researchers=1;S.f.drained=1')
+    for room in page.evaluate('Object.keys(R)'):
+        page.evaluate('r=>{S.room=r;S.prev=r;S.roomViewRoom=null;S.sceneFocus=null;render()}', room)
+        page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
+        if room == 'wardnorth':
+            page.evaluate('wardOpenWindows()')
+            page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
+        points = page.evaluate('WardWinter.orbit.points()')
+        for point in points:
+            if page.evaluate('S.roomView') != point['view']:
+                page.get_by_role('button', name='Look right', exact=True).click()
+                page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
+            assert page.evaluate('S.roomView') == point['view'], (room, point)
+            result = page.evaluate('''p=>{
+                const selector=p.id.startsWith('door:')?'[data-door="'+p.id.slice(5)+'"]':'[data-fixture="'+p.id.slice(8)+'"]';
+                const node=document.querySelector(selector);
+                if(!node)return {wanted:p.id,ok:false,hit:'MISSING_TARGET'};
+                const rect=node.getBoundingClientRect(),x=rect.x+rect.width/2,y=rect.y+rect.height/2,hit=document.elementFromPoint(x,y);
+                return {wanted:p.id,view:S.roomView,hit:hit?.dataset.fixture||hit?.dataset.door||hit?.id||hit?.getAttribute('aria-label')||hit?.tagName,ok:hit===node,rect:[rect.x,rect.y,rect.width,rect.height]};
+            }''', point)
+            counts += 1
+            if not result['ok']:
+                failures.append({'room': room, **result})
+                page.screenshot(path=str(OUT / ('native-target-failure-' + room + '.png')))
+        print(room, 'checked', len(points), flush=True)
+    browser.close()
+
+report = {'mode': 'native-full-image-room-views', 'count': counts, 'failures': failures, 'errors': errors, 'transport': URL}
+(OUT / 'room_view_targets.json').write_text(json.dumps(report, indent=2))
+(OUT / 'panorama_targets.json').write_text(json.dumps(report, indent=2))
+assert not failures, failures
+assert not errors, errors
+print('PASS', counts, 'available native room target centers receive the expected ordinary mouse hit')

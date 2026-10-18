@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "applying update to the previous delivered project reproduces every current code/data/asset/audio file byte for byte",
+    "patched project launches with native server and mouse-only room views, without external internet"
+  ],
+  "javascript_errors": [],
+  "failed_resources": [],
+  "bytes": 7451036,
+  "sha256": "d4bfd274c603826cbad573a2385ec0ed1dd0d1ab56cd908097b5b54040190255"
+}

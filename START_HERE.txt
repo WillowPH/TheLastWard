@@ -1,20 +1,19 @@
 THE LAST WARD — CHAPTER 1
 
-Extract the WHOLE ZIP before playing. Keep index.html, js, css, assets, audio and data together.
-This is a multi-file browser game, not a single embedded HTML file.
-
+Extract the WHOLE project ZIP. Keep index.html, js, css, data, assets and audio together.
 Windows 10/11: double-click START_GAME.exe or START_GAME.bat. NO PYTHON NEEDED.
-Keep START_GAME.exe beside index.html and the extracted asset folders.
-Do NOT open index.html directly: the browser blocks panoramic artwork on file://.
-No internet connection is needed to play.
-macOS/Linux: run python3 start_game.py (or sh START_GAME.sh); Python 3 required.
-The launcher opens your browser. Keep its terminal window open while playing.
-Manual launch: python start_game.py --no-browser; open the printed local address.
+Keep the launcher window open while playing. No external internet is required.
+macOS/Linux: run python3 start_game.py (Python 3 standard library).
+Opening index.html directly can block game data/audio; use the launcher.
 
-Start a new game for this build. Hints (Subtle/Strong) and animation controls are in Options.
-Use the lower Look At points or object/door selector. A/D and arrows turn 90 degrees.
-Requires a modern WebGL-capable browser. Object clicks do not move the camera.
-Saves belong to this browser and local address. Use the same port for continued play.
-Export your terminal record before changing browser.
+Start a NEW GAME for this room-view build. Old saves remain preserved separately.
+CLICK visible objects. DRAG sideways or click a SIDE ARROW to see the other side.
+No keyboard controls are required. There is no bottom navigation toolbar.
+Hints (Subtle/Strong), motion and flashes are in OPTIONS.
+Practical requirements appear in THOUGHTS.
+INVENTORY > MANAGE > INSPECT has a confirmed DISCARD action for safe/spent items.
+Keys/tools still needed for progression cannot be discarded.
 
-The source, game artwork, sounds, fonts and documentation are included as separate files.
+Room paintings fit whole and retain their native 1448x1086 detail, without a zoomed
+panorama crop. All files remain separate; this is not one embedded HTML document.
+Keep the same browser/local port for continued saves. Export your record before moving.
