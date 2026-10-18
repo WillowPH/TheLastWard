@@ -46,7 +46,7 @@ register('records','journal','mimiResearch','Cut laboratory addendum','The botto
 register('archive','memo','componentNote','Elevator component transfer','A maintenance carbon copy lists four component locations.',{doc:'Archive component transfer'});
 register('wardnorth','notice','windowWarning','Window linkage warning','A warning is pinned beside the emergency window controls.',{doc:'Window linkage warning'});
 register('laundry','journal','stoveNote','Drying stove instructions','An oil-stained instruction sheet from Heller.',{doc:'Laundry stove instructions'});
-W.fixture('laundry','stove','Laundry drying stove',[84,72,13,20],'rear',{art:'assets/props/drying_stove.svg'});
+W.fixture('laundry','stove','Laundry drying stove',[84,72,13,20],'rear',{});
 register('laundry','stove','dryingStove','Drying stove','The enclosed firebox holds dry discarded cotton. A petrol lighter can ignite it.',{act:'warmStove'});
 W.fixture('wardnorth','windowLever','Window purge handle',[64,50,3,10],'rear',{art:'assets/props/window_lever.svg'});
 register('wardnorth','windowLever','windowLever','Window purge handle','A mechanical handle links three window sashes. A warning explains the danger.',{act:'windowLever'});

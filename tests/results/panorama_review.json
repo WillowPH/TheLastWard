@@ -1,0 +1,167 @@
+{
+  "checks": [
+    "350\u00b0\u219210\u00b0 ends at exactly 10\u00b0; game clicks are blocked during gliding and work after arrival",
+    "hint strength and glide speed are in Options; scene has mouse-based POI controls and no Turn Around",
+    "portraits work before power, expose dated backs, complete after power, and then lose their target",
+    "ordinary inspection and Read preserve the same canvas and camera pose",
+    "each catch has one prompt; closing it immediately removes that target; all three resolve once",
+    "snow pixels stay within exterior glass in all seven glazed rooms; closed shutters stop it and use real artwork",
+    "stove is painted room geometry, with animated fire restricted to its firebox",
+    "long narration is paginated without scrolling, clipping or losing text",
+    "architectural floor plan has 27 real door gaps; one adjacent-room click travels and leaves the entrance behind",
+    "answered phone stays completed through save/reload, which also preserves camera pose",
+    "live atmosphere frames advance and real interior lamp dimming obeys the flashes option",
+    "28 obtainable item names all decode an image icon, rather than an empty glyph",
+    "all 27 rooms render from one equirectangular texture; 0\u00b0 and 360\u00b0 match in GPU pixel comparisons",
+    "reference, tablet and mobile HUDs fit without horizontal overflow"
+  ],
+  "snow": [
+    {
+      "room": "lobby",
+      "painted": 314,
+      "outside": 0
+    },
+    {
+      "room": "security",
+      "painted": 1409,
+      "outside": 0
+    },
+    {
+      "room": "room12",
+      "painted": 953,
+      "outside": 0
+    },
+    {
+      "room": "residence",
+      "painted": 1924,
+      "outside": 0
+    },
+    {
+      "room": "children",
+      "painted": 884,
+      "outside": 0
+    },
+    {
+      "room": "stafflounge",
+      "painted": 914,
+      "outside": 0
+    },
+    {
+      "room": "wardnorth",
+      "painted": 1436,
+      "outside": 0
+    }
+  ],
+  "wrap_comparisons": [
+    {
+      "room": "lobby",
+      "mean": 0
+    },
+    {
+      "room": "security",
+      "mean": 0
+    },
+    {
+      "room": "ward",
+      "mean": 0
+    },
+    {
+      "room": "room12",
+      "mean": 0
+    },
+    {
+      "room": "archive",
+      "mean": 0
+    },
+    {
+      "room": "generator",
+      "mean": 0
+    },
+    {
+      "room": "observation",
+      "mean": 0
+    },
+    {
+      "room": "pharmacy",
+      "mean": 0
+    },
+    {
+      "room": "chapel",
+      "mean": 0
+    },
+    {
+      "room": "morgue",
+      "mean": 0
+    },
+    {
+      "room": "residence",
+      "mean": 0
+    },
+    {
+      "room": "tunnel",
+      "mean": 0
+    },
+    {
+      "room": "boiler",
+      "mean": 0
+    },
+    {
+      "room": "laundry",
+      "mean": 0
+    },
+    {
+      "room": "children",
+      "mean": 0
+    },
+    {
+      "room": "records",
+      "mean": 0
+    },
+    {
+      "room": "surgery",
+      "mean": 0
+    },
+    {
+      "room": "isolation",
+      "mean": 0
+    },
+    {
+      "room": "specimen",
+      "mean": 0
+    },
+    {
+      "room": "powercontrol",
+      "mean": 0
+    },
+    {
+      "room": "stafflounge",
+      "mean": 0
+    },
+    {
+      "room": "lift",
+      "mean": 0
+    },
+    {
+      "room": "coldstore",
+      "mean": 0
+    },
+    {
+      "room": "eastcorridor",
+      "mean": 0
+    },
+    {
+      "room": "isoward",
+      "mean": 0
+    },
+    {
+      "room": "wardnorth",
+      "mean": 0
+    },
+    {
+      "room": "wardservice",
+      "mean": 0
+    }
+  ],
+  "javascript_errors": [],
+  "failed_resources": []
+}

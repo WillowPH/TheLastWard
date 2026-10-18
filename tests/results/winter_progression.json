@@ -3,7 +3,7 @@
     "winter-standard-a",
     "winter-story-complete"
   ],
-  "transport": "http://127.0.0.1:8125",
+  "transport": "http://127.0.0.1:8010",
   "multi_file": true,
   "trace": [
     {
@@ -11,7 +11,7 @@
       "room": "generator",
       "hp": 100,
       "sanity": 92,
-      "charge": 75.24999999999997,
+      "charge": 75.09999999999997,
       "visited": 12,
       "remaining": [
         "recover executive photograph clearance",
@@ -46,7 +46,7 @@
       "room": "generator",
       "hp": 100,
       "sanity": 92,
-      "charge": 88.18,
+      "charge": 88.06,
       "visited": 12,
       "remaining": [
         "recover executive photograph clearance",
@@ -63,7 +63,7 @@
       "room": "powercontrol",
       "hp": 92,
       "sanity": 77,
-      "charge": 16.420000000000073,
+      "charge": 15.88000000000006,
       "visited": 26,
       "remaining": []
     },
@@ -72,7 +72,7 @@
       "room": "lift",
       "hp": 92,
       "sanity": 82,
-      "charge": 5.740000000000075,
+      "charge": 5.020000000000062,
       "visited": 27,
       "remaining": []
     }

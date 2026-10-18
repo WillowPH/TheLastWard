@@ -5,7 +5,7 @@ from playwright.sync_api import sync_playwright
 ROOT=Path(__file__).resolve().parents[1];checks=[]
 def passed(s):checks.append(s);print('PASS',s,flush=True)
 with sync_playwright() as p:
- b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
+ b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--enable-unsafe-swiftshader'])
  c=b.new_context(service_workers='block',viewport={'width':1600,'height':1000});page=c.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto('http://127.0.0.1:8010');page.get_by_role('button',name='BEGIN INVESTIGATION').click()
  def ev(s,a=None):return page.evaluate(s,a)
@@ -14,6 +14,7 @@ with sync_playwright() as p:
  def reset(room='lobby'):
   ev('s=>{S=JSON.parse(s);configureWorld(S.seed,true);placeTelephones(S.seed);cm=0;$("m").innerHTML="";render()}',initial)
   ev('r=>{S.prev=S.room;S.room=r;S.sceneView="front";S.sceneViewRoom=r;S.sceneFocus=null;S.f.powerOut=0;S.pursuer.active=false;render()}',room)
+  page.wait_for_function('WardWinter.panoramaRenderer()?.loaded')
  def close():ev('closeModal();wardCloseFocus()')
  assert ev('S.bat===100&&S.batteryCapacity===100')
  # Sound must decode, advance and produce measurable audio after a gesture.
@@ -27,12 +28,12 @@ with sync_playwright() as p:
  passed('local recorded sound advances and produces nonzero WebAudio output')
  reset('lobby');ev('S.lightOn=true;S.bat=100;S.m=1;advanceTime(10);renderScene()');assert 89<ev('S.bat')<=90
  normal=ev('S.bat');ev('S.m=.7;S.bat=100;advanceTime(10)');assert ev('S.bat')>normal
- ev('S.room="security";S.sceneView="front";S.sceneViewRoom=S.room;S.f.power=1;S.lightOn=true;renderScene()');assert not page.locator('.c1-plane .c1-lighting').evaluate('(n)=>n.classList.contains("unlit")')
- ev('S.bat=.01;S.m=1;closeModal()');page.wait_for_timeout(1200);assert ev('S.bat===0&&!S.lightOn');assert not page.locator('.c1-plane .c1-lighting').evaluate('(n)=>n.classList.contains("torch")')
+ ev('S.room="security";S.sceneView="front";S.sceneViewRoom=S.room;S.f.power=1;S.lightOn=true;renderScene()');page.wait_for_function('WardWinter.panoramaRenderer().loaded');ev('WardWinter.panoEffects.draw(0)');assert ev("(()=>{const g=document.querySelector('.panorama-canvas').getContext('webgl'),p=g.getParameter(g.CURRENT_PROGRAM);return g.getUniform(p,g.getUniformLocation(p,'brightness'))})()")>=1
+ ev('S.bat=.01;S.m=1;closeModal()');page.wait_for_timeout(1200);assert ev('S.bat===0&&!S.lightOn');ev('WardWinter.panoEffects.draw(0)');assert ev("(()=>{const g=document.querySelector('.panorama-canvas').getContext('webgl'),p=g.getParameter(g.CURRENT_PROGRAM);return g.getUniform(p,g.getUniformLocation(p,'torch'))})()")==0
  passed('Normal drains faster than Story; lit rooms stay lit; exhaustion updates the actual flashlight beam')
- reset('laundry');ev('triggerServiceTrap()');assert not ev('S.f.trapArmed||S.f.trapUsed');ev("wardConfirmTrap('arm')");assert ev('S.f.trapArmed&&!S.f.trapUsed');assert 'laundry_trap_armed' in ev('WardWinter.roomArt("laundry","front")');ev("wardConfirmTrap('release')");assert ev('S.f.trapUsed&&!S.f.trapArmed');passed('hoist requires confirmation and persists armed/spent artwork')
- reset('security');ev('hideInRoom()');assert not ev('S.f.hidingRoom');page.get_by_role('button',name='Hide here',exact=True).click();assert ev('S.f.hidingRoom===S.room&&!S.lightOn');assert not page.locator('.winter-hidden-view>img').count();ev('wardPeek()');assert page.locator('.winter-hidden-view.peeking>img').count();ev('wardExitHiding()');passed('hiding asks first, is dark while concealed and uses narrow slits when peeking')
- reset('security');ev('S.f.power=1;S.lightOn=true;renderScene();window.__roomImage=document.querySelector(".c1-background");S.sceneFocus="diary";wardFixtureAction("winterJournal")');assert ev('window.__roomImage===document.querySelector(".c1-background")');close();passed('reading a document preserves the existing room image and camera')
+ reset('laundry');ev('triggerServiceTrap()');assert not ev('S.f.trapArmed||S.f.trapUsed');ev("wardConfirmTrap('arm')");assert ev('S.f.trapArmed&&!S.f.trapUsed');assert 'laundry_trap_armed' in ev('WardPanoramaWorld.laundry.states.trap_armed');ev("wardConfirmTrap('release')");assert ev('S.f.trapUsed&&!S.f.trapArmed');passed('hoist requires confirmation and persists armed/spent artwork')
+ reset('security');ev('hideInRoom()');assert not ev('S.f.hidingRoom');page.get_by_role('button',name='Hide here',exact=True).click();assert ev('S.f.hidingRoom===S.room&&!S.lightOn');assert page.locator('.panorama-hiding-mask path').get_attribute('d').count('M')==1;ev('wardPeek()');assert page.locator('.panorama-hiding-mask path').get_attribute('d').count('M')==4;ev('wardExitHiding()');passed('hiding asks first, is dark while concealed and uses narrow slits when peeking')
+ reset('security');ev('S.f.power=1;S.lightOn=true;renderScene();window.__roomImage=document.querySelector(".panorama-canvas");S.sceneFocus="diary";wardFixtureAction("winterJournal")');assert ev('window.__roomImage===document.querySelector(".panorama-canvas")');close();passed('reading a document preserves the existing room image and camera')
  reset('wardnorth');ev("add('Lighter',1);add('Lighter Fluid',1);wardCombineLighter();S.lightOn=true;S.f.power=1;render()")
  assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
  ev("WardWinter.orbit.face('rear');act('windowLever')");assert not ev('WardWinter.windowState().triggered')
@@ -53,11 +54,11 @@ with sync_playwright() as p:
  reset('eastcorridor');ev("add('Wooden Plank',1);reinforceWindow()");assert ev('has("Wooden Plank")&&!S.f.windowBarricaded')
  page.get_by_role('button',name='Cancel',exact=True).click();assert ev('has("Wooden Plank")')
  ev('reinforceWindow()');page.get_by_role('button',name='Place plank',exact=True).click();assert ev('!has("Wooden Plank")&&S.f.windowBarricaded')
- bounds=page.locator('.c1-plane .winter-window-plank').bounding_box();assert bounds['width']>bounds['height']*3,bounds
+ ev('WardWinter.reveal(WardPanoramaWorld.eastcorridor.fixtures.window.rect)');bounds=page.locator('.panorama-plank').bounding_box();assert bounds['width']>bounds['height']*3,bounds
  passed('plank is confirmed before consumption and renders as a substantial horizontal board')
  reset('isoward');ev("add('Utility Knife',1);choosePatientFate('killed')");assert not ev('S.f.beggingPatientChoice')
  page.get_by_role('button',name='Use utility knife',exact=True).click();assert ev('S.f.beggingPatientChoice==="killed"&&S.f.patientMethod==="knife"')
- assert ev('WardWinter.roomArt("isoward","front").includes("panoramas/states/isoward_after")')
+ assert (ROOT/ev('WardPanoramaWorld.isoward.states.covered')).is_file()
  san=ev('S.san');ev("choosePatientFate('helped');wardConfirmPatient('knife')");assert ev('S.san')==san
  close();ev("S.room='lobby';add('Ink Ribbon',1);confirmSave()");saved=ev('({slots:JSON.stringify(S.placements),fate:S.f.beggingPatientChoice,san:S.san})')
  page.reload();ev('loadGame()');assert ev('JSON.stringify(S.placements)')==saved['slots'];assert ev('S.f.beggingPatientChoice')==saved['fate']
@@ -88,8 +89,13 @@ with sync_playwright() as p:
  passed('rare lethal encounter warns on first inspection, permits retreat and restores its checkpoint after deliberate second inspection')
  reset('security');ev('S.f.power=1;portraitPuzzle()');page.get_by_role('button',name='Inspect photograph',exact=True).first.click();page.get_by_role('button',name='Turn over',exact=True).click();assert 'Appointed' in page.locator('#m').inner_text();close()
  passed('high-resolution photographs have inspectable dated backs')
- reset();ev('S.mapParts=3;mapModal()');assert page.locator('.winter-map-svg').count()>=1;close()
- reset();bad=ev("""()=>{const bad=[];for(const [id,d]of Object.entries(D))for(const [from,to]of [[d.a,d.b],[d.b,d.a]]){S.prev=from;S.room=to;S.sceneViewRoom=null;S.cameraSchema=0;WardScene.normalizeCamera();if(S.sceneView===WardScene.portalView(to,id))bad.push(id+':'+from+'>'+to);}return bad}""");assert not bad,bad
+ reset();ev('S.mapParts=3;mapModal()');assert page.locator('.architectural-map.full').count()==1;close()
+ reset();bad=[]
+ for edge,fromroom,to in ev("Object.entries(D).flatMap(([id,d])=>[[id,d.a,d.b],[id,d.b,d.a]])"):
+  ev('v=>{S.prev=v[0];S.room=v[1];S.panoramaRoom=null;renderScene()}',[fromroom,to]);page.wait_for_function('WardWinter.panoramaRenderer().loaded')
+  delta=ev('id=>Math.abs(WardSnapCamera.shortestDelta(S.cameraYaw,WardWinter.orbit.angleFor(WardPanoramaWorld[S.room].doors[id].rect)))',edge)
+  if abs(delta-180)>.001:bad.append([edge,fromroom,to,delta])
+ assert not bad,bad
  passed('every directed doorway arrival faces away from its fixed entrance portal')
  # Seed variation must never create a missing object target or move a room connection.
  reset();issues=ev("""()=>{const bad=[];for(let i=0;i<128;i++){configureWorld('winter-audit-'+i,false);placeTelephones('winter-audit-'+i);for(const room of Object.keys(R)){S.room=room;S.f.power=1;S.f.pharm=1;S.f.chapel=1;S.f.researchers=1;S.f.drained=1;S.f.photoPuzzleSolved=1;try{WardScene.sites()}catch(e){bad.push(e.message)}}}return [...new Set(bad)]}""");assert not issues,issues
@@ -97,12 +103,12 @@ with sync_playwright() as p:
  # Every runtime pickup gets a valid physical icon; every authored target is inside its art.
  paths=ev('''()=>{const paths=[];for(const r of Object.values(R))for(const o of r.o)for(const [n]of o[4].give||[]){itemIconMarkup(n);paths.push(ITEM_ART[n])}return [...new Set(paths)]}''')
  assert all((ROOT/p).is_file() for p in paths),[p for p in paths if not (ROOT/p).is_file()]
- panos=json.loads((ROOT/'data/panorama_assets.json').read_text());assert len(panos)==27;assert len({hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in panos.values()})==27
+ panos={r:v['asset'] for r,v in json.loads((ROOT/'data/panorama360_world.json').read_text()).items()};assert len(panos)==27;assert len({hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in panos.values()})==27
  for width,height in [(1600,1000),(1000,800),(390,844)]:
   page.set_viewport_size({'width':width,'height':height});page.wait_for_timeout(100)
   for room in ev('Object.keys(R)'):
    ev('r=>{S.room=r;S.sceneView="front";S.sceneViewRoom=r;renderScene()}',room)
-   assert ev('document.documentElement.scrollWidth<=innerWidth+1')
+   page.wait_for_function('WardWinter.panoramaRenderer().loaded');assert ev('document.documentElement.scrollWidth<=innerWidth+1')
    assert not page.get_by_role('button',name='Turn around',exact=True).count()
    ev("WardWinter.orbit.face('rear')");assert ev('S.sceneView==="rear"')
  passed('27 distinct panoramas, all pickup icon files, and usable front/rear controls at desktop, tablet and mobile widths')

@@ -1,14 +1,15 @@
 {
   "format": "multi-file project",
-  "files": 359,
+  "files": 415,
   "checks": [
-    "archive extracts with separate code, data, audio, 27 side atlases and launchers",
+    "archive matches tested runtime source and assets byte for byte",
+    "archive extracts with separate code, data, audio, 27 continuous panoramas and launchers",
     "extracted Python launcher starts the playable game without external internet",
     "separate local audio produces measured output after Begin",
-    "all 27 four-view rooms and handwriting font load from the extracted package"
+    "all 27 spherical rooms and handwriting font load from the extracted package"
   ],
   "javascript_errors": [],
   "failed_requests": [],
-  "zip_bytes": 85349828,
-  "zip_sha256": "8866241225137809cf0467fbebe78582ecf09735099cda355caecbfac141ab15"
+  "zip_bytes": 100018530,
+  "zip_sha256": "d3d862673d4e715255c97f4896b85a1984e7cb5c0ac10b8e9d0ac646d35a1fd0"
 }

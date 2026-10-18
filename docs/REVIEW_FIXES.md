@@ -1,50 +1,21 @@
-# Chapter 1 correction pass
+# Panoramic correction pass
 
-## Delivery
+All 27 room backgrounds were replaced with single coherent spherical panoramas.
+The old joined-card scrolling renderer is replaced by WebGL and click-to-snap POIs.
+The lower direction controls, named targets and selector move the camera; examining
+an object does not. Options owns hint strength and camera speed.
 
-The primary download is the complete multi-file project. Its index loads separate
-JavaScript and CSS; artwork, fonts, audio and data remain in their own directories.
-The old embedded HTML and player/source split are removed from current downloads.
-Python 3 starts a local server; play requires no external internet.
+Portraits are inspectable before power and solve after power. Window catches have one
+prompt each. Taken items and completed reads lose their targets. All obtainable item
+names decode an icon, including Photographic Negative. The fixed caption cards preserve
+long text through pages without scrolling. The floor plan has architectural room shapes
+and shared-wall doors, with one-click adjacent travel.
 
-## Interface and interaction
+Snow is clipped inside seven rooms' exterior panes. East Corridor and Service Crossroads
+are enclosed. Shutters, stove, covered Mercer, Kessler aftermath, the hoist and drained
+water have actual painted local states. Screen feeds are monochrome room views with
+local scanlines. Lamp dips respect Options. The lobby exit is obstructed by furniture.
 
-- Reference three-column layout: navigation and local map, full-height scene,
-  physical/mental condition, flashlight percentage, ammunition and inventory.
-- Restrained corner brackets replace orb markers. Strong mode adds larger brackets
-  and contextual symbols. Subtle/Strong selection is exclusively in Options.
-- Item clicks preserve yaw. Only deliberate look input or keyboard target focus
-  changes the camera. Examinations do not zoom the background.
-- Item icons have bounded cells separate from text and controls, including the
-  photographic negative and gun. Note thumbnails cannot cover their titles.
-- Answered phones remain completed through save/reload. Inactive-phone feedback
-  appears beside the phone and its target is then disabled. A later genuine story
-  call can reactivate that phone. Transcripts remain in Files.
-- Completed staff-portrait puzzle loses its scene target; unresolved puzzle access
-  remains available so inspecting once cannot lock progression.
-- Mini-map focuses on the present room and its neighbors; adjacent destinations
-  can be entered directly. Full-map adjacent travel also takes one click.
-- Flashlight is directly switchable from the right HUD.
-
-## Rooms and motion
-
-- Continuous horizontal rotation replaces the Turn Around UI. Front, rear, left
-  and right are connected views; targets and effects move with their own art plane.
-- All 27 rooms have independent side-view atlases. It is a fixed-position panorama,
-  not a fully modeled room. Joins can be visible between painted views.
-- North corridor door targets and Mercer/trolley/chart geometry are corrected.
-- Room 12 now depicts both real front routes. Service/generator targets are aligned.
-- Children's unused front door is blocked by furniture; the actual return is behind.
-  Unused Staff Lounge, Isolation and Surgery doors are visibly barred.
-- Lobby exterior exit is blocked with furniture, rather than suggesting an escape.
-- All 27 front window sets have authored snow masks. Indoor particles are not used
-  to simulate exterior snow. Security scan effects stay within the CRT screens.
-- Brief irregular lamp dips darken the interior while excluding exterior glazing.
-  Motion and light flashes can be disabled in Options.
-
-## Verification
-
-See VALIDATION.md and tests/results JSON reports for browser evidence. Full routes
-and focused interaction checks establish functional behavior; they do not replace
-human artwork review or first-time-player pacing assessment. Start a new game for
-the corrected build. Earlier save namespaces are preserved separately.
+Tests exercise native POI selection and mouse clicks, both earned chapter routes, all
+directed arrivals, target hit priority, persistent actions, snow pixels, wrap pixels,
+input lock, responsive HUD, icons and offline extracted delivery. See VALIDATION.md.

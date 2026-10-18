@@ -1,0 +1,3444 @@
+{
+  "lobby": {
+    "asset": "assets/panoramic360/lobby.webp",
+    "fixtures": {
+      "dynamo": {
+        "rect": [
+          40,
+          53,
+          2.5,
+          4
+        ],
+        "reviewed": true
+      },
+      "desk": {
+        "rect": [
+          45.5,
+          55.5,
+          6,
+          4
+        ],
+        "reviewed": true
+      },
+      "locker": {
+        "rect": [
+          40,
+          48.5,
+          4,
+          23
+        ],
+        "reviewed": true
+      },
+      "coat": {
+        "rect": [
+          43,
+          49,
+          3,
+          15
+        ],
+        "reviewed": true
+      },
+      "terminal": {
+        "rect": [
+          55.8,
+          52.5,
+          4,
+          7
+        ],
+        "reviewed": true
+      },
+      "box": {
+        "rect": [
+          51,
+          56,
+          4,
+          4
+        ],
+        "reviewed": true
+      },
+      "intercom": {
+        "rect": [
+          73.6,
+          45.5,
+          2.5,
+          6
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          27.6,
+          45.5,
+          2.2,
+          9
+        ],
+        "reviewed": true
+      },
+      "window": {
+        "rect": [
+          8,
+          32,
+          10,
+          15
+        ],
+        "reviewed": true
+      },
+      "entrance": {
+        "rect": [
+          12,
+          49.5,
+          18,
+          25
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "ls": {
+        "to": "security",
+        "rect": [
+          34.2,
+          49,
+          5.8,
+          22
+        ],
+        "reviewed": true
+      },
+      "lw": {
+        "to": "eastcorridor",
+        "rect": [
+          77.7,
+          49,
+          7,
+          22
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          3.7,
+          25.5
+        ],
+        [
+          8.5,
+          29
+        ],
+        [
+          8.5,
+          33.7
+        ],
+        [
+          3.7,
+          30.5
+        ]
+      ],
+      [
+        [
+          9.7,
+          30
+        ],
+        [
+          14.1,
+          34.2
+        ],
+        [
+          14.1,
+          38.9
+        ],
+        [
+          9.7,
+          35.2
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "states": {
+      "shutters": "assets/panoramic360/states/lobby_shutters.webp"
+    },
+    "stateMasks": {
+      "shutters": [
+        [
+          [
+            3.7,
+            25.5
+          ],
+          [
+            8.5,
+            29
+          ],
+          [
+            8.5,
+            33.7
+          ],
+          [
+            3.7,
+            30.5
+          ]
+        ],
+        [
+          [
+            9.7,
+            30
+          ],
+          [
+            14.1,
+            34.2
+          ],
+          [
+            14.1,
+            38.9
+          ],
+          [
+            9.7,
+            35.2
+          ]
+        ]
+      ]
+    }
+  },
+  "security": {
+    "asset": "assets/panoramic360/security.webp",
+    "fixtures": {
+      "report": {
+        "rect": [
+          49,
+          63,
+          5,
+          3
+        ],
+        "reviewed": true
+      },
+      "cabinet": {
+        "rect": [
+          36.5,
+          51,
+          9,
+          30
+        ],
+        "reviewed": true
+      },
+      "drawer": {
+        "rect": [
+          40,
+          71.5,
+          7,
+          10
+        ],
+        "reviewed": true
+      },
+      "roster": {
+        "rect": [
+          62,
+          42,
+          8,
+          15
+        ],
+        "reviewed": true
+      },
+      "monitors": {
+        "rect": [
+          50.1,
+          49,
+          17,
+          18
+        ],
+        "reviewed": true
+      },
+      "coffee": {
+        "rect": [
+          44,
+          62,
+          2,
+          4
+        ],
+        "reviewed": true
+      },
+      "map": {
+        "rect": [
+          54,
+          63,
+          7,
+          3
+        ],
+        "reviewed": true
+      },
+      "portraits": {
+        "rect": [
+          50.5,
+          35,
+          13,
+          9
+        ],
+        "reviewed": true
+      },
+      "diary": {
+        "rect": [
+          47,
+          63,
+          3,
+          3
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          60,
+          61,
+          5,
+          5
+        ],
+        "reviewed": true
+      },
+      "cache": {
+        "rect": [
+          68,
+          71,
+          4,
+          4
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "ls": {
+        "to": "lobby",
+        "rect": [
+          26.5,
+          50,
+          6,
+          39
+        ],
+        "reviewed": true
+      },
+      "es": {
+        "to": "eastcorridor",
+        "rect": [
+          77.3,
+          50,
+          6,
+          41
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          10.4,
+          28
+        ],
+        [
+          13.3,
+          29
+        ],
+        [
+          13.3,
+          37.3
+        ],
+        [
+          10.4,
+          36.5
+        ]
+      ],
+      [
+        [
+          14.3,
+          29
+        ],
+        [
+          17.3,
+          31
+        ],
+        [
+          17.3,
+          38.7
+        ],
+        [
+          14.3,
+          37.6
+        ]
+      ],
+      [
+        [
+          10.4,
+          38.3
+        ],
+        [
+          13.3,
+          39
+        ],
+        [
+          13.3,
+          50
+        ],
+        [
+          10.4,
+          50.5
+        ]
+      ],
+      [
+        [
+          14.3,
+          40
+        ],
+        [
+          17.3,
+          41
+        ],
+        [
+          17.3,
+          50.7
+        ],
+        [
+          14.3,
+          50.5
+        ]
+      ],
+      [
+        [
+          10.4,
+          52
+        ],
+        [
+          13.3,
+          52
+        ],
+        [
+          13.3,
+          54.8
+        ],
+        [
+          10.4,
+          55.5
+        ]
+      ],
+      [
+        [
+          14.3,
+          52
+        ],
+        [
+          17.3,
+          52
+        ],
+        [
+          17.3,
+          54.6
+        ],
+        [
+          14.3,
+          54.8
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "screens": [
+      {
+        "rect": [
+          44.85,
+          43.4,
+          3.35,
+          4.6
+        ],
+        "feed": "eastcorridor"
+      },
+      {
+        "rect": [
+          49.85,
+          43.4,
+          3.35,
+          4.6
+        ],
+        "feed": "ward"
+      },
+      {
+        "rect": [
+          54.85,
+          43.4,
+          3.35,
+          4.6
+        ],
+        "feed": "room12"
+      },
+      {
+        "rect": [
+          44.85,
+          50.8,
+          3.35,
+          4.6
+        ],
+        "feed": "laundry"
+      },
+      {
+        "rect": [
+          49.85,
+          50.8,
+          3.35,
+          4.6
+        ],
+        "feed": "observation"
+      },
+      {
+        "rect": [
+          54.85,
+          50.8,
+          3.35,
+          4.6
+        ],
+        "feed": "wardnorth"
+      }
+    ]
+  },
+  "ward": {
+    "asset": "assets/panoramic360/ward.webp",
+    "fixtures": {
+      "gurney": {
+        "rect": [
+          52,
+          65,
+          17,
+          16
+        ],
+        "reviewed": true
+      },
+      "names": {
+        "rect": [
+          50,
+          47,
+          11,
+          8
+        ],
+        "reviewed": true
+      },
+      "lockbox": {
+        "rect": [
+          49,
+          57,
+          5,
+          4
+        ],
+        "reviewed": true
+      },
+      "ammo": {
+        "rect": [
+          44,
+          57,
+          2.5,
+          3
+        ],
+        "reviewed": true
+      },
+      "journal": {
+        "rect": [
+          38,
+          56,
+          4,
+          3
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "ew": {
+        "to": "eastcorridor",
+        "rect": [
+          20,
+          52,
+          7,
+          23
+        ],
+        "reviewed": true
+      },
+      "northPassage": {
+        "to": "wardnorth",
+        "rect": [
+          80.6,
+          51,
+          7,
+          24
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "room12": {
+    "asset": "assets/panoramic360/room12.webp",
+    "fixtures": {
+      "file": {
+        "rect": [
+          45,
+          56,
+          3,
+          3
+        ],
+        "reviewed": true
+      },
+      "cabinet": {
+        "rect": [
+          63,
+          51,
+          6,
+          19
+        ],
+        "reviewed": true
+      },
+      "shelf": {
+        "rect": [
+          85,
+          52,
+          5,
+          18
+        ],
+        "reviewed": true
+      },
+      "restraints": {
+        "rect": [
+          53.5,
+          61,
+          5,
+          4
+        ],
+        "reviewed": true
+      },
+      "drawer": {
+        "rect": [
+          44.5,
+          59,
+          4,
+          7
+        ],
+        "reviewed": true
+      },
+      "tray": {
+        "rect": [
+          8,
+          63,
+          8,
+          5
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "wr": {
+        "to": "wardnorth",
+        "rect": [
+          23.2,
+          52,
+          7,
+          28
+        ],
+        "reviewed": true
+      },
+      "rr": {
+        "to": "residence",
+        "rect": [
+          70.4,
+          52,
+          6,
+          27
+        ],
+        "reviewed": true
+      },
+      "rc12": {
+        "to": "children",
+        "rect": [
+          93.4,
+          52,
+          7,
+          29
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          2.8,
+          26
+        ],
+        [
+          6.2,
+          27
+        ],
+        [
+          6.2,
+          38
+        ],
+        [
+          2.8,
+          37
+        ]
+      ],
+      [
+        [
+          7.3,
+          28
+        ],
+        [
+          10.3,
+          30
+        ],
+        [
+          10.3,
+          39
+        ],
+        [
+          7.3,
+          38
+        ]
+      ],
+      [
+        [
+          2.8,
+          40
+        ],
+        [
+          6.2,
+          40
+        ],
+        [
+          6.2,
+          50
+        ],
+        [
+          2.8,
+          51
+        ]
+      ],
+      [
+        [
+          7.3,
+          41
+        ],
+        [
+          10.3,
+          42
+        ],
+        [
+          10.3,
+          50
+        ],
+        [
+          7.3,
+          50
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "archive": {
+    "asset": "assets/panoramic360/archive.webp",
+    "fixtures": {
+      "memo": {
+        "rect": [
+          56,
+          64,
+          5,
+          3
+        ],
+        "reviewed": true
+      },
+      "cabinet": {
+        "rect": [
+          6,
+          49,
+          7,
+          25
+        ],
+        "reviewed": true
+      },
+      "fuse": {
+        "rect": [
+          75,
+          58,
+          4,
+          5
+        ],
+        "reviewed": true
+      },
+      "plaque": {
+        "rect": [
+          50.2,
+          42,
+          7,
+          25
+        ],
+        "reviewed": true
+      },
+      "drawer": {
+        "rect": [
+          41,
+          69,
+          6,
+          12
+        ],
+        "reviewed": true
+      },
+      "folder": {
+        "rect": [
+          61,
+          64,
+          4,
+          3
+        ],
+        "reviewed": true
+      },
+      "survey": {
+        "rect": [
+          32,
+          61,
+          5,
+          3
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "wa": {
+        "to": "wardservice",
+        "rect": [
+          12.2,
+          49,
+          5.5,
+          27
+        ],
+        "reviewed": true
+      },
+      "ag": {
+        "to": "generator",
+        "rect": [
+          29.7,
+          49,
+          5.5,
+          20
+        ],
+        "reviewed": true
+      },
+      "ac": {
+        "to": "chapel",
+        "rect": [
+          69.7,
+          49,
+          5.2,
+          20
+        ],
+        "reviewed": true
+      },
+      "ar": {
+        "to": "records",
+        "rect": [
+          87.8,
+          49,
+          6,
+          27
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "generator": {
+    "asset": "assets/panoramic360/generator.webp",
+    "fixtures": {
+      "log": {
+        "rect": [
+          72,
+          59,
+          7,
+          4
+        ],
+        "reviewed": true
+      },
+      "panel": {
+        "rect": [
+          75,
+          48,
+          5,
+          15
+        ],
+        "reviewed": true
+      },
+      "terminal": {
+        "rect": [
+          77.4,
+          57,
+          4,
+          7
+        ],
+        "reviewed": true
+      },
+      "box": {
+        "rect": [
+          82,
+          59,
+          4,
+          7
+        ],
+        "reviewed": true
+      },
+      "cradle": {
+        "rect": [
+          44,
+          55,
+          6,
+          8
+        ],
+        "reviewed": true
+      },
+      "parts": {
+        "rect": [
+          25,
+          49.5,
+          6,
+          20
+        ],
+        "reviewed": true
+      },
+      "tools": {
+        "rect": [
+          30,
+          49,
+          3,
+          19
+        ],
+        "reviewed": true
+      },
+      "regulator": {
+        "rect": [
+          53,
+          56,
+          12,
+          10
+        ],
+        "reviewed": true
+      },
+      "dynamo": {
+        "rect": [
+          5,
+          55,
+          5,
+          15
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "liftEntry": {
+        "to": "lift",
+        "rect": [
+          15.9,
+          50,
+          7,
+          21
+        ],
+        "reviewed": true
+      },
+      "ag": {
+        "to": "archive",
+        "rect": [
+          34.6,
+          49.3,
+          5.4,
+          18.5
+        ],
+        "reviewed": true
+      },
+      "go": {
+        "to": "observation",
+        "rect": [
+          66.2,
+          49.5,
+          5,
+          18
+        ],
+        "reviewed": true
+      },
+      "gm": {
+        "to": "morgue",
+        "rect": [
+          85.1,
+          49.7,
+          7,
+          20
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "observation": {
+    "asset": "assets/panoramic360/observation.webp",
+    "fixtures": {
+      "transcript": {
+        "rect": [
+          35,
+          61,
+          5,
+          3
+        ],
+        "reviewed": true
+      },
+      "consent": {
+        "rect": [
+          40,
+          62,
+          4,
+          3
+        ],
+        "reviewed": true
+      },
+      "console": {
+        "rect": [
+          49,
+          65,
+          14,
+          8
+        ],
+        "reviewed": true
+      },
+      "glass": {
+        "rect": [
+          49,
+          47,
+          19,
+          22
+        ],
+        "reviewed": true
+      },
+      "notice": {
+        "rect": [
+          26,
+          48,
+          4,
+          13
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          89,
+          49,
+          2.5,
+          8
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "go": {
+        "to": "generator",
+        "rect": [
+          16,
+          52,
+          6,
+          29
+        ],
+        "reviewed": true
+      },
+      "os": {
+        "to": "specimen",
+        "rect": [
+          78,
+          52,
+          6,
+          30
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "pharmacy": {
+    "asset": "assets/panoramic360/pharmacy.webp",
+    "fixtures": {
+      "judith": {
+        "rect": [
+          36.5,
+          56,
+          4,
+          21
+        ],
+        "reviewed": true
+      },
+      "fridge": {
+        "rect": [
+          62,
+          48,
+          9,
+          27
+        ],
+        "reviewed": true
+      },
+      "ribbon": {
+        "rect": [
+          48,
+          57,
+          10,
+          9
+        ],
+        "reviewed": true
+      },
+      "cutters": {
+        "rect": [
+          93,
+          53,
+          7,
+          25
+        ],
+        "reviewed": true
+      },
+      "drawer": {
+        "rect": [
+          53,
+          65,
+          7,
+          9
+        ],
+        "reviewed": true
+      },
+      "battery": {
+        "rect": [
+          86.5,
+          50,
+          5,
+          9
+        ],
+        "reviewed": true
+      },
+      "shelves": {
+        "rect": [
+          49,
+          35,
+          14,
+          8
+        ],
+        "reviewed": true
+      },
+      "returns": {
+        "rect": [
+          71.5,
+          61,
+          6,
+          8
+        ],
+        "reviewed": true
+      },
+      "tools": {
+        "rect": [
+          54.5,
+          56.8,
+          4,
+          3.5
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          34,
+          49,
+          3,
+          9
+        ],
+        "reviewed": true
+      },
+      "cache": {
+        "rect": [
+          21,
+          61,
+          5,
+          5
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "wp": {
+        "to": "wardservice",
+        "rect": [
+          80.1,
+          51,
+          7,
+          29
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "chapel": {
+    "asset": "assets/panoramic360/chapel.webp",
+    "fixtures": {
+      "letter": {
+        "rect": [
+          52,
+          60,
+          5,
+          3
+        ],
+        "reviewed": true
+      },
+      "reliquary": {
+        "rect": [
+          47,
+          57,
+          7,
+          8
+        ],
+        "reviewed": true
+      },
+      "chest": {
+        "rect": [
+          95,
+          63,
+          7,
+          10
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          72,
+          51,
+          2.5,
+          8
+        ],
+        "reviewed": true
+      },
+      "candles": {
+        "rect": [
+          39,
+          53,
+          7,
+          9
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "ac": {
+        "to": "archive",
+        "rect": [
+          88.2,
+          52,
+          7,
+          30
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "morgue": {
+    "asset": "assets/panoramic360/morgue.webp",
+    "fixtures": {
+      "report": {
+        "rect": [
+          44,
+          60.5,
+          10,
+          7
+        ],
+        "reviewed": true
+      },
+      "drawer": {
+        "rect": [
+          50,
+          43,
+          7,
+          7
+        ],
+        "reviewed": true
+      },
+      "cart": {
+        "rect": [
+          66.5,
+          58,
+          6,
+          12
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "mt": {
+        "to": "tunnel",
+        "rect": [
+          5,
+          46.5,
+          8,
+          33
+        ],
+        "reviewed": true
+      },
+      "mb": {
+        "to": "boiler",
+        "rect": [
+          67.2,
+          45.7,
+          4.5,
+          22
+        ],
+        "reviewed": true
+      },
+      "gm": {
+        "to": "generator",
+        "rect": [
+          95.3,
+          46.5,
+          8,
+          33
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "residence": {
+    "asset": "assets/panoramic360/residence.webp",
+    "fixtures": {
+      "diary": {
+        "rect": [
+          53,
+          54.5,
+          4,
+          3
+        ],
+        "reviewed": true
+      },
+      "breaker": {
+        "rect": [
+          48.2,
+          39,
+          7,
+          15
+        ],
+        "reviewed": true
+      },
+      "terminal": {
+        "rect": [
+          51,
+          50.5,
+          5,
+          7
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          23.5,
+          47,
+          2.5,
+          8
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "rr": {
+        "to": "room12",
+        "rect": [
+          33.4,
+          49,
+          7,
+          34
+        ],
+        "reviewed": true
+      },
+      "rl": {
+        "to": "stafflounge",
+        "rect": [
+          88.7,
+          49,
+          8,
+          33
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          10,
+          24
+        ],
+        [
+          13.5,
+          25.5
+        ],
+        [
+          13.5,
+          37
+        ],
+        [
+          10,
+          36
+        ]
+      ],
+      [
+        [
+          14.4,
+          26
+        ],
+        [
+          17.2,
+          27.2
+        ],
+        [
+          17.2,
+          38.2
+        ],
+        [
+          14.4,
+          37.5
+        ]
+      ],
+      [
+        [
+          10,
+          38
+        ],
+        [
+          13.5,
+          39
+        ],
+        [
+          13.5,
+          49
+        ],
+        [
+          10,
+          50
+        ]
+      ],
+      [
+        [
+          14.4,
+          40
+        ],
+        [
+          17.2,
+          40.5
+        ],
+        [
+          17.2,
+          49.7
+        ],
+        [
+          14.4,
+          49.5
+        ]
+      ],
+      [
+        [
+          71.5,
+          27.5
+        ],
+        [
+          73.2,
+          26.5
+        ],
+        [
+          73.2,
+          38
+        ],
+        [
+          71.5,
+          38.5
+        ]
+      ],
+      [
+        [
+          74,
+          26
+        ],
+        [
+          75,
+          25.5
+        ],
+        [
+          75,
+          38
+        ],
+        [
+          74,
+          38
+        ]
+      ],
+      [
+        [
+          71.5,
+          40
+        ],
+        [
+          73.2,
+          40
+        ],
+        [
+          73.2,
+          49
+        ],
+        [
+          71.5,
+          49
+        ]
+      ],
+      [
+        [
+          74,
+          40
+        ],
+        [
+          75,
+          40
+        ],
+        [
+          75,
+          49
+        ],
+        [
+          74,
+          49
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "tunnel": {
+    "asset": "assets/panoramic360/tunnel.webp",
+    "fixtures": {
+      "note": {
+        "rect": [
+          10,
+          59.5,
+          5,
+          3
+        ],
+        "reviewed": true
+      },
+      "winch": {
+        "rect": [
+          51,
+          56,
+          15,
+          12
+        ],
+        "reviewed": true
+      },
+      "key": {
+        "rect": [
+          62,
+          56.5,
+          3,
+          3
+        ],
+        "reviewed": true
+      },
+      "writing": {
+        "rect": [
+          35,
+          40,
+          5,
+          7
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "mt": {
+        "to": "morgue",
+        "rect": [
+          78,
+          46,
+          8,
+          23
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "states": {
+      "drained": "assets/panoramic360/states/tunnel_drained.webp"
+    },
+    "stateMasks": {
+      "drained": [
+        [
+          [
+            0,
+            54
+          ],
+          [
+            100,
+            54
+          ],
+          [
+            100,
+            100
+          ],
+          [
+            0,
+            100
+          ]
+        ]
+      ]
+    }
+  },
+  "boiler": {
+    "asset": "assets/panoramic360/boiler.webp",
+    "fixtures": {
+      "log": {
+        "rect": [
+          73.5,
+          54,
+          7.5,
+          7
+        ],
+        "reviewed": true
+      },
+      "furnace": {
+        "rect": [
+          46,
+          51.5,
+          10,
+          15
+        ],
+        "reviewed": true
+      },
+      "pipes": {
+        "rect": [
+          32,
+          40,
+          7,
+          17
+        ],
+        "reviewed": true
+      },
+      "tin": {
+        "rect": [
+          33,
+          62,
+          4,
+          5
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "mb": {
+        "to": "morgue",
+        "rect": [
+          89.5,
+          51,
+          7,
+          26
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "laundry": {
+    "asset": "assets/panoramic360/laundry.webp",
+    "fixtures": {
+      "cart": {
+        "rect": [
+          50,
+          61,
+          11,
+          16
+        ],
+        "reviewed": true
+      },
+      "antiseptic": {
+        "rect": [
+          96,
+          55,
+          3,
+          4
+        ],
+        "reviewed": true
+      },
+      "chute": {
+        "rect": [
+          70.5,
+          51.5,
+          5.5,
+          13
+        ],
+        "reviewed": true
+      },
+      "pouch": {
+        "rect": [
+          5.5,
+          53,
+          4,
+          6
+        ],
+        "reviewed": true
+      },
+      "map": {
+        "rect": [
+          74.5,
+          37.5,
+          5,
+          9
+        ],
+        "reviewed": true
+      },
+      "plank": {
+        "rect": [
+          25.5,
+          59.5,
+          3,
+          16
+        ],
+        "reviewed": true
+      },
+      "locker": {
+        "rect": [
+          61.5,
+          51,
+          7,
+          25
+        ],
+        "reviewed": true
+      },
+      "lever": {
+        "rect": [
+          34.7,
+          43.5,
+          5,
+          10
+        ],
+        "reviewed": true
+      },
+      "journal": {
+        "rect": [
+          8,
+          54,
+          4,
+          3
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          76.2,
+          46,
+          2,
+          7
+        ],
+        "reviewed": true
+      },
+      "cache": {
+        "rect": [
+          7,
+          63,
+          5,
+          7
+        ],
+        "reviewed": true
+      },
+      "stove": {
+        "rect": [
+          92,
+          56.5,
+          8,
+          22
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "lr": {
+        "to": "surgery",
+        "rect": [
+          18.6,
+          49,
+          6.8,
+          29
+        ],
+        "reviewed": true
+      },
+      "wl": {
+        "to": "wardservice",
+        "rect": [
+          81.6,
+          49,
+          7,
+          28
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "states": {
+      "trap_spent": "assets/panoramic360/states/laundry_trap_spent.webp",
+      "trap_armed": "assets/panoramic360/states/laundry_trap_armed.webp"
+    },
+    "stateMasks": {
+      "trap_spent": [
+        [
+          [
+            49.6,
+            26.0
+          ],
+          [
+            61.6,
+            26.0
+          ],
+          [
+            61.6,
+            48.0
+          ],
+          [
+            49.6,
+            48.0
+          ]
+        ],
+        [
+          [
+            51.0,
+            54.0
+          ],
+          [
+            71.0,
+            54.0
+          ],
+          [
+            71.0,
+            76.0
+          ],
+          [
+            51.0,
+            76.0
+          ]
+        ]
+      ],
+      "trap_armed": [
+        [
+          [
+            30.700000000000003,
+            35.5
+          ],
+          [
+            38.7,
+            35.5
+          ],
+          [
+            38.7,
+            51.5
+          ],
+          [
+            30.700000000000003,
+            51.5
+          ]
+        ],
+        [
+          [
+            33,
+            23
+          ],
+          [
+            57,
+            29
+          ],
+          [
+            57,
+            33
+          ],
+          [
+            33,
+            27
+          ]
+        ]
+      ]
+    },
+    "firebox": [
+      92.1,
+      55.7,
+      2.5,
+      6.5
+    ]
+  },
+  "children": {
+    "asset": "assets/panoramic360/children.webp",
+    "fixtures": {
+      "drawing": {
+        "rect": [
+          48,
+          44.5,
+          8,
+          10
+        ],
+        "reviewed": true
+      },
+      "negative": {
+        "rect": [
+          48.5,
+          63,
+          3,
+          3
+        ],
+        "reviewed": true
+      },
+      "rabbit": {
+        "rect": [
+          64,
+          71,
+          6,
+          8
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "rc12": {
+        "to": "room12",
+        "rect": [
+          90,
+          51,
+          8,
+          31
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          3,
+          28
+        ],
+        [
+          8,
+          30
+        ],
+        [
+          8,
+          40
+        ],
+        [
+          3,
+          38
+        ]
+      ],
+      [
+        [
+          9,
+          30.5
+        ],
+        [
+          13.5,
+          32
+        ],
+        [
+          13.5,
+          41
+        ],
+        [
+          9,
+          40
+        ]
+      ],
+      [
+        [
+          3,
+          40
+        ],
+        [
+          8,
+          42
+        ],
+        [
+          8,
+          52
+        ],
+        [
+          3,
+          53
+        ]
+      ],
+      [
+        [
+          9,
+          42
+        ],
+        [
+          13.5,
+          43
+        ],
+        [
+          13.5,
+          51
+        ],
+        [
+          9,
+          52
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "records": {
+    "asset": "assets/panoramic360/records.webp",
+    "fixtures": {
+      "ledger": {
+        "rect": [
+          62,
+          58,
+          6,
+          3
+        ],
+        "reviewed": true
+      },
+      "cabinet": {
+        "rect": [
+          30,
+          52,
+          7,
+          21
+        ],
+        "reviewed": true
+      },
+      "wall": {
+        "rect": [
+          47,
+          34,
+          15,
+          9
+        ],
+        "reviewed": true
+      },
+      "tape": {
+        "rect": [
+          67.4,
+          60,
+          6,
+          4
+        ],
+        "reviewed": true
+      },
+      "journal": {
+        "rect": [
+          57.5,
+          58,
+          4,
+          3
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          8,
+          47,
+          2.5,
+          7
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "ar": {
+        "to": "archive",
+        "rect": [
+          16,
+          51.5,
+          7,
+          30
+        ],
+        "reviewed": true
+      },
+      "rc": {
+        "to": "coldstore",
+        "rect": [
+          81.5,
+          51.5,
+          7,
+          30
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "surgery": {
+    "asset": "assets/panoramic360/surgery.webp",
+    "fixtures": {
+      "kessler": {
+        "rect": [
+          34,
+          52,
+          6,
+          26
+        ],
+        "reviewed": true
+      },
+      "notes": {
+        "rect": [
+          65,
+          47,
+          6,
+          3
+        ],
+        "reviewed": true
+      },
+      "tray": {
+        "rect": [
+          78,
+          58,
+          13,
+          10
+        ],
+        "reviewed": true
+      },
+      "mask": {
+        "rect": [
+          16,
+          57,
+          4,
+          5
+        ],
+        "reviewed": true
+      },
+      "shotgun": {
+        "rect": [
+          23,
+          65,
+          6,
+          4
+        ],
+        "reviewed": true
+      },
+      "exit": {
+        "rect": [
+          25,
+          43.5,
+          4,
+          4
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "lr": {
+        "to": "laundry",
+        "rect": [
+          88.9,
+          49,
+          6,
+          40
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "states": {
+      "after": "assets/panoramic360/states/surgery_after.webp"
+    },
+    "stateMasks": {
+      "after": [
+        [
+          [
+            29.0,
+            38.0
+          ],
+          [
+            39.0,
+            38.0
+          ],
+          [
+            39.0,
+            72.0
+          ],
+          [
+            29.0,
+            72.0
+          ]
+        ],
+        [
+          [
+            28.0,
+            59.0
+          ],
+          [
+            42.0,
+            59.0
+          ],
+          [
+            42.0,
+            73.0
+          ],
+          [
+            28.0,
+            73.0
+          ]
+        ]
+      ]
+    }
+  },
+  "isolation": {
+    "asset": "assets/panoramic360/isolation.webp",
+    "fixtures": {
+      "log": {
+        "rect": [
+          51.5,
+          56,
+          4,
+          3
+        ],
+        "reviewed": true
+      },
+      "cabinet": {
+        "rect": [
+          42.5,
+          48,
+          8,
+          22
+        ],
+        "reviewed": true
+      },
+      "mirror": {
+        "rect": [
+          31,
+          48,
+          4,
+          13
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "oi": {
+        "to": "powercontrol",
+        "rect": [
+          70.2,
+          51,
+          6,
+          27
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "specimen": {
+    "asset": "assets/panoramic360/specimen.webp",
+    "fixtures": {
+      "register": {
+        "rect": [
+          48.5,
+          60,
+          5,
+          3
+        ],
+        "reviewed": true
+      },
+      "fluid": {
+        "rect": [
+          48.5,
+          43,
+          9,
+          13
+        ],
+        "reviewed": true
+      },
+      "wire": {
+        "rect": [
+          79,
+          57,
+          5,
+          8
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "os": {
+        "to": "observation",
+        "rect": [
+          18.3,
+          48.5,
+          7,
+          31
+        ],
+        "reviewed": true
+      },
+      "spc": {
+        "to": "powercontrol",
+        "rect": [
+          84.4,
+          48.5,
+          7,
+          31
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "powercontrol": {
+    "asset": "assets/panoramic360/powercontrol.webp",
+    "fixtures": {
+      "memo": {
+        "rect": [
+          50,
+          59,
+          6,
+          4
+        ],
+        "reviewed": true
+      },
+      "relays": {
+        "rect": [
+          49,
+          44.5,
+          17,
+          18
+        ],
+        "reviewed": true
+      },
+      "parts": {
+        "rect": [
+          33,
+          45,
+          7,
+          13
+        ],
+        "reviewed": true
+      },
+      "clearance": {
+        "rect": [
+          65,
+          46,
+          10,
+          18
+        ],
+        "reviewed": true
+      },
+      "markerGraffiti": {
+        "rect": [
+          87.5,
+          41,
+          4,
+          10
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "oi": {
+        "to": "isolation",
+        "rect": [
+          11.1,
+          51.5,
+          7,
+          30
+        ],
+        "reviewed": true
+      },
+      "spc": {
+        "to": "specimen",
+        "rect": [
+          90,
+          51.5,
+          7,
+          30
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "stafflounge": {
+    "asset": "assets/panoramic360/stafflounge.webp",
+    "fixtures": {
+      "shaw": {
+        "rect": [
+          5,
+          55,
+          5,
+          25
+        ],
+        "reviewed": true
+      },
+      "note": {
+        "rect": [
+          37,
+          46,
+          11,
+          14
+        ],
+        "reviewed": true
+      },
+      "thermos": {
+        "rect": [
+          52,
+          63,
+          3,
+          5
+        ],
+        "reviewed": true
+      },
+      "harness": {
+        "rect": [
+          45.5,
+          60.5,
+          4,
+          4
+        ],
+        "reviewed": true
+      },
+      "sink": {
+        "rect": [
+          70,
+          51.5,
+          7,
+          8
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          94,
+          47,
+          2.5,
+          8
+        ],
+        "reviewed": true
+      },
+      "cache": {
+        "rect": [
+          60,
+          64,
+          5,
+          7
+        ],
+        "reviewed": true
+      },
+      "television": {
+        "rect": [
+          17,
+          48.5,
+          7,
+          10
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "rl": {
+        "to": "residence",
+        "rect": [
+          80.5,
+          50,
+          7,
+          33
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          5.2,
+          31
+        ],
+        [
+          9.7,
+          32.5
+        ],
+        [
+          9.7,
+          38.3
+        ],
+        [
+          5.2,
+          37
+        ]
+      ],
+      [
+        [
+          10.4,
+          32.8
+        ],
+        [
+          14.6,
+          34
+        ],
+        [
+          14.6,
+          39.5
+        ],
+        [
+          10.4,
+          38.5
+        ]
+      ],
+      [
+        [
+          5.2,
+          39
+        ],
+        [
+          9.7,
+          40
+        ],
+        [
+          9.7,
+          45.5
+        ],
+        [
+          5.2,
+          46
+        ]
+      ],
+      [
+        [
+          10.4,
+          40.5
+        ],
+        [
+          14.6,
+          41
+        ],
+        [
+          14.6,
+          45.5
+        ],
+        [
+          10.4,
+          45.5
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "screens": [
+      {
+        "rect": [
+          16.6,
+          48.2,
+          4.9,
+          6.8
+        ],
+        "tv": true
+      }
+    ]
+  },
+  "lift": {
+    "asset": "assets/panoramic360/lift.webp",
+    "fixtures": {
+      "controls": {
+        "rect": [
+          63.4,
+          46,
+          5.5,
+          23
+        ],
+        "reviewed": true
+      },
+      "manifest": {
+        "rect": [
+          74,
+          44,
+          6,
+          13
+        ],
+        "reviewed": true
+      },
+      "mirror": {
+        "rect": [
+          23,
+          42,
+          17,
+          21
+        ],
+        "reviewed": true
+      },
+      "terminal": {
+        "rect": [
+          12,
+          58,
+          5,
+          9
+        ],
+        "reviewed": true
+      },
+      "ribbon": {
+        "rect": [
+          8,
+          65,
+          3,
+          4
+        ],
+        "reviewed": true
+      },
+      "cache": {
+        "rect": [
+          73,
+          67,
+          11,
+          14
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "liftEntry": {
+        "to": "generator",
+        "rect": [
+          92.3,
+          53,
+          10,
+          46
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "coldstore": {
+    "asset": "assets/panoramic360/coldstore.webp",
+    "fixtures": {
+      "log": {
+        "rect": [
+          65,
+          48,
+          6,
+          7
+        ],
+        "reviewed": true
+      },
+      "reel": {
+        "rect": [
+          48,
+          60,
+          5,
+          5
+        ],
+        "reviewed": true
+      },
+      "medkit": {
+        "rect": [
+          5.5,
+          61.5,
+          5,
+          5
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "rc": {
+        "to": "records",
+        "rect": [
+          78.8,
+          51.5,
+          7,
+          31
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  },
+  "eastcorridor": {
+    "asset": "assets/panoramic360/eastcorridor.webp",
+    "fixtures": {
+      "light": {
+        "rect": [
+          50,
+          23,
+          4,
+          12
+        ],
+        "reviewed": true
+      },
+      "trolley": {
+        "rect": [
+          53,
+          63,
+          15,
+          13
+        ],
+        "reviewed": true
+      },
+      "directory": {
+        "rect": [
+          39,
+          45,
+          8,
+          18
+        ],
+        "reviewed": true
+      },
+      "radio": {
+        "rect": [
+          39,
+          55,
+          4,
+          4
+        ],
+        "reviewed": true
+      },
+      "window": {
+        "rect": [
+          56.5,
+          44.5,
+          15.5,
+          16.5
+        ],
+        "reviewed": true
+      },
+      "exit": {
+        "rect": [
+          8.5,
+          47.5,
+          3.6,
+          7
+        ],
+        "reviewed": true
+      },
+      "valve": {
+        "rect": [
+          56,
+          26.5,
+          5,
+          10
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "lw": {
+        "to": "lobby",
+        "rect": [
+          21.8,
+          52,
+          8,
+          28
+        ],
+        "reviewed": true
+      },
+      "ew": {
+        "to": "ward",
+        "rect": [
+          77.4,
+          52,
+          7,
+          28
+        ],
+        "reviewed": true
+      },
+      "es": {
+        "to": "security",
+        "rect": [
+          88.8,
+          52,
+          7,
+          28
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "droppedLight": [
+      51,
+      73,
+      3,
+      3
+    ]
+  },
+  "isoward": {
+    "asset": "assets/panoramic360/isoward.webp",
+    "fixtures": {
+      "patient": {
+        "rect": [
+          51,
+          55,
+          15,
+          21
+        ],
+        "reviewed": true
+      },
+      "trolley": {
+        "rect": [
+          34,
+          55.5,
+          6,
+          16
+        ],
+        "reviewed": true
+      },
+      "chart": {
+        "rect": [
+          56,
+          35.5,
+          6,
+          13
+        ],
+        "reviewed": true
+      },
+      "phone": {
+        "rect": [
+          21.4,
+          45,
+          2.5,
+          8
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "wi": {
+        "to": "wardnorth",
+        "rect": [
+          87.6,
+          48.5,
+          8,
+          46
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "states": {
+      "covered": "assets/panoramic360/states/isoward_covered.webp"
+    },
+    "stateMasks": {
+      "covered": [
+        [
+          [
+            40.5,
+            42.5
+          ],
+          [
+            62.5,
+            42.5
+          ],
+          [
+            62.5,
+            72.5
+          ],
+          [
+            40.5,
+            72.5
+          ]
+        ]
+      ]
+    }
+  },
+  "wardnorth": {
+    "asset": "assets/panoramic360/wardnorth.webp",
+    "fixtures": {
+      "notice": {
+        "rect": [
+          59,
+          47,
+          3.5,
+          11
+        ],
+        "reviewed": true
+      },
+      "trolley": {
+        "rect": [
+          45,
+          59.5,
+          7,
+          14
+        ],
+        "reviewed": true
+      },
+      "windowLever": {
+        "rect": [
+          5.2,
+          60,
+          3,
+          11
+        ],
+        "reviewed": true
+      },
+      "coldWindow0": {
+        "rect": [
+          7.5,
+          50.5,
+          2,
+          4
+        ],
+        "reviewed": true
+      },
+      "coldWindow1": {
+        "rect": [
+          14.1,
+          50.5,
+          2,
+          4
+        ],
+        "reviewed": true
+      },
+      "coldWindow2": {
+        "rect": [
+          20.9,
+          50.5,
+          2,
+          4
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "wr": {
+        "to": "room12",
+        "rect": [
+          28,
+          51,
+          4.5,
+          26
+        ],
+        "reviewed": true
+      },
+      "wi": {
+        "to": "isoward",
+        "rect": [
+          38,
+          51,
+          5,
+          26
+        ],
+        "reviewed": true
+      },
+      "northPassage": {
+        "to": "ward",
+        "rect": [
+          75.5,
+          51,
+          5.5,
+          26
+        ],
+        "reviewed": true
+      },
+      "servicePassage": {
+        "to": "wardservice",
+        "rect": [
+          89,
+          51,
+          8,
+          34
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [
+      [
+        [
+          3.5,
+          33
+        ],
+        [
+          6.9,
+          33.2
+        ],
+        [
+          6.9,
+          40
+        ],
+        [
+          3.5,
+          40
+        ]
+      ],
+      [
+        [
+          3.5,
+          41
+        ],
+        [
+          6.9,
+          41
+        ],
+        [
+          6.9,
+          48.5
+        ],
+        [
+          3.5,
+          48.5
+        ]
+      ],
+      [
+        [
+          10.3,
+          33.5
+        ],
+        [
+          13.4,
+          33.5
+        ],
+        [
+          13.4,
+          40
+        ],
+        [
+          10.3,
+          40
+        ]
+      ],
+      [
+        [
+          10.3,
+          41
+        ],
+        [
+          13.4,
+          41
+        ],
+        [
+          13.4,
+          48.5
+        ],
+        [
+          10.3,
+          48.5
+        ]
+      ],
+      [
+        [
+          16.6,
+          34.2
+        ],
+        [
+          19.9,
+          34.5
+        ],
+        [
+          19.9,
+          40.5
+        ],
+        [
+          16.6,
+          40.3
+        ]
+      ],
+      [
+        [
+          16.6,
+          41.5
+        ],
+        [
+          19.9,
+          41.5
+        ],
+        [
+          19.9,
+          48.5
+        ],
+        [
+          16.6,
+          48.5
+        ]
+      ]
+    ],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true,
+    "states": {
+      "windows_open": "assets/panoramic360/states/wardnorth_windows_open.webp"
+    },
+    "stateMasks": {
+      "windows_open": [
+        [
+          [
+            1.75,
+            29.5
+          ],
+          [
+            9.25,
+            29.5
+          ],
+          [
+            9.25,
+            54.5
+          ],
+          [
+            1.75,
+            54.5
+          ]
+        ],
+        [
+          [
+            8.45,
+            29.5
+          ],
+          [
+            15.95,
+            29.5
+          ],
+          [
+            15.95,
+            54.5
+          ],
+          [
+            8.45,
+            54.5
+          ]
+        ],
+        [
+          [
+            14.75,
+            29.5
+          ],
+          [
+            22.25,
+            29.5
+          ],
+          [
+            22.25,
+            54.5
+          ],
+          [
+            14.75,
+            54.5
+          ]
+        ]
+      ]
+    },
+    "windowPolygons": [
+      [
+        [
+          [
+            1.75,
+            29.5
+          ],
+          [
+            9.25,
+            29.5
+          ],
+          [
+            9.25,
+            54.5
+          ],
+          [
+            1.75,
+            54.5
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            8.45,
+            29.5
+          ],
+          [
+            15.95,
+            29.5
+          ],
+          [
+            15.95,
+            54.5
+          ],
+          [
+            8.45,
+            54.5
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            14.75,
+            29.5
+          ],
+          [
+            22.25,
+            29.5
+          ],
+          [
+            22.25,
+            54.5
+          ],
+          [
+            14.75,
+            54.5
+          ]
+        ]
+      ]
+    ]
+  },
+  "wardservice": {
+    "asset": "assets/panoramic360/wardservice.webp",
+    "fixtures": {
+      "map": {
+        "rect": [
+          50.2,
+          45,
+          8,
+          13
+        ],
+        "reviewed": true
+      },
+      "cupboard": {
+        "rect": [
+          61.3,
+          51,
+          7,
+          24
+        ],
+        "reviewed": true
+      },
+      "cover": {
+        "rect": [
+          86.5,
+          68,
+          8,
+          14
+        ],
+        "reviewed": true
+      },
+      "keypad": {
+        "rect": [
+          32,
+          43,
+          2,
+          5
+        ],
+        "reviewed": true
+      },
+      "trail": {
+        "rect": [
+          50,
+          69,
+          12,
+          12
+        ],
+        "reviewed": true
+      }
+    },
+    "doors": {
+      "wa": {
+        "to": "archive",
+        "rect": [
+          11.5,
+          50.5,
+          9,
+          40
+        ],
+        "reviewed": true
+      },
+      "wp": {
+        "to": "pharmacy",
+        "rect": [
+          27.3,
+          51,
+          6,
+          32
+        ],
+        "reviewed": true
+      },
+      "wl": {
+        "to": "laundry",
+        "rect": [
+          70.7,
+          51,
+          6,
+          32
+        ],
+        "reviewed": true
+      },
+      "servicePassage": {
+        "to": "wardnorth",
+        "rect": [
+          87.2,
+          50.5,
+          9,
+          40
+        ],
+        "reviewed": true
+      }
+    },
+    "glazing": [],
+    "threat": [
+      50,
+      58,
+      6,
+      25
+    ],
+    "reviewed": true
+  }
+}

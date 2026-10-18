@@ -1,0 +1,2939 @@
+{
+  "lobby": {
+    "name": "Emergency Lobby",
+    "description": "Snow drifts against the dark glass. Battery-backed emergency lamps pulse above abandoned reception. Black mould blooms around the vents; a dark drag trail ends beneath the desk.",
+    "doors": [
+      {
+        "id": "ls",
+        "door": {
+          "a": "lobby",
+          "b": "security"
+        },
+        "to": "security",
+        "u": 0.25
+      },
+      {
+        "id": "lw",
+        "door": {
+          "a": "lobby",
+          "b": "eastcorridor"
+        },
+        "to": "eastcorridor",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "dynamo",
+        "label": "Reception emergency dynamo",
+        "ids": [
+          "emergencyDynamo"
+        ],
+        "rect": [
+          75,
+          75,
+          5,
+          7
+        ],
+        "layer": "dynamo"
+      },
+      {
+        "id": "desk",
+        "label": "Reception desk",
+        "ids": [
+          "desk"
+        ],
+        "rect": [
+          87,
+          67,
+          14,
+          8
+        ],
+        "drawer": true
+      },
+      {
+        "id": "locker",
+        "label": "Staff locker",
+        "ids": [
+          "lock"
+        ],
+        "rect": [
+          84,
+          40,
+          6,
+          31
+        ]
+      },
+      {
+        "id": "coat",
+        "label": "Coat hook",
+        "ids": [
+          "coat"
+        ],
+        "rect": [
+          87,
+          42,
+          4,
+          19
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Continuity Terminal",
+        "ids": [
+          "term"
+        ],
+        "rect": [
+          85,
+          57,
+          7,
+          10
+        ]
+      },
+      {
+        "id": "box",
+        "label": "Field cache",
+        "ids": [
+          "box"
+        ],
+        "rect": [
+          76,
+          68,
+          10,
+          10
+        ]
+      },
+      {
+        "id": "intercom",
+        "label": "Intercom panel",
+        "ids": [
+          "int"
+        ],
+        "rect": [
+          63,
+          45,
+          2.5,
+          8
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Public payphone",
+        "ids": [
+          "payphone"
+        ],
+        "rect": [
+          59.7,
+          39,
+          3.5,
+          13
+        ]
+      },
+      {
+        "id": "window",
+        "label": "Snow-covered window",
+        "ids": [
+          "win",
+          "lobbyShutters"
+        ],
+        "rect": [
+          5,
+          32,
+          8,
+          32
+        ]
+      },
+      {
+        "id": "entrance",
+        "label": "Chained main entrance",
+        "ids": [
+          "sealedExit"
+        ],
+        "rect": [
+          32,
+          48,
+          25,
+          60
+        ]
+      }
+    ]
+  },
+  "security": {
+    "name": "Security Office",
+    "description": "Surveillance monitors hum above a cramped security desk. A cold coffee sits beside the controls. The outside locks answer to a remote operator; the local switches have been disabled.",
+    "doors": [
+      {
+        "id": "ls",
+        "door": {
+          "a": "lobby",
+          "b": "security"
+        },
+        "to": "lobby",
+        "u": 0.265
+      },
+      {
+        "id": "es",
+        "door": {
+          "a": "eastcorridor",
+          "b": "security",
+          "flag": "power"
+        },
+        "to": "eastcorridor",
+        "u": 0.773
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "report",
+        "label": "Incident report",
+        "ids": [
+          "rep"
+        ],
+        "rect": [
+          49,
+          61,
+          9,
+          6
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Equipment cabinet",
+        "ids": [
+          "rev",
+          "earlyBattery",
+          "umbrella",
+          "petrolLighter",
+          "utilityKnife"
+        ],
+        "rect": [
+          34.5,
+          38,
+          11,
+          32
+        ],
+        "drawer": true
+      },
+      {
+        "id": "drawer",
+        "label": "Desk drawer",
+        "ids": [
+          "drw",
+          "lighterFluid"
+        ],
+        "rect": [
+          37.5,
+          73,
+          9,
+          17
+        ],
+        "drawer": true
+      },
+      {
+        "id": "roster",
+        "label": "Duty roster",
+        "ids": [
+          "ros",
+          "mimiPersonnel"
+        ],
+        "rect": [
+          65,
+          31,
+          10,
+          17
+        ]
+      },
+      {
+        "id": "monitors",
+        "label": "Camera monitors",
+        "ids": [
+          "cam",
+          "rep2",
+          "clara"
+        ],
+        "rect": [
+          50,
+          38,
+          17,
+          19
+        ]
+      },
+      {
+        "id": "coffee",
+        "label": "Cold coffee",
+        "ids": [
+          "cof"
+        ],
+        "rect": [
+          47,
+          56.5,
+          3,
+          5
+        ]
+      },
+      {
+        "id": "map",
+        "label": "Folded floor plan",
+        "ids": [
+          "mapboard"
+        ],
+        "rect": [
+          55,
+          61,
+          8,
+          6
+        ]
+      },
+      {
+        "id": "portraits",
+        "label": "Staff portraits",
+        "ids": [
+          "staffPortraits"
+        ],
+        "rect": [
+          51.5,
+          21.5,
+          14,
+          10
+        ]
+      },
+      {
+        "id": "diary",
+        "label": "Night attendant journal",
+        "ids": [
+          "attendantDiary1",
+          "winterJournal"
+        ],
+        "rect": [
+          41.5,
+          56,
+          7,
+          4
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Desk telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          61,
+          55.5,
+          7,
+          7
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "ids": [
+          "@supply"
+        ],
+        "rect": [
+          70,
+          60,
+          4,
+          4
+        ],
+        "layer": "pouch"
+      }
+    ]
+  },
+  "ward": {
+    "name": "Patient Wing",
+    "description": "The Patient Wing opens around a tiled nurse station. An open night-shift equipment case rests on the counter. Heavy doors lead back to the East Corridor and onward to the North Patient Corridor. A toppled gurney blocks part of the floor.",
+    "doors": [
+      {
+        "id": "ew",
+        "door": {
+          "a": "eastcorridor",
+          "b": "ward",
+          "need": "Staff Access Card"
+        },
+        "to": "eastcorridor",
+        "u": 0.25
+      },
+      {
+        "id": "northPassage",
+        "door": {
+          "a": "ward",
+          "b": "wardnorth"
+        },
+        "to": "wardnorth",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "gurney",
+        "label": "Overturned gurney",
+        "ids": [
+          "gur"
+        ],
+        "rect": [
+          76.68,
+          64.6,
+          12.006,
+          17.1
+        ],
+        "drawer": true
+      },
+      {
+        "id": "names",
+        "label": "Patient name boards",
+        "ids": [
+          "nb"
+        ],
+        "rect": [
+          38.661,
+          29.5,
+          8.004000000000001,
+          14.4
+        ]
+      },
+      {
+        "id": "lockbox",
+        "label": "Night nurse equipment box",
+        "ids": [
+          "nightPistol"
+        ],
+        "rect": [
+          48.666,
+          42.1,
+          5.336,
+          5.4
+        ],
+        "drawer": true
+      },
+      {
+        "id": "ammo",
+        "label": "Ammunition envelope",
+        "ids": [
+          "pistolRounds"
+        ],
+        "rect": [
+          45.998,
+          45.7,
+          2.668,
+          1.8
+        ],
+        "drawer": true
+      },
+      {
+        "id": "journal",
+        "label": "Night attendant journal",
+        "ids": [
+          "nightJournal"
+        ],
+        "rect": [
+          42.663,
+          42.1,
+          4.002000000000001,
+          2.7
+        ]
+      }
+    ]
+  },
+  "room12": {
+    "name": "Room 12",
+    "description": "A single bed, restraints cut. The name on the door has been scratched out and rewritten: J-09. Beneath the frame, someone carved BELA into the metal.",
+    "doors": [
+      {
+        "id": "wr",
+        "door": {
+          "a": "wardnorth",
+          "b": "room12",
+          "need": "Staff Access Card"
+        },
+        "to": "wardnorth",
+        "u": 0.22
+      },
+      {
+        "id": "rr",
+        "door": {
+          "a": "room12",
+          "b": "residence",
+          "flag": "power"
+        },
+        "to": "residence",
+        "u": 0.68
+      },
+      {
+        "id": "rc12",
+        "door": {
+          "a": "room12",
+          "b": "children"
+        },
+        "to": "children",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "file",
+        "label": "Patient file",
+        "ids": [
+          "file"
+        ],
+        "rect": [
+          62.006,
+          60.1,
+          4.002000000000001,
+          10.8
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Medical cabinet",
+        "ids": [],
+        "rect": [
+          54.002,
+          32.650000000000006,
+          6.003,
+          13.5
+        ]
+      },
+      {
+        "id": "shelf",
+        "label": "Supply shelves",
+        "ids": [
+          "shf",
+          "shf2",
+          "drw12"
+        ],
+        "rect": [
+          52.668,
+          42.1,
+          4.002000000000001,
+          4.5
+        ],
+        "drawer": true
+      },
+      {
+        "id": "restraints",
+        "label": "Cut restraints",
+        "ids": [
+          "rs"
+        ],
+        "rect": [
+          48.666,
+          56.5,
+          4.6690000000000005,
+          10.8
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Bedside drawer",
+        "ids": [
+          "mimiNote",
+          "cab"
+        ],
+        "rect": [
+          37.327,
+          52,
+          7.337000000000001,
+          6.3
+        ],
+        "drawer": true
+      },
+      {
+        "id": "tray",
+        "label": "Instrument tray",
+        "ids": [
+          "tray12"
+        ],
+        "rect": [
+          25.988,
+          65.5,
+          12.006,
+          8.1
+        ]
+      }
+    ]
+  },
+  "archive": {
+    "name": "The Archives",
+    "description": "Rows of steel shelving. Every folder bears your name, in handwriting that is not yours.",
+    "doors": [
+      {
+        "id": "wa",
+        "door": {
+          "a": "wardservice",
+          "b": "archive",
+          "need": "Archive Key"
+        },
+        "to": "wardservice",
+        "u": 0.18
+      },
+      {
+        "id": "ag",
+        "door": {
+          "a": "archive",
+          "b": "generator"
+        },
+        "to": "generator",
+        "u": 0.34
+      },
+      {
+        "id": "ac",
+        "door": {
+          "a": "archive",
+          "b": "chapel",
+          "flag": "chapel"
+        },
+        "to": "chapel",
+        "u": 0.68
+      },
+      {
+        "id": "ar",
+        "door": {
+          "a": "archive",
+          "b": "records"
+        },
+        "to": "records",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "memo",
+        "label": "Research memo",
+        "ids": [
+          "memo",
+          "componentNote"
+        ],
+        "rect": [
+          57.337,
+          55.6,
+          8.004000000000001,
+          4.5
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Long-gun cabinet",
+        "ids": [
+          "gun",
+          "tin"
+        ],
+        "rect": [
+          62.006,
+          34,
+          6.67,
+          16.2
+        ]
+      },
+      {
+        "id": "fuse",
+        "label": "Equipment shelf",
+        "ids": [
+          "fus"
+        ],
+        "rect": [
+          60.672,
+          44.800000000000004,
+          4.002000000000001,
+          3.6
+        ],
+        "drawer": true
+      },
+      {
+        "id": "plaque",
+        "label": "Memorial plaque lock",
+        "ids": [
+          "cat"
+        ],
+        "rect": [
+          50,
+          24.1,
+          4.6690000000000005,
+          12.6
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Hidden index drawer",
+        "ids": [
+          "hid",
+          "elevatorFuseA"
+        ],
+        "rect": [
+          40.662,
+          69.1,
+          6.003,
+          7.2
+        ],
+        "drawer": true
+      },
+      {
+        "id": "folder",
+        "label": "Patient folder",
+        "ids": [
+          "flr",
+          "mimiTransfer"
+        ],
+        "rect": [
+          63.673500000000004,
+          59.65,
+          4.6690000000000005,
+          3.6
+        ]
+      },
+      {
+        "id": "survey",
+        "label": "Restricted wing survey",
+        "ids": [
+          "eastMap"
+        ],
+        "rect": [
+          38.661,
+          52,
+          6.67,
+          4.5
+        ]
+      }
+    ]
+  },
+  "generator": {
+    "name": "Generator Room",
+    "description": "The lower facility hums with cold. The generator is dark, its panel missing a fuse. A save terminal and storage box sit by the door.",
+    "doors": [
+      {
+        "id": "liftEntry",
+        "door": {
+          "a": "generator",
+          "b": "lift",
+          "flag": "chapter1Ready"
+        },
+        "to": "lift",
+        "u": 0.18
+      },
+      {
+        "id": "ag",
+        "door": {
+          "a": "archive",
+          "b": "generator"
+        },
+        "to": "archive",
+        "u": 0.34
+      },
+      {
+        "id": "go",
+        "door": {
+          "a": "generator",
+          "b": "observation",
+          "flag": "power"
+        },
+        "to": "observation",
+        "u": 0.68
+      },
+      {
+        "id": "gm",
+        "door": {
+          "a": "generator",
+          "b": "morgue",
+          "need": "Bolt Cutters"
+        },
+        "to": "morgue",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Maintenance log",
+        "ids": [
+          "log"
+        ],
+        "rect": [
+          20.651999999999997,
+          69.1,
+          7.337000000000001,
+          6.3
+        ]
+      },
+      {
+        "id": "panel",
+        "label": "Generator fuse panel",
+        "ids": [
+          "pan"
+        ],
+        "rect": [
+          21.319,
+          40.300000000000004,
+          6.67,
+          18.900000000000002
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Continuity Terminal",
+        "ids": [
+          "term2"
+        ],
+        "rect": [
+          80.015,
+          46.6,
+          4.6690000000000005,
+          9
+        ],
+        "layer": "terminal"
+      },
+      {
+        "id": "box",
+        "label": "Field cache",
+        "ids": [
+          "box2"
+        ],
+        "rect": [
+          18.651,
+          57.4,
+          3.335,
+          9.9
+        ]
+      },
+      {
+        "id": "cradle",
+        "label": "Charging cradle",
+        "ids": [
+          "charger"
+        ],
+        "rect": [
+          25.988,
+          59.2,
+          5.336,
+          6.3
+        ]
+      },
+      {
+        "id": "parts",
+        "label": "Parts locker",
+        "ids": [
+          "stb"
+        ],
+        "rect": [
+          80.015,
+          61.9,
+          4.6690000000000005,
+          9
+        ]
+      },
+      {
+        "id": "tools",
+        "label": "Tool cabinet",
+        "ids": [
+          "bt2"
+        ],
+        "rect": [
+          31.323999999999998,
+          83.5,
+          5.336,
+          9
+        ]
+      },
+      {
+        "id": "regulator",
+        "label": "Regulator housing",
+        "ids": [
+          "regulator"
+        ],
+        "rect": [
+          47.332,
+          55.6,
+          5.336,
+          13.5
+        ]
+      },
+      {
+        "id": "dynamo",
+        "label": "Emergency hand charger",
+        "ids": [
+          "handCharge"
+        ],
+        "rect": [
+          31.323999999999998,
+          67.30000000000001,
+          2.668,
+          5.4
+        ],
+        "layer": "dynamo"
+      }
+    ]
+  },
+  "observation": {
+    "name": "Observation Ward",
+    "description": "Reinforced viewing windows separate the first-floor observation ward from sealed trial chambers. A records console remains under emergency power. The more heavily scratched pane is isolated behind a yellow floor line.",
+    "doors": [
+      {
+        "id": "go",
+        "door": {
+          "a": "generator",
+          "b": "observation",
+          "flag": "power"
+        },
+        "to": "generator",
+        "u": 0.25
+      },
+      {
+        "id": "os",
+        "door": {
+          "a": "observation",
+          "b": "specimen",
+          "need": "Encrypted Drive"
+        },
+        "to": "specimen",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "transcript",
+        "label": "Transcript 4B",
+        "ids": [
+          "tr"
+        ],
+        "rect": [
+          41.329,
+          44.800000000000004,
+          4.002000000000001,
+          2.7
+        ]
+      },
+      {
+        "id": "consent",
+        "label": "Original consent",
+        "ids": [
+          "con"
+        ],
+        "rect": [
+          33.325,
+          30.400000000000002,
+          3.335,
+          10.8
+        ]
+      },
+      {
+        "id": "console",
+        "label": "Archive console",
+        "ids": [
+          "dr"
+        ],
+        "rect": [
+          34.659,
+          41.2,
+          4.002000000000001,
+          9
+        ],
+        "drawer": true
+      },
+      {
+        "id": "glass",
+        "label": "Restricted scratched glass",
+        "ids": [
+          "glasssound"
+        ],
+        "rect": [
+          71.344,
+          33.1,
+          4.6690000000000005,
+          20.7
+        ]
+      },
+      {
+        "id": "notice",
+        "label": "Viewing safety notice",
+        "ids": [
+          "glassNotice"
+        ],
+        "rect": [
+          39.995,
+          40.300000000000004,
+          2.0010000000000003,
+          4.5
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Desk telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          47.999,
+          47.5,
+          3.335,
+          5.4
+        ],
+        "layer": "phone"
+      }
+    ]
+  },
+  "pharmacy": {
+    "name": "Pharmacy",
+    "description": "Shelves stripped by panicked hands. Something dripped here recently, and not water.",
+    "doors": [
+      {
+        "id": "wp",
+        "door": {
+          "a": "wardservice",
+          "b": "pharmacy",
+          "flag": "pharm"
+        },
+        "to": "wardservice",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "judith",
+        "label": "Nurse Judith Price",
+        "ids": [
+          "judith"
+        ],
+        "rect": [
+          64.007,
+          77.2,
+          5.336,
+          22.5
+        ]
+      },
+      {
+        "id": "fridge",
+        "label": "Medical fridge",
+        "ids": [
+          "med",
+          "shelf5"
+        ],
+        "rect": [
+          69.343,
+          41.2,
+          9.338000000000001,
+          35.1
+        ],
+        "drawer": true
+      },
+      {
+        "id": "ribbon",
+        "label": "Clerk desk",
+        "ids": [
+          "rib",
+          "elevatorFuseB"
+        ],
+        "rect": [
+          45.331,
+          46.6,
+          6.67,
+          3.6
+        ],
+        "drawer": true
+      },
+      {
+        "id": "cutters",
+        "label": "Maintenance rack",
+        "ids": [
+          "bol"
+        ],
+        "rect": [
+          78.681,
+          65.5,
+          3.335,
+          24.3
+        ],
+        "drawer": true
+      },
+      {
+        "id": "drawer",
+        "label": "Dispensing drawer",
+        "ids": [
+          "am",
+          "shelf3"
+        ],
+        "rect": [
+          52.668,
+          54.7,
+          10.005,
+          7.2
+        ],
+        "drawer": true
+      },
+      {
+        "id": "battery",
+        "label": "Torch rack",
+        "ids": [
+          "bat"
+        ],
+        "rect": [
+          56.003,
+          44.800000000000004,
+          4.6690000000000005,
+          4.5
+        ]
+      },
+      {
+        "id": "shelves",
+        "label": "Upper shelf",
+        "ids": [
+          "shelf2"
+        ],
+        "rect": [
+          44.664,
+          25.900000000000002,
+          14.007000000000001,
+          10.8
+        ]
+      },
+      {
+        "id": "returns",
+        "label": "Returns basket",
+        "ids": [
+          "shelf4",
+          "pharmacyBattery"
+        ],
+        "rect": [
+          51.334,
+          44.800000000000004,
+          4.6690000000000005,
+          4.5
+        ],
+        "drawer": true
+      },
+      {
+        "id": "tools",
+        "label": "Maintenance tool roll",
+        "ids": [
+          "maintenanceKit"
+        ],
+        "rect": [
+          59.338,
+          50.2,
+          3.335,
+          2.7
+        ],
+        "drawer": true,
+        "layer": "pouch"
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          60.672,
+          32.2,
+          2.668,
+          8.1
+        ],
+        "layer": "phone"
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "ids": [
+          "@supply"
+        ],
+        "rect": [
+          39.995,
+          47.5,
+          2.668,
+          3.6
+        ],
+        "layer": "pouch"
+      }
+    ]
+  },
+  "chapel": {
+    "name": "Hospital Chapel",
+    "description": "Candles burn that nobody lit. The pews face a wall of names. It is the only room where the intercom is silent.",
+    "doors": [
+      {
+        "id": "ac",
+        "door": {
+          "a": "archive",
+          "b": "chapel",
+          "flag": "chapel"
+        },
+        "to": "archive",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "letter",
+        "label": "Chaplain letter",
+        "ids": [
+          "let",
+          "chapelRegister"
+        ],
+        "rect": [
+          70.01,
+          43.9,
+          6.003,
+          5.4
+        ]
+      },
+      {
+        "id": "reliquary",
+        "label": "Reliquary",
+        "ids": [
+          "rel"
+        ],
+        "rect": [
+          53.335,
+          40.300000000000004,
+          3.335,
+          9
+        ],
+        "drawer": true
+      },
+      {
+        "id": "chest",
+        "label": "Field cache",
+        "ids": [
+          "box3"
+        ],
+        "rect": [
+          79.348,
+          57.4,
+          7.337000000000001,
+          10.8
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Disconnected telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          36.66,
+          49.300000000000004,
+          2.668,
+          7.2
+        ],
+        "layer": "phone"
+      },
+      {
+        "id": "candles",
+        "label": "Memorial candles",
+        "view": "rear",
+        "ids": [
+          "chapelCandles",
+          "openingPhoto"
+        ],
+        "rect": [
+          15,
+          43,
+          9,
+          12
+        ],
+        "art": "assets/props/candles.svg"
+      }
+    ]
+  },
+  "morgue": {
+    "name": "Morgue",
+    "description": "Rows of steel doors. Some are open. One is warm to the touch.",
+    "doors": [
+      {
+        "id": "mt",
+        "door": {
+          "a": "morgue",
+          "b": "tunnel",
+          "need": "Crank Handle"
+        },
+        "to": "tunnel",
+        "u": 0.22
+      },
+      {
+        "id": "mb",
+        "door": {
+          "a": "morgue",
+          "b": "boiler",
+          "need": "Boiler Key"
+        },
+        "to": "boiler",
+        "u": 0.68
+      },
+      {
+        "id": "gm",
+        "door": {
+          "a": "generator",
+          "b": "morgue",
+          "need": "Bolt Cutters"
+        },
+        "to": "generator",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "report",
+        "label": "Autopsy report",
+        "ids": [
+          "aut"
+        ],
+        "rect": [
+          34.659,
+          66.4,
+          16.008000000000003,
+          11.700000000000001
+        ]
+      },
+      {
+        "id": "drawer",
+        "label": "Mortuary drawer",
+        "ids": [
+          "dw"
+        ],
+        "rect": [
+          31.991,
+          34.900000000000006,
+          12.006,
+          11.700000000000001
+        ]
+      },
+      {
+        "id": "cart",
+        "label": "Supply cart",
+        "ids": [
+          "sh"
+        ],
+        "rect": [
+          80.682,
+          64.6,
+          4.6690000000000005,
+          19.8
+        ]
+      }
+    ]
+  },
+  "residence": {
+    "name": "Staff Residence",
+    "description": "A corridor of staff bedrooms behind a door that was sealed until the power came back. Every bed is made. Every bed has been slept in.",
+    "doors": [
+      {
+        "id": "rr",
+        "door": {
+          "a": "room12",
+          "b": "residence",
+          "flag": "power"
+        },
+        "to": "room12",
+        "u": 0.25
+      },
+      {
+        "id": "rl",
+        "door": {
+          "a": "residence",
+          "b": "stafflounge",
+          "flag": "power"
+        },
+        "to": "stafflounge",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "diary",
+        "label": "Resident diary",
+        "ids": [
+          "dia",
+          "fogPostcard"
+        ],
+        "rect": [
+          64.007,
+          49.300000000000004,
+          4.6690000000000005,
+          3.6
+        ]
+      },
+      {
+        "id": "breaker",
+        "label": "Breaker panel",
+        "ids": [
+          "brk"
+        ],
+        "rect": [
+          32.658,
+          27.7,
+          5.336,
+          14.4
+        ],
+        "drawer": true
+      },
+      {
+        "id": "terminal",
+        "label": "Continuity Terminal",
+        "ids": [
+          "term4"
+        ],
+        "rect": [
+          35.992999999999995,
+          42.1,
+          5.336,
+          9
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          39.328,
+          60.1,
+          3.335,
+          7.2
+        ],
+        "layer": "phone"
+      }
+    ]
+  },
+  "tunnel": {
+    "name": "Flooded Tunnel",
+    "description": "Waist-deep black water. A winch hangs over the flood, and something drags itself in the dark beneath.",
+    "doors": [
+      {
+        "id": "mt",
+        "door": {
+          "a": "morgue",
+          "b": "tunnel",
+          "need": "Crank Handle"
+        },
+        "to": "morgue",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "note",
+        "label": "Diver note",
+        "ids": [
+          "dvn"
+        ],
+        "rect": [
+          25.320999999999998,
+          73.60000000000001,
+          11.339,
+          12.6
+        ]
+      },
+      {
+        "id": "winch",
+        "label": "Winch mechanism",
+        "ids": [
+          "wnc"
+        ],
+        "rect": [
+          59.338,
+          73.60000000000001,
+          12.673,
+          22.5
+        ]
+      },
+      {
+        "id": "key",
+        "label": "Chained key",
+        "ids": [
+          "tk"
+        ],
+        "rect": [
+          74.679,
+          34,
+          2.0010000000000003,
+          9
+        ]
+      },
+      {
+        "id": "writing",
+        "label": "Faint wall writing",
+        "ids": [
+          "uv"
+        ],
+        "rect": [
+          35.992999999999995,
+          28.6,
+          3.335,
+          10.8
+        ]
+      }
+    ]
+  },
+  "boiler": {
+    "name": "Boiler Room",
+    "description": "Pipes shudder with heat. The furnace door is fused shut around something that glows the color of an old lullaby.",
+    "doors": [
+      {
+        "id": "mb",
+        "door": {
+          "a": "morgue",
+          "b": "boiler",
+          "need": "Boiler Key"
+        },
+        "to": "morgue",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Furnace log",
+        "ids": [
+          "fl"
+        ],
+        "rect": [
+          75.346,
+          55.6,
+          8.004000000000001,
+          9
+        ]
+      },
+      {
+        "id": "furnace",
+        "label": "Furnace hatch",
+        "ids": [
+          "fur"
+        ],
+        "rect": [
+          50,
+          51.1,
+          6.67,
+          12.6
+        ],
+        "drawer": true
+      },
+      {
+        "id": "pipes",
+        "label": "Pipe rack",
+        "ids": [
+          "pip"
+        ],
+        "rect": [
+          37.327,
+          42.1,
+          8.671000000000001,
+          27.900000000000002
+        ]
+      },
+      {
+        "id": "tin",
+        "label": "Tool tin",
+        "ids": [
+          "mag"
+        ],
+        "rect": [
+          37.327,
+          64.6,
+          4.6690000000000005,
+          6.3
+        ]
+      }
+    ]
+  },
+  "laundry": {
+    "name": "Laundry & Service Wing",
+    "description": "Industrial washers sit open like steel mouths. Damp sheets hang from ceiling rails, dark with old stains. A sour smell rises from clogged drains. Behind the dryers, someone has scratched a route map into the tile.",
+    "doors": [
+      {
+        "id": "lr",
+        "door": {
+          "a": "laundry",
+          "b": "surgery",
+          "flag": "power"
+        },
+        "to": "surgery",
+        "u": 0.25
+      },
+      {
+        "id": "wl",
+        "door": {
+          "a": "wardservice",
+          "b": "laundry"
+        },
+        "to": "wardservice",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "cart",
+        "label": "Laundry cart",
+        "ids": [
+          "lau"
+        ],
+        "rect": [
+          44.664,
+          54.7,
+          10.005,
+          18
+        ]
+      },
+      {
+        "id": "antiseptic",
+        "label": "Antiseptic pouch",
+        "ids": [
+          "lauant"
+        ],
+        "rect": [
+          50,
+          70,
+          3.335,
+          3.6
+        ],
+        "layer": "pouch"
+      },
+      {
+        "id": "chute",
+        "label": "Laundry chute",
+        "ids": [
+          "chute"
+        ],
+        "rect": [
+          67.342,
+          44.800000000000004,
+          5.336,
+          11.700000000000001
+        ]
+      },
+      {
+        "id": "pouch",
+        "label": "Field equipment pouch",
+        "ids": [
+          "pouch"
+        ],
+        "rect": [
+          25.320999999999998,
+          63.7,
+          5.336,
+          5.4
+        ]
+      },
+      {
+        "id": "map",
+        "label": "Service wing floor plan",
+        "ids": [
+          "tag",
+          "serviceMap"
+        ],
+        "rect": [
+          71.344,
+          27.7,
+          4.6690000000000005,
+          10.8
+        ]
+      },
+      {
+        "id": "plank",
+        "label": "Dry wooden plank",
+        "ids": [
+          "sparePlank"
+        ],
+        "rect": [
+          25.988,
+          52.9,
+          3.335,
+          16.2
+        ]
+      },
+      {
+        "id": "locker",
+        "label": "Supply locker hiding place",
+        "ids": [
+          "laundryhide"
+        ],
+        "rect": [
+          57.337,
+          43.9,
+          8.004000000000001,
+          28.8
+        ]
+      },
+      {
+        "id": "lever",
+        "label": "Overhead hoist release",
+        "ids": [
+          "traplever"
+        ],
+        "rect": [
+          33.992,
+          35.8,
+          3.335,
+          11.700000000000001
+        ]
+      },
+      {
+        "id": "journal",
+        "label": "Loose journal page",
+        "ids": [
+          "attendantDiary2",
+          "stoveNote"
+        ],
+        "rect": [
+          25.320999999999998,
+          72.7,
+          4.6690000000000005,
+          3.6
+        ],
+        "layer": "paper"
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          73.345,
+          36.7,
+          2.0010000000000003,
+          6.3
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "ids": [
+          "@supply"
+        ],
+        "rect": [
+          60.005,
+          68.2,
+          4.002000000000001,
+          3.6
+        ],
+        "layer": "pouch"
+      },
+      {
+        "id": "stove",
+        "label": "Laundry drying stove",
+        "view": "rear",
+        "ids": [
+          "dryingStove"
+        ],
+        "rect": [
+          84,
+          72,
+          13,
+          20
+        ]
+      }
+    ]
+  },
+  "children": {
+    "name": "Children\u2019s Ward",
+    "description": "Paper stars sag above empty beds. Mold has eaten through the painted clouds; dried food cakes the tray tables. The wall is covered in drawings of Bela holding the hand of a faceless man. Every drawing has the same numeric date.",
+    "doors": [
+      {
+        "id": "rc12",
+        "door": {
+          "a": "room12",
+          "b": "children"
+        },
+        "to": "room12",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "drawing",
+        "label": "Children\u2019s drawing",
+        "ids": [
+          "draw"
+        ],
+        "rect": [
+          32.8,
+          34,
+          7.2,
+          13.5
+        ]
+      },
+      {
+        "id": "negative",
+        "label": "Photographic negative",
+        "ids": [
+          "neg"
+        ],
+        "rect": [
+          47.332,
+          66.4,
+          9.338000000000001,
+          7.2
+        ]
+      },
+      {
+        "id": "rabbit",
+        "label": "Wind-up rabbit",
+        "ids": [
+          "toy",
+          "icecreamToy"
+        ],
+        "rect": [
+          68,
+          79,
+          8,
+          19
+        ]
+      }
+    ]
+  },
+  "records": {
+    "name": "Records Annex",
+    "description": "The Records Annex smells of warm paper and stale antiseptic. A researcher\u2019s final notes rest beside a field recorder. A carbon-copy cabinet conceals a photographic lock; no public exit leads through this room.",
+    "doors": [
+      {
+        "id": "ar",
+        "door": {
+          "a": "archive",
+          "b": "records"
+        },
+        "to": "archive",
+        "u": 0.25
+      },
+      {
+        "id": "rc",
+        "door": {
+          "a": "records",
+          "b": "coldstore",
+          "flag": "photo"
+        },
+        "to": "coldstore",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "ledger",
+        "label": "Memorial ledger",
+        "ids": [
+          "ledger",
+          "elevatorFuseC"
+        ],
+        "rect": [
+          29.99,
+          77.2,
+          11.339,
+          10.8
+        ],
+        "drawer": true
+      },
+      {
+        "id": "cabinet",
+        "label": "Carbon cabinet",
+        "ids": [
+          "cab2"
+        ],
+        "rect": [
+          35.992999999999995,
+          43.9,
+          9.338000000000001,
+          25.2
+        ]
+      },
+      {
+        "id": "wall",
+        "label": "Sealed service hatch",
+        "ids": [
+          "wall"
+        ],
+        "rect": [
+          66.675,
+          32.2,
+          4.002000000000001,
+          7.2
+        ]
+      },
+      {
+        "id": "tape",
+        "label": "Field recorder",
+        "ids": [
+          "lasttape"
+        ],
+        "rect": [
+          56.003,
+          50.2,
+          4.002000000000001,
+          4.5
+        ]
+      },
+      {
+        "id": "journal",
+        "label": "Rourke\u2019s final journal",
+        "ids": [
+          "finalJournal",
+          "attendantDiary3",
+          "mimiResearch"
+        ],
+        "rect": [
+          65.34100000000001,
+          50.2,
+          6.003,
+          4.5
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          57.337,
+          35.8,
+          2.668,
+          7.2
+        ],
+        "layer": "phone"
+      }
+    ]
+  },
+  "surgery": {
+    "name": "Surgical Theatre 2",
+    "description": "Surgical lamps hang above a table strapped down from the inside. Rust-colored streaks run into the floor drain. The monitors display waveforms for a patient who is not on the table.",
+    "doors": [
+      {
+        "id": "lr",
+        "door": {
+          "a": "laundry",
+          "b": "surgery",
+          "flag": "power"
+        },
+        "to": "laundry",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "kessler",
+        "label": "Dr. Adrian Kessler",
+        "ids": [
+          "kessler"
+        ],
+        "rect": [
+          35.326,
+          45.7,
+          5.336,
+          18.900000000000002
+        ]
+      },
+      {
+        "id": "notes",
+        "label": "Operating theatre notes",
+        "ids": [
+          "opnote"
+        ],
+        "rect": [
+          29.99,
+          29.5,
+          5.336,
+          8.1
+        ]
+      },
+      {
+        "id": "tray",
+        "label": "Instrument tray",
+        "ids": [
+          "tray"
+        ],
+        "rect": [
+          75.346,
+          52.9,
+          8.004000000000001,
+          8.1
+        ]
+      },
+      {
+        "id": "mask",
+        "label": "Anaesthesia mask",
+        "ids": [
+          "mask"
+        ],
+        "rect": [
+          66.675,
+          42.1,
+          4.002000000000001,
+          10.8
+        ]
+      },
+      {
+        "id": "shotgun",
+        "label": "Security shotgun case",
+        "ids": [
+          "lateShotgun",
+          "shotShells"
+        ],
+        "rect": [
+          56.003,
+          37.6,
+          12.006,
+          7.2
+        ],
+        "drawer": true
+      },
+      {
+        "id": "exit",
+        "label": "Bolted theatre exit",
+        "ids": [
+          "surgeryExit"
+        ],
+        "rect": [
+          81.349,
+          33.1,
+          4.002000000000001,
+          36.9
+        ]
+      }
+    ]
+  },
+  "isolation": {
+    "name": "Restricted Isolation Room",
+    "description": "The glass doors are fogged from the inside. Six beds. Six mirrors turned to the wall. In the dark reflection, one bed is still occupied.",
+    "doors": [
+      {
+        "id": "oi",
+        "door": {
+          "a": "powercontrol",
+          "b": "isolation",
+          "flag": "power"
+        },
+        "to": "powercontrol",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Isolation log",
+        "ids": [
+          "isolog"
+        ],
+        "rect": [
+          32.658,
+          35.8,
+          2.0010000000000003,
+          9
+        ]
+      },
+      {
+        "id": "cabinet",
+        "label": "Medical cabinet",
+        "ids": [
+          "medcab",
+          "medgauze"
+        ],
+        "rect": [
+          80.015,
+          34,
+          6.003,
+          22.5
+        ]
+      },
+      {
+        "id": "mirror",
+        "label": "Covered mirror",
+        "ids": [
+          "mirror"
+        ],
+        "rect": [
+          70.67699999999999,
+          44.800000000000004,
+          6.67,
+          36
+        ]
+      }
+    ]
+  },
+  "specimen": {
+    "name": "Specimen Laboratory",
+    "description": "Glass vials are arranged by voice, not by patient number. A sample in the centre cabinet leans toward the intercom whenever it crackles.",
+    "doors": [
+      {
+        "id": "os",
+        "door": {
+          "a": "observation",
+          "b": "specimen",
+          "need": "Encrypted Drive"
+        },
+        "to": "observation",
+        "u": 0.25
+      },
+      {
+        "id": "spc",
+        "door": {
+          "a": "specimen",
+          "b": "powercontrol",
+          "flag": "power"
+        },
+        "to": "powercontrol",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "register",
+        "label": "Specimen register",
+        "ids": [
+          "specdoc"
+        ],
+        "rect": [
+          42.663,
+          52,
+          7.337000000000001,
+          4.5
+        ]
+      },
+      {
+        "id": "fluid",
+        "label": "Developing fluid",
+        "ids": [
+          "dev"
+        ],
+        "rect": [
+          50,
+          47.5,
+          2.668,
+          9
+        ],
+        "drawer": true
+      },
+      {
+        "id": "wire",
+        "label": "Wire spool",
+        "ids": [
+          "wire"
+        ],
+        "rect": [
+          63.34,
+          53.800000000000004,
+          3.335,
+          6.3
+        ],
+        "drawer": true
+      }
+    ]
+  },
+  "powercontrol": {
+    "name": "Emergency Power Control",
+    "description": "A secondary control station hums behind a mesh cage. The relay labels have been scraped off and replaced with three terms: SUBJECT X, J-09, and CONTINUITY.",
+    "doors": [
+      {
+        "id": "oi",
+        "door": {
+          "a": "powercontrol",
+          "b": "isolation",
+          "flag": "power"
+        },
+        "to": "isolation",
+        "u": 0.25
+      },
+      {
+        "id": "spc",
+        "door": {
+          "a": "specimen",
+          "b": "powercontrol",
+          "flag": "power"
+        },
+        "to": "specimen",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "memo",
+        "label": "Power control memo",
+        "ids": [
+          "pwrmemo"
+        ],
+        "rect": [
+          48.666,
+          43,
+          2.0010000000000003,
+          7.2
+        ]
+      },
+      {
+        "id": "relays",
+        "label": "Relay rack",
+        "ids": [
+          "relays"
+        ],
+        "rect": [
+          58.004000000000005,
+          40.300000000000004,
+          12.006,
+          18.900000000000002
+        ]
+      },
+      {
+        "id": "parts",
+        "label": "Spare parts tray",
+        "ids": [
+          "parts2",
+          "elevatorFuseD"
+        ],
+        "rect": [
+          47.999,
+          53.800000000000004,
+          6.67,
+          4.5
+        ],
+        "drawer": true
+      },
+      {
+        "id": "clearance",
+        "label": "Containment authorization console",
+        "ids": [
+          "clearance",
+          "elevatorBoard"
+        ],
+        "rect": [
+          56.67,
+          66.4,
+          6.003,
+          9
+        ],
+        "layer": "terminal"
+      },
+      {
+        "id": "markerGraffiti",
+        "label": "Red wall graffiti",
+        "view": "rear",
+        "ids": [
+          "markerGraffiti"
+        ],
+        "rect": [
+          28,
+          35,
+          12,
+          24
+        ]
+      }
+    ]
+  },
+  "stafflounge": {
+    "name": "Staff Lounge",
+    "description": "A vending machine glows with no power cable. The staff noticeboard has been wiped clean except for one note in your handwriting.",
+    "doors": [
+      {
+        "id": "rl",
+        "door": {
+          "a": "residence",
+          "b": "stafflounge",
+          "flag": "power"
+        },
+        "to": "residence",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "shaw",
+        "label": "Nurse Evelyn Shaw",
+        "ids": [
+          "shaw"
+        ],
+        "rect": [
+          68.676,
+          78.10000000000001,
+          5.336,
+          24.3
+        ]
+      },
+      {
+        "id": "note",
+        "label": "Staff lounge note",
+        "ids": [
+          "loungeNote",
+          "herbMemo"
+        ],
+        "rect": [
+          39.328,
+          30.400000000000002,
+          6.003,
+          18
+        ]
+      },
+      {
+        "id": "thermos",
+        "label": "Thermos and supplies",
+        "ids": [
+          "coffee",
+          "satriales"
+        ],
+        "rect": [
+          56.003,
+          57.4,
+          6.67,
+          10.8
+        ]
+      },
+      {
+        "id": "harness",
+        "label": "Utility harness",
+        "ids": [
+          "harness"
+        ],
+        "rect": [
+          79.348,
+          36.7,
+          5.336,
+          22.5
+        ]
+      },
+      {
+        "id": "sink",
+        "label": "Utility sink",
+        "ids": [
+          "sink"
+        ],
+        "rect": [
+          73.345,
+          41.2,
+          5.336,
+          5.4
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Wall telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          32.658,
+          31.3,
+          2.0010000000000003,
+          7.2
+        ]
+      },
+      {
+        "id": "cache",
+        "label": "Supply pouch",
+        "ids": [
+          "@supply"
+        ],
+        "rect": [
+          58.671,
+          68.2,
+          5.336,
+          5.4
+        ],
+        "layer": "pouch"
+      },
+      {
+        "id": "television",
+        "label": "Staff room television",
+        "view": "rear",
+        "ids": [
+          "staffTV"
+        ],
+        "rect": [
+          24,
+          35,
+          20,
+          20
+        ],
+        "art": "assets/props/crt.svg"
+      }
+    ]
+  },
+  "lift": {
+    "name": "Restricted Service Elevator",
+    "description": "A freight elevator with a chipped brass floor selector. Its public labels stop at the basement. A steel plate conceals two deeper buttons, rubbed smooth from use. The motor groans as though something is waiting beneath it.",
+    "doors": [
+      {
+        "id": "liftEntry",
+        "door": {
+          "a": "generator",
+          "b": "lift",
+          "flag": "chapter1Ready"
+        },
+        "to": "generator",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "controls",
+        "label": "Elevator controls",
+        "ids": [
+          "liftpanel"
+        ],
+        "rect": [
+          69.343,
+          40.300000000000004,
+          2.668,
+          21.6
+        ]
+      },
+      {
+        "id": "manifest",
+        "label": "Lift service manifest",
+        "ids": [
+          "liftlog"
+        ],
+        "rect": [
+          77.34700000000001,
+          36.7,
+          4.002000000000001,
+          16.2
+        ]
+      },
+      {
+        "id": "mirror",
+        "label": "Elevator mirror",
+        "ids": [
+          "liftmirror"
+        ],
+        "rect": [
+          36.66,
+          37.6,
+          4.6690000000000005,
+          21.6
+        ]
+      },
+      {
+        "id": "terminal",
+        "label": "Final Continuity Terminal",
+        "ids": [
+          "finalTerminal"
+        ],
+        "rect": [
+          76.68,
+          70,
+          5.336,
+          9
+        ],
+        "layer": "terminal"
+      },
+      {
+        "id": "ribbon",
+        "label": "Emergency record spool",
+        "ids": [
+          "finalRibbon"
+        ],
+        "rect": [
+          70.67699999999999,
+          73.60000000000001,
+          3.335,
+          3.6
+        ],
+        "drawer": true
+      },
+      {
+        "id": "cache",
+        "label": "Transfer field cache",
+        "ids": [
+          "finalBox"
+        ],
+        "rect": [
+          77.34700000000001,
+          80.8,
+          8.004000000000001,
+          8.1
+        ]
+      }
+    ]
+  },
+  "coldstore": {
+    "name": "Cold Storage",
+    "description": "A cold room behind a light-sensitive latch. Rows of labelled evidence bags are frozen into shelves; one has split open around a dark, fibrous mass. One reel bears the word CONTINUITY.",
+    "doors": [
+      {
+        "id": "rc",
+        "door": {
+          "a": "records",
+          "b": "coldstore",
+          "flag": "photo"
+        },
+        "to": "records",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "log",
+        "label": "Cold storage inventory",
+        "ids": [
+          "coldlog"
+        ],
+        "rect": [
+          37.994,
+          35.8,
+          3.335,
+          10.8
+        ]
+      },
+      {
+        "id": "reel",
+        "label": "Continuity reel",
+        "ids": [
+          "reel"
+        ],
+        "rect": [
+          57.337,
+          56.5,
+          10.005,
+          7.2
+        ]
+      },
+      {
+        "id": "medkit",
+        "label": "Field medkit",
+        "ids": [
+          "cachemed"
+        ],
+        "rect": [
+          36.66,
+          61,
+          4.002000000000001,
+          5.4
+        ]
+      }
+    ]
+  },
+  "eastcorridor": {
+    "name": "East Corridor",
+    "description": "The corridor slopes gently toward the patient wing. Only the emergency EXIT stencil is visible without a light. Someone has dragged a trolley across the tiles; fresh scraping marks end beneath a broken ceiling fixture.",
+    "doors": [
+      {
+        "id": "lw",
+        "door": {
+          "a": "lobby",
+          "b": "eastcorridor"
+        },
+        "to": "lobby",
+        "u": 0.22
+      },
+      {
+        "id": "ew",
+        "door": {
+          "a": "eastcorridor",
+          "b": "ward",
+          "need": "Staff Access Card"
+        },
+        "to": "ward",
+        "u": 0.68
+      },
+      {
+        "id": "es",
+        "door": {
+          "a": "eastcorridor",
+          "b": "security",
+          "flag": "power"
+        },
+        "to": "security",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "light",
+        "label": "Ceiling light",
+        "ids": [
+          "fixture"
+        ],
+        "rect": [
+          50.3335,
+          18.700000000000003,
+          2.668,
+          9
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Broken trolley",
+        "ids": [
+          "trolley"
+        ],
+        "rect": [
+          66.00800000000001,
+          64.6,
+          12.006,
+          15.3
+        ]
+      },
+      {
+        "id": "directory",
+        "label": "East wing directory",
+        "ids": [
+          "directory"
+        ],
+        "rect": [
+          35.326,
+          34,
+          4.6690000000000005,
+          25.2
+        ]
+      },
+      {
+        "id": "radio",
+        "label": "Portable staff radio",
+        "ids": [
+          "radioHall",
+          "staticNote"
+        ],
+        "rect": [
+          36.66,
+          53.800000000000004,
+          4.002000000000001,
+          4.5
+        ]
+      },
+      {
+        "id": "window",
+        "label": "Cracked ward window",
+        "ids": [
+          "windowBoard"
+        ],
+        "rect": [
+          92,
+          34,
+          14,
+          50
+        ]
+      },
+      {
+        "id": "exit",
+        "label": "Bolted fire exit",
+        "ids": [
+          "emergencyExit"
+        ],
+        "rect": [
+          40.662,
+          44.800000000000004,
+          2.0010000000000003,
+          26.1
+        ]
+      },
+      {
+        "id": "valve",
+        "label": "Damaged sprinkler valve",
+        "ids": [
+          "staffSprinkler"
+        ],
+        "rect": [
+          60,
+          13,
+          4,
+          9
+        ]
+      }
+    ]
+  },
+  "isoward": {
+    "name": "Isolation Treatment Room",
+    "description": "Through a narrow glass slot, a conscious patient pleads with someone who is no longer here. Old restraints bind his wrists. A pressure monitor has no power, and the medicine trolley has been dragged out of reach.",
+    "doors": [
+      {
+        "id": "wi",
+        "door": {
+          "a": "wardnorth",
+          "b": "isoward"
+        },
+        "to": "wardnorth",
+        "u": 0.75
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "patient",
+        "label": "Daniel Mercer",
+        "ids": [
+          "beggingPatient"
+        ],
+        "rect": [
+          49,
+          47,
+          20,
+          20
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Treatment trolley",
+        "ids": [
+          "patientTherapy"
+        ],
+        "rect": [
+          30,
+          50,
+          11,
+          27
+        ]
+      },
+      {
+        "id": "chart",
+        "label": "Isolation admission chart",
+        "ids": [
+          "patientFile"
+        ],
+        "rect": [
+          56,
+          24,
+          8,
+          19
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Disconnected telephone",
+        "ids": [
+          "@phone"
+        ],
+        "rect": [
+          55.336,
+          31.3,
+          2.668,
+          6.3
+        ],
+        "layer": "phone"
+      }
+    ]
+  },
+  "wardnorth": {
+    "name": "North Patient Corridor",
+    "description": "The corridor narrows between patient rooms. A linen trolley has been dragged across the doors. A narrow strip of ceiling lights flickers, failing to dispel the shadows along the baseboards.",
+    "doors": [
+      {
+        "id": "wr",
+        "door": {
+          "a": "wardnorth",
+          "b": "room12",
+          "need": "Staff Access Card"
+        },
+        "to": "room12",
+        "u": 0.18
+      },
+      {
+        "id": "wi",
+        "door": {
+          "a": "wardnorth",
+          "b": "isoward"
+        },
+        "to": "isoward",
+        "u": 0.34
+      },
+      {
+        "id": "northPassage",
+        "door": {
+          "a": "ward",
+          "b": "wardnorth"
+        },
+        "to": "ward",
+        "u": 0.68
+      },
+      {
+        "id": "servicePassage",
+        "door": {
+          "a": "wardnorth",
+          "b": "wardservice"
+        },
+        "to": "wardservice",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "notice",
+        "label": "Patient transfer notice",
+        "ids": [
+          "northBoard",
+          "windowWarning"
+        ],
+        "rect": [
+          58.671,
+          42.1,
+          2.668,
+          7.2
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Linen trolley",
+        "ids": [
+          "northTrolley",
+          "linenBattery"
+        ],
+        "rect": [
+          42.663,
+          61,
+          8.671000000000001,
+          14.4
+        ],
+        "drawer": true
+      },
+      {
+        "id": "windowLever",
+        "label": "Window purge handle",
+        "view": "rear",
+        "ids": [
+          "windowLever"
+        ],
+        "rect": [
+          64,
+          50,
+          3,
+          10
+        ],
+        "art": "assets/props/window_lever.svg"
+      },
+      {
+        "id": "coldWindow0",
+        "label": "Window 1 brass catch",
+        "view": "rear",
+        "ids": [
+          "coldWindow0"
+        ],
+        "rect": [
+          18,
+          35,
+          11,
+          28
+        ]
+      },
+      {
+        "id": "coldWindow1",
+        "label": "Window 2 brass catch",
+        "view": "rear",
+        "ids": [
+          "coldWindow1"
+        ],
+        "rect": [
+          32,
+          35,
+          11,
+          28
+        ]
+      },
+      {
+        "id": "coldWindow2",
+        "label": "Window 3 brass catch",
+        "view": "rear",
+        "ids": [
+          "coldWindow2"
+        ],
+        "rect": [
+          77,
+          35,
+          11,
+          28
+        ]
+      }
+    ]
+  },
+  "wardservice": {
+    "name": "Patient Service Crossroads",
+    "description": "The service passage runs behind the wards. A peeling evacuation diagram connects Pharmacy, Archives and Laundry. Condensation runs down a barred maintenance window.",
+    "doors": [
+      {
+        "id": "wa",
+        "door": {
+          "a": "wardservice",
+          "b": "archive",
+          "need": "Archive Key"
+        },
+        "to": "archive",
+        "u": 0.18
+      },
+      {
+        "id": "wp",
+        "door": {
+          "a": "wardservice",
+          "b": "pharmacy",
+          "flag": "pharm"
+        },
+        "to": "pharmacy",
+        "u": 0.34
+      },
+      {
+        "id": "wl",
+        "door": {
+          "a": "wardservice",
+          "b": "laundry"
+        },
+        "to": "laundry",
+        "u": 0.68
+      },
+      {
+        "id": "servicePassage",
+        "door": {
+          "a": "wardnorth",
+          "b": "wardservice"
+        },
+        "to": "wardnorth",
+        "u": 0.84
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "map",
+        "label": "Ward service map",
+        "ids": [
+          "crossDiagram"
+        ],
+        "rect": [
+          50.667,
+          31.3,
+          5.336,
+          10.8
+        ]
+      },
+      {
+        "id": "cupboard",
+        "label": "Staff supply alcove",
+        "ids": [
+          "crossCabinet"
+        ],
+        "rect": [
+          60.005,
+          40.300000000000004,
+          4.6690000000000005,
+          20.7
+        ]
+      },
+      {
+        "id": "cover",
+        "label": "Supply recess",
+        "ids": [
+          "crossHide"
+        ],
+        "rect": [
+          60.005,
+          68.2,
+          10.672,
+          19.8
+        ]
+      },
+      {
+        "id": "keypad",
+        "label": "Pharmacy keypad",
+        "ids": [
+          "kp"
+        ],
+        "rect": [
+          29.99,
+          34.900000000000006,
+          1.6675,
+          6.3
+        ]
+      },
+      {
+        "id": "trail",
+        "label": "Drag marks",
+        "ids": [
+          "serviceTrail"
+        ],
+        "rect": [
+          39.328,
+          75.4,
+          6.67,
+          5.4
+        ]
+      }
+    ]
+  }
+}
