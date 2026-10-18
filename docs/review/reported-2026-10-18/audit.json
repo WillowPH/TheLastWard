@@ -1,0 +1,444 @@
+{
+  "turn_button_count": 1,
+  "click_camera": {
+    "before": "{}",
+    "after": "{\"security:front\":-0.6247938144329899}"
+  },
+  "note_card": {
+    "html": null,
+    "image": null,
+    "text": null,
+    "image_position": null,
+    "image_max_height": null
+  },
+  "negative_art": {
+    "path": "assets/items/negative.svg",
+    "markup": "<img class=\"item-art\" src=\"assets/items/negative.svg\" alt=\"\" loading=\"lazy\">"
+  },
+  "dead_phone_feedback": {
+    "story": "The line is dead. It will not ring.",
+    "modal": ""
+  },
+  "portraits_initial": {
+    "read": null,
+    "solved": null,
+    "modal": "The shift photographsCloseA note on the frame reads: File each appointment from earliest to latest. The dates are handwritten on the reverse.0 / 3 placedDr. KesslerInspect photographPlace Dr. KesslerDr. BlackwellInspect photographPlace Dr. BlackwellDr. RourkeInspect photographPlace Dr. RourkeLeave them"
+  },
+  "portraits_after_solve": 1,
+  "wardnorth": {
+    "connections": [
+      {
+        "id": "wr",
+        "door": {
+          "a": "wardnorth",
+          "b": "room12",
+          "need": "Staff Access Card"
+        },
+        "to": "room12"
+      },
+      {
+        "id": "wi",
+        "door": {
+          "a": "wardnorth",
+          "b": "isoward"
+        },
+        "to": "isoward"
+      },
+      {
+        "id": "northPassage",
+        "door": {
+          "a": "ward",
+          "b": "wardnorth"
+        },
+        "to": "ward"
+      },
+      {
+        "id": "servicePassage",
+        "door": {
+          "a": "wardnorth",
+          "b": "wardservice"
+        },
+        "to": "wardservice"
+      }
+    ],
+    "views": {
+      "front": {
+        "doors": {
+          "wr": [
+            21.319,
+            52.9,
+            4.6690000000000005,
+            43.2
+          ],
+          "wi": [
+            33.325,
+            49.300000000000004,
+            6.67,
+            32.4
+          ],
+          "servicePassage": [
+            78.681,
+            52.9,
+            4.6690000000000005,
+            43.2
+          ]
+        }
+      },
+      "rear": {
+        "doors": {
+          "northPassage": [
+            50,
+            46.5,
+            15,
+            37
+          ]
+        }
+      }
+    },
+    "fixtures": [
+      {
+        "id": "notice",
+        "label": "Patient transfer notice",
+        "rect": [
+          58.671,
+          42.1,
+          2.668,
+          7.2
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "northBoard",
+          "windowWarning"
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Linen trolley",
+        "rect": [
+          42.663,
+          61,
+          8.671000000000001,
+          14.4
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "northTrolley",
+          "linenBattery"
+        ]
+      },
+      {
+        "id": "windowLever",
+        "label": "Window purge handle",
+        "rect": [
+          64,
+          50,
+          3,
+          10
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "windowLever"
+        ]
+      },
+      {
+        "id": "coldWindow0",
+        "label": "Window 1 brass catch",
+        "rect": [
+          18,
+          35,
+          11,
+          28
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "coldWindow0"
+        ]
+      },
+      {
+        "id": "coldWindow1",
+        "label": "Window 2 brass catch",
+        "rect": [
+          32,
+          35,
+          11,
+          28
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "coldWindow1"
+        ]
+      },
+      {
+        "id": "coldWindow2",
+        "label": "Window 3 brass catch",
+        "rect": [
+          77,
+          35,
+          11,
+          28
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "coldWindow2"
+        ]
+      }
+    ]
+  },
+  "isoward": {
+    "connections": [
+      {
+        "id": "wi",
+        "door": {
+          "a": "wardnorth",
+          "b": "isoward"
+        },
+        "to": "wardnorth"
+      }
+    ],
+    "views": {
+      "front": {
+        "doors": {}
+      },
+      "rear": {
+        "doors": {
+          "wi": [
+            50.2,
+            36.3,
+            17,
+            49.5
+          ]
+        }
+      }
+    },
+    "fixtures": [
+      {
+        "id": "patient",
+        "label": "Daniel Mercer",
+        "rect": [
+          60.672,
+          45.7,
+          18.009,
+          19.8
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "beggingPatient"
+        ]
+      },
+      {
+        "id": "trolley",
+        "label": "Treatment trolley",
+        "rect": [
+          39.995,
+          51.1,
+          10.005,
+          22.5
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "patientTherapy"
+        ]
+      },
+      {
+        "id": "chart",
+        "label": "Isolation admission chart",
+        "rect": [
+          64.007,
+          22.3,
+          5.336,
+          15.3
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "patientFile"
+        ]
+      },
+      {
+        "id": "phone",
+        "label": "Disconnected telephone",
+        "rect": [
+          55.336,
+          31.3,
+          2.668,
+          6.3
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "phone_decoy_0"
+        ]
+      }
+    ]
+  },
+  "children": {
+    "connections": [
+      {
+        "id": "rc12",
+        "door": {
+          "a": "room12",
+          "b": "children"
+        },
+        "to": "room12"
+      }
+    ],
+    "views": {
+      "front": {
+        "doors": {}
+      },
+      "rear": {
+        "doors": {
+          "rc12": [
+            50.4,
+            38.5,
+            14,
+            44
+          ]
+        }
+      }
+    },
+    "fixtures": [
+      {
+        "id": "drawing",
+        "label": "Children\u2019s drawing",
+        "rect": [
+          37.994,
+          34,
+          6.003,
+          13.5
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "draw"
+        ]
+      },
+      {
+        "id": "negative",
+        "label": "Photographic negative",
+        "rect": [
+          47.332,
+          66.4,
+          9.338000000000001,
+          7.2
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "neg"
+        ]
+      },
+      {
+        "id": "rabbit",
+        "label": "Wind-up rabbit",
+        "rect": [
+          73.345,
+          78.10000000000001,
+          8.004000000000001,
+          19.8
+        ],
+        "polygon": null,
+        "actorRect": null,
+        "objects": [
+          "toy",
+          "icecreamToy"
+        ]
+      }
+    ]
+  },
+  "animation_support": {
+    "weatherRooms": [
+      "lobby",
+      "security",
+      "wardnorth"
+    ],
+    "motion": true,
+    "reduced": false
+  },
+  "visible_snow_art_rooms": [
+    "lobby",
+    "security",
+    "eastcorridor",
+    "ward",
+    "wardnorth",
+    "room12",
+    "residence",
+    "stafflounge",
+    "children"
+  ],
+  "ui": {
+    "rails": [
+      {
+        "x": 0,
+        "y": 0,
+        "width": 312.65625,
+        "height": 941,
+        "top": 0,
+        "right": 312.65625,
+        "bottom": 941,
+        "left": 0
+      },
+      {
+        "x": 1354.328125,
+        "y": 0,
+        "width": 317.671875,
+        "height": 941,
+        "top": 0,
+        "right": 1672,
+        "bottom": 941,
+        "left": 1354.328125
+      }
+    ],
+    "scene": {
+      "x": 314.65625,
+      "y": 73,
+      "width": 1037.671875,
+      "height": 713,
+      "top": 73,
+      "right": 1352.328125,
+      "bottom": 786,
+      "left": 314.65625
+    },
+    "navigation": [
+      "Map",
+      "Files",
+      "Journal",
+      "Options",
+      "Save / Load"
+    ],
+    "hints": "Hints \u00b7 subtleMotion \u00b7 on"
+  },
+  "errors": [],
+  "The_Last_Ward_Chapter_1_Play.zip": {
+    "files": 2,
+    "sample": [
+      "The_Last_Ward_Chapter_1.html",
+      "START_HERE.txt"
+    ]
+  },
+  "The_Last_Ward_Chapter_1_Source.zip": {
+    "files": 306,
+    "sample": [
+      "The_Last_Ward_Project/.gitignore",
+      "The_Last_Ward_Project/IMPLEMENTATION.md",
+      "The_Last_Ward_Project/ONLINE_ART.md",
+      "The_Last_Ward_Project/README.md",
+      "The_Last_Ward_Project/VALIDATION.md",
+      "The_Last_Ward_Project/assets/characters/infected_nurse.png",
+      "The_Last_Ward_Project/assets/characters/infected_patient.png",
+      "The_Last_Ward_Project/assets/characters/nurse_shaw.png",
+      "The_Last_Ward_Project/assets/characters/nurse_walk.webp",
+      "The_Last_Ward_Project/assets/characters/operator_clara.png",
+      "The_Last_Ward_Project/assets/characters/patient_walk.webp",
+      "The_Last_Ward_Project/assets/characters/shrouded_figure.webp"
+    ]
+  }
+}

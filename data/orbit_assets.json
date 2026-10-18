@@ -1,0 +1,141 @@
+{
+  "assets": {
+    "security": "assets/orbit/security.webp",
+    "eastcorridor": "assets/orbit/eastcorridor.webp",
+    "room12": "assets/orbit/room12.webp",
+    "wardnorth": "assets/orbit/wardnorth.webp",
+    "isoward": "assets/orbit/isoward.webp",
+    "pharmacy": "assets/orbit/pharmacy.webp",
+    "ward": "assets/orbit/ward.webp",
+    "laundry": "assets/orbit/laundry.webp",
+    "archive": "assets/orbit/archive.webp",
+    "generator": "assets/orbit/generator.webp",
+    "powercontrol": "assets/orbit/powercontrol.webp",
+    "boiler": "assets/orbit/boiler.webp",
+    "chapel": "assets/orbit/chapel.webp",
+    "children": "assets/orbit/children.webp",
+    "tunnel": "assets/orbit/tunnel.webp",
+    "residence": "assets/orbit/residence.webp",
+    "morgue": "assets/orbit/morgue.webp",
+    "stafflounge": "assets/orbit/stafflounge.webp",
+    "records": "assets/orbit/records.webp",
+    "specimen": "assets/orbit/specimen.webp",
+    "isolation": "assets/orbit/isolation.webp",
+    "surgery": "assets/orbit/surgery.webp",
+    "coldstore": "assets/orbit/coldstore.webp",
+    "observation": "assets/orbit/observation.webp",
+    "lift": "assets/orbit/lift.webp",
+    "lobby": "assets/orbit/lobby.webp",
+    "wardservice": "assets/orbit/wardservice.webp"
+  },
+  "generated": [
+    [
+      "security",
+      "/workspace/generated_images/exec-78465465-d569-4408-b918-362cea200f01.png"
+    ],
+    [
+      "eastcorridor",
+      "/workspace/generated_images/exec-5addb3f0-a038-4bad-b29c-03d8c81c77f0.png"
+    ],
+    [
+      "room12",
+      "/workspace/generated_images/exec-8b4eadeb-bf2f-4d5d-a971-f699207033d1.png"
+    ],
+    [
+      "wardnorth",
+      "/workspace/generated_images/exec-3214681f-b5b2-4caa-bf81-83f715418b37.png"
+    ],
+    [
+      "isoward",
+      "/workspace/generated_images/exec-5056fe43-2442-491d-98b8-e8bc6fd65438.png"
+    ],
+    [
+      "pharmacy",
+      "/workspace/generated_images/exec-e0152b51-3405-4cc4-9954-c2e254c544bb.png"
+    ],
+    [
+      "ward",
+      "/workspace/generated_images/exec-ae2570ec-3c27-4ac3-b129-3d3509c7d8cf.png"
+    ],
+    [
+      "laundry",
+      "/workspace/generated_images/exec-aaf566f5-b374-42be-8227-721b5ab32950.png"
+    ],
+    [
+      "archive",
+      "/workspace/generated_images/exec-db495b84-8994-4080-81c7-54a85894809b.png"
+    ],
+    [
+      "generator",
+      "/workspace/generated_images/exec-b95f09af-c596-4ad8-94c3-5fd02cbf9fed.png"
+    ],
+    [
+      "powercontrol",
+      "/workspace/generated_images/exec-588bad80-d320-4a74-aa4f-8f617b0c0132.png"
+    ],
+    [
+      "boiler",
+      "/workspace/generated_images/exec-e5cb8cb3-5878-4b7f-9bfc-17b71b71ba85.png"
+    ],
+    [
+      "chapel",
+      "/workspace/generated_images/exec-731dda26-2ab9-4c08-923d-e9ba8dbf9c50.png"
+    ],
+    [
+      "children",
+      "/workspace/generated_images/exec-b2a26045-6642-47bc-bf80-587275495072.png"
+    ],
+    [
+      "tunnel",
+      "/workspace/generated_images/exec-3a03cf94-f092-4f04-8c28-e4cf7e3ee33a.png"
+    ],
+    [
+      "residence",
+      "/workspace/generated_images/exec-245b4c75-d26e-457c-9270-a8915f3b9bbe.png"
+    ],
+    [
+      "morgue",
+      "/workspace/generated_images/exec-2fe6a07d-932b-40b7-ac0f-a6a337eaf90f.png"
+    ],
+    [
+      "stafflounge",
+      "/workspace/generated_images/exec-af5209f9-72e8-477e-9fcc-2b548df0df86.png"
+    ],
+    [
+      "records",
+      "/workspace/generated_images/exec-0abc3380-0c0d-4786-a01c-87a5f6663e94.png"
+    ],
+    [
+      "specimen",
+      "/workspace/generated_images/exec-f9532786-41c3-48ab-9301-e1e25b6ed290.png"
+    ],
+    [
+      "isolation",
+      "/workspace/generated_images/exec-2caf4774-557b-4e6c-bc4c-7a24576aaa19.png"
+    ],
+    [
+      "surgery",
+      "/workspace/generated_images/exec-1e1e11b3-3cd3-4745-96c7-8a01cd658921.png"
+    ],
+    [
+      "coldstore",
+      "/workspace/generated_images/exec-715486dd-acda-4b74-a0be-43d80a9d622b.png"
+    ],
+    [
+      "observation",
+      "/workspace/generated_images/exec-78067112-efee-4fda-9124-9c68808564eb.png"
+    ],
+    [
+      "lift",
+      "/workspace/generated_images/exec-1e0f5658-58cb-45a3-973b-9799daba1a97.png"
+    ],
+    [
+      "lobby",
+      "/workspace/generated_images/exec-090f872b-25b5-4173-8149-4b23f2c649c5.png"
+    ],
+    [
+      "wardservice",
+      "/workspace/generated_images/exec-4c9b9e63-50c0-40e7-8735-6501f2bba6be.png"
+    ]
+  ]
+}

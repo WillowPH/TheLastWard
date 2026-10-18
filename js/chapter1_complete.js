@@ -2,7 +2,7 @@
    the baseline; no room, map or renderer from the rejected pilot is imported. */
 (function(){
 'use strict';
-const BUILD='last-ward-ch1-winter-1';
+const BUILD='last-ward-ch1-orbit-2';
 const ROOMS=['lobby','security','eastcorridor','ward','wardnorth','wardservice','room12','isoward','archive','pharmacy','laundry','generator','powercontrol','boiler','tunnel','morgue','chapel','children','residence','stafflounge','records','surgery','observation','specimen','isolation','coldstore','lift'];
 window.WardChapter={BUILD,rooms:ROOMS};
 for(const id of Object.keys(R))if(!ROOMS.includes(id))delete R[id];

@@ -35,7 +35,7 @@ with sync_playwright() as p:
  reset('security');ev('S.f.power=1;S.lightOn=true;renderScene();window.__roomImage=document.querySelector(".c1-background");S.sceneFocus="diary";wardFixtureAction("winterJournal")');assert ev('window.__roomImage===document.querySelector(".c1-background")');close();passed('reading a document preserves the existing room image and camera')
  reset('wardnorth');ev("add('Lighter',1);add('Lighter Fluid',1);wardCombineLighter();S.lightOn=true;S.f.power=1;render()")
  assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
- ev("act('windowLever')");assert not ev('WardWinter.windowState().triggered')
+ ev("WardWinter.orbit.face('rear');act('windowLever')");assert not ev('WardWinter.windowState().triggered')
  page.get_by_role('button',name='Pull the handle',exact=True).click();assert ev('WardWinter.windowState().closed.every(v=>!v)')
  ev('advanceTime(18)');assert ev('S.hp<100&&S.san<100&&S.f.shivering')
  for i in range(3):
@@ -103,8 +103,8 @@ with sync_playwright() as p:
   for room in ev('Object.keys(R)'):
    ev('r=>{S.room=r;S.sceneView="front";S.sceneViewRoom=r;renderScene()}',room)
    assert ev('document.documentElement.scrollWidth<=innerWidth+1')
-   assert page.get_by_role('button',name='Turn around',exact=True).is_visible()
-   page.get_by_role('button',name='Turn around',exact=True).click();assert ev('S.sceneView==="rear"')
+   assert not page.get_by_role('button',name='Turn around',exact=True).count()
+   ev("WardWinter.orbit.face('rear')");assert ev('S.sceneView==="rear"')
  passed('27 distinct panoramas, all pickup icon files, and usable front/rear controls at desktop, tablet and mobile widths')
  assert not errors,errors
  b.close()

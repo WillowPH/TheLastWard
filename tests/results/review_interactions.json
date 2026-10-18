@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "Subtle/Strong hints are in Options, with no scene hint switch or Turn Around button",
+    "ordinary item click and Read keep camera fixed; 64px icons do not overlap text",
+    "completed portrait puzzle loses its scene target",
+    "answered payphone stays disabled after re-render and save/reload",
+    "dead phone feedback is local and cannot repeat; a later genuine story call reactivates it",
+    "gun and photographic-negative icons have separate bounded inventory cells",
+    "right HUD flashlight button toggles the actual beam without opening inventory",
+    "20 ordinary look keys rotate 360 degrees and return to identical art coordinates",
+    "adjacent map travel takes one node click with no confirmation step",
+    "all 27 front window sets have snow masks; live animation and actual lamp dimming are observed",
+    "27 rooms have independent side atlases; reference, tablet and mobile HUDs do not overflow horizontally"
+  ],
+  "javascript_errors": []
+}

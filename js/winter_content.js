@@ -84,6 +84,7 @@ desc=function(n){if(n==='Lighter')return 'Reusable petrol lighter. Combine with 
 // Early objects stay on the accessible Security route. Later supplies use real containers.
 W.fixture('stafflounge','television','Staff room television',[24,35,20,20],'rear',{art:'assets/props/crt.svg',television:true});
 register('stafflounge','television','staffTV','Staff television','An old CRT television hisses with interference.',{look:1,th:'The antenna socket is empty. The static continues anyway.'});
+const blockedExit=R.lobby.o.find(o=>o[0]==='sealedExit');if(blockedExit){blockedExit[1]='Barricaded main entrance';blockedExit[3]='A tipped filing cabinet and heavy waiting benches are wedged against the exterior entrance.';blockedExit[4].th='The furniture is jammed tight against the doors. The internal hospital passages are my only route.';}
 const baselineObjects=Object.fromEntries(Object.entries(R).map(([r,v])=>[r,structuredClone(v.o)]));
 const baselineScenes=structuredClone(WardScenes);
 const configure=configureWorld;

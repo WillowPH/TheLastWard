@@ -1,14 +1,14 @@
 {
-  "transport": "Only the standalone HTML is served from loopback; all other requests are blocked, and networking is disabled after initial HTML load. Direct file navigation is blocked by environment Chromium policy.",
+  "format": "multi-file project",
+  "files": 359,
   "checks": [
-    "standalone starts offline with all 27 panoramas and 100% charge",
-    "embedded local sound produces output offline after the Begin gesture",
-    "all 54 front/rear scene images and the handwriting font load offline",
-    "embedded portrait inspection and dated reverse are interactive",
-    "open window state art is embedded and independently clipped"
+    "archive extracts with separate code, data, audio, 27 side atlases and launchers",
+    "extracted Python launcher starts the playable game without external internet",
+    "separate local audio produces measured output after Begin",
+    "all 27 four-view rooms and handwriting font load from the extracted package"
   ],
   "javascript_errors": [],
   "failed_requests": [],
-  "standalone_bytes": 71447901,
-  "standalone_sha256": "a0dbec87b9966ff1223197519ce36c508291cf9fc3ea4854e1186a36a8e46de6"
+  "zip_bytes": 85349828,
+  "zip_sha256": "8866241225137809cf0467fbebe78582ecf09735099cda355caecbfac141ab15"
 }

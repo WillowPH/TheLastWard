@@ -122,3 +122,26 @@
 }
 
 .winter-hidden-view.peeking .winter-cover.desk{background:linear-gradient(0deg,#030605 0 35%,transparent 35% 47%,#030605 47%);box-shadow:inset 0 0 70px 25px #000}
+
+/* Reviewed interaction components: imagery never participates in text layout. */
+.winter-finding-art{height:64px!important;min-height:64px!important;max-height:64px!important;overflow:hidden!important;contain:layout paint;align-self:start}
+.winter-finding-art img,.c1-finding .winter-finding-art img{width:64px!important;height:64px!important;max-width:64px!important;max-height:64px!important;min-width:0!important;min-height:0!important;position:static!important;margin:0!important;justify-self:start;object-fit:contain!important}
+.inventory-item-row{display:grid!important;grid-template-columns:52px minmax(0,1fr) auto!important;gap:12px;align-items:center}.inventory-menu-icon{width:48px;height:48px;overflow:hidden;display:grid;place-items:center}.inventory-menu-icon img{width:44px!important;height:44px!important;max-width:44px!important;max-height:44px!important;object-fit:contain}.inventory-menu-copy{position:relative;z-index:1;overflow-wrap:anywhere}
+.room-local-notice{grid-column:1/-1;padding:12px;border-left:2px solid #b0a486;background:#0e1714;color:#e2dfd3;font-size:13px}
+.c1-room-tools{pointer-events:none;background:transparent!important;justify-content:flex-end!important}.c1-room-tools:has(#c1SoundCaption:empty){display:none!important}
+/* Camera-style corner marks, in aged silver/amber, replace luminous beads. */
+.c1-target.important:after,.strong-hints .c1-target.important:after{content:''!important;position:absolute!important;left:50%!important;top:50%!important;width:18px!important;height:18px!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:translate(-50%,-50%)!important;background:linear-gradient(#c2c0ac,#c2c0ac) left top/6px 1px no-repeat,linear-gradient(#c2c0ac,#c2c0ac) left top/1px 6px no-repeat,linear-gradient(#c2c0ac,#c2c0ac) right bottom/6px 1px no-repeat,linear-gradient(#c2c0ac,#c2c0ac) right bottom/1px 6px no-repeat!important;animation:none!important;opacity:.55!important;filter:none!important}
+.c1-target.important:hover:after,.c1-target.important:focus-visible:after{opacity:1!important;width:25px!important;height:25px!important}
+.strong-hints .c1-target{outline:none!important}.strong-hints .c1-target.important:after{width:27px!important;height:27px!important;opacity:.9!important}
+.strong-hints .c1-target:before{content:'⌕';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:15px/1 serif;color:#cfc9ad;text-shadow:0 1px 3px #000}
+.strong-hints .c1-target[data-kind=pickup]:before{content:'+';font-family:monospace}.strong-hints .c1-target[data-kind=document]:before{content:'≡';font-family:monospace}
+.hint-options{display:flex;align-items:center;justify-content:space-between;gap:20px}.hint-options select{max-width:180px}
+/* A continuous camera rotates the four room faces around one stationary viewpoint. */
+.winter-look-frame{position:absolute!important;inset:0!important;overflow:hidden;touch-action:pan-y;perspective-origin:50% 50%;background:#060a08}
+.room-orbit-world{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.room-orbit-face{position:absolute;transform-style:preserve-3d;backface-visibility:hidden;background:linear-gradient(#111612,#20271e 35%,#101610 75%,#121710)}
+.room-side-art{position:absolute;inset:0;background-size:200% 100%;background-repeat:no-repeat;filter:brightness(.86) saturate(.78)}
+.winter-art-plane{transform:none!important;overflow:hidden!important}.winter-art-plane .c1-background,.winter-rear-background{transform:none!important}
+.ward-playing .stage-heading{display:none!important}.ward-playing .stage-world{top:0!important}.ward-playing .ward-stage{padding:0!important}
+.winter-look-controls{left:50%!important;right:auto!important;bottom:8px!important;width:auto!important;height:30px!important;transform:translateX(-50%)!important;padding:3px 8px!important;border:0!important;background:#08100b9c!important;opacity:.45}.winter-look-controls:hover,.winter-look-controls:focus-within{opacity:1}.winter-look-controls .btn{padding:2px 8px;font-size:11px}#winterLookBearing{font:10px monospace;color:#b9b7a7;min-width:35px;text-align:center}
+.ward-playing .ward-center .narrative-focus{bottom:50px!important;left:28px!important;right:28px!important;width:calc(100% - 56px)!important}

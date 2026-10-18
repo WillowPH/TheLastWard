@@ -1,0 +1,17 @@
+THE LAST WARD — CHAPTER 1
+
+Extract the WHOLE ZIP before playing. Keep index.html, js, css, assets, audio and data together.
+This is a multi-file browser game, not a single embedded HTML file.
+
+Requires Python 3 (no extra packages). No internet connection is needed to play.
+Windows: double-click START_GAME.bat.
+macOS/Linux: run python3 start_game.py (or sh START_GAME.sh).
+The launcher opens your browser. Keep its terminal window open while playing.
+Manual launch: python start_game.py --no-browser; open the printed local address.
+
+Start a new game for this build. Hints (Subtle/Strong) and animation controls are in Options.
+Drag horizontally or use A/D or the left/right arrows to look around.
+Saves belong to this browser and local address. Use the same port for continued play.
+Export your terminal record before changing browser.
+
+The source, game artwork, sounds, fonts and documentation are included as separate files.

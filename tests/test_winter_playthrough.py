@@ -9,10 +9,7 @@ report=[]
 with sync_playwright() as p:
  browser=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox'])
  context=browser.new_context(viewport={'width':1600,'height':1000},service_workers='block',reduced_motion='reduce')
- standalone_mode=URL.startswith('file://')
- if standalone_mode:
-  import shutil
-  standalone=Path(URL.removeprefix('file://'));shutil.copyfile(standalone,ROOT/'downloads/The_Last_Ward_Chapter_1.html');URL='http://127.0.0.1:8010/downloads/The_Last_Ward_Chapter_1.html';context.route('**/*',lambda route:route.continue_() if route.request.url==URL else route.abort())
+ context.route('**/*',lambda route:route.continue_() if route.request.url.startswith(URL.rstrip('/')+'/') else route.abort())
  page=context.new_page();page.set_default_timeout(6500)
  errors=[];page.on('pageerror',lambda error:errors.append(str(error)))
  def ev(code,arg=None):return page.evaluate(code,arg)
@@ -21,7 +18,7 @@ with sync_playwright() as p:
    if not page.locator('#m .md').count():
     if ev('!!S.sceneFocus'):ev('wardCloseFocus()')
     if ev('S.room==="eastcorridor"&&S.f.flashlightDropped'):
-     if ev('S.sceneView')!='front':ev('wardTurnAround()')
+     if ev('S.sceneView')!='front':ev("WardWinter.orbit.face('front')")
      ev('WardWinter.reveal([55,82,7,6])');page.get_by_role('button',name='Recover dropped flashlight',exact=True).click()
     if ev('S.room==="eastcorridor"&&S.f.sprinklerTriggered&&!S.f.sprinklerStopped'):
      ev("WardWinter.reveal(WardScene.sites().find(f=>f.id==='valve').rect)");page.locator('[data-fixture=valve]').click();page.locator("button[onclick=\"wardFixtureAction('staffSprinkler')\"]").click()
@@ -44,11 +41,11 @@ with sync_playwright() as p:
    path=ev('''target=>{const q=[[S.room]],seen=new Set([S.room]);while(q.length){const p=q.shift(),r=p.at(-1);if(r===target)return p;for(const [id,d]of Object.entries(D)){const to=d.a===r?d.b:d.b===r?d.a:null;if(!to||seen.has(to)||!(doorOpen(id)||(d.need&&has(d.need))))continue;seen.add(to);q.push([...p,to]);}}return [];}''',target)
    assert len(path)>1,(ev('S.room'),target,ev('S.inv'),ev('WardChapter.requirements()'))
    destination=path[1];view=ev('to=>WardScene.portalView(S.room,WardNavigation.edge(S.room,to))',destination)
-   if ev('S.sceneView')!=view:page.get_by_role('button',name='Face the room' if view=='front' else 'Turn around',exact=True).click()
+   if ev('S.sceneView')!=view:ev('view=>WardWinter.orbit.face(view)',view)
    ev('to=>WardWinter.reveal(WardScenes[S.room].views[S.sceneView].doors[WardNavigation.edge(S.room,to)])',destination)
    page.locator(('.c1-reverse-plane' if view=='rear' else '.c1-plane')+' [data-destination="'+destination+'"]').click()
    skip=page.get_by_role('button',name='Skip transition',exact=True)
-   if skip.count():skip.click()
+   ev("[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Skip transition')?.click()")
    page.wait_for_timeout(360)
   raise AssertionError('Navigation did not reach '+target)
  def use(id):
@@ -58,7 +55,7 @@ with sync_playwright() as p:
    if ev('!S.lightOn'):ev('toggleLight()')
   f=ev('id=>{const f=WardScene.sites().find(f=>f.objects.some(o=>o[0]===id));return f?{id:f.id,view:f.view||"front",rect:f.rect}:null;}',id)
   assert f,('No fixture',ev('S.room'),id)
-  if ev('S.sceneView')!=f['view']:ev('wardTurnAround()')
+  if ev('S.sceneView')!=f['view']:ev('view=>WardWinter.orbit.face(view)',f['view'])
   ev('r=>WardWinter.reveal(r)',f['rect']);page.locator('[data-fixture="'+f['id']+'"]').click()
   button=page.locator('button[onclick="wardFixtureAction(\''+id+'\')"]')
   if button.count():button.click()
@@ -81,7 +78,6 @@ with sync_playwright() as p:
  seeds=['winter-standard-a','winter-story-complete']
  for seed in seeds:
   context.set_offline(False);page.goto(URL,timeout=60000)
-  if standalone_mode:context.set_offline(True)
   page.locator('#diff').select_option('0.7' if 'story' in seed else '1')
   page.get_by_role('button',name='BEGIN INVESTIGATION').click()
   ev('nextIntro();nextIntro();nextIntro()')
@@ -138,5 +134,5 @@ with sync_playwright() as p:
   note(seed+' elevator ending');page.screenshot(path=str(OUT/(seed+'-ending.png')))
  assert not errors,errors
  browser.close()
-(OUT/'winter_progression.json').write_text(json.dumps({'runs':seeds,'standalone_offline':standalone_mode,'trace':report},indent=2))
+(OUT/'winter_progression.json').write_text(json.dumps({'runs':seeds,'transport':URL,'multi_file':True,'trace':report},indent=2))
 print('PASS: two complete all-27-room routes using earned progression and actual controls.')
