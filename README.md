@@ -6,8 +6,10 @@ Chapter 1 ends at the service elevator; Chapter 2 is not playable.
 ## Play
 
 Download `downloads/The_Last_Ward_Chapter_1_Project.zip` and extract the entire folder.
-Requires Python 3 (standard library only) and a modern browser with WebGL enabled.
-Windows: double-click `START_GAME.bat`. macOS/Linux: `python3 start_game.py`.
+Windows 10/11: double-click **`START_GAME.exe`** (or `START_GAME.bat`). No Python
+installation is needed. Keep the EXE beside the extracted game files.
+macOS/Linux: `python3 start_game.py` (Python 3 standard library).
+A modern browser with WebGL enabled is required. Do not open `index.html` directly.
 Keep the launcher terminal open. No external internet connection is required.
 Start a new game: this build has a new save namespace, preserving earlier saves.
 

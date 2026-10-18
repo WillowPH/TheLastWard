@@ -1,15 +1,16 @@
 {
   "format": "multi-file project",
-  "files": 415,
+  "files": 423,
   "checks": [
+    "Windows x64 native launcher is included with valid PE headers",
     "archive matches tested runtime source and assets byte for byte",
     "archive extracts with separate code, data, audio, 27 continuous panoramas and launchers",
-    "extracted Python launcher starts the playable game without external internet",
+    "native server starts the extracted playable game without external internet",
     "separate local audio produces measured output after Begin",
     "all 27 spherical rooms and handwriting font load from the extracted package"
   ],
   "javascript_errors": [],
   "failed_requests": [],
-  "zip_bytes": 100018530,
-  "zip_sha256": "d3d862673d4e715255c97f4896b85a1984e7cb5c0ac10b8e9d0ac646d35a1fd0"
+  "zip_bytes": 102635963,
+  "zip_sha256": "f604484498606dcb3d2360e8c5ce7661e77953f148eb5d87b33a08933dcf178c"
 }

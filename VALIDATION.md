@@ -32,3 +32,18 @@ Three stale corrected exports were found and re-exported before the final archiv
 This validates implemented behavior and observed art; it is not a promise of perfect
 first-time puzzle pacing, seamless painting at every pole, or identical performance
 on every browser/GPU. The game uses painted 2K spherical scenes, not walkable 3D.
+
+## Python-free Windows launch correction
+
+The reported artwork failure came from opening index.html directly. Browsers block
+file-origin images from WebGL textures. `START_GAME.exe` now provides a standard-library
+local server with separate assets; `START_GAME.bat` invokes it without Python. Direct
+HTML opening displays launcher instructions before gameplay.
+
+`GO111MODULE=off go test -v ./launcher` covers extracted-folder validation, actual
+HTTP/index serving, audio byte ranges, loopback binding and occupied-port fallback.
+`node tests/test_launch_guard.js` checks file-origin guidance versus normal HTTP.
+The extracted-package test can use the same native server source compiled for Linux:
+`python tests/test_winter_package.py downloads/The_Last_Ward_Chapter_1_Project.zip /tmp/ward-launcher`.
+The shipped Windows executable's PE/x64 headers are checked. Its Windows desktop
+browser-opening path has not been executed in this Linux environment.

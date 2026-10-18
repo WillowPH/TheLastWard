@@ -1,9 +1,8 @@
 @echo off
 cd /d "%~dp0"
-where py >nul 2>nul
-if %errorlevel% equ 0 (
- py -3 start_game.py
+if exist "%~dp0START_GAME.exe" (
+ "%~dp0START_GAME.exe"
 ) else (
- python start_game.py
+ echo Extract the WHOLE project ZIP first. START_GAME.exe must be beside this file.
 )
 pause

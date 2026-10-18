@@ -3,9 +3,11 @@ THE LAST WARD — CHAPTER 1
 Extract the WHOLE ZIP before playing. Keep index.html, js, css, assets, audio and data together.
 This is a multi-file browser game, not a single embedded HTML file.
 
-Requires Python 3 (no extra packages). No internet connection is needed to play.
-Windows: double-click START_GAME.bat.
-macOS/Linux: run python3 start_game.py (or sh START_GAME.sh).
+Windows 10/11: double-click START_GAME.exe or START_GAME.bat. NO PYTHON NEEDED.
+Keep START_GAME.exe beside index.html and the extracted asset folders.
+Do NOT open index.html directly: the browser blocks panoramic artwork on file://.
+No internet connection is needed to play.
+macOS/Linux: run python3 start_game.py (or sh START_GAME.sh); Python 3 required.
 The launcher opens your browser. Keep its terminal window open while playing.
 Manual launch: python start_game.py --no-browser; open the printed local address.
 
