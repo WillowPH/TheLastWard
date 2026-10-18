@@ -1,121 +1,71 @@
-# The Last Ward — Chapter 1: Blackridge
+# The Last Ward — Chapter 1: Winter at Blackridge
 
-A Chapter 1 rebuild based on the supplied Cinematic Project and master requirements.
-The playable chapter ends inside the restricted service elevator, after the revelation
-and an explicit choice to descend. Chapter 2 exploration is not included.
+A playable browser survival horror chapter set in Blackridge Medical Complex, 1998.
+This build follows the consolidated design notes in [docs/DESIGN_NOTES.md](docs/DESIGN_NOTES.md).
+Chapter 1 ends with the service elevator descending toward Chapter 2. Chapter 2 is not playable yet.
 
 ## Download and play
 
-Download this branch with **Code → Download ZIP**, extract it, and open
-`downloads/The_Last_Ward_Chapter_1.html` in a modern browser. The single HTML contains
-all room artwork, character cutouts, recorded audio, item art, Roboto, and game code.
-No server, installation, image provider, or internet connection is required to play.
-Allow audio after pressing Begin Investigation. Start a new game for this build.
+For the player package, extract `The_Last_Ward_Chapter_1_Play.zip` and open the HTML
+inside. Alternatively, download this branch using **Code → Download ZIP**, extract it, then open
+`downloads/The_Last_Ward_Chapter_1.html` in Chrome, Edge or Firefox. Start a **new game**.
+The single HTML contains the artwork, fonts, sound and game code. No installation,
+server, image provider or internet connection is required. Press Begin Investigation
+to permit sound; check the sound controls in Options if your browser blocks it.
 
-For source development, run `python -m http.server 8000` in the repository directory
-and open the served `index.html`. The hosted edition caches its required files for
-offline return visits. Saves are local to the browser/origin; export a terminal record
-before moving to another browser. Older builds' saves are kept under their old keys
-and are not silently loaded into this different room topology.
+Saves belong to the browser and origin where you play. The winter build uses its own
+save namespace and preserves older builds' saves. Export a terminal record before
+changing browser or moving the game. Modern desktop browsers are the primary target;
+mobile uses a compact layout with horizontal scene looking.
 
-## This build
+## What changed
 
-- 27 unique room backgrounds; no mirrored substitutes or legacy room-image fallback.
-- 154 explicitly authored fixtures, separate doors, fixed art coordinates, subtle glints,
-  focus/hover labels, stronger hints, and responsive controls.
-- Separate object, pickup, lighting, actor, and persistent aftermath layers. The surgical
-  aftermath has its own image and matching changed inspection region.
-- Subject X and infected are visible in rooms and central encounter views. Pursuit uses
-  traversable room edges, with positional heavy boot recordings, cover and locker peeking.
-- Clara Whitmore, Evelyn Shaw, Judith Price, Daniel Mercer and Kessler interactions;
-  consistent Rourke evidence and the Monolith/LULLABY story.
-- Actual maintenance tools plus fuse/regulator repair, matching seeded puzzle clues,
-  final clearance, real pursuit escape, and gated elevator completion.
-- Inventory, storage, stacking, optional upgrades and crafting, ribbon saves, checkpoint
-  recovery, irreversible patient choices, one-time incidents, optional warned fatal
-  glass encounter, nonfatal hallucinations, and recoverable environmental conditions.
-- 26 local recorded effects/loops. Distinct footsteps, wet steps, mechanical bell foley,
-  doors, gunfire, reload handling, breathing, water, machinery and room ambience.
-- Exportable Chapter 1 completion record for later Chapter 2 work.
+- Fixed hospital layout, 27 distinct wide front panoramas and separate reverse views.
+  Drag horizontally, use the lower look controls, or turn around. Doors and objects
+  move with their room artwork; arriving faces away from the entrance used.
+- Explicit object targets, stronger optional hints, contextual examination panels,
+  Take/Leave, container interiors, persistent pickups and non-repeating completed reads.
+- Inspectable photographs with reverse clues, a high-resolution mug, aged paper records
+  and handwritten notes with optional readable transcription. Documents remain in Files.
+- Snow outside authored window panes, localized flickering, generator/emergency lighting,
+  rare recoverable outages and CRT surveillance using monochrome game-room images.
+- Finite flashlight charge and visible percentage. Normal drains faster than Story;
+  found cells recharge it. The flashlight never darkens an already lit room.
+- One-use window purge hazard, individually closable windows, sprinkler shutoff,
+  dropped-flashlight recovery, wet footsteps and local cold recovery. Combine the
+  lighter with fluid; use it at the drying stove or chapel candles.
+- Seeded items in approved containers, matching puzzle clues, named keys, wiring and
+  radio tuning, four distinct chess-shaped elevator interlock plugs and an early clue.
+- Finite persistent infected actors, animated walking sprites, costly struggles,
+  permanent kills, noise-directed movement and a screaming nurse. Subject X is larger,
+  introduced after the midpoint requirements, and follows connected routes.
+- Confirmed traps and plank placement; dark hiding and slit/gap peeking. Clara is a
+  security recording. Mercer, Kessler and the scientist retain one-time consequences.
+- Real playable hallucinated combat uses ammunition but cannot damage real health.
+  Other limited episodes alter bodies/CRT messages; recovery prevents constant effects.
+- Three once-only payphone calls, Rourke/LULLABY evidence, redacted Mimi foreshadowing,
+  optional horror-game/television references and a warned fatal glass encounter.
+- Local recorded effects, spatial Subject X boots, footsteps, doors, gunfire,
+  breathing, machinery, winter wind, radio static and infected vocalizations.
 
-## Doorway and weather correction build
+Animation uses layered effects, sprite frames and transitions over prerendered scenes;
+it is not a freely navigable 3D hospital. Some requested more graphic regular-infected
+art generations were rejected by the image service; this build uses approved torn,
+stained clothing designs. No photographs of real gore are used.
 
-All **27 rooms** now have fixed front and reverse views. Each travel door belongs
-to exactly one view and has a permanent destination. Entering a room faces away
-from the doorway used. **Turn around** reveals it; click that door to return.
-This applies whichever route you take, including the Lobby/Security/East Corridor
-loop, retreats, and migrated saves. Locked doors explain their requirements.
-The hidden view cannot intercept clicks or keyboard focus.
+## Develop and verify
 
-The relocated doorway is removed from each front background itself. Reverse views
-show the opposite wall, rather than a door cutout or flipped copy. Unconnected
-Records-room door artwork is removed. Closed travel doors do not reveal an
-incorrectly lit neighboring room. Drained tunnel artwork persists in both views.
+Serve this directory with `python -m http.server 8010` and open `http://localhost:8010`.
+There are no npm dependencies or required backend services. During browser development,
+block/unregister the service worker to avoid testing an old cached build.
 
-Rain runs on one transparent canvas clipped to individual exterior glass panes,
-with different masks for the lobby's two views. It does not render over the walls,
-floor, furniture, window frames, or other room interiors. Indoor lobby dust is
-removed to keep the weather unambiguous.
+```
+python tests/test_winter_systems.py
+python tests/test_winter_playthrough.py
+python tools/package_build.py
+```
 
-Clara is a recorded message at the surveillance monitors; her transcript is kept
-in Files. The equipment cabinet has one case inspection and a separate utility
-knife pickup. Multi-item containers stay open while
-you inspect or take their remaining contents. Resolved pickups/files lose their
-hotspots; files remain available from Files.
-
-Ten collectibles in these five rooms use separate object images. Leave retains the
-item; Take removes its image and preserves that state through save/load. The base
-art has the relevant map, equipment case and drawer/shelf contents cleared. An empty
-case, desk or cabinet stays behind after taking its contents. The photographic
-negative in Children's Ward is also a separate removable object.
-
-Canvas layers visibly animate rain/reflected light, CRT scanning, fluorescent light,
-lamp pools and airborne dust. **Motion · on/off** is available above the room. Options
-also provides the control. System reduced motion is respected by default; explicitly
-turning Motion on overrides that preference for scene layers. This is layered scene
-animation, not video animation of every object or character.
-
-All 27 rooms have the doorway/reverse-view correction. Full collectible-art
-conversion outside the original five focus rooms remains separate visual work. See [the guide](docs/VISUAL_REVIEW.md).
-
-## Verification and limits
-
-See [VALIDATION.md](VALIDATION.md) for exact automated coverage and commands,
-[IMPLEMENTATION.md](IMPLEMENTATION.md) for the implementation map, and
-[audio/README.md](audio/README.md) for recording sources and processing.
-
-Three progression runs—two Standard seeds and a Story route visiting all 27 rooms—
-have been exercised automatically through the actual inventory, puzzles, gates and
-elevator ending. This is not a completed human playtest
-or proof of the requested 2–3-hour playtime. Long-session pacing, difficulty balance,
-and listening quality still need human evaluation. Automated coverage is Chromium;
-other browser engines have not been claimed verified.
-
-Optional online artwork is limited to a noninteractive atmospheric texture above the
-room. It cannot replace the background or move targets. No paid/live provider is
-configured; the complete offline game is the default reliable path.
-
-## Interaction refinement build
-
-Inspection panels open without replacing or resizing the room image. The room
-viewport stays fixed when narration changes. Flashlight light adds illumination;
-it cannot dim an already lit room. Every unresolved fixture has a subtle idle
-marker, hover/focus feedback and its object label. Missing inventory icons now
-use bundled item-specific artwork or clear vector symbols.
-
-The laundry hoist can be armed in advance, with confirmation and persistent
-armed/spent artwork. It catches Subject X in Laundry without teleporting it.
-Manual release is also available after a separate warning; an empty release uses
-the one-use trap. Its passages remain open.
-
-Locked doors and map exits state their actual key, code, power or clearance.
-Archive Key and Boiler Key now match their destinations; older saves migrate
-the former Maintenance Key and Tunnel Key names in both inventory and storage.
-
-Struggle costs health and buys an escape opening, leaving the infected alive
-for your return. A knife attack requires the utility knife and risks injury.
-Daniel’s irreversible choice supports the knife or a loaded firearm, asks for
-confirmation, and preserves a covered-sheet aftermath through save/load.
-
-Eight focused acceptance passes run against both source and offline HTML; see
-`tests/test_refinements.py` and its JSON results.
+Tests use Python Playwright and `/usr/bin/chromium`; packaging uses Python's standard
+library. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for source ownership and
+[VALIDATION.md](VALIDATION.md) for evidence and limits. Optional online artwork is not
+needed; approved local room art is authoritative for the hotspot geometry.

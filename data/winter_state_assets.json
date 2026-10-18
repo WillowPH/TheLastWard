@@ -1,0 +1,59 @@
+{
+  "generated": [
+    [
+      "lobby_rear_snow",
+      "/workspace/generated_images/exec-fa79809d-f21b-4003-be5f-6ef2284ef02b.png"
+    ],
+    [
+      "isoward_after",
+      "/workspace/generated_images/exec-71bdcded-f189-4653-8bd8-cdd23810461a.png"
+    ],
+    [
+      "surgery_after",
+      "/workspace/generated_images/exec-c2f1f0ef-f8f1-4540-be6f-4361025f5eeb.png"
+    ],
+    [
+      "laundry_trap_armed",
+      "/workspace/generated_images/exec-030dd9d1-a8b0-4719-afae-99b462bd5de2.png"
+    ],
+    [
+      "tunnel_drained",
+      "/workspace/generated_images/exec-156ac108-5491-40b2-ae8a-02846a0dfa14.png"
+    ],
+    [
+      "laundry_trap_spent",
+      "/workspace/generated_images/exec-47e438a0-4b0c-4e17-bd8c-d572a692993b.png"
+    ],
+    [
+      "metal_container",
+      "/workspace/generated_images/exec-720a7387-3fc6-4856-83a3-935fd65afc68.png"
+    ],
+    [
+      "subject_walk",
+      "/workspace/generated_images/exec-5122aa2d-d763-4a56-a345-136c43187386.png"
+    ],
+    [
+      "shrouded_figure",
+      "/workspace/generated_images/exec-b78b91b1-54be-4550-8416-7387a4b57e42.png"
+    ],
+    [
+      "portrait_sheet",
+      "/workspace/generated_images/exec-d79d9e1d-913d-409a-826c-001167bb058d.png"
+    ],
+    [
+      "windows_open",
+      "/workspace/generated_images/exec-9f2e3fb0-3509-4dd3-97f5-185fffa1c541.png"
+    ],
+    [
+      "wooden_plank",
+      "/workspace/generated_images/exec-cab6d314-d71e-4180-a2b1-d70af323ec21.png"
+    ]
+  ],
+  "states": {
+    "isoward_after": "assets/panoramas/states/isoward_after.webp",
+    "surgery_after": "assets/panoramas/states/surgery_after.webp",
+    "laundry_trap_armed": "assets/panoramas/states/laundry_trap_armed.webp",
+    "tunnel_drained": "assets/panoramas/states/tunnel_drained.webp",
+    "laundry_trap_spent": "assets/panoramas/states/laundry_trap_spent.webp"
+  }
+}

@@ -1,108 +1,71 @@
-# Validation
+# Winter build validation
 
-Run from this project directory with Python Playwright, Pillow, system Chromium,
-FFmpeg and Tesseract installed:
+Validated in system Chromium through Python Playwright, 18 October 2026.
+Source tests block service workers so results cannot come from a stale cache.
 
-```
-python -m http.server 8010
-python tests/audit_scenes.py
-python tests/test_chapter1.py
-python tests/test_regressions.py
-python tests/test_scene_corrections.py
-python tests/test_visual_review.py
-python tests/test_five_room_input.py
-python tests/test_refinements.py
-python tests/test_inspection_actions.py
-python tests/test_state_layers.py
-python tests/test_portal_weather.py
-python tests/test_art.py
-python tools/package_build.py
-python tests/test_delivery.py
-```
+## Earned progression
 
-- The geometry audit checks every authored fixture and door for bounds and overlap.
-- Two complete Standard seeded routes use actual player actions: opening, phone, keys, map,
-  handgun, patient treatment, inventory upgrade, seeded pharmacy code, maintenance
-  tools, failed premature generator attempt, regulator repair, fuse installation,
-  powered photograph puzzle, Rourke/observation evidence, authorization, theatre,
-  shotgun, physical pursuit escape, revelation and elevator completion. Milestone
-  flags are not granted by these route tests. A third Story route visits all 27 rooms,
-  including optional combat, resident breaker, carrying harness, drainage/winch,
-  chapel, specimen, cold store, and isolation branches.
-- Regression tests cover 128 seeds for authored-object coverage; all 27 rooms at
-  1600×1000, 1000×800 and 390×844; visible controls and hit-tested target centers;
-  full-inventory recovery; exhausted-battery recovery and dark inspection; save/load
-  and irreversible choices; warned fatal cell and recovery; nonfatal hallucinations;
-  separate sprinkler recovery/valve actions, cold and shivering recovery;
-  actual pursuer edges/retreat/visibility; locker peeking and waiting; visible infected;
-  decoding all 26 bundled recordings.
-- Reported-issue regressions reject 1,944 nonadjacent attempts across door, map and
-  core travel without state/time changes; verify hide/cancel/confirm, black cover,
-  limited peeking, disabled concealed light, unchanged phone scale, full review-room reverse views,
-  absence of door masks, and loaded physical object images across all 27 rooms.
-- Art audit compares perceptual signatures, including mirrored comparisons, and OCR
-  checks for accidental INSPECT/EXAMINE/CLICK HERE/BUTTON prompts. This supports,
-  but does not replace, visual inspection of each scene.
-- Packaging checks exercise the single-file edition with network disabled after its
-  sole document load, and verify hosted offline cache/reload and ZIP integrity.
+`python tests/test_winter_playthrough.py`
 
-Current-run results are in tests/results/*.json. Screenshots are supporting evidence,
-not a substitute for complete interaction checks. Direct file:// launch is restricted
-by the managed test browser; single-file behavior is tested as a single served resource
-with all further network access disabled. Other browsers and a human 2–3-hour session
-are not claimed tested. Optional live image-provider generation is not configured.
+Two seeds/difficulties (Normal and Story), exercised against both source and the
+packaged standalone with resource requests blocked, each reaching all 27 rooms and the explicit
+Chapter 1 elevator ending. Tests click actual scene doors and object action controls;
+keys, tools, fuse, weapons, clues and clearance are earned. Test helpers reveal the
+camera region containing a target and use seeded puzzle values as an oracle. They do
+not grant progression flags. The routes exercise regulator wiring, generator restoration,
+patient treatment, Kessler, Rourke, the scientist, portraits, photograph development,
+all four interlocks, Subject X introduction/escape and final descent. The required
+sprinkler is stopped and its dropped light retrieved through separate actual controls.
 
-The visual-review suite exercises desktop/mobile anchored panels and Take/Leave,
-recorded Clara message without an actor, five review reverse assets, negative removal, file-hotspot cleanup,
-patient prerequisites/aftermath, three cover frames, and large-map controls.
-These checks verify behavior and supporting layouts; artistic acceptance and
-remaining collectible-art conversion are still review work.
+Machine-readable results: `tests/results/winter_progression.json`.
 
-## Actual-pointer acceptance checks
+## Focused systems
 
-`test_five_room_input.py` clicks artwork coordinates rather than invoking travel or
-actor actions directly: 12 physical doorway positions, Clara’s recorded message at the monitor bank,
-and five reverse views at desktop/mobile sizes. Isolated tests prepare room/lock
-states for this input matrix; these do not replace the separate real-progression runs.
-It also verifies one cabinet inspection, a multi-item panel remaining open, all ten
-focus-room collectible layers, Room 12 save/load, and different drawn canvas pixels
-in every focus room with working motion controls. See tests/results/five_room_input.json.
+`python tests/test_winter_systems.py`
 
-A recorded browser preview is in docs/review/animated-scene.mp4. It shows the actual
-layered renderer, not a separately rendered promotional animation.
+Isolated state fixtures test sound decoding/playback and nonzero WebAudio output;
+battery drain by difficulty, lit-room behavior and exhausted beam removal; confirmed
+hoist states; hiding/peeking; stable examination image identity; window confirmation,
+three catches, health/sanity exposure and warming; lighter combination/use; one-time
+sprinkler recovery; confirmed substantial plank; knife patient choice, covered art and
+save/reload; finite actor population, costly knockdown, return and permanent death;
+nonlethal imaginary combat with real ammunition; all three phone transcripts; fatal
+glass warning/retreat/checkpoint; high-resolution photograph backs; 128 seeded worlds
+with authored targets; every pickup icon file and 27 distinct panorama hashes; all-room
+front/rear controls and horizontal overflow at 1600×1000, 1000×800 and 390×844.
 
-## Fixed portals and exterior-only rain
+Machine-readable results: `tests/results/winter_systems.json`.
 
-The graph has 27 edges / 54 directed transitions. The portal-weather suite clicks
-each edge and its return at 1600×1000 and 390×844, requiring the used entrance
-to be in the opposite camera view after arrival. It verifies every visible view's
-image loads, fixed portal identity, camera migration and retained turned-save view.
-All 40 nearby pursuit routes between non-safe rooms also verify that turning
-reverses the sound bearing. Safe rooms remain excluded from pursuit. Both lobby views are tested for moving weather pixels, with zero pixels outside
-the authored glazing polygons (one pixel antialias tolerance); the other 26 rooms
-have no rain canvas in either view. Reduced motion removes both animation canvases.
-The same suite runs with networking disabled against the packaged HTML.
-Results: `portal_weather.json` and `portal_weather_packaged.json`.
+These scenarios deliberately arrange state to isolate behavior; they are separate from
+the earned progression routes. Sound output is measured, not subjectively mixed by a
+human listener. Geometry collision review found and corrected chapel candles overlapping
+the return door. East Corridor's window/valve and Residence's door were moved to the
+actual panorama features. Current authored fixture/door overlap audit has no fixture
+covering more than 35% of its area with an unrelated doorway.
 
-All 27 front and 27 reverse images, plus six state images, were visually inspected
-for doorway placement and persistence. Rear target rectangles were fitted to those
-images individually. OCR and duplicate checks support this review; they are not
-proof of perfect artistic continuity.
+## Package
 
-## Eight interaction refinement passes
+`python tools/package_build.py` creates the source archive, standalone HTML and versioned
+cache, plus a separate player ZIP containing the standalone and launch instructions. The final standalone is tested with networking disabled; embedded artwork,
+fonts and sound must load without fetching external files. See
+`tests/results/winter_package.json` for actual packaged-file checks. The environment’s
+Chromium policy blocks direct file:// navigation, so the exact standalone bytes are
+served as the only permitted request from a loopback HTTP origin; networking is then
+disabled for gameplay. All other resource requests are blocked from the start. Direct file
+opening in an unmanaged desktop browser is not certified here.
 
-Run `python tests/test_refinements.py` against source, or supply the packaged HTML
-URL to repeat the same checks after disabling network access. The eight passes are:
+Historical tests from the preceding build remain in the tree as reference. Some assert
+its old artwork paths/renderer selectors and are not represented as passing this
+redesign. Use the winter suites above for the active presentation and systems.
 
-1. Eight focus-panel open/close cycles at three viewports, with fixed bounds and image identity.
-2. Trap cancel, advance setup, armed save/load, real-room capture and manual empty release.
-3. Every gated edge explains its requirement; legacy key names migrate in inventory/storage.
-4. Actual rendered brightness in all 27 rooms, both views and both power states: torch-on cannot darken the image.
-5. Clara’s monitor recording and evidence; no floating actor.
-6. Every pending fixture has a marker; all active item icons load.
-7. Struggle injury, surviving infected on return, and saved remaining enemy health.
-8. Knife collection, patient cancellation/confirmation, covered aftermath and saved choice.
+## Practical limits
 
-Results are `refinements.json` and `refinements_packaged.json`. These are focused
-automated browser passes, not eight complete human playthroughs. Three separate
-full progression routes still exercise the elevator ending and optional rooms.
+Automated playthroughs prove the tested routes are solvable; they do not replace a
+human first-play pacing, difficulty and art review. Nightmare and every possible seed
+are not full-run certified. Browser autoplay/output-device settings can still mute
+sound until a user gesture. Mobile layouts were checked in Chromium emulation; physical
+phone browsers and Firefox/Safari were not run in this environment.
+
+All 30 local recorded clips were also decoded with FFmpeg and checked against their
+processed-output SHA-256 values in audio/SOURCES.json. The third-party Caveat license
+is retained verbatim, including its original whitespace.

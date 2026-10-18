@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "local recorded sound advances and produces nonzero WebAudio output",
+    "Normal drains faster than Story; lit rooms stay lit; exhaustion updates the actual flashlight beam",
+    "hoist requires confirmation and persists armed/spent artwork",
+    "hiding asks first, is dark while concealed and uses narrow slits when peeking",
+    "reading a document preserves the existing room image and camera",
+    "window confirmation, individual catches, local health/sanity exposure, one-use resolution and lighter recovery",
+    "sprinkler and flashlight recovery are separate persistent one-time actions",
+    "plank is confirmed before consumption and renders as a substantial horizontal board",
+    "knife choice covers Mercer, cannot be repeated or undone, and survives save/reload with seeded placements",
+    "struggle costs health, survivor returns on re-entry, killed actors stay dead, noise creates no new population",
+    "imaginary combat uses real ammo, shares in-room enemy presentation, cannot damage health, resolves and stays resolved",
+    "three once-only story calls use three different seeded phones and preserve transcripts",
+    "rare lethal encounter warns on first inspection, permits retreat and restores its checkpoint after deliberate second inspection",
+    "high-resolution photographs have inspectable dated backs",
+    "every directed doorway arrival faces away from its fixed entrance portal",
+    "128 seeded worlds retain authored geometry for every object and telephone",
+    "27 distinct panoramas, all pickup icon files, and usable front/rear controls at desktop, tablet and mobile widths"
+  ],
+  "javascript_errors": []
+}

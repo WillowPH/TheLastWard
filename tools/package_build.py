@@ -29,12 +29,17 @@ def css(m):
   return 'url("'+data(target)+'")'
  return '<style>'+re.sub(r'url\(([^)]+)\)',url,p.read_text())+'</style>'
 html=re.sub(r'<link rel="stylesheet" href="([^"]+)">',css,html)
-licenses={str(p.relative_to(ROOT)):p.read_text() for p in [ROOT/'assets/fonts/OFL.txt',ROOT/'audio/CC0-LICENSE.txt']}
+licenses={str(p.relative_to(ROOT)):p.read_text() for p in [ROOT/'assets/fonts/OFL.txt',ROOT/'assets/fonts/Caveat-OFL.txt',ROOT/'audio/CC0-LICENSE.txt']}
 boot='<script>window.WardEmbeddedAssets='+json.dumps(assets,separators=(',',':'))+';</script><script type="application/json" id="bundled-asset-licenses">'+json.dumps(licenses).replace('</','<\\/')+'</script>'
 html=html.replace('<script src="js/bootstrap.js">',boot+'<script src="js/bootstrap.js">')
 html=re.sub(r'<script src="([^"]+)"></script>',lambda m:'<script>\n'+(ROOT/m[1]).read_text().replace('</script','<\\/script')+'\n</script>',html)
 html=re.sub(r'<script>if\(location.protocol.startsWith\("http"\).*?</script>','',html)
 standalone=OUT/'The_Last_Ward_Chapter_1.html';standalone.write_text(html)
+# A separate player ZIP contains the actual standalone, not just source files.
+player_archive=OUT/'The_Last_Ward_Chapter_1_Play.zip'
+with zipfile.ZipFile(player_archive,'w',zipfile.ZIP_DEFLATED) as z:
+ z.write(standalone,standalone.name)
+ z.writestr('START_HERE.txt','THE LAST WARD — CHAPTER 1\n\nExtract this ZIP completely. Open The_Last_Ward_Chapter_1.html in Chrome or Edge.\nStart a NEW GAME and press Begin Investigation to enable sound.\nThe HTML contains all artwork, fonts, audio and code. No server or internet is required.\nKeep saves in the same browser; export a terminal record before moving browsers.\n')
 # A source ZIP avoids recursively including previous generated builds.
 archive=OUT/'The_Last_Ward_Chapter_1_Source.zip'
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
@@ -43,4 +48,4 @@ with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
   if not p.is_file() or any(part in ['.git','__pycache__','downloads'] for part in rel.parts) or p.suffix=='.pyc':continue
   if rel.parts[:2]==('tests','results') and p.suffix!='.json':continue
   z.write(p,'The_Last_Ward_Project/'+rel.as_posix())
-print(json.dumps({'cache':cache,'runtime_files':len(runtime),'standalone':str(standalone),'standalone_bytes':standalone.stat().st_size,'source_zip':str(archive),'source_zip_bytes':archive.stat().st_size},indent=2))
+print(json.dumps({'cache':cache,'runtime_files':len(runtime),'standalone':str(standalone),'standalone_bytes':standalone.stat().st_size,'source_zip':str(archive),'source_zip_bytes':archive.stat().st_size,'play_zip':str(player_archive),'play_zip_bytes':player_archive.stat().st_size},indent=2))

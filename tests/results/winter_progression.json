@@ -1,0 +1,79 @@
+{
+  "runs": [
+    "winter-standard-a",
+    "winter-story-complete"
+  ],
+  "standalone_offline": true,
+  "trace": [
+    {
+      "step": "winter-standard-a power restored",
+      "room": "generator",
+      "hp": 100,
+      "sanity": 92,
+      "charge": 75.39999999999998,
+      "visited": 12,
+      "remaining": [
+        "recover executive photograph clearance",
+        "investigate the observation incident",
+        "recover Rourke\u2019s final evidence",
+        "investigate the surgical theatre",
+        "authorize the containment console",
+        "escape Subject X",
+        "install all four elevator interlock fuses in Emergency Power Control"
+      ]
+    },
+    {
+      "step": "winter-standard-a interlock fitted",
+      "room": "powercontrol",
+      "hp": 70,
+      "sanity": 77,
+      "charge": 0,
+      "visited": 26,
+      "remaining": []
+    },
+    {
+      "step": "winter-standard-a elevator ending",
+      "room": "lift",
+      "hp": 70,
+      "sanity": 82,
+      "charge": 0,
+      "visited": 27,
+      "remaining": []
+    },
+    {
+      "step": "winter-story-complete power restored",
+      "room": "generator",
+      "hp": 100,
+      "sanity": 92,
+      "charge": 88.06,
+      "visited": 12,
+      "remaining": [
+        "recover executive photograph clearance",
+        "investigate the observation incident",
+        "recover Rourke\u2019s final evidence",
+        "investigate the surgical theatre",
+        "authorize the containment console",
+        "escape Subject X",
+        "install all four elevator interlock fuses in Emergency Power Control"
+      ]
+    },
+    {
+      "step": "winter-story-complete interlock fitted",
+      "room": "powercontrol",
+      "hp": 92,
+      "sanity": 77,
+      "charge": 16.12000000000006,
+      "visited": 26,
+      "remaining": []
+    },
+    {
+      "step": "winter-story-complete elevator ending",
+      "room": "lift",
+      "hp": 92,
+      "sanity": 82,
+      "charge": 5.380000000000063,
+      "visited": 27,
+      "remaining": []
+    }
+  ]
+}

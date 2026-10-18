@@ -1,101 +1,71 @@
-# Implementation map
+# Winter Chapter 1 implementation
 
-The uploaded Cinematic Project is the baseline. The rejected five-room pilot is not
-merged into it. The complete agreed scope is retained in docs/MASTER_REQUIREMENTS.md.
+Build identifier: `last-ward-ch1-winter-1`. The uploaded Cinematic Project is the baseline;
+latest decisions are preserved in `docs/DESIGN_NOTES.md`. Implementation was authorized
+by “lets fire this up and build it.” Older notes-only instructions are historical.
 
-| Area | Implementation |
+| Area | Active implementation |
 | --- | --- |
-| Chapter boundary and gates | js/chapter1_complete.js; 27 rooms, 27 graph edges, one elevator entrance; no B2/Chapter 3 map nodes |
-| Travel and orientation | js/chapter1_navigation.js; shared adjacency guard, click cooldown, fixed front/rear portal identities, arrival orientation, 27 reverse backgrounds; black doorway-shading patches removed |
-| Art and targets | data/chapter1_views.json, data/chapter1_scenes.json, js/scene_manifest.js, tools/author_scenes.py; 154 fixtures and explicit door rectangles |
-| Scene/state/inspection | js/chapter1_scene.js; art and targets resize on one uncropped plane; no arbitrary coordinate fallback |
-| Threats and conditions | js/chapter1_survival.js; traversal, encounters, injury aim/movement effects, hiding, rare hallucination, sprinkler recovery and cold/wet recovery |
-| People and evidence | js/chapter1_people.js; named NPCs, coherent aftermath, missing-nurse evidence, non-repeating consequences |
-| Recorded sound | js/chapter1_audio.js; local playback, spatial cues from graph distance, volume buses and sound captions |
-| Accessibility/layout | css/chapter1_scene.css; hints, motion/flash controls, keyboard focus, responsive survival controls |
-| Save and delivery | distinct build keys/schema, terminal exports, completion record, tools/package_build.py, offline service worker |
+| Chapter boundary | `chapter1_complete.js`, `winter_content.js`: 27 rooms, fixed graph, clearance/pursuit/fuse gates, elevator ending and transfer record |
+| Panoramas | `panorama_assets.js`, `data/panorama_assets.json`: 27 distinct 2:1 front images; rear art remains independently authored |
+| Geometry | `data/winter_geometry.json`, `winter_geometry.js`, base `scene_manifest.js`: explicit room coordinates, no runtime wall-placement fallback; regenerate embedded coordinates with `tools/build_winter_geometry.py` |
+| Content/seeds | `winter_content.js`: early winter journal, lighter/fluid, batteries, redacted Mimi documents, eggs, four named interlocks and saved item/container placements |
+| Scene/UI | `winter_scene.js`, `css/winter.css`: shared art/target planes, camera offsets, local focus panels, Take/Leave, container imagery, item removal, reverse interaction, lower turn controls, transitions |
+| Object inspection | `winter_examination.js`: physical object close-ups, photo reverses, seeded appointment dates, damaged/handwritten documents and literal transcription, radio tuning |
+| Power/hazards | `winter_gameplay.js`: authoritative clock, Normal/Story battery drain, two limited automatic-reset outages, window catches, exposure, sprinkler, separate flashlight recovery, warming, lighter, wiring and four socket plugs |
+| Threats | `winter_threats.js`: finite saved actor identities, damage/death, knockdown/re-entry, graph-based noise response, screams, shared in-room combat presentation, nonlethal imaginary encounter |
+| Story/map | `winter_story.js`: Kessler choices, mandatory one-time suppression event on the return route after Room 12, phone transcripts, zone-based floor map and adjacent-only travel |
+| Effects | `winter_fx.js`: snow clipped to pane polygons; optional localized light flicker; individual CRT clips and room feeds; sprinkler particles; stove glow. Effects are children of the same moving art plane |
+| Audio | `chapter1_audio.js`, `audio/SOURCES.json`: local CC0 recordings, WebAudio spatial routing with HTMLAudio fallback, resumed playback after user gesture, measured output, winter ambience and creature voices |
+| Persistence | `bootstrap.js`, `save.js`: new winter save namespace, saved placement/enemy/hazard/story state, checkpoints and completion export |
+| Packaging | `tools/package_build.py`: source ZIP, embedded standalone HTML, deterministic service-worker cache, font/audio license embedding |
 
-## Artwork rules
+The previous engine modules remain as underlying narrative/combat/inventory code; the
+winter modules load last in the order declared in index.html. Their final overrides
+are authoritative. The previous rain canvas mount is replaced, not run alongside snow.
+The scene renderer does not use optional provider-generated backgrounds that could
+invalidate the explicit target coordinates.
 
-All 27 active backgrounds were newly generated for this build and inspected against
-room connectivity. Original JPG backgrounds and unused later-chapter backgrounds are
-removed from the runtime asset directory. Styles are shared; compositions are distinct.
-No random object-placement search or generic door-slot fallback is used by the active
-renderer. Seeded supply pouches and phones have authored locations and physical layers.
+## State rules
 
-Only real graph connections receive travel targets. Other pictured doors are sealed
-props or decoration. The elevator's rear doors are operated by its controls; they are
-not an invisible doorway into an unfinished Chapter 2. Its side cage returns upstairs.
+- `S.placements`: saved seed plus approved object/container selections. Load/visits do not reroll.
+- `S.enemyActors`: finite identities with health, room/home, alert expiry and knockdown.
+  Noise redirects existing survivors through unlocked edges. A reserved window-breach
+  actor is included in the initial finite registry; it is not an endless spawn source.
+- `S.windows`: triggered, three closed flags, resolved and local exposure. The lever is
+  irreversible once used; closing all catches resolves it for the run.
+- Sprinkler trigger/stopped/recovered flags are independent. Its one-time required route
+  event drops the torch; closing the valve does not retrieve it.
+- Cold exposure is local and recoverable. Wetness expires or dries in warm rooms. No
+  permanent stack of hunger/cold meters is added. Windows give a grace warning first.
+- Major incident choices and aftermath flags persist. Hallucinations can refer to them
+  without replaying them. False combat is one saved episode; visual episodes are capped.
+- Hallucinated attacks have no real-health damage path. Shots consume real loaded rounds;
+  waiting, retreat, damage or timeout resolves the encounter. Active unresolved cold/
+  sprinkler hazards are excluded from beginning this episode.
+- Normal infected killed in combat stay dead. Struggle costs health and leaves a living
+  knockdown; that survivor can return on room re-entry with its health retained.
+- Subject X remains a distinct pursuer, gated behind power, executive authorization,
+  observation/Rourke evidence and at least 14 visited rooms. Ordinary fire delays it.
+- Both real and imaginary combat keep room actors visible behind a compact control panel.
+- One-off items disappear; completed documents remain available in Files. Within a
+  container that still has contents, read papers can remain as noninteractive decoration.
+- Opening an examination does not scale the room. Pure examinations retain the existing
+  image node unless power, room, view, temperature or light state genuinely changes.
 
-A changed scene can have changed geometry: Kessler's aftermath uses a separate image
-and the inspection target moves to the visible fallen sleeve. Each room's portal IDs are partitioned into fixed front/rear views. The rear
-portal ID never depends on S.prev. Camera schema 2 chooses the opposite facing on
-arrival and migrates older saves once; manual camera state then persists. The
-front plane is hidden and inert while rear is active. Every physical travel door
-has one target in its own view, with measured per-room geometry. All 27 front
-backgrounds remove the relocated door; all 27 reverse backgrounds show one fixed
-closed doorway. These are two scene views, not a freely rotating 3D camera.
-Contextual inspection keeps the original scene scale.
-Hiding requires confirmation and reveals the room only through a narrow peek gap.
-Other state effects use
-separate overlays and the established save flags. Documents remain physical papers
-after reading; inventory pickups leave their item layer after collection.
+## Art and remaining limits
 
-## Audio rules
+Room/environment artwork is fictional game art. Runtime labels, hints, dates, map text,
+surveillance readouts and menus are game-rendered. The new front panoramas are not
+mirrored copies. Persistent front-state variants retain the wide aspect ratio to avoid
+camera jumps. Sprite sheets provide four walking frames; ambient layers provide motion
+rather than full video for every background prop.
 
-No browser oscillator, synthetic fallback bleep, or remote sound stream is used. The
-phone sound is an edited mechanical-bell recording in a telephone cadence, not a newly
-recorded vintage telephone. Heavy steps use recorded metal footfalls with pitch/EQ
-processing. Sources, exact original paths, commit and file hashes are in audio/SOURCES.json.
-Listening approval and long-session mix tuning remain human playtest work.
+The image service rejected some bloodier regular-infected variants. Approved clothed,
+torn/stained designs are used. Their presentation and frame-based animation can still
+benefit from human art review. Automated route tests establish solvability, not ideal
+first-time player pacing or a measured human completion time.
 
-## Scope boundary
-
-Chapter 2/3 content is not accessible or mapped. Source baseline functions relating to
-later chapters remain in inherited modules where harmless, but their locations and
-routes are removed from the active graph. No Chapter 2 completion is claimed.
-The desired 2–3-hour runtime and final human acceptance of pacing remain unverified.
-
-## Visual review scope
-
-See docs/VISUAL_REVIEW.md for the full camera pass and remaining collectible-art conversion.
-js/chapter1_review.js provides the enlarged physical-connection map and visible
-patient-action prerequisites. The actual graph is unchanged: North Corridor branches
-to Room 12 and Isolation separately; Children’s Ward connects to Room 12.
-
-## Input and object-layer repair
-
-Clara is an archived recording at the monitor fixture, without a standing sprite. Reverse door buttons are
-absolutely positioned inside the art plane and cannot cover footer controls.
-Door targets belong to their fixed view, matching the revised artwork; the entry is behind arrival.
-Door-lock failures are modal, and scene view survives flashlight updates.
-
-The authoring script defines ten explicit collectible image rectangles for the
-five focus rooms. The renderer removes each by its own saved object state. Base
-artwork is cleared separately using authored edits. Containers can remain open for
-multiple actions without resetting focus. The security cabinet's two empty-case
-inspections are merged into one. `js/chapter1_motion.js` paints frame-driven layers
-on the current front/reverse art plane; targets remain stationary and unobstructed.
-
-## Exterior weather
-
-`js/chapter1_motion.js` owns one independent transparent weather canvas. Hand-authored
-front/rear glazing polygons exclude frames and interior objects. Ambient reflected
-light is a separate canvas; the duplicate rectangular CSS rain and its keyframes
-are removed. Reduced motion disables both. `tests/test_portal_weather.py` checks
-actual doorway clicks and arrival/return facing across all 54 directed edges at
-desktop/mobile sizes, save migration, asset loading, and every rain pixel outside
-the permitted glass areas. It also runs against the packaged HTML offline.
-
-Pursuer panning and sound captions use the fixed portal geometry and current camera
-facing, including ahead/behind cues. Turning reverses the horizontal bearing.
-
-## Interaction refinements
-
-`js/chapter1_refinements.js` owns named lock requirements, legacy key-name migration,
-trap confirmation/arming/one-use outcomes, paid struggle and knife choice. Trap
-art and displaced loose pouches use authored persistent states; no doorway is
-blocked. `chapter1_scene.js` opens/closes focus panels without remounting the image,
-and uses a fixed scene viewport. Ambient darkness uses `WardNavigation.isDark`,
-while the flashlight beam is additive in lit rooms. All pending fixtures have
-visible idle markers. Local inventory artwork covers the complete item catalog.
+Mimi is Chapter 1 foreshadowing only. Her friendly introduction, surveillance revelation,
+knife betrayal, stalking and containment ending remain Chapter 2 work. Her legal name
+stays redacted. The existing Marian Vale evidence is a separate mystery thread.

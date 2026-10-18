@@ -209,6 +209,38 @@
       "output_sha256": "81c33996742094977f34df59cde242783f124cf6a380c52adfab2138664bc8a9",
       "license": "CC0-1.0",
       "processing": "atrim=duration=0.22,afade=t=out:st=0.12:d=0.1,apad=whole_dur=0.28,aloop=loop=9:size=12348,atrim=duration=2.7,alimiter=limit=0.8"
+    },
+    {
+      "name": "infected_cry",
+      "source": "80-CC0-creature-SFX/scream_01.ogg",
+      "source_sha256": "54da7bba4c4272b0b77dc3fe26a91d0a26d9280797fecb8197d716b47745eb85",
+      "output_sha256": "2de87e5df1bf460b605cb1aaefd4c3802697a2d8930eff3a5979e2d2726f9e8c",
+      "license": "CC0-1.0",
+      "processing": "asetrate=44100*0.85,aresample=44100,lowpass=f=3600,alimiter=limit=0.8"
+    },
+    {
+      "name": "infected_groan",
+      "source": "80-CC0-creature-SFX/grunt_01.ogg",
+      "source_sha256": "73ee84f2bb3e1b371a72dd66a09f150c98c9000bcb735c3bdd7f607e59385206",
+      "output_sha256": "1691cc9fc8891cc7eb3f521e9164eb039f60b76c794d1a31d27a14839ed1fa72",
+      "license": "CC0-1.0",
+      "processing": "asetrate=44100*0.82,aresample=44100,alimiter=limit=0.8"
+    },
+    {
+      "name": "winter_wind",
+      "source": "100-cc0-sfx-2/sfx100v2_air_03.ogg",
+      "source_sha256": "df32019155c3a8b5fc77244126261695f762ba7018a4fc4c6d9ad201cedeb985",
+      "output_sha256": "90ba6c99c1748e9812349ae4a6407db7aa8447b3e990b1ffdf52f463317e2dd7",
+      "license": "CC0-1.0",
+      "processing": "lowpass=f=2200,highpass=f=100,atempo=0.6,apad=whole_dur=10,atrim=duration=10,afade=t=in:d=1,afade=t=out:st=8:d=2,alimiter=limit=0.8; remove silent padding, loudnorm I=-23 TP=-3 LRA=7, loop recorded active air to 10s with 0.3s/0.4s fades"
+    },
+    {
+      "name": "radio_static",
+      "source": "30-cc0-sfx-loops/noise_02.ogg",
+      "source_sha256": "b1cb867f85c2735023943686e8d4976f1c29c094c5951cf1f6ce91ce70cac5ba",
+      "output_sha256": "9a6651ae1f8615a10b29c0f0242f930a2ea7f1f014d9d003a76296edaff09f3f",
+      "license": "CC0-1.0",
+      "processing": "highpass=f=600,lowpass=f=3800,alimiter=limit=0.75"
     }
   ]
 }
