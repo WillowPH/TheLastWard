@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "Physical FINE, CAUTION and DANGER trace and label use matching green, amber and red.",
+    "Subtle is default; save controls are separate from Options and available from the Save navigation action.",
+    "A mouse facing change immediately rotates the map arrow by 180 degrees.",
+    "Closed hiding is opaque black; PEEK has three usable physical slots showing the live room through a transparent parent.",
+    "Standby security feeds show monochrome rooms, and all emissive pixels remain strictly inside six authored CRT rectangles.",
+    "Taking the Security utility knife and returning to the room clears the contents overlay and leaves no colour filter or stale focus container.",
+    "Hinged door/latch animation completes once and takes longer with wet hands.",
+    "Rapid real door clicks and direct map/turn/inventory commands stay locked to one transition; Pause remains available and completion waits for Resume."
+  ],
+  "errors": []
+}

@@ -42,9 +42,16 @@ with sync_playwright() as p:
      aim_point('fixture:valve');page.locator('[data-fixture=valve]').click();page.locator("button[onclick=\"wardFixtureAction('staffSprinkler')\"]").click()
     return
    if ev('!!S.f.pursuerEncounter'):
-    choice='shoot' if ev('(S.f.pursuerEscapes||0)>0&&W[S.eq]&&has(S.eq)&&(S.ld[S.eq]||0)>0') else 'retreat'
-    page.locator('button[onclick="escapePursuer(\''+choice+'\')"]').click()
-   elif ev('!!S.hallCombat'):ev("wardResolveFalseEncounter('hold')")
+    # Deal with the physical pursuer using earned ammunition. Shooting twice
+    # creates a bounded opening; repeatedly choosing retreat could never
+    # establish that the forward progression gate is actually escapable.
+    if ev('W[S.eq]&&has(S.eq)&&(S.ld[S.eq]||0)>0'):
+     page.get_by_role('button',name='Shoot Subject X',exact=True).click()
+    elif ev('W[S.eq]&&has(S.eq)&&cnt(W[S.eq].ammo)>0'):
+     page.get_by_role('button',name='Reload',exact=True).click()
+    else:
+     raise AssertionError(('Earned route ran out of ammunition at Subject X',ev('({room:S.room,hp:S.hp,inventory:S.inv,loaded:S.ld,pursuer:S.pursuer})')))
+   elif ev('!!S.hallCombat'):page.get_by_role('button',name='Hold and observe',exact=True).click()
    elif page.get_by_role('button',name='Call his name',exact=True).count():page.get_by_role('button',name='Call his name',exact=True).click()
    elif page.get_by_role('button',name='Struggle past · risk injury',exact=True).count():
     page.get_by_role('button',name='Struggle past · risk injury',exact=True).click();page.wait_for_timeout(650)
@@ -103,7 +110,7 @@ with sync_playwright() as p:
    i=ev('n=>S.inv.findIndex(x=>x.n===n)',n)
    if i>=0:ev('i=>store(i)',i);close()
  def note(label):
-  state=ev('({build:WardChapter.BUILD,room:S.room,hp:S.hp,sanity:S.san,charge:S.bat,visited:Object.keys(S.vis).length,remaining:WardChapter.requirements()})')
+  state=ev('({build:WardChapter.BUILD,room:S.room,hp:S.hp,sanity:S.san,charge:S.bat,visited:Object.keys(S.vis).length,loadedRounds:S.ld.Handgun||0,reserveRounds:cnt("Handgun Ammo"),pursuerStaggers:S.f.pursuerStaggers||0,pursuerEscapes:S.f.pursuerEscapes||0,remaining:WardChapter.requirements()})')
   report.append({'step':label,**state});print(label,state,flush=True)
  seeds=['winter-standard-a','winter-story-complete']
  for seed in seeds:
@@ -155,10 +162,7 @@ with sync_playwright() as p:
    page.get_by_role('button',name=name,exact=True).click();page.get_by_role('button',name=name+' socket',exact=True).click()
   close();assert ev('!!S.f.elevatorFusesInstalled');note(seed+' interlock fitted')
   move('archive');close();assert ev('!!S.f.pursuerStarted');assert ev('Object.keys(S.vis).length>=14')
-  for _ in range(20):
-   if ev('(S.f.pursuerEscapes||0)>0'):break
-   move('laundry');move('ward');ev('advanceTime(5);renderScene()');close()
-  assert ev('(S.f.pursuerEscapes||0)>0')
+  assert ev('(S.f.pursuerStaggers||0)>0&&(S.f.pursuerEscapes||0)>0'),('Natural full route must meet and stagger Subject X',ev('S.f'))
   move('generator');store(['Bolt Cutters','Encrypted Drive']);move('lift')
   if page.get_by_role('button',name='Face the elevator',exact=True).count():page.get_by_role('button',name='Face the elevator',exact=True).click()
   if not page.get_by_role('button',name='Descend · End Chapter 1',exact=True).count():use('liftpanel')

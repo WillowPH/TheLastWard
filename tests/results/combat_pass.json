@@ -1,0 +1,43 @@
+{
+  "checks": [
+    "door, confirmed movement, map, flee and sneak all stop before animation when Subject X blocks the room",
+    "two actual handgun clicks spend two rounds, carry a minor first-shot risk and knock Subject X down long enough to pass; it remains alive",
+    "one heavy shell also staggers; the real recovery deadline expires and the same exits become blocked again",
+    "retreat uses the actual unlocked entry doorway and runs arrival once; a locked rear route cannot select an unrelated forward exit",
+    "pause blocks all combat and pursuer movement mutations",
+    "three finite infected identities use three distinct art assets and retain full actor opacity",
+    "finite authored ammo covers new stagger costs, scales by difficulty and never grows on reconfigure"
+  ],
+  "ammo_totals": [
+    [
+      48,
+      48
+    ],
+    [
+      40,
+      40
+    ],
+    [
+      26,
+      26
+    ]
+  ],
+  "enemy_variants": [
+    {
+      "variant": "winter-actor infected enemy-orderly watching",
+      "art": "http://127.0.0.1:8010/assets/room_views/infected_orderly.png",
+      "opacity": "1"
+    },
+    {
+      "variant": "winter-actor infected enemy-nurse watching",
+      "art": "url(\"assets/characters/nurse_walk.webp\")",
+      "opacity": "1"
+    },
+    {
+      "variant": "winter-actor infected enemy-patient watching",
+      "art": "url(\"assets/characters/patient_walk.webp\")",
+      "opacity": "1"
+    }
+  ],
+  "javascript_errors": []
+}

@@ -31,7 +31,11 @@ with sync_playwright() as p:
         page.get_by_role('button', name='BEGIN INVESTIGATION', exact=True).click()
         ev('nextIntro();nextIntro();nextIntro()')
         ready()
-        ev('''S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();
+        # Compare difficulty on one authored run. Independent random seeds can
+        # move or resize optional ammo caches and invalidate a balance comparison.
+        ev('''S.seed='survival-revision-fixture';S.rngState=hashSeed(S.seed);
+            S.puzzles=generatePuzzles();configureWorld(S.seed,false);placeTelephones(S.seed);
+            S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();
             S.pursuer.active=false;S.f.blackoutCount=2;S.slots=12;
             add('Flashlight',1);S.lightOn=false;render()''')
 
@@ -125,10 +129,12 @@ with sync_playwright() as p:
         assert ev('S.room') == 'surgery'
         assert ev('S.f.doctorWallEncounterStarted&&!S.f.doctorWallSeen')
         assert ev('window.__arrivalCalls') == [['laundry', 'surgery']], {'pursuer':pursuer,'calls':ev('window.__arrivalCalls')}
-        assert ev('S.t') - before == (1 if pursuer else 3)
+        assert ev('S.t') - before == 3
         assert page.get_by_role('button', name='Call his name', exact=True).count() == 1
         if pursuer:
-            assert ev('S.pursuer.evadeUntil-S.t') >= 12
+            # The twelve-turn evasion window includes the same three-turn
+            # physical doorway traversal as ordinary movement.
+            assert ev('S.pursuer.evadeUntil-S.t') >= 9
             ev('''S.pursuer.room=S.room;S.pursuer.cooldown=0;S.f.pursuerEncounter=0;
                 S.t=S.pursuer.evadeUntil-1;pursuerApproach(S.room);pursuerApproach(S.room);''')
             assert not ev('S.f.pursuerEncounter'), 'Successful evasion needs a real recovery interval.'
@@ -139,7 +145,7 @@ with sync_playwright() as p:
                 pursuerApproach(S.room);pursuerApproach(S.room);pursuerApproach(S.room);''')
             assert ev('S.pursuer.cooldown') == 2, 'Arrival and clock must not consume cooldown three times in one turn.'
     passed('infected flee and Subject X retreat each invoke the new room’s scripted incident exactly once, with one original movement cost')
-    passed('Subject X evasion buys a finite twelve-turn Normal recovery interval; repeated arrival checks cannot burn it in one turn')
+    passed('Subject X evasion buys a finite twelve-turn Normal recovery interval including travel; repeated arrival checks cannot burn it in one turn')
 
     fresh()
     room('archive', True)

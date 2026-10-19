@@ -3,8 +3,9 @@
 This is the active presentation. Load `room_views_data.js`, `room_view_renderer.js`
 and `room_orbit.js` before `room_view_scene.js`; load `room_view_effects.js` afterward.
 Keep reference_theme.css, room_views.css and reading_review.css after the base styles.
-Load reading_review.js after inventory_discard.js and survival_review.js last so
-terminal-death guards protect the final public command wrappers.
+Load reading_review.js after inventory_discard.js, then survival_review.js,
+combat_pass.js, hud_view_pass.js and pause.js last. The final wrappers enforce
+death, door-transition locking and pause consistently.
 
 - Use one native painting near 1448×1086 per authored facing; retain real source dimensions. Fit the WHOLE image with a uniform
   scale no larger than1. Never use cover-cropping, fake4K resizing or a 360° texture crop.
@@ -16,7 +17,8 @@ terminal-death guards protect the final public command wrappers.
 - Keep navigation arrows in the side matte, outside the paintings, so edge objects
   remain clickable. No bottom labels or POI picker is rendered.
 - Mark each door's real view and rectangle. On arrival, choose the opposite facing
-  from the door used; preserve `roomView` when restoring a saved game.
+  from the door used unless `entryFacing[doorId]` explicitly authors another facing.
+  East Corridor looks toward Patient Wing from Lobby/Security. Preserve `roomView` on load.
 - Author weather in `data/room_view_effects.json` against actual visible glass cells,
   excluding frames, bars and foreground objects. Interior observation glass has no snow.
   Place CRT scanlines/messages inside actual screens and state patches in their fixtures.

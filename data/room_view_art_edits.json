@@ -58,25 +58,25 @@
     },
     "lobby_shutters_front": {
       "source": "assets/room_views/lobby_front.webp",
-      "generated": "exec-1a322038-5324-432d-89ed-b5c066a3e64d.png",
+      "generated": "exec-df2c6c50-f1db-491f-959e-e2f307ebef7d.png",
       "output": "assets/room_views/lobby_shutters_front.webp",
       "native_size": [
         1448,
         1086
       ],
-      "change": "Physical steel roll shutters integrated behind foreground barricade",
-      "export": "WebP quality95; original size preserved without resizing"
+      "change": "Closed opaque shutters exclude blue exterior snowy light and cold reflected highlights; amber local lamps retained",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
     },
     "lobby_shutters_rear": {
       "source": "assets/room_views/lobby_rear.webp",
-      "generated": "exec-564c58a7-950e-4487-a1eb-d826f0ceaa85.png",
+      "generated": "exec-048ea4f3-f536-4476-8eb9-41d3b8cde75a.png",
       "output": "assets/room_views/lobby_shutters_rear.webp",
       "native_size": [
         1448,
         1086
       ],
-      "change": "Matching physical shutter state behind rear-view barricade",
-      "export": "WebP quality95; original size preserved without resizing"
+      "change": "Matching closed shutter state with no exterior snowy reflections",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
     },
     "surgery_front": {
       "source": "assets/rooms/surgery.webp",
@@ -99,6 +99,28 @@
       ],
       "change": "Readable full-body seated aftermath beside same wall; non-graphic game art",
       "export": "WebP quality95; original size preserved without resizing"
+    },
+    "isoward_front": {
+      "source": "assets/rooms/isoward.webp",
+      "generated": "exec-9ac4c3c1-c94f-4164-9cb4-aff6e3724dc5.png",
+      "output": "assets/room_views/isoward_front.webp",
+      "native_size": [
+        1447,
+        1087
+      ],
+      "change": "Conscious restrained Daniel Mercer has visible pallor, branching facial and forearm veins, torn gown and mild dried blood stains; covered death state retained",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
+    },
+    "infected_orderly": {
+      "source_generated": "exec-1c54c6d0-164f-4f8e-bb8b-dc0dc3e96292.png",
+      "generated": "exec-f04d30f6-0766-4cb4-918d-e8e76d8fb7e0.png",
+      "output": "assets/room_views/infected_orderly.png",
+      "native_size": [
+        1024,
+        1536
+      ],
+      "change": "Distinct game-rendered infected orderly with pallor, visible veins, clouded eyes and torn stained uniform; native transparent background retained",
+      "export": "Native PNG without resizing"
     }
   }
 }

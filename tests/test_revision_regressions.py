@@ -90,9 +90,9 @@ with sync_playwright() as playwright:
     passed('named nurses have no living scene actors; invisible clipboard-doctor modal no longer appears')
 
     room('security', power=True, view='front')
-    target('attendantDiary1')
+    diary_fixture = target('attendantDiary1')
     assert page.locator('.c1-finding,.winter-drawer-item').count() == 1
-    assert page.locator('.finding-choices button').count() >= 2
+    assert page.locator('.finding-choices button').count() == 0
     no_scroll('.reading-focus')
     page.get_by_role('button', name='Read', exact=True).click()
     assert ev('WardWinter.isReadingRecord()')
@@ -100,6 +100,10 @@ with sync_playwright() as playwright:
     no_scroll('.winter-document')
     assert 'NIGHT ATTENDANT' in page.locator('#m').inner_text()
     ev('closeModal();wardCloseFocus()')
+    note_fixture = target('winterJournal')
+    assert note_fixture != diary_fixture, 'Heller’s note belongs to separate rear furniture.'
+    assert page.locator('.c1-finding,.winter-drawer-item').count() == 1
+    ev('wardCloseFocus()')
     target('cam')
     assert page.locator('.c1-finding,.winter-drawer-item').count() == 1
     no_scroll('.reading-focus')

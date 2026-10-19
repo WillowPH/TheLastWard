@@ -129,6 +129,40 @@ for(const [room,r]of Object.entries(R))for(const o of r.o){
 }
 for(const bp of Object.values(WardScenes))for(const f of bp.fixtures){f.label=equipmentName(f.label);if(f.ids.some(id=>W.find(id)?.[4].act==='save'))f.label='Terminal';if(f.ids.length===1&&W.find(f.ids[0])?.[4].act==='box')f.label='Storage box';if(f.ids.some(id=>['emergencyDynamo','handCharge'].includes(id)))f.label='Emergency battery charger';}
 const revisedDescription=desc;desc=function(name){if(canonicalItem(name)==='Floppy Disk')return 'One blank 3½-inch disk. Records your progress at a Terminal.';return revisedDescription(name);};
+// Small, authored containers keep important equipment discoverable without a
+// single cabinet becoming a shopping list. These all match painted furniture.
+W.fixture('security','personalEffects','Personal effects cupboard',[82,56,14,13],'rear',{drawer:true});
+W.fixture('security','winterNotice','Heller’s maintenance notice',[81,26,15,16],'rear',{});
+W.fixture('records','researchBinder','Restricted research binder',[76,32,10,13],'rear',{});
+W.fixture('residence','nightDesk','Night attendant’s desk',[80,45,9,5],'rear',{});
+W.fixture('children','nightDrawer','Bedside supply drawer',[25,48,8,7],'rear',{drawer:true});
+W.fixture('isolation','dressingShelf','Sealed dressing shelf',[4.5,51,7,10],'rear',{drawer:true});
+W.fixture('coldstore','courierCrate','Insulated courier crate',[79,57,8,8],'rear',{drawer:true});
+const relocate=(id,room,fixture)=>{
+ let object;
+ for(const r of Object.values(R)){const i=r.o.findIndex(o=>o[0]===id);if(i>=0)object=r.o.splice(i,1)[0];}
+ if(!object)throw Error('Cannot relocate missing authored object '+id);
+ for(const bp of Object.values(WardScenes))for(const f of bp.fixtures){f.ids=f.ids.filter(x=>x!==id);f.collectibles=(f.collectibles||[]).filter(p=>p.id!==id);}
+ R[room].o.push(object);WardScenes[room].fixtures.find(f=>f.id===fixture).ids.push(id);
+};
+for(const [id,room,fixture]of [
+ ['winterJournal','security','winterNotice'],['petrolLighter','security','personalEffects'],
+ ['drw','security','personalEffects'],['lighterFluid','security','drawer'],
+ ['earlyBattery','security','cache'],['umbrella','lobby','locker'],
+ ['mimiResearch','records','researchBinder'],['attendantDiary3','residence','nightDesk']
+])relocate(id,room,fixture);
+W.find('attendantDiary3')[3]='The final loose page of the night attendant’s notebook, left on his quarters desk.';
+W.find('earlyBattery')[3]='A sealed flashlight cell remains in the desk supply pouch.';
+register('children','nightDrawer','childNightCell','Night-light battery','A sealed torch battery was set aside in the bedside drawer for night rounds.',{give:[['Battery',1]]});
+register('isolation','dressingShelf','isolationDressing','Sealed isolation dressing','An unopened sterile dressing survived inside the glass-fronted cabinet.',{give:[['Trauma Dressing',1]]});
+register('coldstore','courierCrate','courierCell','Courier’s spare battery','A spare torch cell is sealed in the insulated delivery crate beside the cold-room door.',{give:[['Battery',1]]});
+// Chapter 1 only foreshadows Sister Mimi. Her real identity remains redacted;
+// meeting her, the betrayal and the underground pursuit belong to Chapter 2.
+DOCS['Nursing personnel amendment']=`MONOLITH PHARMACEUTICALS\nPERSONNEL AMENDMENT / INTERNAL ONLY\n\nLegal name: ████████████████████\nReligious title: SISTER\nRecorded name: SISTER MIMI\nAssignment: Hospital religious sister / ward medical duties\nPublic roster: REMOVED\n\nHer charitable order has not authorized this transfer. Do not restore the legal name from carbon copies. All inquiries are to be forwarded below the public basement.\n\nHandwritten: Sister Mimi sits with frightened patients until they sleep. She makes sure the night staff have clean dressings, even when supplies are short. Nobody has explained why she was transferred.`;
+DOCS['Mimi’s unsigned note']=`I put the clean dressings in the lower cabinet. Leave some for the night staff.\n\nThey keep changing my rota. Yesterday I was upstairs. Today the lift would not stop there. Nobody will tell me why my name is blacked out.\n\nIf you cannot find me, ask for Sister Mimi. I still know how to take care of my patients.\n\nSister M.`;
+DOCS['Redacted treatment transfer']=`MONOLITH / RESTRICTED CLINICAL TRANSFER\n\nLegal name: ████████████████████\nFormer post: Hospital religious sister / medical duties\nRecorded name: SISTER MIMI\nDestination: Underground clinical research\n\nThe sister’s medical clearance is withdrawn pending neurological observation. Infection markers and affective instability have been recorded after experimental treatment. Experiment authorization and attending physician fields have been removed from this copy.\n\nStaff are instructed to use her religious title and recorded name only.`;
+DOCS['Lower laboratory nursing addendum']=`LULLABY / RESTRICTED ADDENDUM\n\nSister Mimi remains under Monolith observation following experimental treatment. Familiar voices briefly settle her, but her condition is unstable.\n\nHer personal identity, treatment history and current assignment are held in the underground laboratory archive. The charitable order’s inquiries have not been answered. Do not discuss her condition over the ward intercom.\n\nThe remainder of the page has been cut away.`;
+W.find('mimiPersonnel')[1]='Redacted religious staff roster';W.find('mimiTransfer')[1]='Sister’s restricted transfer';W.find('mimiNote')[1]='Sister Mimi’s folded note';W.find('mimiResearch')[1]='Sister’s cut research addendum';
 // Names follow the painted containers in the authored rear views.
 for(const [room,id,label]of [['security','drawer','Security filing drawer'],['stafflounge','harness','Staff locker'],['pharmacy','returns','Returns box'],['pharmacy','ribbon','Clerk filing drawer'],['room12','drawer','Treatment cabinet drawer'],['archive','fuse','Equipment cabinet']])WardScenes[room].fixtures.find(f=>f.id===id).label=label;
 R.stafflounge.o.find(o=>o[0]==='harness')[3]='A durable medical utility harness hangs inside the open staff locker.';
@@ -141,13 +175,13 @@ configureWorld=function(seed,preserve=true){
  configure(seed,preserve);
  S.placements=preserve&&S.placements?.seed===seed?S.placements:{seed,items:{}};
  const slots={
-  drw:['security',['drawer','cabinet']],petrolLighter:['security',['cabinet','drawer']],lighterFluid:['security',['drawer','cabinet']],
-  utilityKnife:['security',['cabinet','drawer']],cab:['room12',['cabinet','drawer']],drw12:['room12',['drawer','shelf']],
+  drw:['security',['personalEffects']],petrolLighter:['security',['personalEffects']],lighterFluid:['security',['drawer']],
+  utilityKnife:['security',['cabinet']],cab:['room12',['cabinet','drawer']],drw12:['room12',['drawer','shelf']],
   elevatorFuseA:['archive',['fuse','drawer']],elevatorFuseB:['pharmacy',['ribbon','drawer']],
   elevatorFuseC:['records',['cabinet','ledger']],elevatorFuseD:['powercontrol',['parts','clearance']]
  };
  for(const [id,[room,choices]]of Object.entries(slots)){
-  const target=S.placements.items[id]||choices[hashSeed(seed+'::slot::'+id)%choices.length];S.placements.items[id]=target;
+  const savedTarget=S.placements.items[id],target=choices.includes(savedTarget)?savedTarget:choices[hashSeed(seed+'::slot::'+id)%choices.length];S.placements.items[id]=target;
   for(const f of WardScenes[room].fixtures){f.ids=f.ids.filter(x=>x!==id);f.collectibles=(f.collectibles||[]).filter(x=>x.id!==id);}
   const f=WardScenes[room].fixtures.find(f=>f.id===target);f.ids.push(id);f.drawer=true;
  }

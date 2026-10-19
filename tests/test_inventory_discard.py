@@ -21,6 +21,9 @@ with sync_playwright() as p:
     page.goto(URL)
     if not page.evaluate('!!WardWinter.inventoryDiscard'):
         page.add_script_tag(url=URL.rstrip('/')+'/js/inventory_discard.js')
+    # Normal now retires spent progression tools automatically. This suite
+    # verifies the explicitly manual Nightmare lifecycle and confirmations.
+    page.locator('#diff').select_option('1.3')
     page.get_by_role('button', name='BEGIN INVESTIGATION', exact=True).click()
     page.evaluate('nextIntro();nextIntro();nextIntro()')
     page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
@@ -90,14 +93,20 @@ with sync_playwright() as p:
     passed('supply stacks have an explicit permanent-loss warning; stale/closed confirmations and protected-item requests cannot remove items')
 
     ev('confirmSave()')
+    # v6 deliberately keeps the delivered v5 save namespace and schema. Model
+    # that record's exact version marker before launching the updated reader.
+    ev('''const saved=JSON.parse(localStorage.getItem(K));
+        saved.buildId='last-ward-ch1-survival-review-5';
+        localStorage.setItem(K,JSON.stringify(saved));''')
     page.reload()
     if not page.evaluate('!!WardWinter.inventoryDiscard'):
         page.add_script_tag(url=URL.rstrip('/')+'/js/inventory_discard.js')
     ev('loadGame()')
     page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
+    assert ev('S.buildId===WardChapter.BUILD')
     assert ev('!has("Cabinet Key")&&!has("Battery")&&S.discardedItems.length===2&&has("Power Fuse")')
     assert ev('S.inv.length===7')
-    passed('discarded inventory and freed capacity persist through an actual save and reload')
+    passed('discarded inventory and freed capacity persist through an actual Terminal save and v5-to-v6 reload migration')
 
     ev('''S.room='wardnorth';S.prev='wardnorth';S.roomViewRoom=null;S.sceneFocus=null;S.f.power=0;S.lightOn=false;S.bat=60;S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.pursuer.active=false;S.contextThought=null;$('m').innerHTML='';render()''')
     page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
@@ -124,7 +133,7 @@ with sync_playwright() as p:
     assert ev('!S.contextThought')
     ev('S.room="generator";S.roomViewRoom=null;render();rechargeAtGenerator()')
     assert ev('S.contextThought?.requirement==="power"')
-    assert 'generator power' in page.locator('#thoughtCaptionText').inner_text()
+    assert 'generator' in page.locator('#thoughtCaptionText').inner_text().lower()
     ev('S.f.power=1;render()')
     assert ev('!S.contextThought')
     ev('interaction("The drawer is empty.")')

@@ -18,7 +18,8 @@ with tempfile.TemporaryDirectory(prefix='last-ward-package-') as tmp:
  for folder in ['js','css','assets','audio','data']:
   for f in (ROOT/folder).rglob('*'):
    if f.is_file():assert hashlib.sha256(f.read_bytes()).digest()==hashlib.sha256((project/f.relative_to(ROOT)).read_bytes()).digest(),str(f)
- checks.append('archive matches tested runtime source and assets byte for byte')
+ for name in ['README.md','VALIDATION.md','docs/REVISION_V6.md','tools/package_visual_update.py']:assert (ROOT/name).read_bytes()==(project/name).read_bytes(),name
+ checks.append('archive matches tested runtime source, assets, correction notes and packager byte for byte')
  checks.append('archive extracts with separate code, data, audio, 54 native room-facing views and launchers')
  command=([sys.argv[2],'--root',str(project)] if len(sys.argv)>2 else [sys.executable,str(project/'start_game.py')])+['--no-browser','--port','8124']
  proc=subprocess.Popen(command,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)

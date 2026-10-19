@@ -1,9 +1,9 @@
 /* Room-facing atmosphere: every effect shares the native image's 1448 × 1086 coordinates. */
 (function(){
 'use strict';
-const WW=WardWinter,W=1448,H=1086,fx=document.createElement('canvas'),snow=document.createElement('canvas');
-fx.width=snow.width=W;fx.height=snow.height=H;
-const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),images=new Map();
+const WW=WardWinter,W=1448,H=1086,fx=document.createElement('canvas'),snow=document.createElement('canvas'),screensLight=document.createElement('canvas');
+fx.width=snow.width=screensLight.width=W;fx.height=snow.height=screensLight.height=H;
+const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),crt=screensLight.getContext('2d'),images=new Map();
 let data={},raf=0,revision=0,frames=0,running=false;
 const state=()=>typeof S==='undefined'?null:S;
 const renderer=()=>WW.roomViewRenderer?.();
@@ -43,19 +43,21 @@ function paintSnow(glass,time,moving){
 }
 function paintScreens(screens,time,moving){
  for(const [i,screen]of (screens||[]).entries()){
-  const [x,y,w,h]=bounds(screen.rect),s=state(),online=screen.feed&&(s.f.power&&!s.f.powerOut||i<2);
-  ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,Math.max(2,w*.06));ctx.clip();ctx.fillStyle='#080908';ctx.fillRect(x,y,w,h);
+  const [x,y,w,h]=bounds(screen.rect),s=state(),online=!!(screen.feed&&(s.f.power&&!s.f.powerOut||i<2)),standby=!screen.feed||online;
+  crt.save();crt.beginPath();crt.roundRect(x,y,w,h,Math.max(2,w*.06));crt.clip();crt.fillStyle=standby?'#19191b':'#080809';crt.fillRect(x,y,w,h);
   if(online){
    const source=WW.roomViewAsset?.(screen.feed,'front')||data[screen.feed]?.front?.source;
-   if(source){const im=image(source);if(im.complete&&im.naturalWidth){ctx.filter='grayscale(1) brightness(.66) contrast(1.12)';ctx.drawImage(im,0,0,im.naturalWidth,im.naturalHeight,x,y,w,h);ctx.filter='none';}}
+   if(source){const im=image(source);if(im.complete&&im.naturalWidth){crt.filter='grayscale(1) brightness(1.2) contrast(.85)';crt.drawImage(im,0,0,im.naturalWidth,im.naturalHeight,x,y,w,h);crt.filter='none';crt.fillStyle='#d1d1d118';crt.fillRect(x,y,w,h);}}
   }
-  for(let n=0;n<60;n++){ctx.fillStyle='rgba(192,198,190,'+(.025+.055*Math.abs(Math.sin(n*7+(moving?time*13:0))))+')';ctx.fillRect(x+(n*13.7)%w,y+(n*7.7+(moving?time*15:0))%h,1,1);}
-  ctx.fillStyle='#c1c7bc16';for(let line=0;line<h;line+=3)ctx.fillRect(x,y+line,w,.5);
-  if(moving){ctx.fillStyle='#c1c7bc22';ctx.fillRect(x,y+(time*7)%h,w,1);}
-  if(s.sceneDisturbance?.room===s.room&&s.san<65){
-   ctx.fillStyle='#070807';ctx.fillRect(x,y,w,h);ctx.fillStyle='#cdd3c4';ctx.font=Math.max(6,w*.075)+'px monospace';ctx.textAlign='center';ctx.fillText(['WE REMEMBER','YOU WERE AWAKE','DO NOT LOOK AWAY'][i%3],x+w/2,y+h/2);
-  }else if(online){ctx.fillStyle='#b7bdb0';ctx.font=Math.max(5,w*.065)+'px monospace';ctx.fillText('CAM '+(i+1)+' 1998',x+3,y+h-3);}
-  ctx.restore();
+  if(standby){
+   for(let n=0;n<100;n++){crt.fillStyle='rgba(220,220,222,'+(.04+.13*Math.abs(Math.sin(n*7+(moving?time*13:0))))+')';crt.fillRect(x+(n*13.7)%w,y+(n*7.7+(moving?time*15:0))%h,1+n%2,1);}
+   crt.fillStyle='#11111333';for(let line=0;line<h;line+=3)crt.fillRect(x,y+line,w,.6);
+   if(moving){crt.fillStyle='#d1d1d124';crt.fillRect(x,y+(time*7)%h,w,1);}
+  }
+  if(s.sceneDisturbance?.room===s.room&&s.san<65&&standby){
+   crt.fillStyle='#151516';crt.fillRect(x,y,w,h);crt.fillStyle='#e2e0d8';crt.font=Math.max(6,w*.075)+'px monospace';crt.textAlign='center';crt.fillText(['WE REMEMBER','YOU WERE AWAKE','DO NOT LOOK AWAY'][i%3],x+w/2,y+h/2);
+  }else if(online){crt.fillStyle='#e3e2de';crt.font=Math.max(5,w*.065)+'px monospace';crt.textAlign='left';crt.fillText('CAM '+(i+1)+' 1998',x+3,y+h-3);}
+  crt.restore();
  }
 }
 function paintFire(rect,time,moving){
@@ -71,8 +73,8 @@ function paintFire(rect,time,moving){
 }
 function draw(now){
  const s=state(),r=renderer();if(!s||!r?.loaded||r.room!==s.room)return;
- const view=r.view||s.roomView||'front',spec=data[s.room]?.[view];ctx.clearRect(0,0,W,H);flakes.clearRect(0,0,W,H);if(!spec){r.effects(fx);return;}
- const t=now/1000,moving=motionEnabled(),closed=s.room==='lobby'&&s.f.lobbyShutters;
+ const view=r.view||s.roomView||'front',spec=data[s.room]?.[view];ctx.clearRect(0,0,W,H);flakes.clearRect(0,0,W,H);crt.clearRect(0,0,W,H);if(!spec){r.effects(fx,screensLight);return;}
+ const t=(WW.presentationTime?.(now)??now)/1000,moving=motionEnabled()&&!WW.isPaused?.(),closed=s.room==='lobby'&&s.f.lobbyShutters;
  const windows=spec.windowGlass&&WW.windowState?.(),physicalGlass=windows?.triggered?spec.windowGlass.flatMap((pane,i)=>pane[windows.closed[i]?'closed':'open']):spec.glass||[],glass=closed?[]:physicalGlass;
  if(windows?.triggered&&spec.windowState){
   const opening=image(spec.windowState.asset);
@@ -89,7 +91,7 @@ function draw(now){
   const p=spec.sprinkler,x=p.origin[0]/100*W,y=p.origin[1]/100*H;ctx.save();ctx.strokeStyle='rgba(182,215,223,.25)';
   for(let i=0;i<35;i++){const a=(i%9-4)/9,travel=((moving?t:0)*.9+i/35)%1,px=x+a*travel*W*p.width/100,py=y+travel*H*p.length/100;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px+a*2,py+6);ctx.stroke();}ctx.restore();
  }
- r.effects(fx);frames++;
+ r.effects(fx,screensLight);frames++;
 }
 function stop(){cancelAnimationFrame(raf);raf=0;revision++;running=false;}
 function mount(){
@@ -98,7 +100,7 @@ function mount(){
  function frame(now){if(own!==revision||!renderer()?.loaded)return;if(now-last>=1000/24){draw(now);last=now;}if(motionEnabled()){running=true;raf=requestAnimationFrame(frame);}else running=false;}
  frame(performance.now());
 }
-const api={mount,stop,draw,canvas:fx,snowCanvas:snow,get frames(){return frames;},get data(){return data;}};
+const api={mount,stop,draw,canvas:fx,snowCanvas:snow,screenCanvas:screensLight,get frames(){return frames;},get data(){return data;}};
 WW.roomViewEffects=api;
 api.ready=fetch(WW.asset('data/room_view_effects.json')).then(response=>{if(!response.ok)throw Error('Room effect definitions could not load.');return response.json();}).then(value=>{data=value;WardMotion.glazing=data;mount();return data;}).catch(error=>{console.error(error);return null;});
 WardMotion.mount=mount;

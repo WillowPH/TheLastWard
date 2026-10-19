@@ -44,7 +44,7 @@ with sync_playwright() as p:
  beam_on=ev(center);ev('S.bat=.01;S.m=1;closeModal()');page.wait_for_timeout(1300);assert ev('S.bat===0&&!S.lightOn');assert ev(center)<beam_on*.5
  passed('Normal drains faster than Story; lit rooms stay lit; exhaustion updates the actual flashlight beam')
  reset('laundry');ev('triggerServiceTrap()');assert not ev('S.f.trapArmed||S.f.trapUsed');ev("wardConfirmTrap('arm')");assert ev('S.f.trapArmed&&!S.f.trapUsed');whole_art('assets/states/laundry_trap_armed.webp');ev("wardConfirmTrap('release')");assert ev('S.f.trapUsed&&!S.f.trapArmed');whole_art('assets/states/laundry_trap_spent.webp');passed('hoist requires confirmation and actual rendered pixels match its persistent armed/spent artwork')
- reset('security');ev('hideInRoom()');assert not ev('S.f.hidingRoom');page.get_by_role('button',name='Hide here',exact=True).click();assert ev('S.f.hidingRoom===S.room&&!S.lightOn');assert page.locator('.panorama-hiding-mask path').get_attribute('d').count('M')==1;ev('wardPeek()');assert page.locator('.panorama-hiding-mask path').get_attribute('d').count('M')==4;ev('wardExitHiding()');passed('hiding asks first, is dark while concealed and uses narrow slits when peeking')
+ reset('security');ev('hideInRoom()');assert not ev('S.f.hidingRoom');page.get_by_role('button',name='Hide here',exact=True).click();assert ev('S.f.hidingRoom===S.room&&!S.lightOn');assert page.locator('.panorama-hiding-mask path').first.get_attribute('d').count('M')==1;ev('wardPeek()');assert page.locator('.panorama-hiding-mask path').first.get_attribute('d').count('M')==(2 if ev('S.f.hidingType')=='desk' else 4);ev('wardExitHiding()');passed('hiding asks first, is dark while concealed and uses narrow slits when peeking')
  reset('security');ev('S.f.power=1;S.lightOn=true;renderScene();window.__roomImage=document.querySelector(".room-view-canvas");window.__roomPose=[S.roomView,S.cameraYaw,S.cameraPitch];S.sceneFocus="diary";wardFixtureAction("winterJournal")');assert ev('window.__roomImage===document.querySelector(".room-view-canvas")&&JSON.stringify(window.__roomPose)===JSON.stringify([S.roomView,S.cameraYaw,S.cameraPitch])');close();passed('reading a document preserves the existing room image and camera')
  reset('wardnorth');ev("add('Lighter',1);add('Lighter Fluid',1);wardCombineLighter();S.lightOn=true;S.f.power=1;render()")
  assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
@@ -106,13 +106,13 @@ with sync_playwright() as p:
  arrivals=[]
  for edge,fromroom,to in ev("Object.entries(D).flatMap(([id,d])=>[[id,d.a,d.b],[id,d.b,d.a]])"):
   ev('v=>{S.prev=v[0];S.room=v[1];S.roomViewRoom=null;renderScene()}',[fromroom,to]);ready()
-  result=ev('''id=>{const data=WardRoomViews[S.room],entry=Object.entries(data.views).find(([view,v])=>Object.hasOwn(v.doors,id))?.[0];return {room:S.room,from:S.prev,entry,view:S.roomView,entranceVisible:!!document.querySelector('[data-door="'+id+'"]'),renderRoom:WardWinter.roomViewRenderer().room,renderView:WardWinter.roomViewRenderer().view};}''',edge)
+  result=ev('''id=>{const data=WardRoomViews[S.room],entry=Object.entries(data.views).find(([view,v])=>Object.hasOwn(v.doors,id))?.[0];return {expected:data.entryFacing?.[id]||(entry==='front'?'rear':'front'),room:S.room,from:S.prev,entry,view:S.roomView,entranceVisible:!!document.querySelector('[data-door="'+id+'"]'),renderRoom:WardWinter.roomViewRenderer().room,renderView:WardWinter.roomViewRenderer().view};}''',edge)
   arrivals.append({'door':edge,**result})
-  if result['view']==result['entry'] or result['entranceVisible'] or result['room']!=to or result['from']!=fromroom or result['renderRoom']!=to or result['renderView']!=result['view']:bad.append([edge,fromroom,to,result])
+  if result['view']!=result['expected'] or result['entranceVisible']!=(result['expected']==result['entry']) or result['room']!=to or result['from']!=fromroom or result['renderRoom']!=to or result['renderView']!=result['view']:bad.append([edge,fromroom,to,result])
   ev('WardWinter.orbit.face(\''+result['entry']+'\')');ready();assert page.locator('[data-door='+edge+'][data-destination='+fromroom+']').count()==1,(edge,fromroom,to,result)
  assert not bad,bad
  assert len(arrivals)==54
- passed('all 54 directed doorway arrivals face away from the real entrance; looking back exposes the correct return destination')
+ passed('all 54 directed arrivals match authored facing, including East Corridor toward Patient Wing; the real return door remains accessible')
  # Seed variation must never create a missing object target or move a room connection.
  reset();issues=ev("""()=>{const bad=[];for(let i=0;i<128;i++){configureWorld('winter-audit-'+i,false);placeTelephones('winter-audit-'+i);for(const room of Object.keys(R)){S.room=room;S.f.power=1;S.f.pharm=1;S.f.chapel=1;S.f.researchers=1;S.f.drained=1;S.f.photoPuzzleSolved=1;try{WardScene.sites()}catch(e){bad.push(e.message)}}}return [...new Set(bad)]}""");assert not issues,issues
  passed('128 seeded worlds retain authored geometry for every object and telephone')

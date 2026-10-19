@@ -14,13 +14,14 @@
     "three once-only story calls use three different seeded phones and preserve transcripts",
     "rare lethal encounter warns on first inspection, permits retreat and restores its checkpoint after deliberate second inspection",
     "high-resolution photographs have inspectable dated backs",
-    "all 54 directed doorway arrivals face away from the real entrance; looking back exposes the correct return destination",
+    "all 54 directed arrivals match authored facing, including East Corridor toward Patient Wing; the real return door remains accessible",
     "128 seeded worlds retain authored geometry for every object and telephone",
     "54 distinct native room views, all pickup icons, and working mouse view arrows at desktop, tablet and mobile widths"
   ],
   "directed_arrivals": [
     {
       "door": "liftEntry",
+      "expected": "front",
       "room": "lift",
       "from": "generator",
       "entry": "rear",
@@ -31,6 +32,7 @@
     },
     {
       "door": "liftEntry",
+      "expected": "rear",
       "room": "generator",
       "from": "lift",
       "entry": "front",
@@ -41,6 +43,7 @@
     },
     {
       "door": "lr",
+      "expected": "front",
       "room": "surgery",
       "from": "laundry",
       "entry": "rear",
@@ -51,6 +54,7 @@
     },
     {
       "door": "lr",
+      "expected": "rear",
       "room": "laundry",
       "from": "surgery",
       "entry": "front",
@@ -61,6 +65,7 @@
     },
     {
       "door": "ls",
+      "expected": "front",
       "room": "security",
       "from": "lobby",
       "entry": "rear",
@@ -71,6 +76,7 @@
     },
     {
       "door": "ls",
+      "expected": "front",
       "room": "lobby",
       "from": "security",
       "entry": "rear",
@@ -81,16 +87,18 @@
     },
     {
       "door": "lw",
+      "expected": "front",
       "room": "eastcorridor",
       "from": "lobby",
       "entry": "front",
-      "view": "rear",
-      "entranceVisible": false,
+      "view": "front",
+      "entranceVisible": true,
       "renderRoom": "eastcorridor",
-      "renderView": "rear"
+      "renderView": "front"
     },
     {
       "door": "lw",
+      "expected": "rear",
       "room": "lobby",
       "from": "eastcorridor",
       "entry": "front",
@@ -101,6 +109,7 @@
     },
     {
       "door": "wr",
+      "expected": "front",
       "room": "room12",
       "from": "wardnorth",
       "entry": "rear",
@@ -111,6 +120,7 @@
     },
     {
       "door": "wr",
+      "expected": "rear",
       "room": "wardnorth",
       "from": "room12",
       "entry": "front",
@@ -121,6 +131,7 @@
     },
     {
       "door": "wa",
+      "expected": "front",
       "room": "archive",
       "from": "wardservice",
       "entry": "rear",
@@ -131,6 +142,7 @@
     },
     {
       "door": "wa",
+      "expected": "rear",
       "room": "wardservice",
       "from": "archive",
       "entry": "front",
@@ -141,6 +153,7 @@
     },
     {
       "door": "ag",
+      "expected": "front",
       "room": "generator",
       "from": "archive",
       "entry": "rear",
@@ -151,6 +164,7 @@
     },
     {
       "door": "ag",
+      "expected": "rear",
       "room": "archive",
       "from": "generator",
       "entry": "front",
@@ -161,6 +175,7 @@
     },
     {
       "door": "go",
+      "expected": "front",
       "room": "observation",
       "from": "generator",
       "entry": "rear",
@@ -171,6 +186,7 @@
     },
     {
       "door": "go",
+      "expected": "rear",
       "room": "generator",
       "from": "observation",
       "entry": "front",
@@ -181,6 +197,7 @@
     },
     {
       "door": "rr",
+      "expected": "front",
       "room": "residence",
       "from": "room12",
       "entry": "rear",
@@ -191,6 +208,7 @@
     },
     {
       "door": "rr",
+      "expected": "rear",
       "room": "room12",
       "from": "residence",
       "entry": "front",
@@ -201,6 +219,7 @@
     },
     {
       "door": "mt",
+      "expected": "front",
       "room": "tunnel",
       "from": "morgue",
       "entry": "rear",
@@ -211,6 +230,7 @@
     },
     {
       "door": "mt",
+      "expected": "rear",
       "room": "morgue",
       "from": "tunnel",
       "entry": "front",
@@ -221,6 +241,7 @@
     },
     {
       "door": "mb",
+      "expected": "front",
       "room": "boiler",
       "from": "morgue",
       "entry": "rear",
@@ -231,6 +252,7 @@
     },
     {
       "door": "mb",
+      "expected": "rear",
       "room": "morgue",
       "from": "boiler",
       "entry": "front",
@@ -241,6 +263,7 @@
     },
     {
       "door": "os",
+      "expected": "front",
       "room": "specimen",
       "from": "observation",
       "entry": "rear",
@@ -251,6 +274,7 @@
     },
     {
       "door": "os",
+      "expected": "rear",
       "room": "observation",
       "from": "specimen",
       "entry": "front",
@@ -261,6 +285,7 @@
     },
     {
       "door": "wp",
+      "expected": "front",
       "room": "pharmacy",
       "from": "wardservice",
       "entry": "rear",
@@ -271,6 +296,7 @@
     },
     {
       "door": "wp",
+      "expected": "rear",
       "room": "wardservice",
       "from": "pharmacy",
       "entry": "front",
@@ -281,6 +307,7 @@
     },
     {
       "door": "ac",
+      "expected": "front",
       "room": "chapel",
       "from": "archive",
       "entry": "rear",
@@ -291,6 +318,7 @@
     },
     {
       "door": "ac",
+      "expected": "rear",
       "room": "archive",
       "from": "chapel",
       "entry": "front",
@@ -301,6 +329,7 @@
     },
     {
       "door": "gm",
+      "expected": "front",
       "room": "morgue",
       "from": "generator",
       "entry": "rear",
@@ -311,6 +340,7 @@
     },
     {
       "door": "gm",
+      "expected": "rear",
       "room": "generator",
       "from": "morgue",
       "entry": "front",
@@ -321,6 +351,7 @@
     },
     {
       "door": "wl",
+      "expected": "front",
       "room": "laundry",
       "from": "wardservice",
       "entry": "rear",
@@ -331,6 +362,7 @@
     },
     {
       "door": "wl",
+      "expected": "rear",
       "room": "wardservice",
       "from": "laundry",
       "entry": "front",
@@ -341,6 +373,7 @@
     },
     {
       "door": "rc12",
+      "expected": "front",
       "room": "children",
       "from": "room12",
       "entry": "rear",
@@ -351,6 +384,7 @@
     },
     {
       "door": "rc12",
+      "expected": "rear",
       "room": "room12",
       "from": "children",
       "entry": "front",
@@ -361,6 +395,7 @@
     },
     {
       "door": "ar",
+      "expected": "front",
       "room": "records",
       "from": "archive",
       "entry": "rear",
@@ -371,6 +406,7 @@
     },
     {
       "door": "ar",
+      "expected": "rear",
       "room": "archive",
       "from": "records",
       "entry": "front",
@@ -381,6 +417,7 @@
     },
     {
       "door": "oi",
+      "expected": "front",
       "room": "isolation",
       "from": "powercontrol",
       "entry": "rear",
@@ -391,6 +428,7 @@
     },
     {
       "door": "oi",
+      "expected": "rear",
       "room": "powercontrol",
       "from": "isolation",
       "entry": "front",
@@ -401,6 +439,7 @@
     },
     {
       "door": "spc",
+      "expected": "front",
       "room": "powercontrol",
       "from": "specimen",
       "entry": "rear",
@@ -411,6 +450,7 @@
     },
     {
       "door": "spc",
+      "expected": "rear",
       "room": "specimen",
       "from": "powercontrol",
       "entry": "front",
@@ -421,6 +461,7 @@
     },
     {
       "door": "rl",
+      "expected": "front",
       "room": "stafflounge",
       "from": "residence",
       "entry": "rear",
@@ -431,6 +472,7 @@
     },
     {
       "door": "rl",
+      "expected": "rear",
       "room": "residence",
       "from": "stafflounge",
       "entry": "front",
@@ -441,6 +483,7 @@
     },
     {
       "door": "rc",
+      "expected": "front",
       "room": "coldstore",
       "from": "records",
       "entry": "rear",
@@ -451,6 +494,7 @@
     },
     {
       "door": "rc",
+      "expected": "rear",
       "room": "records",
       "from": "coldstore",
       "entry": "front",
@@ -461,6 +505,7 @@
     },
     {
       "door": "ew",
+      "expected": "front",
       "room": "ward",
       "from": "eastcorridor",
       "entry": "rear",
@@ -471,6 +516,7 @@
     },
     {
       "door": "ew",
+      "expected": "rear",
       "room": "eastcorridor",
       "from": "ward",
       "entry": "front",
@@ -481,6 +527,7 @@
     },
     {
       "door": "es",
+      "expected": "rear",
       "room": "security",
       "from": "eastcorridor",
       "entry": "front",
@@ -491,6 +538,7 @@
     },
     {
       "door": "es",
+      "expected": "front",
       "room": "eastcorridor",
       "from": "security",
       "entry": "rear",
@@ -501,6 +549,7 @@
     },
     {
       "door": "wi",
+      "expected": "front",
       "room": "isoward",
       "from": "wardnorth",
       "entry": "rear",
@@ -511,6 +560,7 @@
     },
     {
       "door": "wi",
+      "expected": "rear",
       "room": "wardnorth",
       "from": "isoward",
       "entry": "front",
@@ -521,6 +571,7 @@
     },
     {
       "door": "northPassage",
+      "expected": "front",
       "room": "wardnorth",
       "from": "ward",
       "entry": "rear",
@@ -531,6 +582,7 @@
     },
     {
       "door": "northPassage",
+      "expected": "rear",
       "room": "ward",
       "from": "wardnorth",
       "entry": "front",
@@ -541,6 +593,7 @@
     },
     {
       "door": "servicePassage",
+      "expected": "front",
       "room": "wardservice",
       "from": "wardnorth",
       "entry": "rear",
@@ -551,6 +604,7 @@
     },
     {
       "door": "servicePassage",
+      "expected": "rear",
       "room": "wardnorth",
       "from": "wardservice",
       "entry": "front",

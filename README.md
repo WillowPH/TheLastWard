@@ -9,8 +9,8 @@ Extract the entire `The_Last_Ward_Chapter_1_Project.zip` folder.
 Windows 10/11: double-click **START_GAME.exe** or **START_GAME.bat**. No Python
 installation or external internet connection is needed. Keep the launcher window open.
 macOS/Linux: `python3 start_game.py` (Python 3 standard library only).
-Use the same local port/browser for saved games. Start a new game for this build;
-older builds' saves are preserved in their own namespaces.
+Use the same local port/browser for saved games. Existing v5 saves can continue in
+this v6 update; a new game also works. Older incompatible builds remain separate.
 
 **Click objects to examine them. Drag sideways or click a side arrow to see the
 other side of the room. No keyboard is needed.** Hints (Subtle/Strong), motion and
@@ -23,7 +23,7 @@ requires confirmation; items needed for unfinished progression remain protected.
 
 The user chose sharper room-facing artwork over the limited-resolution 360° format.
 The active renderer uses **54 distinct native room paintings** across 27 rooms,
-mostly 1448×1086 (the North Corridor rear is 1447×1087).
+mostly 1448×1086 (the North Corridor rear and Mercer view are 1447×1087).
 Each complete painting fits inside the scene without cropping, stretching or digital
 zoom. Mouse turns use a brief fade between authored views; no images are joined into
 a pretend continuous panorama. This is game artwork, not native 4K or walkable 3D.
@@ -57,7 +57,28 @@ saves and nonlethal in imaginary combat. The optional one-time window purge rele
 supplies after all three catches are closed. Save at a **Terminal** using a **Floppy
 Disk**; additional **Storage boxes** share equipment along the route.
 
-See [the correction notes](docs/REVISION_2026-10-19.md) for the detailed pass.
+## Gameplay and audio follow-up — v6
+
+Pause from the left navigation or any open dialog. Resume preserves the record,
+world time, battery, exposure and encounter deadlines. Normal, caution and danger
+use distinct quiet air-breath loops; longer machine/wind beds and an original pickup
+cue replace the repeated hurt and bottle sounds.
+
+Inventory actions stay beside the grid, with quantity badges and direct pairing.
+Story/Normal remove truly spent keys/tools automatically; Nightmare keeps manual
+discard. Supplies are spread across rear furniture, including Security's early tools.
+
+Subject X blocks casual exits. Two handgun rounds or a heavier shot create a short
+knockdown opening; it recovers. Finite ammunition is balanced for this use. Infected
+have distinct opaque appearances. PEEK shows the live room through physical gaps.
+Door openings use hinged animations, slow with wet/cold hands and respect Pause.
+
+Security CRTs show local monochrome room feeds, ECG colour follows condition, and
+the map arrow follows the current facing. Closed shutters remove snowy reflections.
+Sister Mimi's early notes portray someone helpful; experimentation and instability
+are revealed later. Chapter 2 encounters remain deferred.
+
+See [the v6 correction notes](docs/REVISION_V6.md) and [the prior pass](docs/REVISION_2026-10-19.md).
 
 Finite noise-responsive enemies, later Subject X pursuit, confirmed traps, once-only
 story/cold/sprinkler incidents, handwritten records, generator outages, lighter/fluid,

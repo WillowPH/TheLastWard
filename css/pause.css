@@ -1,0 +1,5 @@
+#wardPauseOverlay{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;background:#050505df;backdrop-filter:blur(3px);padding:20px;color:#d9d3c8}
+#wardPauseOverlay[hidden]{display:none}.pause-card{width:min(420px,100%);border:1px solid #8a7656;background:#11100f;padding:40px;text-align:center;box-shadow:0 20px 80px #0009}.pause-card>span{font:12px Roboto,sans-serif;letter-spacing:.25em;color:#a99b83}.pause-card h2{font:32px Roboto,sans-serif;letter-spacing:.18em;color:#ddd4c5;margin:25px 0}.pause-card p{font:14px/1.6 Roboto,sans-serif;color:#afa494}.pause-card .btn{margin-top:18px;min-height:44px;padding:10px 24px}
+body.ward-paused *{animation-play-state:paused!important}#wardPauseButton .hud-nav-icon svg{width:23px;height:23px}
+body:has(#m .modal-pause-button) #wardPauseButton{visibility:hidden}.modal-pause-button{margin-left:6px!important}#m .mh:has(.modal-pause-button) h2{flex:1;min-width:0}
+@media(max-width:700px){body.ward-playing .nav-list{grid-template-columns:repeat(6,minmax(0,1fr))!important}.pause-card{padding:28px}}

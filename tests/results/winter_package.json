@@ -1,9 +1,9 @@
 {
   "format": "multi-file project",
-  "files": 453,
+  "files": 484,
   "checks": [
     "Windows x64 native launcher is included with valid PE headers",
-    "archive matches tested runtime source and assets byte for byte",
+    "archive matches tested runtime source, assets, correction notes and packager byte for byte",
     "archive extracts with separate code, data, audio, 54 native room-facing views and launchers",
     "native server starts the extracted playable game without external internet",
     "separate local audio produces measured output after Begin",
@@ -11,6 +11,6 @@
   ],
   "javascript_errors": [],
   "failed_requests": [],
-  "zip_bytes": 85757025,
-  "zip_sha256": "6aaab76882b5913f496046e0c5ea9b3f359f6dab4f7f4b654c996792438ba8b0"
+  "zip_bytes": 89136625,
+  "zip_sha256": "c26f065bd3c4d90423099d8f477574ac905161bb576ecb42f944502b43034e17"
 }

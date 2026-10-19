@@ -1,0 +1,49 @@
+{
+  "checks": [
+    "At 1672, 1000 and 390 pixels: select, combine and use work through actual mouse clicks; actions remain in the viewport without scrolling or opening the inventory modal. Supply and ammo badges show exact counts.",
+    "Normal automatically removes the access card only after both matching locks open, preserving useful supplies, lighter and weapon. Nightmare retains the spent card until confirmed manual discard; discard returns to the room.",
+    "Paused carry, combine, heal, recharge and storage commands do not mutate inventory, battery or condition."
+  ],
+  "javascript_errors": [],
+  "layouts": [
+    {
+      "width": 1672,
+      "height": 941,
+      "popover": {
+        "left": 1111.328125,
+        "top": 526.5,
+        "right": 1367.328125,
+        "bottom": 686.28125,
+        "height": 158,
+        "scrollHeight": 158,
+        "parent": "BODY"
+      }
+    },
+    {
+      "width": 1000,
+      "height": 800,
+      "popover": {
+        "left": 535,
+        "top": 524,
+        "right": 791,
+        "bottom": 683.78125,
+        "height": 158,
+        "scrollHeight": 158,
+        "parent": "BODY"
+      }
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "popover": {
+        "left": 120,
+        "top": 551.125,
+        "right": 376,
+        "bottom": 708,
+        "height": 155,
+        "scrollHeight": 155,
+        "parent": "BODY"
+      }
+    }
+  ]
+}

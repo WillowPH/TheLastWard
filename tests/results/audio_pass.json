@@ -1,0 +1,69 @@
+{
+  "checks": [
+    "all 8 original assets decode, match provenance, avoid clipping and contain paced breath/rest cycles",
+    "new calm air breath and long lobby hum actually advance and produce WebAudio output",
+    "HP selects calm/caution/danger; low sanity never selects hurt grunts; 100 syncs create no duplicate loops",
+    "pause freezes every channel and blocks new sounds; tab visibility cannot resume manual Pause; resume preserves playheads without duplicates",
+    "pickup uses the original short cue and ends; explicit damage impact plays once without becoming a breathing loop",
+    "the game-wide pause contract automatically stops and restores audio without a parallel sound clock"
+  ],
+  "browser_errors": [],
+  "assets": [
+    {
+      "file": "chapter1/breath_calm.ogg",
+      "design": "Four quiet 6.2\u20136.7 second shaped-air breath cycles, no voice/grunt recording.",
+      "seconds": 25.9,
+      "sha256": "aa22975c8f05baaa203e50fa725cdefd55e567dc53ae1395401709418f4646d9",
+      "rms": 0.026128524304755086
+    },
+    {
+      "file": "chapter1/breath_caution.ogg",
+      "design": "Four moderately paced 4.3\u20134.7 second shaped-air breath cycles.",
+      "seconds": 17.899977324263038,
+      "sha256": "46cee6030261166c92319e8fdb3e81f6f00bd6fc14e576a74535402a85ec399d",
+      "rms": 0.032889506201808416
+    },
+    {
+      "file": "chapter1/breath_danger.ogg",
+      "design": "Four strained 2.8\u20133.15 second shaped-air breath cycles; no repeated pain vocalization.",
+      "seconds": 11.9,
+      "sha256": "fc657d5679b10f34ec58c5a6b3469ee143b2554683f0f4c7fd67dff9b649e186",
+      "rms": 0.04282083814136149
+    },
+    {
+      "file": "chapter1/hospital_hum.ogg",
+      "design": "Quiet 40 second transformer/ventilation bed with crossfaded air and steady 50 Hz mains harmonics.",
+      "seconds": 40.0,
+      "sha256": "c395e30847449b5c8a0e03b6ddd38f76bda5350af09daac7b1fb710eaca9c38f",
+      "rms": 0.023442909674670182
+    },
+    {
+      "file": "chapter1/hospital_machine.ogg",
+      "design": "40 second fuller low machine/ventilation bed, no recurrent impacts or rattles.",
+      "seconds": 40.0,
+      "sha256": "dff77af383f8e97923048f13c955bfabe11b4014ebb71a0b6e215cf9dcb6104d",
+      "rms": 0.05180004320019693
+    },
+    {
+      "file": "chapter1/exterior_wind.ogg",
+      "design": "36 second crossfaded low winter wind with slow broad gusts, no rhythmic percussive loop.",
+      "seconds": 36.0,
+      "sha256": "b840abb4b99812bc888a76f3299418036e846282ba5e998b37e0594d2f92d7b6",
+      "rms": 0.0737583199284456
+    },
+    {
+      "file": "chapter1/pickup_chime.ogg",
+      "design": "Original 460 ms soft two-note item confirmation cue, no bottle/dishes recording or game sample.",
+      "seconds": 0.46,
+      "sha256": "ea64092d8c8460ac5fcec10373f9bc651ce78a596a180b03c851431737171591",
+      "rms": 0.022847020522831833
+    },
+    {
+      "file": "chapter1/cloth_soft.ogg",
+      "design": "Original 380 ms filtered-air cloth handling foley, without glass clinks.",
+      "seconds": 0.38,
+      "sha256": "9b13e5e0aced7a09ab84bbe8485c94377779c70390543a499f0175836d44dd1d",
+      "rms": 0.017297611271542
+    }
+  ]
+}

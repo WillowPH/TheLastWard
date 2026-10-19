@@ -1,4 +1,5 @@
-/* Recording-only audio bus: no oscillators, random sweeps, generated digital tones or fallback bleeps. */
+/* Base local-file audio bus; chapter1_audio adds original offline sound design.
+   There are no runtime oscillators or missing-file fallback bleeps. */
 const audio={enabled:false,sounds:{},lastFx:{},activeBus:{},missing:new Set(),amb:null};
 const SOUND_FILES=window.LW_AUDIO_ASSETS||{door:'audio/door.wav',reload:'audio/reload.wav',shot:'audio/gunshot.wav'};
 const SOUND_BUS={click:'ui',door:'fx',pickup:'fx',reload:'fx',heal:'fx',hit:'fx',shot:'fx',knife:'fx',kill:'fx',escape:'fx',combine:'ui',phone:'fx'};
