@@ -34,8 +34,8 @@ function sync(){if(!S||!audio.enabled||S.hp<=0){stop();return;}if(gamePaused()){
  if(S.f.sprinklerTriggered&&!S.f.sprinklerStopped&&r==='eastcorridor')loop('sprinkler','water',.4);else loop('sprinkler',null,0);
  // Health changes breath pace, never a repeated hurt vocalization. Sanity alone
  // cannot select an injured voice. One quiet channel survives all UI renders.
- const breathing=S.f.introComplete?(S.hp<=25?'breath_danger':S.hp<=50?'breath_caution':'breath_calm'):null;
- loop('breathing',breathing,S.hp<=25?.46:S.hp<=50?.32:.16);
+ const breathing=S.f.introComplete?(S.hp<=25?'breath_danger':S.hp<=75?'breath_caution':'breath_calm'):null;
+ loop('breathing',breathing,S.hp<=25?.46:S.hp<=75?.32:.16);
  const now=performance.now(),d=distance();
  if(d.distance<=3&&!SAFE_FROM_PURSUER.has(r)&&now>=stepAt&&!(S.pursuer.trappedUntil>S.t)){variant=1-variant;play('subject_step_'+(variant+1),{volume:[.85,.55,.28,.13][d.distance],pan:d.pan,rate:.96});stepAt=now+(S.f.pursuerEncounter?1050:1650);caption(d.distance===0?'Heavy boots inside this room':d.distance===1?'Heavy boots beyond the doorway '+d.bearing:'Heavy footsteps farther along the passage');}
  if(alive(r)&&now>=groanAt){play('infected_groan',{volume:.3,pan:.25,rate:.9});groanAt=now+14000;}

@@ -59,7 +59,7 @@ with sync_playwright() as playwright:
     assert max(energies) > .00001, energies
     passed('new calm air breath and long lobby hum actually advance and produce WebAudio output')
 
-    for hp, name in [(45, 'breath_caution'), (20, 'breath_danger'), (100, 'breath_calm')]:
+    for hp, name in [(76, 'breath_calm'), (75, 'breath_caution'), (26, 'breath_caution'), (25, 'breath_danger'), (100, 'breath_calm')]:
         ev('hp=>{S.hp=hp;S.san=10;WardSound.sync()}', hp)
         page.wait_for_function('(name)=>WardSound.snapshot().some(a=>a.clip===name&&a.ready>=3&&!a.paused)', arg=name)
         assert ev("WardSound.snapshot().filter(a=>a.channel==='breathing').map(a=>a.clip)") == [name]
