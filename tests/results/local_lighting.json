@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "generator leaves an unpowered local circuit visibly dark; the actual flashlight brightens it",
+    "a powered circuit is lit without the flashlight and does not spend its battery",
+    "both full-resolution shutter overlays receive room lighting instead of bypassing darkness"
+  ],
+  "javascript_errors": []
+}

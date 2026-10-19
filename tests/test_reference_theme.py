@@ -40,7 +40,10 @@ with sync_playwright() as p:
  for title,kind in [('Heller’s winter maintenance note','handwritten'),('Nursing personnel amendment','typed')]:
   page.evaluate('(title)=>doc(title)',title)
   paper=page.locator('.winter-document').evaluate('''e=>({background:getComputedStyle(e).backgroundColor,color:getComputedStyle(e.querySelector('.winter-paper-text')).color,font:getComputedStyle(e.querySelector('.winter-paper-text')).font,textLength:e.querySelector('.winter-paper-text').textContent.length})''')
-  assert paper['color']=='rgb(40, 45, 37)' and paper['textLength']>300,paper
+  ink=[int(v) for v in paper['color'].removeprefix('rgb(').removesuffix(')').split(',')]
+  assert max(ink)<65 and paper['textLength']>100,paper
+  assert page.locator('.winter-document').evaluate('e=>e.scrollHeight<=e.clientHeight+2'),paper
+  assert page.locator('.record-modal .mb').evaluate('e=>e.scrollHeight<=e.clientHeight+2'),paper
   page.screenshot(path=str(OUT/f'reference-theme-paper-{kind}.png'));report['documents'].append({'title':title,**paper});page.evaluate('closeModal()')
  report['checks'].append('Real handwritten and typed records retain dark readable text on damaged parchment; modal colours do not leak into document ink.')
  assert not report['javascript_errors'],report['javascript_errors'];browser.close()

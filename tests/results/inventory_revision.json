@@ -1,0 +1,17 @@
+{
+  "checks": [
+    "Battery + Wire combines from the right HUD, consumes one of each and returns to the scene without Manage or a dropdown",
+    "Lighter + fluid refills the reusable lighter directly from the HUD",
+    "Weapon + its ammunition loads the selected weapon without opening inventory",
+    "A stabilizer can be applied to a selected firearm directly; the old inventory modal stays closed",
+    "An incompatible pair never consumes resources and has an explicit cancel action",
+    "A full pack rolls both ingredient counts back when neither stack frees an output slot",
+    "A key remains protected while a matching lock is unfinished; discarding the spent key closes confirmation and stays in the room",
+    "Dead players cannot heal, recharge, craft, refill or discard through any inventory entrypoint, even if another caller changes HP",
+    "First Wire Spool acquisition explains its battery use in Thoughts",
+    "A direct Recharge action uses the selected supply and leaves the room visible",
+    "Three added painted Storage boxes open in non-safe rooms and share stored equipment across the route",
+    "Selected item names and controls fit desktop, tablet and narrow mouse/touch HUD widths without icon/text overlap"
+  ],
+  "javascript_errors": []
+}

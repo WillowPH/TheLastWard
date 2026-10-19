@@ -1,6 +1,6 @@
 {
   "format": "multi-file project",
-  "files": 430,
+  "files": 453,
   "checks": [
     "Windows x64 native launcher is included with valid PE headers",
     "archive matches tested runtime source and assets byte for byte",
@@ -11,6 +11,6 @@
   ],
   "javascript_errors": [],
   "failed_requests": [],
-  "zip_bytes": 83249990,
-  "zip_sha256": "c7a3212d8cb135cecefb00f8542a8d66dfe97f0b7d0ba91300cf6635c3be76dc"
+  "zip_bytes": 85757025,
+  "zip_sha256": "6aaab76882b5913f496046e0c5ea9b3f359f6dab4f7f4b654c996792438ba8b0"
 }

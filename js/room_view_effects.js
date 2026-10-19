@@ -3,7 +3,7 @@
 'use strict';
 const WW=WardWinter,W=1448,H=1086,fx=document.createElement('canvas'),snow=document.createElement('canvas');
 fx.width=snow.width=W;fx.height=snow.height=H;
-const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),images=new Map(),shutters=new Map();
+const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),images=new Map();
 let data={},raf=0,revision=0,frames=0,running=false;
 const state=()=>typeof S==='undefined'?null:S;
 const renderer=()=>WW.roomViewRenderer?.();
@@ -23,31 +23,10 @@ function polygons(paths){
 function bounds(rect){return [(rect[0]-rect[2]/2)/100*W,(rect[1]-rect[3]/2)/100*H,rect[2]/100*W,rect[3]/100*H];}
 function motionEnabled(){return WardMotion.enabled(WardScene.options);}
 function shutterSurface(spec){
- if(!spec)return null;
- const material=image(spec.material);if(!material.complete||!material.naturalWidth)return null;
- const key=JSON.stringify(spec);if(shutters.has(key))return shutters.get(key);
- const layer=document.createElement('canvas');layer.width=W;layer.height=H;const c=layer.getContext('2d');
- function triangle(src,dst){
-  const [s0,s1,s2]=src,[d0,d1,d2]=dst,det=s0[0]*(s1[1]-s2[1])+s1[0]*(s2[1]-s0[1])+s2[0]*(s0[1]-s1[1]);
-  function coefficient(axis){const z=[d0[axis],d1[axis],d2[axis]];return [(z[0]*(s1[1]-s2[1])+z[1]*(s2[1]-s0[1])+z[2]*(s0[1]-s1[1]))/det,(z[0]*(s2[0]-s1[0])+z[1]*(s0[0]-s2[0])+z[2]*(s1[0]-s0[0]))/det,(z[0]*(s1[0]*s2[1]-s2[0]*s1[1])+z[1]*(s2[0]*s0[1]-s0[0]*s2[1])+z[2]*(s0[0]*s1[1]-s1[0]*s0[1]))/det];}
-  const x=coefficient(0),y=coefficient(1),center=[(d0[0]+d1[0]+d2[0])/3,(d0[1]+d1[1]+d2[1])/3];
-  // Adjacent triangles overlap by one texel; their shared image mapping agrees.
-  // This prevents Canvas2D's antialiased clip edges from drawing a visible grid.
-  const cover=dst.map(p=>{const dx=p[0]-center[0],dy=p[1]-center[1],length=Math.hypot(dx,dy)||1;return [p[0]+dx/length,p[1]+dy/length];});
-  c.save();c.beginPath();c.moveTo(...cover[0]);c.lineTo(...cover[1]);c.lineTo(...cover[2]);c.closePath();c.clip();c.transform(x[0],y[0],x[1],y[1],x[2],y[2]);c.drawImage(material,0,0);c.restore();
- }
- for(const panel of spec.panels){
-  const quad=panel.map(([x,y])=>[x/100*W,y/100*H]);
-  const point=(u,v)=>[0,1].map(i=>(1-v)*((1-u)*quad[0][i]+u*quad[1][i])+v*((1-u)*quad[3][i]+u*quad[2][i]));
-  c.save();c.clip(polygons([panel]));
-  for(let row=0;row<8;row++)for(let col=0;col<4;col++){
-   const u=col/4,v=row/8,ur=(col+1)/4,vb=(row+1)/8,src=(x,y)=>[x*material.naturalWidth,y*material.naturalHeight];
-   triangle([src(u,v),src(ur,v),src(ur,vb)],[point(u,v),point(ur,v),point(ur,vb)]);
-   triangle([src(u,v),src(ur,vb),src(u,vb)],[point(u,v),point(ur,vb),point(u,vb)]);
-  }
-  c.globalCompositeOperation='source-atop';const shade=c.createLinearGradient(0,Math.min(...quad.map(p=>p[1])),0,Math.max(...quad.map(p=>p[1])));shade.addColorStop(0,'#150e0780');shade.addColorStop(1,'#050609ad');c.fillStyle=shade;c.fillRect(0,0,W,H);c.restore();
- }
- shutters.set(key,layer);return layer;
+ // Both shutter states are full-resolution painted room states with rails,
+ // perspective and foreground occlusion. Never stretch a material over glass.
+ if(!spec?.asset)return null;
+ const native=image(spec.asset);return native.complete&&native.naturalWidth?native:null;
 }
 function paintSnow(glass,time,moving){
  flakes.clearRect(0,0,W,H);if(!glass.length)return;
@@ -101,7 +80,7 @@ function draw(now){
    ctx.save();ctx.clip(polygons(spec.windowState.masks[i]));ctx.drawImage(opening,0,0,W,H);ctx.restore();
   }
  }
- if(closed){const surface=shutterSurface(spec.shutters);if(surface)ctx.drawImage(surface,0,0);}
+ if(closed){const surface=shutterSurface(spec.shutters);if(surface)ctx.drawImage(surface,0,0,W,H);}
  const dip=moving&&WardScene.options.flashes!==false?WW.flicker(s.room,t):0;
  if(dip){const interior=new Path2D();interior.rect(0,0,W,H);interior.addPath(polygons(physicalGlass));ctx.save();ctx.clip(interior,'evenodd');ctx.fillStyle='rgba(0,0,0,'+dip+')';ctx.fillRect(0,0,W,H);ctx.restore();}
  paintSnow(glass,t,moving);ctx.drawImage(snow,0,0);paintScreens(spec.screens,t,moving);

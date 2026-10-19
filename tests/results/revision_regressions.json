@@ -1,0 +1,19 @@
+{
+  "transport": "http://127.0.0.1:8010",
+  "checks": [
+    "flashlight starts in the room and is obtained through its actual mouse pickup",
+    "named nurses have no living scene actors; invisible clipboard-doctor modal no longer appears",
+    "journal/note and camera/recording fixtures show one selected finding without stacked scroll panels",
+    "document reading pauses real-time and action-time battery costs; exploration resumes draining afterward",
+    "powered-room flashlight does not run; dark examination gives a visible scene warning and practical thought",
+    "emergency battery charger is named and becomes interactive only when a nearly empty flashlight can use it",
+    "collected puzzle evidence remains directly accessible in Files and memorial record omits DDMM solution format",
+    "a lock opens only its collected clue and returns to the unsolved puzzle without filling in the answer",
+    "long handwritten records fit desktop and mobile, mouse pagination reaches all pages, Thoughts have no numbered pages",
+    "useful pickups occupy rear views in several rooms and can be reached, examined and taken using mouse facing controls",
+    "purge handle opens the actual rear windows, unclosed exposure hurts health/sanity, three catches resolve it once",
+    "sprinkler causes injury, wet clothing persists, and deliberate warming recovers the local hazard",
+    "warned fatal glass encounter cannot be healed or escaped through stale actions; explicit checkpoint restores a live run"
+  ],
+  "javascript_errors": []
+}

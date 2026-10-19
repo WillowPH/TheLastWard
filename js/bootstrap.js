@@ -1,2 +1,2 @@
 'use strict';
-const $=i=>document.getElementById(i),K='lw_ch1_roomviews_complete_v4',KB='lw_ch1_roomviews_complete_v4_bak';
+const $=i=>document.getElementById(i),K='lw_ch1_survival_review_v5',KB='lw_ch1_survival_review_v5_bak';

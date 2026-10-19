@@ -11,9 +11,17 @@ CLICK visible objects. DRAG sideways or click a SIDE ARROW to see the other side
 No keyboard controls are required. There is no bottom navigation toolbar.
 Hints (Subtle/Strong), motion and flashes are in OPTIONS.
 Practical requirements appear in THOUGHTS.
-INVENTORY > MANAGE > INSPECT has a confirmed DISCARD action for safe/spent items.
+Select an item in the RIGHT INVENTORY for USE, INSPECT, COMBINE or DISCARD.
+To combine: select the first item, choose COMBINE, then select the second item.
+Discard asks for confirmation and returns directly to the room.
 Keys/tools still needed for progression cannot be discarded.
 
-Room paintings fit whole and retain their native 1448x1086 detail, without a zoomed
+The FLASHLIGHT is in the lobby coat pocket. Reading records pauses its battery.
+Lighted rooms save battery automatically. Cold and wet clothes now hurt:
+stop the source, then choose DRY OFF AND WARM UP in a powered warm shelter,
+or use the lit laundry stove. Death requires loading a save/checkpoint or restarting.
+Use a FLOPPY DISK at a TERMINAL to save. STORAGE BOXES share stored equipment.
+
+Room paintings fit whole and retain their native detail (mostly 1448x1086), without a zoomed
 panorama crop. All files remain separate; this is not one embedded HTML document.
 Keep the same browser/local port for continued saves. Export your record before moving.

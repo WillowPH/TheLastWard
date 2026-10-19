@@ -3,10 +3,10 @@
 'use strict';
 const WW=WardWinter,e=htmlSafe;
 const accessItems=new Set(['Cabinet Key','Staff Access Card','Archive Key','Boiler Key','Bolt Cutters','Crank Handle','Maintenance Tools','Encrypted Drive']);
-const resources=new Set(['Battery','Reinforced Battery','Ink Ribbon','Antiseptic','Wire Spool','Stabilizer Part','Wooden Plank']);
+const resources=new Set(['Battery','Reinforced Battery','Floppy Disk','Ink Ribbon','Antiseptic','Wire Spool','Stabilizer Part','Wooden Plank']);
 const keepsakes=new Set(['Silver Locket','Executive Photograph','Continuity Reel','Emergency Record Spool','Chapel Seal','Morgue Seal','Lab Seal','Boiler Seal']);
-let pending=null,serial=0;
-const usable=()=>!!(S&&S.hp>0&&!S.f.chapter1Complete&&!WW.orbit?.busy);
+let pending=null,serial=0,selected=null,combineArmed=false;
+const usable=()=>!!(S&&S.hp>0&&!S.f.dead&&!S.f.chapter1Complete&&!WW.orbit?.busy);
 function unfinishedUse(name){
  for(const [id,d]of Object.entries(D))if(d.need===name&&!S.dr[id])return true;
  for(const r of Object.values(R))for(const o of r.o){const sp=o[4]||{};if(S.ob[o[0]]==='done'||S.ob[o[0]]==='read')continue;if(sp.need===name||sp.need3?.includes(name))return true;}
@@ -31,7 +31,7 @@ function policy(name){
  if(name==='Lighter Fluid'&&!S.lighterFuel&&!S.f.stoveLit&&!S.f.chapelCandles)return protect('Keep this first refill until the lighter has fuel.');
  if(name==='Lighter Fluid'||resources.has(name)||HEALS[name]||Object.values(W).some(w=>w.ammo===name))return {allowed:true,spent:false,status:'Supply',reason:'This supply can still be useful. Discarding it is permanent.'};
  if(keepsakes.has(name))return {allowed:true,spent:false,status:'Keepsake',reason:'This keepsake has no remaining lock or task in Chapter 1.'};
- return protect('Keep this equipment. It may still be needed. Use a field cache to store it safely.');
+ return protect('Keep this equipment. It may still be needed. Use a storage box to store it safely.');
 }
 function actions(index){const slot=S.inv[index];if(!slot)return '';const p=policy(slot.n);return '<div class="inventory-discard-actions"><p class="inventory-discard-note">'+(p.spent?'<b>Spent item</b> · ':'')+e(p.reason)+'</p>'+(p.allowed?'<button type="button" class="btn" onclick="wardRequestDiscard('+index+')">Discard'+(slot.c>1?' stack':'')+'</button>':'<span class="inventory-protected" aria-label="Protected item">Keep</span>')+'</div>';}
 window.wardInspectInventory=function(index){
@@ -44,14 +44,14 @@ window.wardRequestDiscard=function(index){
  if(!usable())return;const slot=S.inv[index];if(!slot)return;const p=policy(slot.n);
  if(!p.allowed){WW.think(p.reason);return;}
  pending={slot,index,room:S.room,token:++serial};
- modal('Discard '+e(slot.n)+'?', '<div class="c1-item-examine">'+itemIconMarkup(slot.n)+'<p>'+e(slot.n)+(slot.c>1?' × '+slot.c:'')+'</p></div><p>'+e(p.spent?'This item has no remaining use. Discard it to free one carry slot?':'Discard this whole stack to free one carry slot? You may want to store it in a field cache instead.')+'</p><p><b>This is permanent. It cannot be picked up again.</b></p><button class="btn" onclick="wardInspectInventory('+index+')">Keep item</button><button class="btn p" onclick="wardConfirmDiscard('+pending.token+')">Discard permanently</button>');
+ modal('Discard '+e(slot.n)+'?', '<div class="c1-item-examine">'+itemIconMarkup(slot.n)+'<p>'+e(slot.n)+(slot.c>1?' × '+slot.c:'')+'</p></div><p>'+e(p.spent?'This item has no remaining use. Discard it to free one carry slot?':'Discard this whole stack to free one carry slot? You may want to store it in a storage box instead.')+'</p><p><b>This is permanent. It cannot be picked up again.</b></p><button class="btn" onclick="wardInspectInventory('+index+')">Keep item</button><button class="btn p" onclick="wardConfirmDiscard('+pending.token+')">Discard permanently</button>');
  pending.modal=document.querySelector('#m .md');
 };
 window.wardConfirmDiscard=function(token){
  const request=pending;pending=null;
  if(!usable()||!request||request.token!==token||request.modal!==document.querySelector('#m .md')||request.room!==S.room||S.inv[request.index]!==request.slot||!policy(request.slot.n).allowed)return;
  const slot=request.slot;S.inv.splice(request.index,1);S.discardedItems=S.discardedItems||[];S.discardedItems.push({n:slot.n,c:slot.c,room:S.room,time:S.t});S.discardedItems=S.discardedItems.slice(-100);
- lg('Discarded '+slot.n+(slot.c>1?' ×'+slot.c:'')+'.');soundEffect('pickup');$('m').innerHTML='';render();WW.think('I leave '+(slot.c>1?'the remaining ':'the ')+slot.n.toLowerCase()+' behind. There is space in my pack now.');invModal();
+ selected=null;combineArmed=false;lg('Discarded '+slot.n+(slot.c>1?' ×'+slot.c:'')+'.');soundEffect('pickup');$('m').innerHTML='';render();WW.think('I leave '+(slot.c>1?'the remaining ':'the ')+slot.n.toLowerCase()+' behind. There is space in my pack now.');
 };
 const baseInventory=invModal;
 invModal=function(category='all'){
@@ -61,7 +61,71 @@ invModal=function(category='all'){
  return result;
 };
 const baseSlot=useInventorySlot;
-useInventorySlot=function(index){const slot=S?.inv[index],result=baseSlot(index);if(!slot)return result;const body=document.querySelector('#m .mb');if(body&&document.querySelector('#m .c1-item-examine')&&!body.querySelector('.inventory-discard-actions'))body.insertAdjacentHTML('beforeend',actions(index));return result;};
+useInventorySlot=function(index){if(!usable())return;const slot=S?.inv[index],result=baseSlot(index);if(!slot)return result;const body=document.querySelector('#m .mb');if(body&&document.querySelector('#m .c1-item-examine')&&!body.querySelector('.inventory-discard-actions'))body.insertAdjacentHTML('beforeend',actions(index));return result;};
+
+// The carry grid is an action surface. Combining never requires the inventory modal.
+function selectionIndex(){if(!selected||selected.room!==S?.room)return -1;return S.inv.indexOf(selected.slot);}
+function pairAction(a,b){
+ if(!a||!b||a===b)return null;
+ const recipe=RECIPES.find(r=>(r.a===a.n&&r.b===b.n)||(r.b===a.n&&r.a===b.n));
+ if(recipe)return {kind:'recipe',recipe};
+ if([a.n,b.n].includes('Lighter')&&[a.n,b.n].includes('Lighter Fluid'))return {kind:'lighter'};
+ const weapon=W[a.n]?a:W[b.n]?b:null,other=weapon===a?b:a;
+ if(weapon&&W[weapon.n].ammo===other.n)return {kind:'reload',weapon};
+ if(weapon&&other.n==='Stabilizer Part')return {kind:'upgrade',weapon};
+ return null;
+}
+function selectedUse(name){return W[name]?'Equip':HEALS[name]?'Use':name==='Flashlight'?'Toggle flashlight':['Battery','Reinforced Battery'].includes(name)?'Recharge':Object.values(W).some(w=>w.ammo===name)?'Load weapon':name==='Stabilizer Part'?'Upgrade weapon':null;}
+function clearSelection(){selected=null;combineArmed=false;syncCarryActions();}
+window.wardCancelInventorySelection=clearSelection;
+window.wardSelectInventory=function(index){
+ if(!usable())return;const slot=S.inv[index];if(!slot)return;
+ const first=selectionIndex();
+ if(combineArmed&&first>=0){if(first===index){combineArmed=false;return syncCarryActions();}return wardCombineInventory(first,index);}
+ selected={slot,room:S.room};combineArmed=false;syncCarryActions();
+};
+window.wardBeginInventoryCombine=function(){
+ if(!usable()||selectionIndex()<0)return;
+ combineArmed=true;syncCarryActions();
+};
+window.wardUseSelectedInventory=function(){
+ if(!usable())return;const index=selectionIndex();if(index<0)return;
+ clearSelection();useInventorySlot(index);
+ // Legacy upgrade/medical helpers can open the large inventory; direct actions return to the room.
+ if(usable()&&document.querySelector('#m .inv-scroll'))$('m').innerHTML='';
+};
+window.wardCombineInventory=function(ai,bi){
+ if(!usable()||!Number.isInteger(ai)||!Number.isInteger(bi)||ai===bi)return false;
+ const a=S.inv[ai],b=S.inv[bi],action=pairAction(a,b);
+ if(!action){WW.think('Those items do not fit together. Nothing has been used.');return false;}
+ clearSelection();
+ if(action.kind==='lighter'){wardCombineLighter();return true;}
+ if(action.kind==='reload'){S.eq=action.weapon.n;reload();return true;}
+ if(action.kind==='upgrade'){S.eq=action.weapon.n;upgrade();if(usable()&&document.querySelector('#m .inv-scroll'))$('m').innerHTML='';return true;}
+ const recipe=action.recipe,previous=S.inv.slice(),counts=previous.map(slot=>slot.c),inFight=!!(cm&&alive(S.room));
+ for(const slot of [a,b]){slot.c--;if(!slot.c)S.inv.splice(S.inv.indexOf(slot),1);}
+ if(!add(recipe.out,recipe.count)){previous.forEach((slot,i)=>slot.c=counts[i]);S.inv=previous;render();WW.think('There is no room for the finished item. I need a free carry slot.','space');return false;}
+ if(recipe.out==='Developed Photograph'){S.f.photo=1;S.th2=S.th2||[];if(!S.docs.includes('Cold Storage Inventory'))S.th2.push('The photograph reveals a hidden route into Cold Storage. The image was taken before I arrived.');lg('Developed photograph: a hidden latch in the Records Annex responds to the image.');}
+ else lg('Combined '+a.n+' and '+b.n+' into '+recipe.out+'.');
+ soundEffect('combine');render();
+ if(inFight){foe('You combine items while the threat closes in.');return true;}
+ WW.think(recipe.out==='Reinforced Battery'?'The wire holds the cell contacts firmly. This reinforced battery gives the flashlight a longer charge.':'I put the '+recipe.out.toLowerCase()+' in my pack.');
+ return true;
+};
+function syncCarryActions(){
+ const host=$('inventorySlots');if(!host||!S)return;
+ let index=selectionIndex();if(!usable()||index<0){selected=null;combineArmed=false;index=-1;}
+ let panel=$('inventoryCarryActions');
+ if(!panel){panel=document.createElement('section');panel.id='inventoryCarryActions';panel.className='inventory-carry-actions';panel.setAttribute('aria-live','polite');host.after(panel);}
+ for(const [i,cell]of [...host.querySelectorAll('.inventory-cell.filled')].entries()){
+  const slot=S.inv[i];cell.dataset.inventoryIndex=String(i);cell.onclick=()=>wardSelectInventory(i);cell.setAttribute('aria-label',(combineArmed?'Combine with ':'Select ')+slot.n+(slot.c>1?' × '+slot.c:''));cell.setAttribute('aria-pressed',String(i===index));cell.classList.toggle('inventory-selected',i===index);cell.classList.toggle('combine-compatible',combineArmed&&!!pairAction(selected?.slot,slot));cell.title=combineArmed?'Combine with '+slot.n:'Select '+slot.n;
+ }
+ panel.hidden=index<0;if(index<0){panel.innerHTML='';return;}
+ const slot=S.inv[index],p=policy(slot.n),use=selectedUse(slot.n);
+ panel.innerHTML='<div class="carry-selection-heading"><strong>'+e(slot.n)+(slot.c>1?' × '+slot.c:'')+'</strong><button type="button" class="carry-selection-close" onclick="wardCancelInventorySelection()" aria-label="Cancel item selection">×</button></div>'+(combineArmed?'<p>Select the second item in your pack.</p><button type="button" class="btn" onclick="wardCancelInventorySelection()">Cancel combine</button>':'<p>'+e(p.spent?'Spent · all matching tasks are complete.':desc(slot.n))+'</p><div class="carry-selection-buttons">'+(use?'<button type="button" class="btn" onclick="wardUseSelectedInventory()">'+e(use)+'</button>':'')+'<button type="button" class="btn" onclick="wardBeginInventoryCombine()">Combine</button><button type="button" class="btn" onclick="wardInspectInventory('+index+')">Inspect</button>'+(p.allowed?'<button type="button" class="btn" onclick="wardRequestDiscard('+index+')">Discard</button>':'')+'</div>');
+}
+const baseCarry=renderUnifiedInventory;renderUnifiedInventory=function(){const result=baseCarry();syncCarryActions();return result;};
+WW.inventoryDirect={pairAction,selection:()=>({index:selectionIndex(),combining:combineArmed}),sync:syncCarryActions};
 function manageButton(){const heading=document.querySelector('.unified-inventory-panel .panel-heading');if(!heading||heading.querySelector('.inventory-manage-button'))return;const button=document.createElement('button');button.type='button';button.className='btn inventory-manage-button';button.textContent='Manage';button.setAttribute('aria-label','Manage carried items');button.onclick=()=>invModal();heading.append(button);}
 const baseRender=render;render=function(){const result=baseRender();manageButton();return result;};manageButton();
 
@@ -83,6 +147,7 @@ function thoughtResolved(thought){
   case 'concealed':return !S.f.hidingRoom;
   case 'fuel':return WW.fuel()>0;
   case 'warm':return WW.isWarm();
+  case 'dry':return !S.f.wet&&!S.f.shivering;
   case 'space':return S.inv.length<carryLimit();
   case 'equip':return !!(W[S.eq]&&has(S.eq));
   case 'terminal':return R[S.room].o.some(o=>o[4].act==='save');
@@ -118,7 +183,7 @@ function practicalHint(value){
  if(/^The console needs power,/i.test(text))return 'flag:finalSecurityClearance';
  if(/^The (?:shotgun case is locked behind an electronic authorization|elevator terminal requires a Monolith executive authorization)/i.test(text))return 'flag:photoPuzzleSolved';
  if(/^The key hangs beyond the flooded working platform/i.test(text))return 'flag:drained';
- if(/^Find a Continuity Terminal before saving/i.test(text))return 'terminal';
+ if(/^Find (?:a Continuity Terminal|a Terminal|a terminal) before saving/i.test(text))return 'terminal';
  if(/^No storage box in this room/i.test(text))return 'cache';
  if(/^You need to equip a firearm first/i.test(text))return 'equip';
  if(/^I need clean dressings/i.test(text))return 'item:Trauma Dressing';
@@ -134,5 +199,13 @@ const baseInteraction=interaction;interaction=function(value){const requirement=
 const baseToast=toast;toast=function(value){const requirement=practicalHint(value);if(requirement){WW.think(value,requirement);return;}return baseToast(value);};
 const baseMessage=msg;msg=function(value,good){const requirement=good?null:practicalHint(value);if(requirement){S.msg=null;WW.think(value,requirement);return;}return baseMessage(value,good);};
 WW.inventoryDiscard={policy,unfinishedUse};
+const baseAdd=add;add=function(name,count=1,inventory=S?.inv,limit=null){
+ const carried=inventory===S?.inv,had=carried?cnt('Wire Spool'):0,result=baseAdd(name,count,inventory,limit);
+ if(result&&carried&&canonicalItem(name)==='Wire Spool'&&!had&&!S.f.wireCombineExplained){
+  const run=S;S.f.wireCombineExplained=1;queueMicrotask(()=>{if(S===run&&usable()&&has('Wire Spool'))WW.think('This wire can reinforce a flashlight battery. Select it in my pack, choose Combine, then select a battery.');});
+ }
+ return result;
+};
+const carryStyle=document.createElement('style');carryStyle.textContent='.inventory-carry-actions{margin-top:10px;padding:10px 0;border-top:1px solid #625a4b;color:#d5cfc1;font:12px/1.45 Roboto,Arial,sans-serif}.inventory-carry-actions[hidden]{display:none!important}.carry-selection-heading{display:flex;align-items:flex-start;gap:8px}.carry-selection-heading strong{font-weight:400;font-size:13px;overflow-wrap:anywhere;flex:1;min-width:0}.carry-selection-close{border:0;background:transparent;color:#bdb5a7;cursor:pointer;font-size:20px;line-height:1;padding:0 2px}.inventory-carry-actions p{margin:7px 0;color:#aaa296;overflow-wrap:anywhere}.carry-selection-buttons{display:flex;flex-wrap:wrap;gap:5px}.inventory-carry-actions .btn{min-height:28px!important;padding:4px 8px!important;font-size:11px!important;letter-spacing:0!important}.ward-playing .right-rail .inventory-cell.inventory-selected{border-color:#d6ba81!important;box-shadow:inset 0 0 0 1px #d6ba81!important;background:#a995651a!important}.ward-playing .right-rail .inventory-cell.combine-compatible{border-color:#c6b58b!important;background:#bca27422!important}.ward-playing .right-rail .inventory-cell.combine-compatible:after{content:"+";position:absolute;right:4px;top:1px;color:#dfcfaa;font-size:16px}.inventory-carry-actions .item-art{display:none}@media(max-width:650px){.inventory-carry-actions{position:fixed;right:8px;bottom:145px;width:min(270px,calc(100vw - 30px));background:#11100ff5;border:1px solid #625a4b;border-radius:4px;padding:10px;z-index:120;box-shadow:0 6px 24px #0009}.inventory-carry-actions p{font-size:11px}}';document.head.append(carryStyle);
 const style=document.createElement('style');style.textContent='.inventory-discard-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:20px 0;padding:16px 0;border-top:1px solid var(--ln,#444);border-bottom:1px solid var(--ln,#444)}.inventory-discard-note{flex:1 1 200px;margin:0;line-height:1.5}.inventory-protected{font-size:12px;opacity:.7}.inventory-spent-label{color:var(--mu,#aaa)}.inventory-manage-button{margin-left:auto;padding:4px 8px!important;font-size:11px!important;min-height:26px}.unified-inventory-panel .panel-heading:has(.inventory-manage-button){display:flex;align-items:center;gap:8px}';document.head.append(style);
 })();

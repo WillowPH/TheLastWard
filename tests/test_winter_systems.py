@@ -10,6 +10,9 @@ with sync_playwright() as p:
  page.goto('http://127.0.0.1:8010');page.get_by_role('button',name='BEGIN INVESTIGATION').click()
  def ev(s,a=None):return page.evaluate(s,a)
  ev('nextIntro();nextIntro();nextIntro()')
+ assert not ev('has("Flashlight")')
+ ev('const pickup=R.lobby.o.find(o=>o[4].give?.some(g=>g[0]==="Flashlight"));if(!pickup)throw Error("Missing opening flashlight pickup");wardFixtureAction(pickup[0]);wardCloseFocus()')
+ assert ev('has("Flashlight")')
  ev('WardScene.options.motion=false;WardScene.options.flashes=false')
  def ready():page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&WardWinter.roomViewRenderer().room===S.room&&WardWinter.roomViewRenderer().view===S.roomView&&!WardWinter.orbit.busy')
  def whole_art(path):
@@ -32,11 +35,10 @@ with sync_playwright() as p:
  for _ in range(10):page.wait_for_timeout(70);energies.append(ev('WardSound.energy()'))
  assert max(energies)>0.00001,energies
  passed('local recorded sound advances and produces nonzero WebAudio output')
- reset('lobby');ev('S.lightOn=true;S.bat=100;S.m=1;advanceTime(10);renderScene()');assert 89<ev('S.bat')<=90
+ reset('wardnorth');ev('S.lightOn=true;S.bat=100;S.m=1;advanceTime(10);renderScene()');assert 92<ev('S.bat')<=92.5
  normal=ev('S.bat');ev('S.m=.7;S.bat=100;advanceTime(10)');assert ev('S.bat')>normal
  ev('S.room="security";S.roomView="front";S.roomViewRoom=S.room;S.f.power=1;S.lightOn=false;renderScene()');ready()
- ev('''WardWinter.roomViewEffects.stop();WardWinter.roomViewRenderer().effects(null);window.__litPixels=document.querySelector('.room-view-canvas').getContext('2d').getImageData(0,0,document.querySelector('.room-view-canvas').width,document.querySelector('.room-view-canvas').height).data;S.lightOn=true;WardWinter.fitRoomView()''')
- assert ev('''(()=>{const c=document.querySelector('.room-view-canvas'),p=c.getContext('2d').getImageData(0,0,c.width,c.height).data;return p.every((v,i)=>v===window.__litPixels[i]);})()''')
+ assert ev('''()=>{WardWinter.roomViewEffects.stop();WardWinter.roomViewRenderer().effects(null);const c=document.querySelector('.room-view-canvas'),a=c.getContext('2d').getImageData(0,0,c.width,c.height).data;S.lightOn=true;WardWinter.fitRoomView();const b=c.getContext('2d').getImageData(0,0,c.width,c.height).data;return a.length===b.length&&b.every((v,i)=>v===a[i]);}''')
  reset('tunnel');ev('S.lightOn=true;S.bat=100;S.m=1;renderScene()');ready()
  center='''()=>{WardWinter.roomViewEffects.stop();const r=WardWinter.roomViewRenderer();r.effects(null);const c=document.querySelector('.room-view-canvas'),p=c.getContext('2d').getImageData(c.width*.45,c.height*.45,Math.max(1,c.width*.1),Math.max(1,c.height*.1)).data;let sum=0;for(let i=0;i<p.length;i++)if(i%4!==3)sum+=p[i];return sum/(p.length/4*3);}'''
  beam_on=ev(center);ev('S.bat=.01;S.m=1;closeModal()');page.wait_for_timeout(1300);assert ev('S.bat===0&&!S.lightOn');assert ev(center)<beam_on*.5

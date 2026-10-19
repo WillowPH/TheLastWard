@@ -22,6 +22,83 @@
       "generated": "exec-7cf96c18-67ec-4c4e-9db4-8d73c78607d9.png",
       "output": "assets/room_views/stafflounge_rear.webp",
       "change": "Physical 1998 CRT resting on filing cabinet"
+    },
+    "wardnorth_rear": {
+      "source": "assets/reverse/wardnorth.webp",
+      "generated": "exec-f4ba8c1b-cdda-4223-ade7-ab54c586e3b4.png",
+      "output": "assets/room_views/wardnorth_rear.webp",
+      "native_size": [
+        1447,
+        1087
+      ],
+      "change": "Three exterior windows on perpendicular wall; interior return door on opaque wall",
+      "export": "WebP quality95; original size preserved without resizing"
+    },
+    "wardnorth_windows_open": {
+      "source": "assets/reverse/wardnorth.webp",
+      "generated": "exec-0a01a906-2f72-4507-afbd-cddfcf0c64b8.png",
+      "output": "assets/room_views/wardnorth_windows_open.webp",
+      "native_size": [
+        1447,
+        1087
+      ],
+      "change": "Individual raised sash states for perpendicular exterior wall windows",
+      "export": "WebP quality95; original size preserved without resizing"
+    },
+    "lobby_rear": {
+      "source": "assets/reverse/lobby.webp",
+      "generated": "exec-7cbb1b9e-83a0-4e02-92bf-ee37ed5d6068.png",
+      "output": "assets/room_views/lobby_rear.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Matching chained chair and filing cabinet evacuation barricade",
+      "export": "WebP quality95; original size preserved without resizing"
+    },
+    "lobby_shutters_front": {
+      "source": "assets/room_views/lobby_front.webp",
+      "generated": "exec-1a322038-5324-432d-89ed-b5c066a3e64d.png",
+      "output": "assets/room_views/lobby_shutters_front.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Physical steel roll shutters integrated behind foreground barricade",
+      "export": "WebP quality95; original size preserved without resizing"
+    },
+    "lobby_shutters_rear": {
+      "source": "assets/room_views/lobby_rear.webp",
+      "generated": "exec-564c58a7-950e-4487-a1eb-d826f0ceaa85.png",
+      "output": "assets/room_views/lobby_shutters_rear.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Matching physical shutter state behind rear-view barricade",
+      "export": "WebP quality95; original size preserved without resizing"
+    },
+    "surgery_front": {
+      "source": "assets/rooms/surgery.webp",
+      "generated": "exec-824d3f24-0618-4c91-b816-fc81c08173ca.png",
+      "output": "assets/room_views/surgery_front.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Full-size doctor visibly braced against tiled wall",
+      "export": "WebP quality95; original size preserved without resizing"
+    },
+    "surgery_after": {
+      "source": "assets/room_views/surgery_front.webp",
+      "generated": "exec-2d769fca-cdd8-426e-8050-97a9b68664d3.png",
+      "output": "assets/room_views/surgery_after.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Readable full-body seated aftermath beside same wall; non-graphic game art",
+      "export": "WebP quality95; original size preserved without resizing"
     }
   }
 }

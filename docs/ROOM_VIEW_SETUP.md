@@ -2,9 +2,11 @@
 
 This is the active presentation. Load `room_views_data.js`, `room_view_renderer.js`
 and `room_orbit.js` before `room_view_scene.js`; load `room_view_effects.js` afterward.
-Keep reference_theme.css and room_views.css after the base styles.
+Keep reference_theme.css, room_views.css and reading_review.css after the base styles.
+Load reading_review.js after inventory_discard.js and survival_review.js last so
+terminal-death guards protect the final public command wrappers.
 
-- Use one 1448×1086 painting per authored facing. Fit the WHOLE image with a uniform
+- Use one native painting near 1448×1086 per authored facing; retain real source dimensions. Fit the WHOLE image with a uniform
   scale no larger than1. Never use cover-cropping, fake4K resizing or a 360° texture crop.
 - Place targets in the same fitted plane. Rectangles are centered percentages `[x,y,w,h]`.
   Edit `data/room_views.json`, then run `python3 tools/build_room_views.py`.
@@ -18,9 +20,10 @@ Keep reference_theme.css and room_views.css after the base styles.
 - Author weather in `data/room_view_effects.json` against actual visible glass cells,
   excluding frames, bars and foreground objects. Interior observation glass has no snow.
   Place CRT scanlines/messages inside actual screens and state patches in their fixtures.
+  Native state overlays are composited before lighting, so they cannot bypass darkness.
 - Practical blocked actions call `WardWinter.think(text)`; puzzle choices stay in dialogs.
   Discard policy belongs in inventory_discard.js and must protect unfinished item uses.
 
-Historical spherical-camera code remains in the repository but is not loaded by index.
+Historical spherical-camera helpers remain in the repository but are not the active presentation.
 The old snap-camera mathematical tests do not validate the current room-view navigation;
 use the native presentation, target and full-route suites documented in VALIDATION.md.

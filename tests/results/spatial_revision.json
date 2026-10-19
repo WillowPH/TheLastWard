@@ -1,0 +1,168 @@
+{
+  "checks": [
+    {
+      "room": "lobby",
+      "view": "front",
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "labels": [
+        "desk",
+        "locker",
+        "coat",
+        "terminal",
+        "box",
+        "intercom",
+        "phone",
+        "window",
+        "entrance"
+      ]
+    },
+    {
+      "room": "lobby",
+      "view": "rear",
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "labels": []
+    },
+    {
+      "room": "lobby",
+      "view": "front",
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "labels": [
+        "desk",
+        "locker",
+        "coat",
+        "terminal",
+        "box",
+        "intercom",
+        "phone",
+        "window",
+        "entrance"
+      ]
+    },
+    {
+      "room": "lobby",
+      "view": "rear",
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "labels": []
+    },
+    {
+      "room": "wardnorth",
+      "view": "rear",
+      "source": {
+        "width": 1447,
+        "height": 1087
+      },
+      "labels": [
+        "windowLever"
+      ]
+    },
+    {
+      "room": "surgery",
+      "view": "front",
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "labels": [
+        "kessler",
+        "notes",
+        "tray",
+        "mask",
+        "shotgun",
+        "exit"
+      ]
+    },
+    {
+      "room": "surgery",
+      "view": "front",
+      "source": {
+        "width": 1448,
+        "height": 1086
+      },
+      "labels": [
+        "kessler",
+        "notes",
+        "tray",
+        "mask",
+        "shotgun",
+        "exit"
+      ]
+    },
+    {
+      "room": "security",
+      "fixture": "drawer",
+      "hit": "drawer",
+      "x": 487.890625,
+      "y": 409.34375,
+      "w": 89.1875,
+      "h": 118.875
+    },
+    {
+      "room": "stafflounge",
+      "fixture": "harness",
+      "hit": "harness",
+      "x": 418.515625,
+      "y": 231.0234375,
+      "w": 109,
+      "h": 222.890625
+    },
+    {
+      "room": "room12",
+      "fixture": "drawer",
+      "hit": "drawer",
+      "x": 537.4453125,
+      "y": 372.1953125,
+      "w": 148.640625,
+      "h": 66.859375
+    },
+    {
+      "room": "pharmacy",
+      "fixture": "returns",
+      "hit": "returns",
+      "x": 577.078125,
+      "y": 327.625,
+      "w": 99.09375,
+      "h": 59.4375
+    },
+    {
+      "room": "pharmacy",
+      "fixture": "ribbon",
+      "hit": "ribbon",
+      "x": 1250.9609375,
+      "y": 424.2109375,
+      "w": 128.828125,
+      "h": 74.296875
+    },
+    {
+      "room": "records",
+      "fixture": "cabinet",
+      "hit": "cabinet",
+      "x": 477.9765625,
+      "y": 431.6484375,
+      "w": 79.265625,
+      "h": 260.046875
+    },
+    {
+      "room": "archive",
+      "fixture": "fuse",
+      "hit": "fuse",
+      "x": 1060.6796875,
+      "y": 297.8984375,
+      "w": 69.359375,
+      "h": 37.140625
+    }
+  ],
+  "errors": [],
+  "old_shutter_material_requested": false
+}

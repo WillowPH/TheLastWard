@@ -49,14 +49,14 @@
       },
       "frame": {
         "display": "block",
-        "height": 779,
-        "scrollHeight": 779,
-        "width": 1039,
-        "scrollWidth": 1039,
-        "x": 315.25,
-        "y": 5,
-        "right": 1354.25,
-        "bottom": 784,
+        "height": 743,
+        "scrollHeight": 743,
+        "width": 991,
+        "scrollWidth": 1015,
+        "x": 339.25,
+        "y": 23,
+        "right": 1330.25,
+        "bottom": 766,
         "background": "rgb(7, 7, 7)"
       },
       "viewport": {
@@ -132,14 +132,14 @@
       },
       "frame": {
         "display": "block",
-        "height": 458,
-        "scrollHeight": 458,
-        "width": 610,
-        "scrollWidth": 610,
-        "x": 180,
-        "y": 91,
-        "right": 790,
-        "bottom": 549,
+        "height": 422,
+        "scrollHeight": 422,
+        "width": 562,
+        "scrollWidth": 586,
+        "x": 204,
+        "y": 109,
+        "right": 766,
+        "bottom": 531,
         "background": "rgb(7, 7, 7)"
       },
       "viewport": {
@@ -215,14 +215,14 @@
       },
       "frame": {
         "display": "block",
-        "height": 293,
-        "scrollHeight": 293,
-        "width": 390,
-        "scrollWidth": 390,
-        "x": 0,
-        "y": 104,
-        "right": 390,
-        "bottom": 397,
+        "height": 257,
+        "scrollHeight": 257,
+        "width": 342,
+        "scrollWidth": 366,
+        "x": 24,
+        "y": 122,
+        "right": 366,
+        "bottom": 379,
         "background": "rgb(7, 7, 7)"
       },
       "viewport": {
@@ -260,15 +260,15 @@
     {
       "title": "Heller\u2019s winter maintenance note",
       "background": "rgb(203, 191, 168)",
-      "color": "rgb(40, 45, 37)",
-      "font": "26px / 40.3px Caveat, cursive",
-      "textLength": 934
+      "color": "rgb(40, 35, 30)",
+      "font": "24px / 30px Caveat, cursive",
+      "textLength": 979
     },
     {
       "title": "Nursing personnel amendment",
       "background": "rgb(203, 191, 168)",
-      "color": "rgb(40, 45, 37)",
-      "font": "15px / 26.25px \"Courier New\", monospace",
+      "color": "rgb(40, 35, 30)",
+      "font": "17px / 27px Roboto, sans-serif",
       "textLength": 442
     }
   ],

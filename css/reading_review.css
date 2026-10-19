@@ -1,0 +1,34 @@
+/* Contents never overlap: choose a finding, then inspect its own card. */
+.c1-focus.reading-focus{overflow:hidden!important;max-height:none!important;display:flex;flex-direction:column}
+.reading-focus header{display:flex;align-items:center;gap:12px;justify-content:space-between;position:static!important;padding:10px!important}
+.reading-focus header h3{min-width:0}.reading-focus header .btn{flex-shrink:0}
+.finding-choices{display:flex;flex-wrap:wrap;gap:5px;padding:8px;border-bottom:1px solid #665b49}
+.finding-choices .btn{font-size:11px;min-height:30px}.finding-choices .selected{outline:1px solid #d1b882}
+.reading-focus .c1-findings,.reading-focus .winter-drawer-interior{display:block!important;overflow:hidden!important;min-height:0!important;max-height:none!important;padding:12px!important}
+.reading-focus .c1-finding,.reading-focus .winter-drawer-item{display:grid!important;grid-template-columns:68px minmax(0,1fr);align-items:start;gap:10px;padding:10px!important;margin:0!important;position:relative;background:#11100ee8!important;min-height:0!important}
+.reading-focus .winter-finding-art{width:68px!important;height:68px!important;position:static!important;grid-row:1;grid-column:1;opacity:1!important;overflow:hidden}
+.reading-focus .winter-finding-art img{position:static!important;max-width:100%!important;width:100%!important;height:100%!important;object-fit:contain!important;opacity:1!important;filter:none!important}
+.reading-focus article>div:not(.winter-finding-art){grid-column:2;min-width:0}.reading-focus article strong{font-size:14px!important;line-height:1.35}
+.reading-focus article p{display:block!important;font:13px/1.4 Roboto,sans-serif!important;margin:6px 0!important;white-space:normal}
+.reading-focus article>.btn{grid-column:1/-1;justify-self:stretch;margin:0!important;font-size:12px!important;min-height:30px}
+.reading-focus .room-local-notice{margin:0 0 8px;padding:8px;font-size:13px}
+.scene-warning-banner{position:absolute;top:48px;left:50%;transform:translateX(-50%);z-index:300;pointer-events:none;background:#0b0909eb;border:1px solid #aa8a65;border-radius:4px;padding:12px 18px;color:#e3d2ae;font:15px/1.4 Roboto,sans-serif;text-align:center;max-width:85%}
+/* A paper fills a bounded reading surface; text advances in complete pages. */
+body.ward-playing #m:has(.record-modal),body.ward-playing #m:has(.file-modal){position:fixed!important;inset:0!important;z-index:1000!important}
+body.ward-playing #m .md.record-modal{width:min(780px,95vw)!important;height:min(820px,calc(100svh - 28px))!important;max-height:calc(100svh - 28px)!important;display:flex;flex-direction:column;overflow:hidden!important}
+.record-modal .mh{flex:none}.record-modal .mb{flex:1;min-height:0;display:flex;overflow:hidden!important;padding:16px!important}
+.record-reader{display:flex;flex-direction:column;width:100%;height:100%;min-height:0;gap:10px}
+.record-reader .winter-document-tools{flex:none;margin:0;min-height:32px}
+.record-reader .winter-document{flex:1;min-height:0!important;display:flex;margin:0!important;padding:28px 34px!important;transform:none!important;overflow:hidden}
+.record-reader .winter-paper-text{position:relative;flex:1;min-width:0;min-height:0;white-space:pre-wrap!important;overflow:hidden!important;color:#28231e!important;font:17px/27px Roboto,sans-serif!important;letter-spacing:0!important;transform:none!important;z-index:2}
+.record-reader .handwritten:not(.transcription-view) .winter-paper-text{font:24px/30px Caveat,cursive!important}
+.record-pages{display:flex;flex:none;align-items:center;gap:12px;min-height:34px;font-size:12px;color:#c8baa0}.record-pages .record-return{margin-left:auto}.record-pages .btn{min-height:32px}
+.file-modal{width:min(760px,96vw)!important}.file-modal .mb{overflow:hidden!important}.file-browser>p{font-size:13px;line-height:1.5}.file-search{display:flex;align-items:center;gap:14px;font-size:12px;color:#bfb39d}.file-search input{flex:1;min-width:0;background:#15130f;color:#d8cbb7;border:1px solid #665b49;padding:8px}
+#recordFileList{min-height:250px}.file-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 2px;border-bottom:1px solid #524c3f}.file-entry div{min-width:0}.file-entry strong{font-size:14px;color:#d6ccba}.file-entry small{display:block;margin-top:5px;font-size:11px;color:#a99c87}.file-entry .btn{flex:none}
+@media(max-width:700px){.record-modal .mb{padding:10px!important}.record-reader .winter-document{padding:20px!important}.record-reader .winter-paper-text{font-size:15px!important;line-height:24px!important}.record-reader .handwritten:not(.transcription-view) .winter-paper-text{font-size:22px!important;line-height:27px!important}.record-reader .winter-document-tools{font-size:10px}.record-pages{gap:6px}.record-pages .btn{padding:6px;font-size:11px}.file-entry{padding:9px 0}.file-entry strong{font-size:12px}.file-browser .inv-tabs .btn{font-size:11px}.reading-focus article p{font-size:12px!important}}
+
+.related-record{display:block;margin-top:12px!important}#recoverExposure{margin-top:8px;max-width:100%;font-size:11px}
+
+.scene-focus-overlay .c1-ending{pointer-events:auto!important;z-index:400!important}
+
+.doctor-evidence-image{display:block;width:100%;max-height:38svh;object-fit:contain;margin:0 auto 12px}

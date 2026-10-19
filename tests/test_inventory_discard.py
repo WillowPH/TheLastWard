@@ -53,7 +53,7 @@ with sync_playwright() as p:
     assert ev('WardWinter.inventoryDiscard.policy("Lighter").spent')
     passed('shared keys stay protected until every matching lock is open; tools and drive retain their additional task guards')
 
-    ev('''S.inv=[{n:'Flashlight',c:1},{n:'Cabinet Key',c:1},{n:'Archive Key',c:1},{n:'Battery',c:2},{n:'Handgun Ammo',c:6},{n:'Ink Ribbon',c:2},{n:'Utility Knife',c:1},{n:'Power Fuse',c:1}];S.slots=8;render()''')
+    ev('''S.inv=[{n:'Flashlight',c:1},{n:'Cabinet Key',c:1},{n:'Archive Key',c:1},{n:'Battery',c:2},{n:'Handgun Ammo',c:6},{n:'Floppy Disk',c:2},{n:'Utility Knife',c:1},{n:'Power Fuse',c:1}];S.slots=8;render()''')
     assert not ev('add("Trauma Dressing",1)')
     page.get_by_role('button', name='Manage carried items', exact=True).click()
     row = page.locator('#m .inventory-item-row').filter(has_text='Cabinet Key')
@@ -147,11 +147,11 @@ with sync_playwright() as p:
     ev('closeModal()')
     passed('missing named keys/tools use Thoughts while door labels remain specific; successful generator restoration keeps its story scene')
 
-    ev('rem("Ink Ribbon",cnt("Ink Ribbon"));saveGame()')
-    assert ev('S.contextThought?.requirement==="item:Ink Ribbon"')
+    ev('rem("Floppy Disk",cnt("Floppy Disk"));saveGame()')
+    assert ev('S.contextThought?.requirement==="item:Floppy Disk"')
     assert page.locator('#m .md').count() == 0
-    ev('add("Ink Ribbon");render();saveGame()')
-    assert page.get_by_role('heading', name='Continuity Terminal', exact=True).count() == 1
+    ev('add("Floppy Disk");render();saveGame()')
+    assert page.get_by_role('heading', name='Terminal', exact=True).count() == 1
     ev('closeModal()')
     passed('missing save supplies use Thoughts; acquiring them clears the hint and preserves the normal save confirmation')
     assert not errors, errors

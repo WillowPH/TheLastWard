@@ -15,8 +15,8 @@ W.fixture=function(room,id,label,rect,view='front',extra={}){
  const f={id,label,rect,ids:[],view,...extra};WardScenes[room].fixtures.push(f);return f;
 };
 const documents={
- 'Heller’s winter maintenance note':`MARTIN HELLER — NIGHT MAINTENANCE\n14 NOVEMBER 1998\n\nThe automatic window linkage is still connected to the purge handle in the North Patient Corridor. Pulling it opens all three sashes. Shut EACH sash by its brass catch. The linkage will shear after one opening; do not try it for fun.\n\nThere is a petrol lighter in Security and lighter fluid on the same early staff route. Refill the lighter before you need it. The laundry drying stove has a prepared bed of old cotton. Light it, then stand back and warm your hands. Powered safe rooms will also dry you.\n\nThe lift motor uses generator power, but its transfer interlock has FOUR shaped fuse plugs. The duty electrician left them at Archives, Pharmacy, Records and Emergency Power Control. They are circuit keys, not spare flashlight batteries. All four belong in the elevator control board.\n\nThe generator is not running. Any light you see now is a battery-backed emergency fitting.`,
- 'Window linkage warning':`BLACKRIDGE MAINTENANCE\n\nPURGE HANDLE — THREE WINDOW LINKAGES\n\nOpening the windows during the snowstorm will expose the whole corridor. The old linkage cannot pull them shut again. Close the three brass catches individually. Warm rooms are marked on the service plan.\n\nSomeone has written beneath it: The valve in East Corridor controls the sprinklers. It does NOT close these windows.`,
+ 'Heller’s winter maintenance note':`MARTIN HELLER — NIGHT MAINTENANCE\n14 NOVEMBER 1998\n\nThe automatic window linkage is still connected to the purge handle in the North Patient Corridor. Pulling it opens all three sashes. Shut EACH sash by its brass catch. The linkage will shear after one opening. A seized linen-return flap is coupled to the same shaft; the purge releases its emergency supply compartment. Shut the windows before collecting the supplies.\n\nThere is a petrol lighter in Security and lighter fluid on the same early staff route. Refill the lighter before you need it. The laundry drying stove has a prepared bed of old cotton. Light it, then stand back and warm your hands. Powered safe rooms will also dry you.\n\nThe lift motor uses generator power, but its transfer interlock has FOUR shaped fuse plugs. The duty electrician left them at Archives, Pharmacy, Records and Emergency Power Control. They are circuit keys, not spare flashlight batteries. All four belong in the elevator control board.\n\nThe generator is not running. Any light you see now is a battery-backed emergency fitting.`,
+ 'Window linkage warning':`BLACKRIDGE MAINTENANCE\n\nPURGE HANDLE — THREE WINDOW LINKAGES\n\nThe purge shaft also releases the seized emergency linen-return compartment. Supplies are inside, but opening the windows during the snowstorm will expose the whole corridor. The old linkage cannot pull them shut again. Close the three brass catches individually before searching the trolley. Warm rooms are marked on the service plan.\n\nSomeone has written beneath it: The valve in East Corridor controls the sprinklers. It does NOT close these windows.`,
  'Laundry stove instructions':`M. HELLER\n\nThe drying stove is packed with discarded dry cotton. Use the petrol lighter to ignite it. Leave the flue open; the firebox is enclosed. You do not need to carry the cloth.\n\nSit beside the stove until your hands stop shaking. Do not waste fuel trying to warm yourself with the lighter alone.`,
  'Nursing personnel amendment':`MONOLITH PHARMACEUTICALS\nPERSONNEL AMENDMENT / INTERNAL ONLY\n\nEmployee name: ████████████████████\nAssignment: Nursing / lower clinical services\nPublic roster: REMOVED\n\nPersonal correspondence may use the nickname MIMI. Do not restore the legal name from carbon copies. All inquiries are to be forwarded below the public basement.\n\nHandwritten: She always remembered what each patient liked. I cannot understand why they took her off the ward.`,
  'Mimi’s unsigned note':`I put the clean dressings in the lower cabinet. Leave some for the night staff.\n\nThey keep changing my rota. Yesterday I was upstairs. Today the lift would not stop there. Nobody will tell me why my name is blacked out.\n\nIf you cannot find me, ask for Mimi.\n\nM.`,
@@ -24,8 +24,8 @@ const documents={
  'Lower laboratory nursing addendum':`LULLABY / RESTRICTED ADDENDUM\n\nThe former nurse designated MIMI remains under Monolith observation. The public chart is not a reliable record of her condition.\n\nHer personal identity, treatment history and current assignment are held in the underground laboratory archive. Do not discuss them over the ward intercom.\n\nThe remainder of the page has been cut away.`,
  'A note beside the sandwich bag':`Tony,\n\nYour gabagool’s in the fridge.\n\n—Paulie\n\nSATRIALE’S PORK STORE\nNEW JERSEY`,
  'A postcard from a foggy town':`The lake disappeared into the fog this morning. The radio keeps hissing even when the batteries are out.\n\nI wish you were here.\n\nSILENT HILL`,
- 'Chapel candle register':`The memorial inscription is difficult to read after the lamps fail. The three votive candles still have good wicks.\n\nThe photograph on the lower shelf is of the hospital's opening day. Someone wrote the dedication date on its reverse.`,
- 'Opening day photograph':`BLACKRIDGE MEDICAL COMPLEX\nOPENING DAY\n\nOn the reverse, in the chaplain’s hand:\nThe dedication was held on {MEMORIAL_DATE}. Use the DAY, then the MONTH, in the old memorial lock.`,
+ 'Chapel candle register':`The three votive candles still have good wicks. Heller left a lighter with the Security staff; there is enough dry cotton in the laundry stove to warm anyone who reaches it.\n\nThe photograph below the stand records the opening of Blackridge. Someone has kept it here all these years.`,
+ 'Opening day photograph':`BLACKRIDGE MEDICAL COMPLEX\nOPENING DAY\n\nOn the reverse, in the chaplain’s hand:\nDedication — {MEMORIAL_DATE}.\nFor everyone who came through these doors.`,
  'A note on the discarded radio':`The static starts before anyone comes through the door. I used to think it was the wiring.\n\nIt is not the wiring.`,
  'Archive component transfer':`ELEVATOR INTERLOCK COMPONENTS\n\nFour shaped fuse plugs were removed for isolation testing. One was left in Archives, one in Pharmacy, one in Records, and one in Emergency Power Control.\n\nThe generator powers the motor. These four plugs authorize the transfer circuit. They can be fitted only to the board outside the final elevator.`,
 };
@@ -49,7 +49,7 @@ register('laundry','journal','stoveNote','Drying stove instructions','An oil-sta
 W.fixture('laundry','stove','Laundry drying stove',[84,72,13,20],'rear',{});
 register('laundry','stove','dryingStove','Drying stove','The enclosed firebox holds dry discarded cotton. A petrol lighter can ignite it.',{act:'warmStove'});
 W.fixture('wardnorth','windowLever','Window purge handle',[64,50,3,10],'rear',{art:'assets/props/window_lever.svg'});
-register('wardnorth','windowLever','windowLever','Window purge handle','A mechanical handle links three window sashes. A warning explains the danger.',{act:'windowLever'});
+register('wardnorth','windowLever','windowLever','Window purge handle','The purge shaft releases the seized linen-return supply compartment, but also opens three windows into the snowstorm.',{act:'windowLever'});
 for(let i=0;i<3;i++){
  W.fixture('wardnorth','coldWindow'+i,'Window '+(i+1)+' brass catch',[[18,35,11,28],[32,35,11,28],[77,35,11,28]][i],'rear',{windowIndex:i});
  register('wardnorth','coldWindow'+i,'coldWindow'+i,'Window '+(i+1)+' catch','A brass catch closes this window independently.',{act:'coldWindow',index:i});
@@ -85,6 +85,53 @@ desc=function(n){if(n==='Lighter')return 'Reusable petrol lighter. Combine with 
 W.fixture('stafflounge','television','Staff room television',[24,35,20,20],'rear',{art:'assets/props/crt.svg',television:true});
 register('stafflounge','television','staffTV','Staff television','An old CRT television hisses with interference.',{look:1,th:'The antenna socket is empty. The static continues anyway.'});
 const blockedExit=R.lobby.o.find(o=>o[0]==='sealedExit');if(blockedExit){blockedExit[1]='Barricaded main entrance';blockedExit[3]='A tipped filing cabinet and heavy waiting benches are wedged against the exterior entrance.';blockedExit[4].th='The furniture is jammed tight against the doors. The internal hospital passages are my only route.';}
+// Presentation and equipment terminology are data, not labels pasted over legacy items.
+ICON['Floppy Disk']='';STK['Floppy Disk']=3;ITEM_ART['Floppy Disk']='assets/items/floppy_disk.svg';
+const equipmentName=text=>String(text).replace(/Continuity Terminal/gi,'Terminal').replace(/Ink Ribbons?/g,m=>m.endsWith('s')?'Floppy Disks':'Floppy Disk').replace(/Field cache/gi,'Storage box');
+for(const [title,text]of Object.entries(DOCS))DOCS[title]=equipmentName(text);
+DOCS['Evelyn Shaw’s handover']=`EVELYN SHAW — HANDOVER\n\nDaniel Mercer in Isolation Treatment was still conscious when the ward closed. He understood every word. Do not treat him like an empty bed.\n\nKessler kept accepting Graves’s instructions after the evacuation was cancelled. I am going to look for Marian. If I do not return, leave this with the night attendant.`;
+DOCS['Judith Price’s medication record']=`JUDITH PRICE — DISPENSARY RECORD\n\n20:00 medication round suspended. The names on the charts no longer match the wristbands. I have locked the returned drugs away rather than administer an unverified dose.\n\nNo staff remain assigned to this dispensary. Do not follow an old rota into a closed ward.`;
+DOCS['Chaplain Letter']=`I refused Blackwell’s request to bless the continuity trial. I can still leave clean dressings for whoever reaches this room.\n\nThe reliquary holds emergency aid. There is no staff rota left to keep; I will leave the candles and the opening-day photograph where anyone can find them.`;
+DOCS['Staff Lounge Note']=DOCS['Staff Lounge Note'].replace('leave it with Evelyn Shaw','return it to her locker in Staff Residence');
+for(const [room,id,fixture,title,name,description]of [
+ ['stafflounge','shaw','note','Evelyn Shaw’s handover','Shaw’s abandoned handover','A nurse’s handwritten handover remains on the noticeboard. The lounge is empty.'],
+ ['pharmacy','judith','ribbon','Judith Price’s medication record','Judith’s medication record','A signed medication record lies at the empty clerk’s desk.']
+]){
+ const object=R[room].o.find(o=>o[0]===id);object[0]=id==='shaw'?'shawHandover':'judithRecord';object.splice(1,4,name,'',description,{doc:title});
+ WardScenes[room].fixtures=WardScenes[room].fixtures.filter(f=>f.id!==id);
+ WardScenes[room].fixtures.find(f=>f.id===fixture).ids.push(object[0]);
+}
+const coat=R.lobby.o.find(o=>o[0]==='coat');coat[1]='Flashlight in the coat pocket';coat[3]='A scratched flashlight protrudes from the abandoned coat. I can take it, or leave it here.';coat[4]={give:[['Flashlight',1]]};
+const plaque=R.archive.o.find(o=>o[0]==='cat');plaque[3]='A four-place brass lock marked “Dedication”. The year is crossed out on its small date plate.';
+for(const [room,fixture,id]of [['stafflounge','harness','loungeStorage'],['pharmacy','returns','pharmacyStorage'],['records','cabinet','recordsStorage']]){
+ register(room,fixture,id,'Storage box','An intact hospital storage compartment. Stored equipment can be retrieved at any storage box.',{act:'box'});
+}
+register('wardnorth','trolley','purgeSupplies','Emergency linen-return compartment','The purge shaft has released a sealed maintenance pouch. Close the windows before opening it.',{give:[['Handgun Ammo',8],['Battery',1]],after:'windowHazardResolved'});
+W.chargerStatus=function(id){
+ if(!['emergencyDynamo','handCharge','charger'].includes(id))return null;
+ if(!S||!has('Flashlight'))return {available:false,label:'Battery charger · no flashlight',reason:S?.ob.coat==='done'?'Retrieve the flashlight from a Storage box before charging.':'Take the flashlight from the coat beside reception first.'};
+ if(S.f.flashlightDropped)return {available:false,label:'Battery charger · flashlight dropped',reason:'Recover the flashlight from the East Corridor floor first.'};
+ if(id==='charger'){
+  if(!S.f.power||S.f.powerOut)return {available:false,label:'Battery charger · no power',reason:'The generator must be running.'};
+  if((S.f.generatorChargeUses||0)>=2)return {available:false,label:'Battery charger · empty',reason:'Both reserve cells have been used.'};
+  if(S.bat>=90)return {available:false,label:'Battery charger · charge sufficient',reason:'No recharge is needed.'};
+ }else{
+  if(S.bat>=12)return {available:false,label:'Emergency battery charger · reserve sufficient',reason:'This hand charger is only for a nearly empty flashlight.'};
+  if(S.t-(S.f.lastDynamo??-100)<50)return {available:false,label:'Emergency battery charger · cooling',reason:'The charging handle must cool before another use.'};
+ }
+ return {available:true,label:id==='charger'?'Battery charger':'Emergency battery charger',reason:''};
+};
+W.objectAvailable=o=>W.chargerStatus(o[0])?.available!==false;
+for(const [room,r]of Object.entries(R))for(const o of r.o){
+ o[1]=equipmentName(o[1]);o[3]=equipmentName(o[3]);if(o[4].give)o[4].give=o[4].give.map(([name,count])=>[canonicalItem(name),count]);
+ if(o[4].act==='save')o[1]='Terminal';if(o[4].act==='box')o[1]='Storage box';if(o[0]==='finalRibbon')o[1]='Emergency Floppy Disk';
+ if(['emergencyDynamo','handCharge'].includes(o[0])){o[1]='Emergency battery charger';o[3]='A hand-powered charger for a nearly empty flashlight. Slow turns restore a small emergency reserve; the handle needs time to cool.';}
+}
+for(const bp of Object.values(WardScenes))for(const f of bp.fixtures){f.label=equipmentName(f.label);if(f.ids.some(id=>W.find(id)?.[4].act==='save'))f.label='Terminal';if(f.ids.length===1&&W.find(f.ids[0])?.[4].act==='box')f.label='Storage box';if(f.ids.some(id=>['emergencyDynamo','handCharge'].includes(id)))f.label='Emergency battery charger';}
+const revisedDescription=desc;desc=function(name){if(canonicalItem(name)==='Floppy Disk')return 'One blank 3½-inch disk. Records your progress at a Terminal.';return revisedDescription(name);};
+// Names follow the painted containers in the authored rear views.
+for(const [room,id,label]of [['security','drawer','Security filing drawer'],['stafflounge','harness','Staff locker'],['pharmacy','returns','Returns box'],['pharmacy','ribbon','Clerk filing drawer'],['room12','drawer','Treatment cabinet drawer'],['archive','fuse','Equipment cabinet']])WardScenes[room].fixtures.find(f=>f.id===id).label=label;
+R.stafflounge.o.find(o=>o[0]==='harness')[3]='A durable medical utility harness hangs inside the open staff locker.';
 const baselineObjects=Object.fromEntries(Object.entries(R).map(([r,v])=>[r,structuredClone(v.o)]));
 const baselineScenes=structuredClone(WardScenes);
 const configure=configureWorld;
@@ -110,6 +157,9 @@ configureWorld=function(seed,preserve=true){
   if(objects.some(o=>o[4].give)&&!/key|negative|plank/.test(f.id))f.drawer=true;
   if(f.drawer)f.collectibles=[];
  }
+ const coatFixture=WardScenes.lobby.fixtures.find(f=>f.id==='coat');coatFixture.drawer=false;coatFixture.label='Flashlight in the coat pocket';coatFixture.collectibles=[{id:'coat',asset:'assets/items/flashlight.png',rect:[97,39,2.8,5]}];
+ for(const r of Object.values(R))for(const o of r.o){if(o[4].give)o[4].give=o[4].give.map(([name,count])=>[canonicalItem(name),count]);o[1]=equipmentName(o[1]);o[3]=equipmentName(o[3]);}
+ S.inv=normalizeItems(S.inv);S.box=normalizeItems(S.box);
  for(const bp of Object.values(WardScenes))for(const f of bp.fixtures)f.label=f.label.replace(/Rain-streaked/gi,'Snow-covered');
  R.lobby.d='Snow drifts against the dark glass. Battery-backed emergency lamps pulse above abandoned reception. Black mould blooms around the vents; a dark drag trail ends beneath the desk.';
  for(const r of Object.values(R)){

@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "intro leaves hands empty; coat pickup grants and removes the actual flashlight",
+    "legacy ribbons migrate to stackable Floppy Disks; an actual Terminal save consumes exactly one disk",
+    "nurses exist as evidence; invisible doctor pop-ups and solved-chapel instruction text are retired",
+    "optional purge supplies unlock only after all catches close and cannot be farmed or reopened",
+    "emergency charger availability tracks reserve and cooldown; exhausted generator charger is marked empty; storage locations increased"
+  ],
+  "javascript_errors": []
+}

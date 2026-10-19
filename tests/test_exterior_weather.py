@@ -23,11 +23,11 @@ with sync_playwright() as p:
  # Every catch changes only its own native window opening. The raised sash
  # has a different rail position, so the snow cells follow the open state too.
  q.evaluate("WardWinter.windowState=()=>S.windows;S.windows={triggered:true,closed:[false,false,false]}")
- q.evaluate("""async()=>{S.room='wardnorth';S.roomView='rear';let im=new Image();im.src='/assets/reverse/wardnorth.webp';await im.decode();document.querySelector('#base').getContext('2d').drawImage(im,0,0,1448,1086);WardWinter.roomViewEffects.draw(1000)}""");q.wait_for_timeout(300)
+ q.evaluate("""async()=>{S.room='wardnorth';S.roomView='rear';let im=new Image();im.src='/assets/room_views/wardnorth_rear.webp';await im.decode();document.querySelector('#base').getContext('2d').drawImage(im,0,0,1448,1086);WardWinter.roomViewEffects.draw(1000)}""");q.wait_for_timeout(300)
  window_checks=[]
  for closed in [[False,False,False],[True,False,False],[True,True,False],[True,True,True]]:
   q.evaluate('closed=>{S.windows.closed=closed;WardWinter.roomViewEffects.draw(1000)}',closed)
-  alpha=q.evaluate("[260,468,1128].map(x=>WardWinter.roomViewEffects.canvas.getContext('2d').getImageData(x,324,1,1).data[3])")
+  alpha=q.evaluate("[[5.5,26.75],[13.9,31.75],[20.6,35.3]].map(([x,y])=>WardWinter.roomViewEffects.canvas.getContext('2d').getImageData(Math.round(x/100*1448),Math.round(y/100*1086),1,1).data[3])")
   assert all(a==255 if not is_closed else a<100 for a,is_closed in zip(alpha,closed)),(closed,alpha)
   window_checks.append({'closed':closed,'rail_pixel_alpha':alpha})
  q.screenshot(path=str(ROOT/'tests/results/native-windows-resolved.png'))

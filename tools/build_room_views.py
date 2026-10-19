@@ -7,6 +7,7 @@ the whole image and project targets into the same fitted rectangle.
 from pathlib import Path
 import hashlib
 import json
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 EXTRA_FIXTURES = {
@@ -46,6 +47,13 @@ def main():
             assert definition['reviewed'], f'Unreviewed view: {room}/{view}'
             path = ROOT / definition['asset']
             assert path.is_file(), f'Missing room artwork: {path}'
+            with Image.open(path) as art:
+                # Image generation can produce a one-pixel native aspect variant.
+                # Record the real source dimensions; never resize to force a label.
+                width, height = art.size
+                assert width >= 1400 and height >= 1000, (room, view, art.size)
+                assert abs(width / height - 4 / 3) < .005, (room, view, art.size)
+                definition['nativeSize'] = [width, height]
             digest = hashlib.sha256(path.read_bytes()).hexdigest()
             assert digest not in digests, f'Reused room image: {room}/{view}'
             digests.add(digest)

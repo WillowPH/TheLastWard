@@ -33,13 +33,17 @@ with sync_playwright() as p:
  def close():
   for _ in range(12):
    if not page.locator('#m .md').count():
+    recovery=page.get_by_role('button',name='Dry off and warm up',exact=True)
+    if recovery.count() and recovery.is_visible():recovery.click()
     if ev('!!S.sceneFocus'):ev('wardCloseFocus()')
     if ev('S.room==="eastcorridor"&&S.f.flashlightDropped'):
      aim_point('fixture:dropped-light');page.get_by_role('button',name='Recover dropped flashlight',exact=True).click()
     if ev('S.room==="eastcorridor"&&S.f.sprinklerTriggered&&!S.f.sprinklerStopped'):
      aim_point('fixture:valve');page.locator('[data-fixture=valve]').click();page.locator("button[onclick=\"wardFixtureAction('staffSprinkler')\"]").click()
     return
-   if ev('!!S.f.pursuerEncounter'):ev("escapePursuer('retreat')")
+   if ev('!!S.f.pursuerEncounter'):
+    choice='shoot' if ev('(S.f.pursuerEscapes||0)>0&&W[S.eq]&&has(S.eq)&&(S.ld[S.eq]||0)>0') else 'retreat'
+    page.locator('button[onclick="escapePursuer(\''+choice+'\')"]').click()
    elif ev('!!S.hallCombat'):ev("wardResolveFalseEncounter('hold')")
    elif page.get_by_role('button',name='Call his name',exact=True).count():page.get_by_role('button',name='Call his name',exact=True).click()
    elif page.get_by_role('button',name='Struggle past · risk injury',exact=True).count():
@@ -63,9 +67,10 @@ with sync_playwright() as p:
    skip=page.get_by_role('button',name='Skip transition',exact=True)
    ev("[...document.querySelectorAll('button')].find(b=>b.textContent.trim()==='Skip transition')?.click()")
    page.wait_for_timeout(360)
-  raise AssertionError('Navigation did not reach '+target)
+  (OUT/'winter-route-failure.json').write_text(ev('JSON.stringify(S,null,2)'));page.screenshot(path=str(OUT/'winter-route-failure.png'));raise AssertionError(('Navigation did not reach '+target,ev('({room:S.room,previous:S.prev,hp:S.hp,pursuer:S.pursuer,encounter:S.f.pursuerEncounter,modal:document.querySelector("#m .md")?.innerText,log:S.log})')))
  def use(id):
   close()
+  if ev('id=>WardWinter.chargerStatus(id)?.available===false',id):return
   if ev('WardNavigation.isDark(S.room)&&!lit()'):
    if ev('S.bat<8&&has("Battery")'):ev("useBat('Battery',false)")
    if ev('!S.lightOn'):ev('toggleLight()')
@@ -74,6 +79,8 @@ with sync_playwright() as p:
   page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
   aim_point('fixture:'+f['id'])
   click_visible('[data-fixture="'+f['id']+'"]')
+  choice=page.locator('button[onclick="wardSelectFinding(\''+id+'\')"]')
+  if choice.count():choice.click()
   button=page.locator('button[onclick="wardFixtureAction(\''+id+'\')"]')
   if button.count():button.click()
  def take(id,name):
@@ -85,12 +92,18 @@ with sync_playwright() as p:
    else:break
   assert ev('n=>has(n)',name),('Pickup failed',id,name,ev('S.inv'),page.locator('#m').inner_text())
   close()
+ def combine(a,b):
+  close()
+  page.get_by_role('button',name='Select '+a,exact=True).click()
+  page.locator('#inventoryCarryActions').get_by_role('button',name='Combine',exact=True).click()
+  page.get_by_role('button',name='Combine with '+b,exact=True).click()
+  close()
  def store(names):
   for n in names:
    i=ev('n=>S.inv.findIndex(x=>x.n===n)',n)
    if i>=0:ev('i=>store(i)',i);close()
  def note(label):
-  state=ev('({room:S.room,hp:S.hp,sanity:S.san,charge:S.bat,visited:Object.keys(S.vis).length,remaining:WardChapter.requirements()})')
+  state=ev('({build:WardChapter.BUILD,room:S.room,hp:S.hp,sanity:S.san,charge:S.bat,visited:Object.keys(S.vis).length,remaining:WardChapter.requirements()})')
   report.append({'step':label,**state});print(label,state,flush=True)
  seeds=['winter-standard-a','winter-story-complete']
  for seed in seeds:
@@ -99,10 +112,10 @@ with sync_playwright() as p:
   page.get_by_role('button',name='BEGIN INVESTIGATION').click()
   ev('nextIntro();nextIntro();nextIntro()')
   ev('seed=>{S.seed=seed;S.rngState=hashSeed(seed);S.puzzles=generatePuzzles();configureWorld(seed,false);placeTelephones(seed);render()}',seed)
-  use('payphone');close();take('desk','Cabinet Key')
+  assert not ev('has("Flashlight")');take('coat','Flashlight');use('payphone');close();take('desk','Cabinet Key')
   move('security');use('clara');close();use('ros');close();use('winterJournal');close();use('mapboard');close()
   take('drw','Staff Access Card');take('utilityKnife','Utility Knife');take('petrolLighter','Lighter');take('lighterFluid','Lighter Fluid')
-  ev('invModal()');page.locator('#combineA').select_option(str(ev('S.inv.findIndex(x=>x.n==="Lighter")')));page.locator('#combineB').select_option(str(ev('S.inv.findIndex(x=>x.n==="Lighter Fluid")')));page.get_by_role('button',name='Combine',exact=True).click();close();assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
+  combine('Lighter','Lighter Fluid');assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
   move('ward');take('nightPistol','Handgun');take('pistolRounds','Handgun Ammo');ev("equipWeapon('Handgun');reload()")
   move('laundry');use('pouch');close();assert ev('carryLimit()===10')
   move('room12');take('cab','Archive Key');take('shf2','Trauma Dressing');use('file');close()
@@ -118,7 +131,7 @@ with sync_playwright() as p:
   # Collect the Archives interlock plug while this early route is still clear.
   # Returning for it after Subject X appears can leave the shelf physically blocked.
   move('archive');take('elevatorFuseA','Rook Interlock Fuse');move('generator')
-  move('stafflounge');use('harness');close();use('shaw');close();use('loungeNote');close();assert ev('carryLimit()===12')
+  move('stafflounge');use('harness');close();use('shawHandover');close();use('loungeNote');close();assert ev('carryLimit()===12')
   move('residence');use('dia');close();use('brk')
   for color in ev('S.puzzles.breaker'):page.get_by_role('button',name=color,exact=True).click()
   if page.get_by_role('button',name='Take it',exact=True).count():page.get_by_role('button',name='Take it',exact=True).click()
@@ -133,7 +146,7 @@ with sync_playwright() as p:
   move('records');close();use('ledger');close();assert ev('!!S.f.researcherLastRoomSeen');take('elevatorFuseC','Knight Interlock Fuse')
   move('observation');close();assert ev('!!S.f.plexiIncidentSeen');take('dr','Encrypted Drive');use('glassNotice');close()
   move('specimen');take('dev','Developing Fluid')
-  ev('invModal()');page.locator('#combineA').select_option(str(ev('S.inv.findIndex(x=>x.n==="Photographic Negative")')));page.locator('#combineB').select_option(str(ev('S.inv.findIndex(x=>x.n==="Developing Fluid")')));page.get_by_role('button',name='Combine',exact=True).click();close();assert ev('!!S.f.photo')
+  combine('Photographic Negative','Developing Fluid');assert ev('!!S.f.photo')
   move('coldstore');use('coldlog');close();move('isolation');use('isolog');close()
   move('archive');take('elevatorFuseA','Rook Interlock Fuse');use('cat');page.locator('#cin').fill(ev('S.puzzles.memorialCode'));page.get_by_role('button',name='Enter',exact=True).click();close()
   move('chapel');use('let');close();move('pharmacy');take('elevatorFuseB','Bishop Interlock Fuse')
