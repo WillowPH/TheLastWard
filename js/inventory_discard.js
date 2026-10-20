@@ -155,7 +155,7 @@ document.addEventListener('click',event=>{if(!selected||event.target.closest?.('
 const baseCarry=renderUnifiedInventory;renderUnifiedInventory=function(){const result=baseCarry();syncCarryActions();return result;};
 WW.inventoryDirect={pairAction,selection:()=>({index:selectionIndex(),combining:combineArmed}),sync:syncCarryActions};
 function manageButton(){const heading=document.querySelector('.unified-inventory-panel .panel-heading');if(!heading||heading.querySelector('.inventory-manage-button'))return;const button=document.createElement('button');button.type='button';button.className='btn inventory-manage-button';button.textContent='Manage';button.setAttribute('aria-label','Manage carried items');button.onclick=()=>invModal();heading.append(button);}
-const autoSpent=new Set([...accessItems,'Power Fuse','Photographic Negative','Developing Fluid','Developed Photograph']);
+const autoSpent=new Set([...accessItems,'Power Fuse','Photographic Negative','Developing Fluid','Developed Photograph','Lighter','Lighter Fluid']);
 function discardSpent(){
  if(!usable()||S.m>1)return [];
  const discarded=S.inv.filter(slot=>autoSpent.has(slot.n)&&policy(slot.n).spent);

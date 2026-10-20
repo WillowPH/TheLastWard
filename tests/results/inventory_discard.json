@@ -4,7 +4,7 @@
     "shared keys stay protected until every matching lock is open; tools and drive retain their additional task guards",
     "mouse-only Manage \u2192 Inspect \u2192 Discard requires confirmation; Keep cancels; one confirmed discard frees exactly one slot",
     "supply stacks have an explicit permanent-loss warning; stale/closed confirmations and protected-item requests cannot remove items",
-    "discarded inventory and freed capacity persist through actual Terminal saves and both v5/v6 reload migrations",
+    "discarded inventory and freed capacity persist through actual Terminal saves and all v5/v6/v7 reload migrations",
     "a dark search writes its hint to Thoughts without a modal or narration replacement; its target remains usable after lighting",
     "empty battery and unpowered charger feedback use Thoughts and clear when resolved; ordinary observations retain narration",
     "missing named keys/tools use Thoughts while door labels remain specific; successful generator restoration keeps its story scene",

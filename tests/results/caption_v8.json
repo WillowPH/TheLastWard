@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "captions have no backing fill, retain readable fitted text and overlay native artwork on desktop/tablet; no view arrows",
+    "a remaining ammunition container has etched supply brackets which retire once its ammunition is taken"
+  ],
+  "javascript_errors": []
+}

@@ -1,4 +1,4 @@
-"""Build original quiet hospital ambience, breath foley and the item pickup cue.
+"""Build original quiet hospital ambience, heartbeat foley and the item pickup cue.
 
 This is offline sound design, not a runtime synthesizer. No voice or third-party
 game samples are used. NumPy/SciPy and ffmpeg are build-only dependencies.
@@ -106,6 +106,39 @@ def breathing(periods, inhale_share, intensity, seed):
     return result * intensity
 
 
+def heartbeat(bpm, beats, rest, intensity, seed):
+    """Muffled original lub-dub pulses, separated by a quiet recovery interval.
+
+    A healthy fear response is a short burst; injury has a restrained condition
+    rhythm. The two lobes have different resonances, soft attacks and subtle
+    beat-to-beat variation. No respiratory hiss or pain sample is included.
+    """
+    rng = np.random.default_rng(seed)
+    interval = 60 / bpm
+    count = int((.24 + interval * beats + rest) * RATE)
+    result = np.zeros(count)
+    pulse_length = int(.28 * RATE)
+    t = np.arange(pulse_length) / RATE
+    for i in range(beats):
+        start = .24 + i * interval + rng.uniform(-.012, .012)
+        strength = rng.uniform(.87, 1.05) * intensity
+        for offset, frequency, level, decay in [(0, 66, 1, 24), (.15, 88, .63, 32)]:
+            attack = 1 - np.exp(-t * 115)
+            envelope = attack * np.exp(-t * decay)
+            body = np.sin(2 * np.pi * (frequency * t - 14 * t ** 2))
+            body += .12 * np.sin(2 * np.pi * frequency * 1.91 * t + .2)
+            raw = rng.standard_normal(pulse_length)
+            soft = signal.sosfilt(signal.butter(2, [65, 240], fs=RATE,
+                                               btype='band', output='sos'), raw)
+            soft /= max(np.sqrt(np.mean(soft ** 2)), 1e-8)
+            pulse = (body * .88 + soft * .12) * envelope * strength * level
+            at = int((start + offset) * RATE)
+            result[at:at + pulse_length] += pulse[:max(0, min(pulse_length, count - at))]
+    # Only genuine rest sits at the loop boundary. Avoid a constant bass drone
+    # and never make a loop restart sound like a damage impact.
+    return signal.sosfilt(signal.butter(2, 280, fs=RATE, output='sos'), result)
+
+
 def room_hum(seconds, machinery=False):
     count = int(seconds * RATE)
     t = np.arange(count) / RATE
@@ -149,6 +182,9 @@ DESIGNS = {
     'breath_calm': (lambda: breathing([5.7, 6.1, 5.4, 5.9, 6.3, 5.6, 6.0, 5.5, 6.2, 5.8, 5.3, 6.0], .35, .043, 461998), 'Twelve quiet irregular 5.3–6.3 second close-air cycles: nasal inhale, warmer mouth exhale, asymmetric airflow and changing rests. No voice/grunt recording.'),
     'breath_caution': (lambda: breathing([3.8, 4.1, 3.6, 3.9, 4.2, 3.7, 4.0, 3.5, 3.8, 4.15, 3.65, 3.95], .36, .073, 471998), 'Twelve moderately paced irregular 3.5–4.2 second cycles with independent inhale/exhale resonances and breathing depth.'),
     'breath_danger': (lambda: breathing([2.9, 2.65, 3.05, 2.8, 3.1, 2.7, 2.95, 2.6, 2.85, 3.0, 2.75, 2.9], .38, .105, 481998), 'Twelve strained irregular 2.6–3.1 second cycles: audible close breath with short rests, no voiced groans or pain syllables.'),
+    'heartbeat_stress': (lambda: heartbeat(84, 4, 5.7, .21, 811998), 'Original short four-beat muffled lub-dub fear response at 84 BPM, followed by 5.7 seconds of quiet. Only selected with an immediate live threat, not low sanity alone.'),
+    'heartbeat_caution': (lambda: heartbeat(76, 6, 4.1, .23, 821998), 'Original restrained six-beat dual-thump condition pulse at 76 BPM, with 4.1 seconds of recovery silence between bursts. No breath or impact recording.'),
+    'heartbeat_danger': (lambda: heartbeat(98, 12, 2.7, .28, 831998), 'Original deeper twelve-beat danger pulse at 98 BPM with distinct soft lub-dub lobes and 2.7 seconds of quiet recovery. No respiratory noise or hurt syllables.'),
     'hospital_hum': (lambda: room_hum(40), 'Quiet 40 second transformer/ventilation bed with crossfaded air and steady 50 Hz mains harmonics.'),
     'hospital_machine': (lambda: room_hum(40, True), '40 second fuller low machine/ventilation bed, no recurrent impacts or rattles.'),
     'exterior_wind': (lambda: winter_wind(36), '36 second crossfaded low winter wind with slow broad gusts, no rhythmic percussive loop.'),

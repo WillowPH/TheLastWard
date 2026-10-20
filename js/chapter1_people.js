@@ -29,7 +29,7 @@ Someone added: the mortuary register was checked. She was never admitted there.`
 const originalDocumentText=docText;
 docText=function(title){let text=originalDocumentText(title);if(title==='Resident Diary')text+='\n\nMarian Vale left her locket here before a security escort took her toward the service lift. She was alive. The public roster was changed before the alarm.';return text;};
 const baseCheckpoint=loadCheckpoint;
-loadCheckpoint=function(){baseCheckpoint();if(S){configureWorld(S.seed,true);placeTelephones(S.seed);S.f.hidingRoom=null;S.sceneFocus=null;render()}};
+loadCheckpoint=function(){baseCheckpoint();if(S){configureWorld(S.seed,true);S.buildId=WardChapter.BUILD;placeTelephones(S.seed);S.f.hidingRoom=null;S.sceneFocus=null;render()}};
 const basePursuitCheckpoint=loadFirstFloorCheckpoint;
 loadFirstFloorCheckpoint=function(){basePursuitCheckpoint();if(S){placeTelephones(S.seed);S.f.hidingRoom=null;S.sceneFocus=null;render()}};
 const inheritedAct=act;

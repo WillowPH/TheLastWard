@@ -107,8 +107,8 @@ with sync_playwright() as p:
     assert all(before[k]==after[k] for k in ['left','bottom','height','aspect','source']),(before,after)
     assert after['hp']<before['hp'] and after['enemy']==before['enemy'] and after['down']
     page.screenshot(path=str(ROOT/'tests/results/actor_scale_struggle.png'))
-    page.evaluate("go('security',true)")
-    page.wait_for_function("S.room==='security'&&WardWinter.roomViewRenderer()?.loaded")
+    page.evaluate("go('lobby',true)")
+    page.wait_for_function("S.room==='lobby'&&WardWinter.roomViewRenderer()?.loaded")
     page.evaluate("go('eastcorridor',true)")
     page.wait_for_function("S.room==='eastcorridor'&&WardWinter.roomViewRenderer()?.loaded")
     assert page.locator('.winter-actor.infected').count()==1

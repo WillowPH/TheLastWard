@@ -772,6 +772,16 @@
           6
         ],
         "reviewed": true
+      },
+      "rearTrolley": {
+        "view": "rear",
+        "rect": [
+          90,
+          55,
+          16,
+          27
+        ],
+        "reviewed": true
       }
     },
     "threat": [
@@ -1083,6 +1093,16 @@
           50,
           10,
           5
+        ],
+        "reviewed": true
+      },
+      "rearTransferCabinet": {
+        "view": "rear",
+        "rect": [
+          26,
+          44,
+          11,
+          30
         ],
         "reviewed": true
       }
@@ -1652,6 +1672,16 @@
           35,
           12,
           24
+        ],
+        "reviewed": true
+      },
+      "rearServiceRack": {
+        "view": "rear",
+        "rect": [
+          82,
+          45,
+          15,
+          42
         ],
         "reviewed": true
       }
@@ -2557,6 +2587,16 @@
           45,
           5,
           6
+        ],
+        "reviewed": true
+      },
+      "rearDesk": {
+        "view": "rear",
+        "rect": [
+          8,
+          54,
+          14,
+          28
         ],
         "reviewed": true
       }

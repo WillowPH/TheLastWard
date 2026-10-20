@@ -1,7 +1,7 @@
 /* Real enemies retain solid silhouettes throughout an approach. */
 .winter-actor,.winter-actor.approaching{opacity:1!important;animation:ward-solid-breathe 4s ease-in-out infinite}
 .room-view-targets .winter-actor,.room-view-targets .winter-actor.approaching{filter:brightness(var(--enemy-light,.86)) saturate(.85)}
-.winter-actor .winter-walk-sheet,.winter-actor .winter-enemy-still{opacity:1!important;filter:url(#ward-solid-enemy) drop-shadow(2px 8px 6px #0009)}
+.winter-actor .winter-walk-sheet,.winter-actor .winter-enemy-still{opacity:1!important;filter:drop-shadow(2px 8px 6px #0009)}
 .winter-actor .winter-enemy-still{display:block;width:100%;height:100%;object-fit:contain}
 .winter-actor.enemy-orderly,.winter-actor.enemy-breach{aspect-ratio:2/3}.winter-actor.enemy-nurse{aspect-ratio:.5}
 .winter-actor:before{left:34%;right:31%;bottom:1%;height:3%;filter:blur(4px)}
@@ -18,7 +18,7 @@
 .room-view-targets .winter-falling-enemy{width:auto;z-index:200;pointer-events:none;transform:translateX(-50%);transform-origin:50% 98%;filter:brightness(var(--enemy-light,.86)) saturate(.85);animation:ward-grounded-fall 1s ease-in forwards}
 .winter-falling-enemy .winter-walk-sheet{animation:none!important}
 .winter-falling-enemy .winter-enemy-still{display:block;width:100%;height:100%;object-fit:contain}
-.winter-falling-enemy .winter-walk-sheet,.winter-falling-enemy .winter-enemy-still{filter:url(#ward-solid-enemy) drop-shadow(2px 8px 6px #0009)}
+.winter-falling-enemy .winter-walk-sheet,.winter-falling-enemy .winter-enemy-still{filter:drop-shadow(2px 8px 6px #0009)}
 @keyframes ward-grounded-fall{0%{transform:translateX(-50%) rotate(0);opacity:1}75%{transform:translateX(-50%) rotate(78deg);opacity:1}100%{transform:translateX(-50%) rotate(82deg);opacity:0}}
 @keyframes ward-grounded-fall-reduced{to{opacity:0}}
 @keyframes ward-solid-breathe{0%,100%{transform:translateX(-50%) rotate(-.35deg)}50%{transform:translateX(-50%) rotate(.35deg) scaleY(1.008)}}
@@ -26,3 +26,7 @@
 .c1-reduced-motion .room-view-targets .winter-falling-enemy{animation:ward-grounded-fall-reduced .4s ease-out forwards}
 @media(prefers-reduced-motion:reduce){.winter-actor{animation:none!important}}
 @media(prefers-reduced-motion:reduce){.room-view-targets .winter-falling-enemy{animation:ward-grounded-fall-reduced .4s ease-out forwards}}
+
+/* Solid normalized textures use normal alpha compositing, never screen blend. */
+.winter-actor,.winter-actor .winter-walk-sheet,.winter-actor .winter-enemy-still{mix-blend-mode:normal!important}
+.room-view-frame.peek-adapted .winter-actor{filter:brightness(.72) saturate(.85)!important}

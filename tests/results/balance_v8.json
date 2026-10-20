@@ -1,0 +1,18 @@
+{
+  "checks": [
+    "Story/Normal/Nightmare have5/9/11finite authored infected, safe first firearm access and nonstacking finite ammunition budgets",
+    "two actual knife attacks cannot kill a fresh infected and permit its close-range counterattacks",
+    "struggling costs14HP against a fresh Normal infected, knocks it down without killing and preserves its return",
+    "three deliberate handgun shots spend earned round capacity and interrupt an approach; gunfire and elapsed time never spawn extra infected",
+    "real Subject X shots require2/3/4 handgun hits or1/2/2 heavy shells onStory/Normal/Nightmare, with2/4/5HP nonstagger counters",
+    "legacy continued saves retain dead IDs and never repopulate cleared or visited homes",
+    "plain retreat counters cannot clear the final gate: Subject X breaches the shelter and three real handgun shots create the optional-shotgun opening",
+    "a first-ever final knockdown can enter the lift and records exactly one real escape, avoiding a circular escape gate"
+  ],
+  "ammo_totals": [
+    91,
+    72,
+    58
+  ],
+  "javascript_errors": []
+}

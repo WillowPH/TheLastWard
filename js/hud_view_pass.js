@@ -20,12 +20,21 @@ WW.findingIcon=function(object){const id=object?.[0];if(id==='cam'||id==='rep2')
 WW.sceneUI.locker=function(){
  const root=$('sceneFocusOverlay');if(!root||!S)return;
  const peek=!!S.f.lockerPeeking,type=S.f.hidingType||'locker',p=initPursuer();
- const gaps=type==='crates'?[[58,16,2.4,45],[64,16,1.7,45],[68,20,1.1,34]]:type==='desk'?[[22,48,58,13]]:[[25,21,50,3],[25,28,50,3],[25,35,50,3]];
+ // Openings are authored relative to the fitted room, rather than the whole
+ // HUD. The old high, hairline vents looked onto ceiling/matte and missed a
+ // threat's body. These remain physical slits, not a miniature full-room view.
+ const native=type==='crates'?[[40,25,4,48],[49,25,6,48],[60,28,4,42]]:type==='desk'?[[16,48,68,21]]:[[23,24,54,6],[23,40,54,6],[23,56,54,6]];
+ const host=$('interactiveScene').getBoundingClientRect(),frame=document.querySelector('.room-view-frame'),art=frame?.getBoundingClientRect()||host;
+ const gaps=native.map(([x,y,w,h])=>[(art.left-host.left+art.width*x/100)/host.width*100,(art.top-host.top+art.height*y/100)/host.height*100,w*art.width/host.width,h*art.height/host.height]);
+ WW.peekApertures=peek?gaps.map(v=>v.slice()):[];
+ WW.roomViewRenderer?.()?.peek(peek);frame?.classList.toggle('peek-adapted',peek);
  const holes=peek?gaps.map(([x,y,w,h])=>'M'+x+' '+y+'h'+w+'v'+h+'h-'+w+'Z').join(' '):'';
  const rims=peek?gaps.map(([x,y,w,h])=>'<path d="M'+x+' '+(y+h)+'h'+w+'" stroke="#8e877b" stroke-opacity=".4" stroke-width=".22"/>').join(''):'';
  root.classList.remove('hid');root.innerHTML='<div class="c1-locker panorama-locker hiding-physical '+(peek?'peeking':'closed')+'" data-cover="'+e(type)+'"><svg class="panorama-hiding-mask" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path fill="#020202" fill-rule="evenodd" d="M0 0H100V100H0Z '+holes+'"/>'+rims+'</svg><footer><h3>'+(peek?'Through the '+(type==='locker'?'locker vents':type==='crates'?'gaps between the crates':'gap beneath the desk'):'Inside the hiding place')+'</h3><p>'+e(p.active&&p.room===S.room?'Heavy boots are in this room.':'Listen beyond the door.')+'</p><div><button class="btn" onclick="wardStayHidden()">Stay hidden</button><button class="btn" onclick="wardPeek()">'+(peek?'Stop peeking':'Peek')+'</button><button class="btn" onclick="wardExitHiding()">Exit</button></div></footer></div>';
  const targets=document.querySelector('.room-view-targets');if(targets)targets.inert=true;
 };
+const focusWithoutPeek=WW.sceneUI.focus;
+WW.sceneUI.focus=function(...args){WW.roomViewRenderer?.()?.peek(false);document.querySelector('.room-view-frame')?.classList.remove('peek-adapted');WW.peekApertures=[];return focusWithoutPeek.apply(this,args);};
 
 // UI-only animation: movement and combat authorization stay in sceneDoorTravel.
 // No timers finish a doorway while paused, and a pause preserves animation time.

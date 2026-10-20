@@ -12,9 +12,16 @@ const interactionBase=interaction;interaction=function(value){interactionBase(va
 
 const thoughtBlock=document.querySelector('.scene-thought'),thoughtDisplay=document.createElement('p'),thoughtControls=document.createElement('div');thoughtDisplay.id='thoughtCaptionText';thoughtControls.id='thoughtCaptionControls';thoughtControls.className='caption-controls';thoughtControls.innerHTML='<button type="button" onclick="WardWinter.readCurrentThought()">Read in Journal</button>';thoughtBlock.append(thoughtDisplay,thoughtControls);let thoughtText='';
 function paintThought(){if(!S)return;const value=thought.textContent.trim();if(value!==thoughtText){thoughtText=value;S.thoughtHistory=S.thoughtHistory||[];if(value&&!S.thoughtHistory.some(v=>v.text===value)){S.thoughtHistory.push({room:S.room,text:value});S.thoughtHistory=S.thoughtHistory.slice(-40);}}
- const font=getComputedStyle(thoughtDisplay),line=parseFloat(font.lineHeight)||24,height=Math.max(line,thoughtBlock.clientHeight-48),width=thoughtDisplay.clientWidth||thoughtBlock.clientWidth-44,maxLines=Math.max(1,Math.floor(height/line));
- const sentences=value.match(/[^.!?]+[.!?]+(?:[”’"']|$)?|[^.!?]+$/g)||[value];let brief=sentences[0]?.trim()||value;for(let i=1;i<sentences.length;i++){const next=brief+' '+sentences[i].trim();if(wrap(next,width,maxLines).length>1)break;brief=next;}
- while(wrap(brief,width,maxLines).length>1&&brief.includes(' '))brief=brief.slice(0,brief.lastIndexOf(' ')).replace(/[.…]+$/,'')+'…';thoughtDisplay.textContent=brief;thoughtControls.hidden=brief===value;thoughtDisplay.dataset.fullText=value;
+ const font=getComputedStyle(thoughtDisplay),line=parseFloat(font.lineHeight)||24,style=getComputedStyle(thoughtBlock),label=thoughtBlock.querySelector(':scope>span'),labelStyle=getComputedStyle(label);
+ const available=thoughtBlock.clientHeight-parseFloat(style.paddingTop)-parseFloat(style.paddingBottom)-label.getBoundingClientRect().height-(parseFloat(labelStyle.marginTop)||0)-(parseFloat(labelStyle.marginBottom)||0);
+ function fits(candidate,height){thoughtDisplay.textContent=candidate;return thoughtDisplay.getBoundingClientRect().height<=height+1&&thoughtDisplay.scrollHeight<=height+1;}
+ thoughtControls.hidden=true;
+ if(fits(value,available)){thoughtDisplay.dataset.fullText=value;return;}
+ thoughtControls.hidden=false;const room=Math.max(line,available-thoughtControls.getBoundingClientRect().height);
+ const sentences=value.match(/[^.!?]+[.!?]+(?:[”’"']|$)?|[^.!?]+$/g)||[value];let brief=sentences[0]?.trim()||value;
+ for(let i=1;i<sentences.length;i++){const next=brief+' '+sentences[i].trim();if(!fits(next,room))break;brief=next;}
+ while(!fits(brief,room)&&brief.includes(' '))brief=brief.slice(0,brief.lastIndexOf(' ')).replace(/[.…]+$/,'')+'…';
+ thoughtDisplay.textContent=brief;thoughtDisplay.dataset.fullText=value;
 }
 WW.readCurrentThought=()=>WW.readRecord?.('Current thought',thoughtText,{journal:true});new MutationObserver(paintThought).observe(thought,{childList:true,characterData:true,subtree:true});new ResizeObserver(paintThought).observe(thoughtBlock);
 

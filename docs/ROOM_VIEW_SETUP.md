@@ -4,7 +4,8 @@ This is the active presentation. Load `room_views_data.js`, `room_view_renderer.
 and `room_orbit.js` before `room_view_scene.js`; load `room_view_effects.js` afterward.
 Keep reference_theme.css, room_views.css and reading_review.css after the base styles.
 Load reading_review.js after inventory_discard.js, then survival_review.js,
-combat_pass.js, hud_view_pass.js and pause.js last. The final wrappers enforce
+combat_pass.js, hud_view_pass.js, then chapter_balance_v8.js, chapter_puzzles_v8.js,
+chapter_survival_v8.js and chapter_ui_v8.js. Keep pause.js last. The final wrappers enforce
 death, door-transition locking and pause consistently.
 
 - Use one native painting near 1448×1086 per authored facing; retain real source dimensions. Fit the WHOLE image with a uniform
@@ -29,3 +30,8 @@ death, door-transition locking and pause consistently.
 Historical spherical-camera helpers remain in the repository but are not the active presentation.
 The old snap-camera mathematical tests do not validate the current room-view navigation;
 use the native presentation, target and full-route suites documented in VALIDATION.md.
+
+V8 captions overlay the fitted native painting with no opaque backing. The UI layer
+uses pointer-transparent cards and active caption buttons; preserve target access.
+Solid enemy textures and PEEK adaptation are runtime renderer concerns, not
+background painting edits. Keep new rear fixtures in authoritative metadata.

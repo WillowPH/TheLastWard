@@ -1,4 +1,4 @@
-/* Bundled recorded foley and original offline sound design. No runtime tones.
+/* Bundled recorded foley and original offline heartbeat sound design. No runtime tones.
    Positional cues follow the same graph as the pursuer, not random timers. */
 (function(){
 'use strict';
@@ -13,17 +13,17 @@ function resumeAll(reason='manual'){pauseReasons.delete(reason);if(blocked()||!a
 function caption(text){if(!window.WardScene?.options.soundCaptions)return;const el=$('c1SoundCaption');if(el){el.textContent=text;clearTimeout(el._clear);el._clear=setTimeout(()=>{if(el.isConnected)el.textContent=''},4500)}}
 function play(name,{volume=.45,pan=0,rate=1,bus='fx',loop=false}={}){if(!audio.enabled||blocked())return null;const a=new Audio(paths(name));a.dataset.clip=name;if(name==='elevator')a.dataset.ending='true';a.volume=Math.max(0,Math.min(.8,volume*(S?.audio?.[bus]??.45)));a.playbackRate=rate;a.loop=loop;a.preload='auto';const c=context();if(c){let source;try{source=c.createMediaElementSource(a);const gain=c.createGain();a._wardGain=gain;source.connect(gain);if(c.createStereoPanner){const node=c.createStereoPanner();node.pan.value=Math.max(-1,Math.min(1,pan));gain.connect(node);node.connect(meter||c.destination)}else gain.connect(meter||c.destination);}catch(e){try{source?.connect(meter||c.destination)}catch(_){}}}
  if(active.size>=12&&!loop){const first=[...active].find(a=>!a.loop);first?.pause();if(first){active.delete(first);resumeAfterPause.delete(first)}}active.add(a);a.addEventListener('ended',()=>{active.delete(a);resumeAfterPause.delete(a)},{once:true});a.addEventListener('error',()=>{active.delete(a);resumeAfterPause.delete(a);console.warn('Missing local sound',name)},{once:true});a.play().then(()=>{if(blocked()){resumeAfterPause.add(a);a.pause();}}).catch(()=>{if(!loops.has(name)&&!a.loop)active.delete(a)});history.push({name,pan,rate,bus});if(history.length>80)history.shift();return a;}
-function retire(a,fade=false){
+function retire(a,fade=false,channel='pulse'){
  const remove=()=>{a.pause();active.delete(a);resumeAfterPause.delete(a)};
  if(!fade||!a._wardGain){remove();return;}
- // A change in health should not chop an exhale halfway through. Fade the
- // outgoing air over 180 ms while the incoming recording starts in its rest.
+ // Release the outgoing heartbeat over 180 ms while the next pulse starts
+ // in its quiet lead-in, avoiding a click or an abrupt bass cut.
  // The fade uses the same pause contract as playback, never a wall timer.
- a.dataset.channel='breathing-release';a.loop=false;let elapsed=0,last=performance.now();
+ a.dataset.channel=channel+'-release';a.loop=false;let elapsed=0,last=performance.now();
  const frame=now=>{if(!active.has(a))return;const delta=Math.min(50,Math.max(0,now-last));last=now;if(!blocked())elapsed+=delta;a._wardGain.gain.value=Math.max(0,1-elapsed/180);if(elapsed>=180){remove();return;}requestAnimationFrame(frame)};
  requestAnimationFrame(frame);
 }
-function loop(key,name,volume){const old=loops.get(key);if(old?.name===name){old.audio.volume=Math.min(.65,volume*(S?.audio?.amb??.35));if(old.audio.paused&&!blocked()&&navigator.userActivation?.hasBeenActive)old.audio.play().then(()=>active.add(old.audio)).catch(()=>{});return;}if(old){loops.delete(key);retire(old.audio,key==='breathing'&&!!name)}if(!name)return;const a=play(name,{volume,bus:'amb',loop:true});if(a){a.dataset.channel=key;loops.set(key,{name,audio:a})}}
+function loop(key,name,volume){const old=loops.get(key);if(old?.name===name){old.audio.volume=Math.min(.65,volume*(S?.audio?.amb??.35));if(old.audio.paused&&!blocked()&&navigator.userActivation?.hasBeenActive)old.audio.play().then(()=>active.add(old.audio)).catch(()=>{});return;}if(old){loops.delete(key);retire(old.audio,key==='pulse',key)}if(!name)return;const a=play(name,{volume,bus:'amb',loop:true});if(a){a.dataset.channel=key;loops.set(key,{name,audio:a})}}
 function stop(keepEnding=false){for(const a of [...active])if(!keepEnding||a.dataset.ending!=='true'){a.pause();active.delete(a);resumeAfterPause.delete(a)}loops.clear();}
 function distance(){
  if(!S?.pursuer?.active)return {distance:99,pan:0};
@@ -42,11 +42,13 @@ function sync(){if(!S||!audio.enabled||S.hp<=0){stop();return;}if(gamePaused()){
  loop('outside',['lobby','wardnorth'].includes(r)?'exterior_wind':null,r==='lobby'&&S.f.lobbyShutters?.035:r==='wardnorth'&&S.windows?.triggered&&!S.windows.resolved?.42:.14);
  loop('intro',null,0);loop('radio',document.getElementById('winterRadioFrequency')?'radio_static':null,.16);
  if(S.f.sprinklerTriggered&&!S.f.sprinklerStopped&&r==='eastcorridor')loop('sprinkler','water',.4);else loop('sprinkler',null,0);
- // Long, irregular inhale/exhale recordings vary airway colour and depth.
- // Health changes their pace; sanity cannot select an injured voice. One
- // quiet breath channel survives UI renders and fades gently between tiers.
- const breathing=S.f.introComplete?(S.hp<=25?'breath_danger':S.hp<=75?'breath_caution':'breath_calm'):null;
- loop('breathing',breathing,S.hp<=25?.43:S.hp<=75?.30:.13);
+ // Room ambience carries healthy exploration. Injury uses a restrained
+ // heartbeat/rest pattern, never the old breath noise or pain-grunt loop.
+ // Paper/object reading quiets physiology while local room ambience continues.
+ const reading=!!window.WardWinter?.isReadingRecord?.();
+ const threat=!!(S.f.pursuerEncounter||window.WardWinter?.hallActive?.()||window.WardWinter?.pursuerPresent?.()||window.WardWinter?.enemies?.actorAt?.());
+ const pulse=S.f.introComplete&&!reading?(S.hp<=25?'heartbeat_danger':S.hp<=75?'heartbeat_caution':threat?'heartbeat_stress':null):null;
+ loop('pulse',pulse,pulse==='heartbeat_danger'?.31:pulse==='heartbeat_caution'?.20:.16);
  const now=performance.now(),d=distance();
  if(d.distance<=3&&!SAFE_FROM_PURSUER.has(r)&&now>=stepAt&&!(S.pursuer.trappedUntil>S.t)){variant=1-variant;play('subject_step_'+(variant+1),{volume:[.85,.55,.28,.13][d.distance],pan:d.pan,rate:.96});stepAt=now+(S.f.pursuerEncounter?1050:1650);caption(d.distance===0?'Heavy boots inside this room':d.distance===1?'Heavy boots beyond the doorway '+d.bearing:'Heavy footsteps farther along the passage');}
  if(alive(r)&&now>=groanAt){play('infected_groan',{volume:.3,pan:.25,rate:.9});groanAt=now+14000;}

@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "wardLoadFinale preserves last-ward-ch1-survival-review-5 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
+    "loadCheckpoint preserves last-ward-ch1-survival-review-5 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
+    "wardLoadFinale preserves last-ward-ch1-chapter-review-6 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
+    "loadCheckpoint preserves last-ward-ch1-chapter-review-6 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
+    "wardLoadFinale preserves last-ward-ch1-chapter-review-7 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
+    "loadCheckpoint preserves last-ward-ch1-chapter-review-7 earned sump/supply/pursuit clearance, ammunition and cleared enemies"
+  ],
+  "javascript_errors": []
+}

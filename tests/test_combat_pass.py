@@ -1,6 +1,6 @@
 """Subject X travel gates, finite firearm knockdowns and distinct solid enemies."""
 from pathlib import Path
-import json, sys
+import hashlib, json, sys
 from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 URL = sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8010'
@@ -25,7 +25,7 @@ with sync_playwright() as p:
             S.f.wet=0;S.f.coldExposure=0;S.hp=100;S.lightOn=false;
             add('Staff Access Card',1);add('Handgun',1);add('Handgun Ammo',20);S.eq='Handgun';S.ld.Handgun=6;
             S.pursuer={active:true,room:S.room,cooldown:0,noise:0};S.f.pursuerStarted=1;
-            S.f.pursuerEncounter=0;$('m').innerHTML='';render();""")
+            S.f.pursuerEncounter=0;S.f.securityServiceRelease=1;S.dr.es=1;$('m').innerHTML='';render();""")
         ready()
     for command in ["go('ward')","go('ward',true)","sceneDoorTravel('ward')","mapTravel('ward')","flee()","sneak()"]:
         fresh();ev(command)
@@ -40,22 +40,26 @@ with sync_playwright() as p:
     assert ev('S.ld.Handgun')==ammo-1
     assert ev('S.hp')<hp and not ev('WardWinter.pursuerDown()')
     page.get_by_role('button',name='Shoot Subject X',exact=True).click()
+    assert ev('S.ld.Handgun')==ammo-2 and not ev('WardWinter.pursuerDown()')
+    page.get_by_role('button',name='Shoot Subject X',exact=True).click()
     ready()
-    assert ev('S.ld.Handgun')==ammo-2 and ev('WardWinter.pursuerDown()')
+    assert ev('S.ld.Handgun')==ammo-3 and ev('WardWinter.pursuerDown()')
     assert ev('S.pursuer.active&&S.pursuer.room===S.room&&!S.f.pursuerEncounter')
     assert page.locator('.winter-actor.subject-x.knocked-down').count()==1
     ev("go('ward',true)")
     assert ev('S.room')=='ward'
     assert ev('S.f.pursuerEscapes>0&&S.f.pursuerChaseComplete')
-    checks.append('two actual handgun clicks spend two rounds, carry a minor first-shot risk and knock Subject X down long enough to pass; it remains alive')
-    fresh();ev("add('Shotgun',1);S.eq='Shotgun';S.ld.Shotgun=1;pursuerEncounter()")
+    checks.append('three actual Normal handgun clicks spend three rounds, risk two close counters and knock Subject X down long enough to pass; it remains alive')
+    fresh();ev("add('Shotgun',1);S.eq='Shotgun';S.ld.Shotgun=2;pursuerEncounter()")
+    page.get_by_role('button',name='Shoot Subject X',exact=True).click();ready()
+    assert ev('S.ld.Shotgun===1&&!WardWinter.pursuerDown()')
     page.get_by_role('button',name='Shoot Subject X',exact=True).click();ready()
     assert ev('S.ld.Shotgun===0&&WardWinter.pursuerDown()')
     ev('S.pursuer.staggerDeadline=Date.now()-1;WardWinter.updatePursuerRecovery()')
     assert not ev('WardWinter.pursuerDown()')
     ev("sceneDoorTravel('ward')")
     assert ev('S.room')=='eastcorridor' and ev('S.f.pursuerEncounter')
-    checks.append('one heavy shell also staggers; the real recovery deadline expires and the same exits become blocked again')
+    checks.append('two Normal heavy shells stagger; the real recovery deadline expires and the same exits become blocked again')
     fresh();ev('pursuerEncounter()')
     page.get_by_role('button',name='Retreat through an unlocked door',exact=True).click();ready()
     assert ev('S.room')=='security' and ev('S.f.pursuerEscapes')==1
@@ -94,5 +98,11 @@ with sync_playwright() as p:
     assert not errors,errors
     browser.close()
 (ROOT/'tests/results').mkdir(exist_ok=True)
-(ROOT/'tests/results/combat_pass.json').write_text(json.dumps({'checks':checks,'ammo_totals':totals,'enemy_variants':variants,'javascript_errors':errors},indent=2)+'\n')
+# The assertions above compare actual rendered sources. Keep their identities in
+# the report without embedding several megabytes of runtime-generated PNG data.
+reported_variants=[{k:v for k,v in variant.items() if k!='art'} | {
+    'art_source_sha256':hashlib.sha256(variant['art'].encode()).hexdigest(),
+    'art_source_characters':len(variant['art'])
+} for variant in variants]
+(ROOT/'tests/results/combat_pass.json').write_text(json.dumps({'checks':checks,'ammo_totals':totals,'enemy_variants':reported_variants,'javascript_errors':errors},indent=2)+'\n')
 for check in checks:print('PASS',check)

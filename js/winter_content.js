@@ -180,7 +180,7 @@ W.find('handCharge')[3]='A manual dynamo shares the rear charging bench. It can 
 W.find('fur')[1]='Heatproof service-part tin';W.find('fur')[3]='A heatproof tin on the boiler service trolley holds one usable precision part.';
 W.find('aut')[3]='An autopsy report lies on the work trolley beside the mortuary sink.';
 W.find('wire')[3]='A spool of dry insulated wire rests on the laboratory rear workbench.';
-W.find('shotShells')[3]='Four sealed shotgun shells remain in the theatre preparation drawer behind the operating table.';
+W.find('shotShells')[3]='A sealed shotgun shell sleeve remains in the theatre preparation drawer behind the operating table.';
 register('stafflounge','rearTable','arcadeMedallion','Dragon tournament medallion','A brass dragon token rests on an old staff arcade-night flyer.',{look:1});
 register('stafflounge','rearTable','heroMug','Heroes’ mug','A repaired ceramic mug bears a dark circular emblem and an orange arc.',{look:1});
 W.find('umbrella')[3]='A red-and-white umbrella has been left on the cloakroom return counter behind reception.';
@@ -188,6 +188,25 @@ W.find('icecreamToy')[1]='Sweet Tooth ice-cream truck';W.find('icecreamToy')[3]=
 register('children','nightDrawer','childNightCell','Night-light battery','A sealed torch battery was set aside in the bedside drawer for night rounds.',{give:[['Battery',1]]});
 register('isolation','dressingShelf','isolationDressing','Sealed isolation dressing','An unopened sterile dressing survived inside the glass-fronted cabinet.',{give:[['Trauma Dressing',1]]});
 register('coldstore','courierCrate','courierCell','Courier’s spare battery','A spare torch cell is sealed in the insulated delivery crate beside the cold-room door.',{give:[['Battery',1]]});
+// Progress-critical equipment and finite reserves also live behind the player.
+// These are painted drawers/racks, not new icons laid over blank wall space.
+for(const [room,id,label,rect]of [
+ ['wardservice','rearTrolley','Ammunition service trolley',[90,55,16,27]],
+ ['observation','rearDesk','Archive transfer drawer',[8,54,14,28]],
+ ['archive','rearTransferCabinet','Component transfer cabinet',[26,44,11,30]],
+ ['powercontrol','rearServiceRack','Transfer service rack',[82,45,15,42]]
+])W.fixture(room,id,label,rect,'rear',{drawer:true});
+relocate('dr','observation','rearDesk');
+W.find('dr')[1]='Archive transfer drive';W.find('dr')[3]='The sealed archive drive is kept in the writing desk drawer behind the observation console.';
+relocate('componentNote','archive','rearTransferCabinet');
+relocate('pwrmemo','powercontrol','rearServiceRack');
+register('wardservice','rearTrolley','serviceAmmo','Night patrol ammunition sleeve','An intact patrol sleeve is sealed in the rear service trolley beside the return door.',{give:[['Handgun Ammo',6]]});
+register('records','cabinet','recordsAmmo','Records guard ammunition sleeve','A guard left a sealed ammunition sleeve in the rear filing cabinet.',{give:[['Handgun Ammo',8]]});
+register('surgery','rearSupply','restrictedShotgun','Restricted surgical security shotgun','A pump shotgun remains inside the preparation drawer behind the theatre. The executive restriction has been released.',{give:[['Shotgun',1]],after:'photoPuzzleSolved'});
+DOCS['Security ammunition issue log']='NIGHT SECURITY — AMMUNITION ISSUE\n\nPatrol pistol rounds were split between the Patient Wing medicine cupboard and the Ward Service trolley. Both are behind the entry doors, away from public view. Pharmacy keeps its own sealed reserve.\n\nThe North Corridor linen-return reserve is for emergencies; Heller warned that its release linkage also opens the windows. Do not pull it without reading the warning.\n\nThe theatre shotgun and shells are held together in the rear preparation drawer. Executive authorization releases that restriction. A late-shift guard signed a final sleeve into the Records filing cabinet.';
+register('security','winterNotice','ammoIssueLog','Security ammunition issue log','A dated patrol issue sheet lists where the finite ammunition sleeves were distributed.',{doc:'Security ammunition issue log'});
+WardScenes.records.fixtures.find(f=>f.id==='cabinet').label='Records security supply cabinet';
+const beforeRestrictedTake=act;act=function(id){if(id==='restrictedShotgun'&&!S.f.photoPuzzleSolved)return W.think?.('The surgical security case is still under executive restriction.');return beforeRestrictedTake(id);};
 // Chapter 1 only foreshadows Sister Mimi. Her real identity remains redacted;
 // meeting her, the betrayal and the underground pursuit belong to Chapter 2.
 DOCS['Nursing personnel amendment']=`MONOLITH PHARMACEUTICALS\nPERSONNEL AMENDMENT / INTERNAL ONLY\n\nLegal name: ████████████████████\nReligious title: SISTER\nRecorded name: SISTER MIMI\nAssignment: Hospital religious sister / ward medical duties\nPublic roster: REMOVED\n\nHer charitable order has not authorized this transfer. Do not restore the legal name from carbon copies. All inquiries are to be forwarded below the public basement.\n\nHandwritten: Sister Mimi sits with frightened patients until they sleep. She makes sure the night staff have clean dressings, even when supplies are short. Nobody has explained why she was transferred.`;
@@ -198,6 +217,8 @@ W.find('mimiPersonnel')[1]='Redacted religious staff roster';W.find('mimiTransfe
 // Names follow the painted containers in the authored rear views.
 for(const [room,id,label]of [['security','drawer','Security filing drawer'],['stafflounge','harness','Staff locker'],['pharmacy','returns','Returns box'],['pharmacy','ribbon','Clerk filing drawer'],['room12','drawer','Treatment cabinet drawer'],['archive','fuse','Equipment cabinet']])WardScenes[room].fixtures.find(f=>f.id===id).label=label;
 R.stafflounge.o.find(o=>o[0]==='harness')[3]='A durable medical utility harness hangs inside the open staff locker.';
+// A finite mid-route first-aid kit supports the longer authored encounter route.
+register('stafflounge','harness','loungeFirstAid','Staff first-aid kit','A sealed first-aid kit remains in the rear staff locker beside the utility harness.',{give:[['Field Medkit',1]]});
 const baselineObjects=Object.fromEntries(Object.entries(R).map(([r,v])=>[r,structuredClone(v.o)]));
 const baselineScenes=structuredClone(WardScenes);
 const configure=configureWorld;
@@ -209,8 +230,8 @@ configureWorld=function(seed,preserve=true){
  const slots={
   drw:['security',['personalEffects']],petrolLighter:['security',['personalEffects']],lighterFluid:['security',['drawer']],
   utilityKnife:['security',['cabinet']],cab:['room12',['cabinet','drawer']],drw12:['room12',['drawer','shelf']],
-  elevatorFuseA:['archive',['fuse','drawer']],elevatorFuseB:['pharmacy',['ribbon','drawer']],
-  elevatorFuseC:['records',['cabinet','ledger']],elevatorFuseD:['powercontrol',['parts','clearance']]
+  elevatorFuseA:['archive',['fuse','rearTransferCabinet']],elevatorFuseB:['pharmacy',['ribbon','drawer']],
+  elevatorFuseC:['records',['cabinet','ledger']],elevatorFuseD:['powercontrol',['rearServiceRack']]
  };
  for(const [id,[room,choices]]of Object.entries(slots)){
   const savedTarget=S.placements.items[id],target=choices.includes(savedTarget)?savedTarget:choices[hashSeed(seed+'::slot::'+id)%choices.length];S.placements.items[id]=target;

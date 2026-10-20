@@ -16,7 +16,7 @@ with sync_playwright() as p:
  ready();page.wait_for_function('!!WardWinter.playDoorTransition')
  def clean_captions():
   result=page.evaluate('''()=>{const hidden=id=>{const n=document.getElementById(id),r=n.getBoundingClientRect();return r.width===0&&r.height===0;};return {cards:document.querySelector('.story-caption').children.length,legacyInCards:!!document.querySelector('.narrative-focus .message-stream'),sourceHidden:getComputedStyle(hudFeedbackSources).display==='none'&&hudFeedbackSources.inert&&hudFeedbackSources.contains(document.querySelector('.message-stream')),legacyHidden:['feedbackBox','ev','sceneDrawer'].every(hidden),narration:getComputedStyle(document.querySelector('.narration-block')).backgroundColor,thoughts:getComputedStyle(sceneThought).backgroundColor};}''')
-  assert result=={'cards':2,'legacyInCards':False,'sourceHidden':True,'legacyHidden':True,'narration':'rgba(9, 9, 9, 0.91)','thoughts':'rgba(16, 13, 8, 0.91)'},result
+  assert result=={'cards':2,'legacyInCards':False,'sourceHidden':True,'legacyHidden':True,'narration':'rgba(0, 0, 0, 0)','thoughts':'rgba(0, 0, 0, 0)'},result
  clean_captions()
  for health,label,color in [(90,'FINE','rgb(131, 183, 154)'),(50,'CAUTION','rgb(210, 170, 99)'),(15,'DANGER','rgb(216, 102, 92)')]:
   value=page.evaluate('''hp=>{S.hp=hp;WardWinter.updateStatus();return {label:conditionLabel.textContent,line:getComputedStyle(heartLine).color,text:getComputedStyle(conditionLabel).color};}''',health)
@@ -80,9 +80,9 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Interact',exact=True).click();ready()
  assert page.evaluate('S.f.sprinklerStopped&&S.f.wet&&S.f.shivering')
  clean_captions()
- assert page.evaluate("document.querySelector('.room-view-viewport').getBoundingClientRect().bottom<document.querySelector('.narrative-focus').getBoundingClientRect().top")
+ assert page.evaluate("(()=>{const r=document.querySelector('.room-view-frame').getBoundingClientRect(),c=document.querySelector('.narrative-focus').getBoundingClientRect();return c.top>=r.top&&c.bottom<=r.bottom;})()")
  page.screenshot(path=str(OUT/'hud-after-sprinkler.png'))
- report['checks'].append('After triggering and closing the sprinkler, narration and thoughts remain two neutral cards with no extra feedback panels beneath them.')
+ report['checks'].append('After triggering and closing the sprinkler, narration and thoughts remain two transparent cards over the artwork with no extra feedback panels beneath them.')
 
  # Completion is exactly once; exposure changes duration without timer drift.
  durations=page.evaluate('''()=>{S.f.wet=0;S.f.shivering=0;S.f.coldExposure=0;let a=WardWinter.playDoorTransition({from:'security',to:'lobby',duration:1000});const dry=a.duration;a.cancel();S.f.wet=1;let b=WardWinter.playDoorTransition({from:'security',to:'lobby',duration:1000});const wet=b.duration;b.cancel();S.f.wet=0;return {dry,wet};}''')

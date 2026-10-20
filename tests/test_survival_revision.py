@@ -174,11 +174,14 @@ with sync_playwright() as p:
     room('archive', True)
     ev('S.san=86;S.f.doctorWallSeen=1;WardWinter.sanityEpisode()')
     assert ev('S.sceneDisturbance?.kind') == 'hanged'
-    turn_room(page)
-    ready()
-    assert ev('S.roomView') == 'rear'
+    assert ev('S.roomView') == 'front'
+    assert ev('S.sceneDisturbance.view') == 'front'
     assert page.locator('.winter-hallucinated-body').count() == 1
     page.wait_for_function('document.querySelector(".winter-hallucinated-body img")?.naturalWidth>0')
+    turn_room(page);ready();assert ev('S.roomView') == 'rear'
+    assert page.locator('.winter-hallucinated-body').count() == 0
+    turn_room(page);ready();assert ev('S.roomView') == 'front'
+    assert page.locator('.winter-hallucinated-body').count() == 1
     ev('S.sceneDisturbance.deadline=0')
     page.wait_for_timeout(500)
     assert not ev('S.sceneDisturbance')

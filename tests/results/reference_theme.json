@@ -15,25 +15,25 @@
         "display": "flex",
         "height": 110,
         "scrollHeight": 110,
-        "width": 322,
-        "scrollWidth": 322,
-        "x": 1002.609375,
-        "y": 801,
-        "right": 1326.328125,
-        "bottom": 913,
-        "background": "rgba(16, 13, 8, 0.91)"
+        "width": 316,
+        "scrollWidth": 316,
+        "x": 999.9375,
+        "y": 716,
+        "right": 1318.3125,
+        "bottom": 828,
+        "background": "rgba(0, 0, 0, 0)"
       },
       "narration": {
         "display": "flex",
         "height": 110,
         "scrollHeight": 110,
-        "width": 645,
-        "scrollWidth": 645,
-        "x": 343.171875,
-        "y": 801,
-        "right": 990.609375,
-        "bottom": 913,
-        "background": "rgba(9, 9, 9, 0.91)"
+        "width": 635,
+        "scrollWidth": 635,
+        "x": 351.171875,
+        "y": 716,
+        "right": 987.9375,
+        "bottom": 828,
+        "background": "rgba(0, 0, 0, 0)"
       },
       "heading": {
         "display": "flex",
@@ -54,21 +54,21 @@
         "width": 991,
         "scrollWidth": 991,
         "x": 339.25,
-        "y": 23,
+        "y": 99,
         "right": 1330.25,
-        "bottom": 766,
+        "bottom": 842,
         "background": "rgb(7, 7, 7)"
       },
       "viewport": {
         "display": "grid",
-        "height": 789,
-        "scrollHeight": 789,
+        "height": 941,
+        "scrollHeight": 941,
         "width": 1039,
         "scrollWidth": 1039,
         "x": 315.171875,
         "y": 0,
         "right": 1354.328125,
-        "bottom": 789,
+        "bottom": 941,
         "background": "rgb(7, 7, 7)"
       },
       "center": {
@@ -98,25 +98,25 @@
         "display": "flex",
         "height": 110,
         "scrollHeight": 110,
-        "width": 224,
-        "scrollWidth": 224,
-        "x": 547.59375,
-        "y": 668,
-        "right": 773.984375,
-        "bottom": 780,
-        "background": "rgba(16, 13, 8, 0.91)"
+        "width": 208,
+        "scrollWidth": 208,
+        "x": 543.59375,
+        "y": 485,
+        "right": 753.984375,
+        "bottom": 597,
+        "background": "rgba(0, 0, 0, 0)"
       },
       "narration": {
         "display": "flex",
         "height": 110,
         "scrollHeight": 110,
-        "width": 338,
-        "scrollWidth": 338,
-        "x": 196,
-        "y": 668,
-        "right": 535.59375,
-        "bottom": 780,
-        "background": "rgba(9, 9, 9, 0.91)"
+        "width": 314,
+        "scrollWidth": 314,
+        "x": 216,
+        "y": 485,
+        "right": 531.59375,
+        "bottom": 597,
+        "background": "rgba(0, 0, 0, 0)"
       },
       "heading": {
         "display": "flex",
@@ -137,21 +137,21 @@
         "width": 562,
         "scrollWidth": 562,
         "x": 204,
-        "y": 109,
+        "y": 189,
         "right": 766,
-        "bottom": 531,
+        "bottom": 611,
         "background": "rgb(7, 7, 7)"
       },
       "viewport": {
         "display": "grid",
-        "height": 640,
-        "scrollHeight": 640,
+        "height": 800,
+        "scrollHeight": 800,
         "width": 610,
         "scrollWidth": 610,
         "x": 180,
         "y": 0,
         "right": 790,
-        "bottom": 640,
+        "bottom": 800,
         "background": "rgb(7, 7, 7)"
       },
       "center": {
@@ -187,7 +187,7 @@
         "y": 548,
         "right": 380,
         "bottom": 648,
-        "background": "rgba(16, 13, 8, 0.91)"
+        "background": "rgba(0, 0, 0, 0)"
       },
       "narration": {
         "display": "flex",
@@ -199,7 +199,7 @@
         "y": 464,
         "right": 380,
         "bottom": 540,
-        "background": "rgba(9, 9, 9, 0.91)"
+        "background": "rgba(0, 0, 0, 0)"
       },
       "heading": {
         "display": "flex",
@@ -261,8 +261,8 @@
       "title": "Heller\u2019s winter maintenance note",
       "background": "rgb(203, 191, 168)",
       "color": "rgb(40, 35, 30)",
-      "font": "22.56px / 27px Caveat, cursive",
-      "textLength": 1070
+      "font": "24px / 30px Caveat, cursive",
+      "textLength": 979
     },
     {
       "title": "Nursing personnel amendment",

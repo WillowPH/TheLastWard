@@ -1,100 +1,74 @@
 # The Last Ward — Chapter 1
 
 A multi-file survival horror game set in Blackridge Medical Complex, 1998.
-Chapter 1 ends at the service elevator; Chapter 2 is not playable.
+Chapter 1 ends at the service elevator. The hospital layout stays fixed; room
+artwork, object states, targets, documents, audio and logic are separate files.
 
 ## Play
 
-Extract the entire `The_Last_Ward_Chapter_1_Project.zip` folder.
-Windows 10/11: double-click **START_GAME.exe** or **START_GAME.bat**. No Python
-installation or external internet connection is needed. Keep the launcher window open.
-macOS/Linux: `python3 start_game.py` (Python 3 standard library only).
-Use the same local port/browser for saved games. Existing v5 and v6 saves can continue in
-this v7 update; a new game also works. Older incompatible builds remain separate.
+Extract the entire `The_Last_Ward_Chapter_1_Project.zip` folder. On Windows 10/11,
+double-click **START_GAME.exe** or **START_GAME.bat**. No Python or external internet
+connection is needed. Keep the launcher open while playing. On macOS/Linux, run
+`python3 start_game.py` with Python 3's standard library.
 
-**Click objects to examine them. Drag sideways to see the
-other side of the room. No keyboard is needed.** Hints (Subtle/Strong), motion and
-flashes are in Options. The right-side flashlight button shows its battery percentage.
-Select an item in the right inventory to use, inspect or discard it. Select Combine,
-then a second item to craft, refill the lighter or load a compatible weapon. Discard
-requires confirmation; items needed for unfinished progression remain protected.
+Click objects and drag sideways to see the other authored room facing. Pause stays
+below Options in the left menu, including while reading. No keyboard is required.
+Hints default to Subtle; strength, motion, flashes and sound are in Options.
 
-## Visual correction
+Select an item in the right inventory to use, inspect, combine or discard it.
+Choose Combine, then a compatible second item. Normal/Story automatically retire
+truly spent tools; Nightmare keeps manual discard. Items needed for unfinished
+progress remain protected. Save at a Terminal using a Floppy Disk; Storage boxes
+share stored equipment. Saving and the optional shotgun are not mandatory.
 
-The user chose sharper room-facing artwork over the limited-resolution 360° format.
-The active renderer uses **54 distinct native room paintings** across 27 rooms,
-mostly 1448×1086 (the North Corridor rear and Mercer view are 1447×1087).
-Each complete painting fits inside the scene without cropping, stretching or digital
-zoom. Mouse turns use a brief fade between authored views; no images are joined into
-a pretend continuous panorama. This is game artwork, not native 4K or walkable 3D.
+## Survival and progression
 
-- Neutral charcoal HUD, warm grey text, brass rules and amber Thoughts follow the
-  supplied three-column reference. Green is reserved for physical health feedback.
-- No bottom navigation/hint strip or required keyboard controls. Ordinary inspection
-  preserves the same image and scale. There are no view-arrow buttons.
-- Corrected lobby furniture barricade, integrated laundry stove and actual 1998 CRT.
-  Shutters fit real glass, with local snow beyond windows and scanlines inside screens.
-- Practical light, power, key and supply requirements appear in Thoughts. Story and
-  puzzle dialogs retain their own presentation. Documents use readable pages; Files
-  group collected evidence by subject and unfinished leads. Locks can reopen related
-  collected records without filling in the answer. Thoughts stay concise.
+Normal puts pressure on ammunition and route planning across a finite enemy population.
+Noise attracts existing infected; cleared enemies stay cleared. A knife can finish
+a weakened enemy, but fighting a fresh one at close range is dangerous. Struggling
+creates a temporary opening and costs health. Subject X requires a real tactic;
+walking back through a door alone does not clear the final transfer route.
 
-## Gameplay correction — 19 October
+The flashlight is collected from the lobby coat. Battery, exposure and encounter
+clocks pause while reading records. Wet clothing needs deliberate drying at the
+laundry stove or a powered warm room. Close opened windows and leave cold areas.
+Death requires loading a save/checkpoint or restarting.
 
-The flashlight is collected from the lobby coat. It runs only where local lighting
-requires it; reading records pauses battery and exposure. Death is terminal until
-loading or restarting. Sprinklers injure, cold causes exposure damage, and wet clothes
-need deliberate recovery at a powered warm shelter or lit laundry stove.
+Collected records support physical puzzles: the service pump, transfer supply,
+photographs and final interlock. Files groups unfinished Progression objectives
+with their collected clues; Story records and All records preserve the rest.
+The game does not fill puzzle answers in for the player. System repairs show clear
+results, and the elevator only unlocks when all transfer requirements are met.
 
-Judith and Evelyn Shaw appear through records rather than living nurse sprites.
-Kessler has a visible full-body encounter and persistent aftermath. Rear views now
-hold useful supplies, including the Archives elevator fuse. Native shutter artwork
-and the rear barricade match the lobby; snow remains outside the reviewed glass.
+The active sound design uses room ambience and restrained condition/threat heartbeat
+cues. Reading quiets the pulse; Pause stops all playback. Major horror incidents
+remain once-only, with bounded later hallucinations and nonlethal imaginary combat.
 
-Existing finite ammunition caches provide more rounds. Subject X evasion gives a
-limited recovery interval. Earned sanity episodes are bounded, persistent across
-saves and nonlethal in imaginary combat. The optional one-time window purge releases
-supplies after all three catches are closed. Save at a **Terminal** using a **Floppy
-Disk**; additional **Storage boxes** share equipment along the route.
+## Presentation
 
-## Gameplay and audio follow-up
+There are 54 distinct native room paintings across 27 rooms, mostly 1448×1086.
+The user chose these sharp front/rear views over limited-resolution continuous 360
+artwork. Complete paintings fit without cropping, stretching or fake 4K enlargement.
+Mouse turns use a brief optional fade. Real enemies have opaque bodies and grounded
+scale; PEEK shows the live room through physical openings. Snow stays outside glass.
 
-Pause from the left navigation, including while a dialog is open. Resume preserves the record,
-world time, battery, exposure and encounter deadlines. Normal, caution and danger
-use distinct quiet air-breath loops; longer machine/wind beds and an original pickup
-cue replace the repeated hurt and bottle sounds.
+The charcoal HUD follows the supplied reference. Narration and Thoughts sit over
+artwork without an opaque backing fill. Useful finds and clues occupy rear furniture.
+Optional graphical references and Chapter 2 foreshadowing remain in Chapter 1.
 
-Inventory actions stay beside the grid, with quantity badges and direct pairing.
-Story/Normal remove truly spent keys/tools automatically; Nightmare keeps manual
-discard. Supplies are spread across rear furniture, including Security's early tools.
+## Continued saves
 
-Subject X blocks casual exits. Two handgun rounds or a heavier shot create a short
-knockdown opening; it recovers. Finite ammunition is balanced for this use. Infected
-have distinct opaque appearances. PEEK shows the live room through physical gaps.
-Door openings use hinged animations, slow with wet/cold hands and respect Pause.
+Use the same browser/local port. Recognized v5/v6/v7 saves can continue in v8,
+preserving collected items and cleared enemies. Previously earned late clearance
+remains valid. A new run gives the entire revised balance and puzzle sequence.
 
-Security CRTs show local monochrome room feeds, ECG colour follows condition, and
-the map arrow follows the current facing. Closed shutters remove snowy reflections.
-Sister Mimi's early notes portray someone helpful; experimentation and instability
-are revealed later. Chapter 2 encounters remain deferred.
-
-The latest pass removes view-arrow and dialog Pause buttons, keeps Pause below
-Options, removes the cold-status colour wash and extra caption panels, and runs
-all six surveillance feeds on their own backup supply. Mercer has local breathing
-motion; enemy scale and floor placement follow each room. Rear furniture carries
-more useful finds. Four optional graphic references and longer varied breath beds
-are included. See the correction notes for their exact scope.
-
-See [the v7 correction notes](docs/REVISION_V7.md), [v6 notes](docs/REVISION_V6.md) and [the prior pass](docs/REVISION_2026-10-19.md).
-
-Finite noise-responsive enemies, later Subject X pursuit, confirmed traps, once-only
-story/cold/sprinkler incidents, handwritten records, generator outages, lighter/fluid,
-shared access keys and four elevator interlocks remain in Chapter 1.
+See [v8 changes](docs/REVISION_V8.md), [verified checks](VALIDATION.md) and
+[the prior correction pass](docs/REVISION_V7.md).
 
 ## Development
 
-Run `python3 start_game.py --no-browser --port 8010`.
-Author native targets in `data/room_views.json`, then run
-`python3 tools/build_room_views.py`. Effects use `data/room_view_effects.json`.
-See [view setup](docs/ROOM_VIEW_SETUP.md), [implementation](IMPLEMENTATION.md),
-[design notes](docs/DESIGN_NOTES.md) and [verified checks](VALIDATION.md).
+Run `python3 start_game.py --no-browser --port 8010`. Author native targets in
+`data/room_views.json`, then regenerate with `python3 tools/build_room_views.py`.
+Effects use `data/room_view_effects.json`. The late v8 balance, puzzle, survival and
+UI modules load before `pause.js`, which remains last. See
+[view setup](docs/ROOM_VIEW_SETUP.md) for native geometry and interaction contracts.

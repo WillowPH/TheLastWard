@@ -18,7 +18,7 @@ with tempfile.TemporaryDirectory(prefix='last-ward-package-') as tmp:
  for folder in ['js','css','assets','audio','data']:
   for f in (ROOT/folder).rglob('*'):
    if f.is_file():assert hashlib.sha256(f.read_bytes()).digest()==hashlib.sha256((project/f.relative_to(ROOT)).read_bytes()).digest(),str(f)
- for name in ['README.md','VALIDATION.md','docs/REVISION_V6.md','docs/REVISION_V7.md','tools/package_visual_update.py']:assert (ROOT/name).read_bytes()==(project/name).read_bytes(),name
+ for name in ['README.md','VALIDATION.md','docs/REVISION_V6.md','docs/REVISION_V7.md','docs/REVISION_V8.md','tools/package_visual_update.py']:assert (ROOT/name).read_bytes()==(project/name).read_bytes(),name
  checks.append('archive matches tested runtime source, assets, correction notes and packager byte for byte')
  checks.append('archive extracts with separate code, data, audio, 54 native room-facing views and launchers')
  command=([sys.argv[2],'--root',str(project)] if len(sys.argv)>2 else [sys.executable,str(project/'start_game.py')])+['--no-browser','--port','8124']
@@ -28,7 +28,7 @@ with tempfile.TemporaryDirectory(prefix='last-ward-package-') as tmp:
    try:urllib.request.urlopen('http://127.0.0.1:8124',timeout=1);break
    except OSError:time.sleep(.1)
   with sync_playwright() as p:
-   b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--enable-unsafe-swiftshader']);c=b.new_context(service_workers='block',viewport={'width':1672,'height':941});c.route('**/*',lambda r:r.continue_() if r.request.url.startswith('http://127.0.0.1:8124/') else r.abort());page=c.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('requestfailed',lambda r:failures.append(r.url));page.goto('http://127.0.0.1:8124');page.get_by_role('button',name='BEGIN INVESTIGATION').click();page.evaluate('nextIntro();nextIntro();nextIntro()');page.wait_for_function('!!S&&!!WardWinter.orbit');assert page.evaluate('WardChapter.BUILD')=='last-ward-ch1-chapter-review-7';assert not page.locator('.mouse-look-edge').count();checks.append(('native server' if len(sys.argv)>2 else 'Python launcher')+' starts the extracted playable game without external internet')
+   b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox','--enable-unsafe-swiftshader']);c=b.new_context(service_workers='block',viewport={'width':1672,'height':941});c.route('**/*',lambda r:r.continue_() if r.request.url.startswith('http://127.0.0.1:8124/') else r.abort());page=c.new_page();page.on('pageerror',lambda e:errors.append(str(e)));page.on('requestfailed',lambda r:failures.append(r.url));page.goto('http://127.0.0.1:8124');page.get_by_role('button',name='BEGIN INVESTIGATION').click();page.evaluate('nextIntro();nextIntro();nextIntro()');page.wait_for_function('!!S&&!!WardWinter.orbit');assert page.evaluate('WardChapter.BUILD')=='last-ward-ch1-chapter-review-8';assert not page.locator('.mouse-look-edge').count();checks.append(('native server' if len(sys.argv)>2 else 'Python launcher')+' starts the extracted playable game without external internet')
    page.evaluate("WardSound.play('winter_wind',{volume:.8,loop:true})");values=[]
    for _ in range(12):page.wait_for_timeout(100);values.append(page.evaluate('WardSound.energy()'))
    assert max(values)>.00001;checks.append('separate local audio produces measured output after Begin')

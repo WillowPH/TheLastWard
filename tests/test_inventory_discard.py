@@ -94,7 +94,7 @@ with sync_playwright() as p:
 
     ev('confirmSave()')
     # Both delivered save versions must preserve a used/discarded inventory.
-    for version in ['last-ward-ch1-survival-review-5', 'last-ward-ch1-chapter-review-6']:
+    for version in ['last-ward-ch1-survival-review-5', 'last-ward-ch1-chapter-review-6', 'last-ward-ch1-chapter-review-7']:
         ev('''version=>{const saved=JSON.parse(localStorage.getItem(K));
             saved.buildId=version;localStorage.setItem(K,JSON.stringify(saved));}''', version)
         page.reload()
@@ -104,7 +104,7 @@ with sync_playwright() as p:
         assert ev('S.buildId===WardChapter.BUILD')
         assert ev('!has("Cabinet Key")&&!has("Battery")&&S.discardedItems.length===2&&has("Power Fuse")')
         assert ev('S.inv.length===7')
-    passed('discarded inventory and freed capacity persist through actual Terminal saves and both v5/v6 reload migrations')
+    passed('discarded inventory and freed capacity persist through actual Terminal saves and all v5/v6/v7 reload migrations')
 
     ev('''S.room='wardnorth';S.prev='wardnorth';S.roomViewRoom=null;S.sceneFocus=null;S.f.power=0;S.lightOn=false;S.bat=60;S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.pursuer.active=false;S.contextThought=null;$('m').innerHTML='';render()''')
     page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
@@ -150,7 +150,7 @@ with sync_playwright() as p:
     assert page.locator('#m .md').count() == 0
     ev('add("Maintenance Tools");S.f.maintenancePrepared=1;render();act("pan")')
     assert ev('S.f.power&&!has("Power Fuse")')
-    assert page.get_by_role('heading', name='POWER RESTORED', exact=True).count() == 1
+    assert page.get_by_role('heading', name='Generator power restored', exact=True).count() == 1
     ev('closeModal()')
     passed('missing named keys/tools use Thoughts while door labels remain specific; successful generator restoration keeps its story scene')
 

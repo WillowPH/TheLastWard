@@ -80,25 +80,27 @@
     },
     "surgery_front": {
       "source": "assets/rooms/surgery.webp",
-      "generated": "exec-824d3f24-0618-4c91-b816-fc81c08173ca.png",
+      "generated": "exec-975f3de4-befe-49ae-b530-672c5609820d.png",
       "output": "assets/room_views/surgery_front.webp",
       "native_size": [
         1448,
         1086
       ],
-      "change": "Full-size doctor visibly braced against tiled wall",
-      "export": "WebP quality95; original size preserved without resizing"
+      "change": "Anatomically coherent standing doctor braced to tiled wall with attached hands; removes isolated hand-shaped wall mark",
+      "export": "WebP quality95; original size preserved without resizing",
+      "prior_generated": "exec-824d3f24-0618-4c91-b816-fc81c08173ca.png"
     },
     "surgery_after": {
       "source": "assets/room_views/surgery_front.webp",
-      "generated": "exec-2d769fca-cdd8-426e-8050-97a9b68664d3.png",
+      "generated": "exec-50b82743-3ee1-4e5e-88de-89d595c08be9.png",
       "output": "assets/room_views/surgery_after.webp",
       "native_size": [
         1448,
         1086
       ],
-      "change": "Readable full-body seated aftermath beside same wall; non-graphic game art",
-      "export": "WebP quality95; original size preserved without resizing"
+      "change": "Anatomically coherent slumped seated aftermath with both hands resting naturally; removes isolated hand-shaped wall mark",
+      "export": "WebP quality95; original size preserved without resizing",
+      "prior_generated": "exec-2d769fca-cdd8-426e-8050-97a9b68664d3.png"
     },
     "isoward_front": {
       "source": "assets/rooms/isoward.webp",

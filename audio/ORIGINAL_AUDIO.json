@@ -26,6 +26,27 @@
       "rms": 0.037315133071674014
     },
     {
+      "file": "chapter1/heartbeat_stress.ogg",
+      "design": "Original short four-beat muffled lub-dub fear response at 84 BPM, followed by 5.7 seconds of quiet. Only selected with an immediate live threat, not low sanity alone.",
+      "seconds": 8.797142857142857,
+      "sha256": "a3a305ba62ce5d521cbb220b621f34ff827b5c5ebad6153764a81f01fdea533c",
+      "rms": 0.010734563705421711
+    },
+    {
+      "file": "chapter1/heartbeat_caution.ogg",
+      "design": "Original restrained six-beat dual-thump condition pulse at 76 BPM, with 4.1 seconds of recovery silence between bursts. No breath or impact recording.",
+      "seconds": 9.076825396825397,
+      "sha256": "9e3bbd13e623ab12fb9d37a3e9f4cdf356086ee0f836b6dba0c4c952852cc2aa",
+      "rms": 0.014363274214688184
+    },
+    {
+      "file": "chapter1/heartbeat_danger.ogg",
+      "design": "Original deeper twelve-beat danger pulse at 98 BPM with distinct soft lub-dub lobes and 2.7 seconds of quiet recovery. No respiratory noise or hurt syllables.",
+      "seconds": 10.286938775510205,
+      "sha256": "6e8a9c2098f233a7e0740ed4740ea1b31d0fed52ae6651591a8613b3506abb8e",
+      "rms": 0.021935192796337197
+    },
+    {
       "file": "chapter1/hospital_hum.ogg",
       "design": "Quiet 40 second transformer/ventilation bed with crossfaded air and steady 50 Hz mains harmonics.",
       "seconds": 40.0,

@@ -1,8 +1,8 @@
 {
   "checks": [
     "door, confirmed movement, map, flee and sneak all stop before animation when Subject X blocks the room",
-    "two actual handgun clicks spend two rounds, carry a minor first-shot risk and knock Subject X down long enough to pass; it remains alive",
-    "one heavy shell also staggers; the real recovery deadline expires and the same exits become blocked again",
+    "three actual Normal handgun clicks spend three rounds, risk two close counters and knock Subject X down long enough to pass; it remains alive",
+    "two Normal heavy shells stagger; the real recovery deadline expires and the same exits become blocked again",
     "retreat uses the actual unlocked entry doorway and runs arrival once; a locked rear route cannot select an unrelated forward exit",
     "pause blocks all combat and pursuer movement mutations",
     "three finite infected identities use three distinct art assets and retain full actor opacity",
@@ -10,33 +10,36 @@
   ],
   "ammo_totals": [
     [
-      48,
-      48
+      91,
+      91
     ],
     [
-      40,
-      40
+      72,
+      72
     ],
     [
-      26,
-      26
+      58,
+      58
     ]
   ],
   "enemy_variants": [
     {
       "variant": "winter-actor infected enemy-orderly watching",
-      "art": "http://127.0.0.1:8010/assets/room_views/infected_orderly.png",
-      "opacity": "1"
+      "opacity": "1",
+      "art_source_sha256": "a193ee4f8bab3ffcc367ad6109a3bc2c21b61276d5904a54bd8c89f14069da90",
+      "art_source_characters": 1598058
     },
     {
       "variant": "winter-actor infected enemy-nurse watching",
-      "art": "url(\"assets/characters/nurse_walk.webp\")",
-      "opacity": "1"
+      "opacity": "1",
+      "art_source_sha256": "60acd62a60266a649b8a16effa797b199767523e5612b5730877d516a12cdc4a",
+      "art_source_characters": 1752501
     },
     {
       "variant": "winter-actor infected enemy-patient watching",
-      "art": "url(\"assets/characters/patient_walk.webp\")",
-      "opacity": "1"
+      "opacity": "1",
+      "art_source_sha256": "fbb043ed6383e0e2751b84c8fa37214a5209770df65d6042d9ceb99af6224e87",
+      "art_source_characters": 2130413
     }
   ],
   "javascript_errors": []

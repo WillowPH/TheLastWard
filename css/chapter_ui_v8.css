@@ -1,0 +1,12 @@
+/* The reference captions have no separate backing panel. Room art remains
+   visible through the cards; only their fine rules and text are rendered. */
+body.ward-playing .ward-center .narrative-focus,body.ward-playing .story-caption,body.ward-playing .narration-block,body.ward-playing .story-caption .scene-thought{background:transparent!important;background-image:none!important;backdrop-filter:none!important;box-shadow:none!important}
+body.ward-playing .ward-center .narrative-focus,body.ward-playing .story-caption,body.ward-playing .narration-block,body.ward-playing .story-caption .scene-thought{pointer-events:none!important}
+body.ward-playing .caption-controls button{pointer-events:auto}
+body.ward-playing #captionText,body.ward-playing #thoughtCaptionText,body.ward-playing .scene-thought>span{text-shadow:0 1px 3px #000,0 0 8px #000}
+body.ward-playing .scene-thought>span{border-bottom:1px solid #a18b5955;padding-bottom:5px;margin-bottom:7px}
+.room-view-targets .c1-target[data-supply=ammo]:after{width:23px!important;height:23px!important;opacity:.8!important;background:linear-gradient(#ead6a3,#ead6a3) 0 0/7px 1px no-repeat,linear-gradient(#ead6a3,#ead6a3) 0 0/1px 7px no-repeat,linear-gradient(#ead6a3,#ead6a3) 100% 100%/7px 1px no-repeat,linear-gradient(#ead6a3,#ead6a3) 100% 100%/1px 7px no-repeat!important;animation:ammo-bracket 5s ease-in-out infinite!important}
+.room-view-targets.strong-hints .c1-target[data-supply=ammo]:after{width:29px!important;height:29px!important;opacity:1!important}
+@keyframes ammo-bracket{0%,100%{opacity:.6}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.room-view-targets .c1-target[data-supply=ammo]:after{animation:none!important}}
+@media(min-width:701px){.room-view-viewport{bottom:0!important}body.ward-playing .ward-center .narrative-focus{left:var(--caption-left,28px)!important;right:var(--caption-right,28px)!important;bottom:var(--caption-bottom,28px)!important;width:auto!important}}

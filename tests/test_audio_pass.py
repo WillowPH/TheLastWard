@@ -1,4 +1,4 @@
-"""Actual browser playback, health-tier selection and pause continuity regressions."""
+"""Measured local heartbeat playback, health/threat routing and pause continuity."""
 from pathlib import Path
 import hashlib
 import json
@@ -6,6 +6,7 @@ import subprocess
 import sys
 
 import numpy as np
+from scipy.signal import find_peaks
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,25 +30,19 @@ for item in manifest['files']:
     assert .005 < np.sqrt(np.mean(samples ** 2)) < .13, file
     assert np.max(np.abs(samples)) < .8, file
     decoded[file.stem] = samples
-assert len(decoded['breath_calm']) > len(decoded['breath_caution']) > len(decoded['breath_danger'])
-for name in ['breath_calm', 'breath_caution', 'breath_danger']:
+for name, beats in [('heartbeat_stress', 4), ('heartbeat_caution', 6), ('heartbeat_danger', 12)]:
     values = decoded[name]
-    # Calm air rests between breaths; no repeated abrupt impact envelope.
-    windows = np.array([np.sqrt(np.mean(w ** 2)) for w in np.array_split(values, 160)])
-    assert np.count_nonzero(windows < .003) > 20, name
-    assert np.max(np.abs(values[:400])) < .01 and np.max(np.abs(values[-400:])) < .01, name
-    assert len(values) / 44100 >= 30, name
-    # Inhalation and exhalation must have different air colours, rather than
-    # one unchanging hiss rhythmically gated on/off. Ignore silent windows.
-    frames = values[:len(values) // 2205 * 2205].reshape(-1, 2205)
-    power = np.abs(np.fft.rfft(frames * np.hanning(2205), axis=1)) ** 2
-    energy = power.sum(axis=1)
-    frequencies = np.fft.rfftfreq(2205, 1 / 44100)
-    centroids = (power * frequencies).sum(axis=1) / np.maximum(energy, 1e-10)
-    audible = centroids[energy > energy.max() * .20]
-    assert np.percentile(audible, 90) - np.percentile(audible, 10) > 800, name
-assert np.sqrt(np.mean(decoded['breath_calm'] ** 2)) < np.sqrt(np.mean(decoded['breath_caution'] ** 2)) < np.sqrt(np.mean(decoded['breath_danger'] ** 2))
-passed('all 8 original assets decode, match provenance, avoid clipping and contain long breath/rest cycles with changing inhale/exhale colour and increasing health-tier intensity')
+    assert np.max(np.abs(values[:400])) < .001 and np.max(np.abs(values[-44100:])) < .001, name
+    frames = values[:len(values) // 441 * 441].reshape(-1, 441)
+    envelope = np.sqrt(np.mean(frames ** 2, axis=1))
+    peaks, _ = find_peaks(envelope, distance=9, prominence=.006)
+    assert len(peaks) == beats * 2, (name, len(peaks), peaks)
+    assert (envelope < .001).mean() > .45, name
+    power = np.abs(np.fft.rfft(values)) ** 2
+    frequencies = np.fft.rfftfreq(len(values), 1 / 44100)
+    assert power[frequencies < 300].sum() / power.sum() > .985, name
+assert np.sqrt(np.mean(decoded['heartbeat_stress'] ** 2)) < np.sqrt(np.mean(decoded['heartbeat_caution'] ** 2)) < np.sqrt(np.mean(decoded['heartbeat_danger'] ** 2))
+passed('all 11 original assets decode and match provenance; new pulse beds have distinct soft lub-dub pairs, low-frequency body, long real rests and no clipping')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(executable_path='/usr/bin/chromium', args=['--no-sandbox'])
@@ -60,27 +55,35 @@ with sync_playwright() as playwright:
     ev = page.evaluate
     ev('nextIntro();nextIntro();nextIntro();S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.pursuer.active=false;S.f.phoneRinging=false;S.hp=100;S.san=100;S.f.introComplete=1;WardSound.stop();initAudio();WardSound.sync()')
     page.wait_for_function("WardSound.context().state==='running'&&WardSound.snapshot().filter(a=>a.loop).every(a=>a.ready>=3&&a.time>.1)")
-    assert ev("WardSound.snapshot().filter(a=>a.channel==='breathing').map(a=>a.clip)") == ['breath_calm']
+    assert not ev("WardSound.snapshot().some(a=>a.channel==='pulse'||a.clip.startsWith('breath'))")
     assert ev("WardSound.snapshot().some(a=>a.clip==='hospital_hum')")
-    assert not ev("WardSound.snapshot().some(a=>['breathing','room_hum','winter_wind'].includes(a.clip))")
     energies = []
     for _ in range(8):
         page.wait_for_timeout(90)
         energies.append(ev('WardSound.energy()'))
     assert max(energies) > .00001, energies
-    passed('new calm air breath and long lobby hum actually advance and produce WebAudio output')
+    passed('healthy exploration produces room ambience without any constant breathing or heartbeat loop')
 
-    for hp, name in [(76, 'breath_calm'), (75, 'breath_caution'), (26, 'breath_caution'), (25, 'breath_danger'), (100, 'breath_calm')]:
+    ev('S.room="ward";S.pursuer.active=true;S.pursuer.room=S.room;WardSound.sync()')
+    page.wait_for_function("WardSound.snapshot().some(a=>a.channel==='pulse'&&a.clip==='heartbeat_stress'&&a.ready>=3&&!a.paused)")
+    ev('S.pursuer.active=false;S.room="lobby";WardSound.sync()')
+    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel?.startsWith('pulse'))")
+    passed('an immediate live threat adds a brief fear pulse; leaving the threat returns healthy exploration to quiet ambience')
+
+    for hp, name in [(76, None), (75, 'heartbeat_caution'), (26, 'heartbeat_caution'), (25, 'heartbeat_danger')]:
         ev('hp=>{S.hp=hp;S.san=10;WardSound.sync()}', hp)
-        page.wait_for_function('(name)=>WardSound.snapshot().some(a=>a.clip===name&&a.ready>=3&&!a.paused)', arg=name)
-        assert ev("WardSound.snapshot().filter(a=>a.channel==='breathing').map(a=>a.clip)") == [name]
+        if name:
+            page.wait_for_function('(name)=>WardSound.snapshot().some(a=>a.clip===name&&a.channel==="pulse"&&a.ready>=3&&!a.paused)', arg=name)
+        else:
+            assert not ev("WardSound.snapshot().some(a=>a.channel==='pulse')")
+        assert ev("WardSound.snapshot().filter(a=>a.channel==='pulse').map(a=>a.clip)") == ([name] if name else [])
     before = ev('WardSound.history.length')
     ev('for(let i=0;i<100;i++)WardSound.sync()')
     assert ev('WardSound.history.length') == before
-    assert not ev("WardSound.snapshot().some(a=>a.clip==='breathing'||a.clip==='impact')")
-    passed('HP selects calm/caution/danger; low sanity never selects hurt grunts; 100 syncs create no duplicate loops')
+    assert not ev("WardSound.snapshot().some(a=>a.clip.startsWith('breath')||a.clip==='impact')")
+    passed('condition boundaries select only caution/danger pulses; low sanity alone never adds a breathing/grunt bed, and repeated syncs do not duplicate channels')
 
-    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel==='breathing-release')")
+    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel==='pulse-release')")
     ev("WardSound.pauseAll('manual')")
     snapshot = ev('WardSound.snapshot()')
     page.wait_for_timeout(800)
@@ -93,21 +96,32 @@ with sync_playwright() as playwright:
     ev("WardSound.resumeAll('manual')")
     page.wait_for_timeout(500)
     resumed = ev('WardSound.snapshot()')
-    assert len(resumed) == len(snapshot), resumed
-    assert all(not a['paused'] and a['time'] > b['time'] + .15 for a, b in zip(resumed, snapshot)), (resumed, snapshot)
-    passed('pause freezes every channel and blocks new sounds; tab visibility cannot resume manual Pause; resume preserves playheads without duplicates')
+    # A positional one-shot from the threat can naturally finish after Resume.
+    # Persistent room/pulse loops must retain their identity and playheads.
+    old_loops = {a['channel']: a for a in snapshot if a['loop']}
+    new_loops = {a['channel']: a for a in resumed if a['loop']}
+    assert new_loops.keys() == old_loops.keys(), (resumed, snapshot)
+    assert all(not a['paused'] and a['time'] > old_loops[k]['time'] + .15 for k, a in new_loops.items()), (resumed, snapshot)
+    passed('Pause freezes every channel and blocks new sounds; tab visibility cannot resume manual Pause, and Resume retains the playheads')
 
-    ev("S.hp=75;WardSound.sync();WardSound.pauseAll('breath-transition')")
-    release = ev("WardSound.snapshot().filter(a=>a.channel==='breathing-release')")
+    ev("S.hp=75;WardSound.sync();WardSound.pauseAll('pulse-transition')")
+    release = ev("WardSound.snapshot().filter(a=>a.channel==='pulse-release')")
     assert release, ev('WardSound.snapshot()')
     page.wait_for_timeout(500)
-    frozen = ev("WardSound.snapshot().filter(a=>a.channel==='breathing-release')")
+    frozen = ev("WardSound.snapshot().filter(a=>a.channel==='pulse-release')")
     assert len(frozen) == len(release) and all(a['paused'] for a in frozen)
     assert all(abs(a['time'] - b['time']) < .025 for a, b in zip(frozen, release))
-    ev("WardSound.resumeAll('breath-transition')")
-    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel==='breathing-release')")
-    assert ev("WardSound.snapshot().filter(a=>a.channel==='breathing').map(a=>a.clip)") == ['breath_caution']
-    passed('health changes release the outgoing breath smoothly; Pause also freezes that fade, and resume leaves exactly one breath loop')
+    ev("WardSound.resumeAll('pulse-transition')")
+    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel==='pulse-release')")
+    assert ev("WardSound.snapshot().filter(a=>a.channel==='pulse').map(a=>a.clip)") == ['heartbeat_caution']
+    passed('condition changes release outgoing bass smoothly; Pause also freezes that transition, leaving one physiological channel after Resume')
+
+    ev('doc("Night Attendant Journal");WardSound.sync()')
+    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel?.startsWith('pulse'))")
+    assert ev("WardSound.snapshot().some(a=>a.channel==='room'&&!a.paused)")
+    ev('closeModal();WardSound.sync()')
+    page.wait_for_function("WardSound.snapshot().some(a=>a.channel==='pulse'&&a.clip==='heartbeat_caution'&&!a.paused)")
+    passed('reading an actual record quiets the physiological pulse while room ambience continues; closing it restores the correct condition pulse')
 
     ev("soundEffect('pickup')")
     assert ev("WardSound.history.at(-1).name") == 'pickup_chime'
@@ -119,7 +133,7 @@ with sync_playwright() as playwright:
     hits = ev("WardSound.history.filter(a=>a.name==='impact').length")
     page.wait_for_timeout(1500)
     assert ev("WardSound.history.filter(a=>a.name==='impact').length") == hits
-    passed('pickup uses the original short cue and ends; explicit damage impact plays once without becoming a breathing loop')
+    passed('pickup uses the short original cue; an explicit damage impact plays once and never becomes a breathing or heartbeat loop')
 
     ev('window.__audioPauseFunction=WardWinter.isPaused;WardWinter.isPaused=()=>true;WardSound.sync()')
     assert ev('WardSound.snapshot().every(a=>a.paused)')
@@ -127,7 +141,7 @@ with sync_playwright() as playwright:
     page.wait_for_timeout(300)
     assert ev('WardSound.snapshot().filter(a=>a.loop).every(a=>!a.paused)')
     ev('WardWinter.isPaused=window.__audioPauseFunction')
-    passed('the game-wide pause contract automatically stops and restores audio without a parallel sound clock')
+    passed('the game-wide Pause contract stops and restores audio without a parallel sound clock')
     assert not errors, errors
     browser.close()
 

@@ -62,7 +62,7 @@ pursuerEncounter=function(note){
  const p=initPursuer();if(!S.f.pursuerEncounter)p.encounters=(p.encounters||0)+1;
  S.f.pursuerEncounter=1;cm=0;S.sceneFocus=null;renderScene();
  const weapon=W[S.eq]&&has(S.eq)?W[S.eq]:null,loaded=weapon?(S.ld[S.eq]||0):0;
- modal('Subject X · blocking the passage','<div class="c1-encounter"><div><p>'+escape(note||'The broad figure turns with me, cutting off the door. I cannot simply walk past it.')+'</p><p>'+(p.posture?'The last impact shook its balance. Another solid hit may bring it down.':'A concentrated burst can knock it down. It will recover.')+'</p><p>'+(weapon?escape(S.eq)+' · '+loaded+' loaded · '+cnt(weapon.ammo)+' reserve':'No firearm equipped. Cover or a risky retreat may be safer.')+'</p></div></div><div class="c1-encounter-actions"><button class="btn p" '+(!loaded?'disabled':'')+' onclick="escapePursuer(\'shoot\')">Shoot Subject X</button><button class="btn" '+(!weapon?'disabled':'')+' onclick="reload()">Reload</button>'+(HIDING_AREAS.has(S.room)?'<button class="btn" onclick="escapePursuer(\'hide\')">Enter cover · it may see you</button>':'')+'<button class="btn" onclick="escapePursuer(\'retreat\')">Retreat through an unlocked door</button><button class="btn" onclick="escapePursuer(\'push\')">Force a gap · risk injury</button></div>');
+ modal('Subject X · blocking the passage','<div class="c1-encounter"><div><p>'+escape(note||'The broad figure turns with me, cutting off the door. I cannot simply walk past it.')+'</p><p>'+(p.posture?'The impacts are breaking its balance. Keep the impacts concentrated, or change tactics.':'A concentrated burst can knock it down. It will recover.')+'</p><p>'+(weapon?escape(S.eq)+' · '+loaded+' loaded · '+cnt(weapon.ammo)+' reserve':'No firearm equipped. Cover or a risky retreat may be safer.')+'</p></div></div><div class="c1-encounter-actions"><button class="btn p" '+(!loaded?'disabled':'')+' onclick="escapePursuer(\'shoot\')">Shoot Subject X</button><button class="btn" '+(!weapon?'disabled':'')+' onclick="reload()">Reload</button>'+(HIDING_AREAS.has(S.room)?'<button class="btn" onclick="escapePursuer(\'hide\')">Enter cover · it may see you</button>':'')+'<button class="btn" onclick="escapePursuer(\'retreat\')">Retreat through an unlocked door</button><button class="btn" onclick="escapePursuer(\'push\')">Force a gap · risk injury</button></div>');
  document.querySelector('#m .mh button')?.remove();document.querySelector('#m .md')?.classList.add('winter-combat-modal');WW.orbit?.face('front');WardSound?.sync();return true;
 };
 function shootPursuer(){
@@ -71,12 +71,12 @@ function shootPursuer(){
  if(!(S.ld[S.eq]>0))return pursuerEncounter('Click. The chamber is empty. I need to reload.');
  const p=initPursuer();S.ld[S.eq]--;soundEffect('shot');noise();advanceTime(1);
  if(!actionable())return;
- // At this range the large target can reliably be hit: two handgun rounds or
- // one heavier shell create a finite opening, rather than a lethal boss fight.
+ // At this range the large target can reliably be hit. The active difficulty
+ // supplies a finite knockdown threshold; it is never a killable bullet sponge.
  p.posture=(p.posture||0)+(S.eq==='Handgun'?1:2);
- if(p.posture>=2)return stagger();
- S.hp=Math.max(0,S.hp-Math.max(1,Math.round(3*S.m)));soundEffect('hit');
- if(S.hp<=0)return die();render();pursuerEncounter('The shot drives its shoulder back, but it catches me before I can pass. One more solid impact should break its balance.');
+ if(p.posture>=(WW.pursuerKnockdownThreshold?.()||2))return stagger();
+ S.hp=Math.max(0,S.hp-Math.max(1,Math.round((WW.pursuerCounterDamage?.()||3)*S.m)));soundEffect('hit');
+ if(S.hp<=0)return die();render();pursuerEncounter('The shot drives its shoulder back, but it catches me before I can pass. It is still between me and the door; I need to keep my aim steady or find another opening.');
 }
 const priorShoot=shoot;shoot=function(){if(!actionable())return;if(present()&&!down())return shootPursuer();return priorShoot();};
 const priorReload=reload;reload=function(){if(!actionable())return;if(!present()||down())return priorReload();const w=W[S.eq];if(!w||!has(S.eq))return pursuerEncounter('There is no firearm to reload.');const amount=Math.min(w.mag-(S.ld[S.eq]||0),cnt(w.ammo));if(amount<=0)return pursuerEncounter('No reserve rounds are available for this weapon.');rem(w.ammo,amount);S.ld[S.eq]=(S.ld[S.eq]||0)+amount;advanceTime(1);soundEffect('reload');pursuerEncounter('The magazine locks into place. It is still between me and the door.');};

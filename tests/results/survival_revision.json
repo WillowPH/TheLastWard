@@ -12,51 +12,51 @@
     {
       "mode": "0.7",
       "ammo": {
-        "before": 48,
-        "after": 48,
-        "actors": 3
+        "before": 91,
+        "after": 91,
+        "actors": 6
       },
       "sprinkler_initial": {
-        "hp": 95,
+        "hp": 92,
         "san": 94
       },
       "after_four_exposure_turns": {
-        "hp": 91.64,
-        "san": 92.2,
+        "hp": 88.3712,
+        "san": 91.552,
         "wet": 1
       }
     },
     {
       "mode": "1",
       "ammo": {
-        "before": 40,
-        "after": 40,
-        "actors": 4
+        "before": 72,
+        "after": 72,
+        "actors": 10
       },
       "sprinkler_initial": {
-        "hp": 93,
+        "hp": 86,
         "san": 94
       },
       "after_four_exposure_turns": {
-        "hp": 88.2,
-        "san": 92.2,
+        "hp": 78.35,
+        "san": 90.38749999999999,
         "wet": 1
       }
     },
     {
       "mode": "1.3",
       "ammo": {
-        "before": 26,
-        "after": 26,
-        "actors": 4
+        "before": 58,
+        "after": 58,
+        "actors": 12
       },
       "sprinkler_initial": {
-        "hp": 91,
+        "hp": 82,
         "san": 94
       },
       "after_four_exposure_turns": {
-        "hp": 84.76,
-        "san": 92.2,
+        "hp": 70.9552,
+        "san": 89.988,
         "wet": 1
       }
     }

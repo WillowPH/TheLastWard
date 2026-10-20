@@ -1,12 +1,14 @@
 {
   "checks": [
-    "all 8 original assets decode, match provenance, avoid clipping and contain long breath/rest cycles with changing inhale/exhale colour and increasing health-tier intensity",
-    "new calm air breath and long lobby hum actually advance and produce WebAudio output",
-    "HP selects calm/caution/danger; low sanity never selects hurt grunts; 100 syncs create no duplicate loops",
-    "pause freezes every channel and blocks new sounds; tab visibility cannot resume manual Pause; resume preserves playheads without duplicates",
-    "health changes release the outgoing breath smoothly; Pause also freezes that fade, and resume leaves exactly one breath loop",
-    "pickup uses the original short cue and ends; explicit damage impact plays once without becoming a breathing loop",
-    "the game-wide pause contract automatically stops and restores audio without a parallel sound clock"
+    "all 11 original assets decode and match provenance; new pulse beds have distinct soft lub-dub pairs, low-frequency body, long real rests and no clipping",
+    "healthy exploration produces room ambience without any constant breathing or heartbeat loop",
+    "an immediate live threat adds a brief fear pulse; leaving the threat returns healthy exploration to quiet ambience",
+    "condition boundaries select only caution/danger pulses; low sanity alone never adds a breathing/grunt bed, and repeated syncs do not duplicate channels",
+    "Pause freezes every channel and blocks new sounds; tab visibility cannot resume manual Pause, and Resume retains the playheads",
+    "condition changes release outgoing bass smoothly; Pause also freezes that transition, leaving one physiological channel after Resume",
+    "reading an actual record quiets the physiological pulse while room ambience continues; closing it restores the correct condition pulse",
+    "pickup uses the short original cue; an explicit damage impact plays once and never becomes a breathing or heartbeat loop",
+    "the game-wide Pause contract stops and restores audio without a parallel sound clock"
   ],
   "browser_errors": [],
   "assets": [
@@ -30,6 +32,27 @@
       "seconds": 34.25,
       "sha256": "a88eca406bec48a8551bf72cfa1a4cf81f646b333d2b81dc805df45dfd235670",
       "rms": 0.037315133071674014
+    },
+    {
+      "file": "chapter1/heartbeat_stress.ogg",
+      "design": "Original short four-beat muffled lub-dub fear response at 84 BPM, followed by 5.7 seconds of quiet. Only selected with an immediate live threat, not low sanity alone.",
+      "seconds": 8.797142857142857,
+      "sha256": "a3a305ba62ce5d521cbb220b621f34ff827b5c5ebad6153764a81f01fdea533c",
+      "rms": 0.010734563705421711
+    },
+    {
+      "file": "chapter1/heartbeat_caution.ogg",
+      "design": "Original restrained six-beat dual-thump condition pulse at 76 BPM, with 4.1 seconds of recovery silence between bursts. No breath or impact recording.",
+      "seconds": 9.076825396825397,
+      "sha256": "9e3bbd13e623ab12fb9d37a3e9f4cdf356086ee0f836b6dba0c4c952852cc2aa",
+      "rms": 0.014363274214688184
+    },
+    {
+      "file": "chapter1/heartbeat_danger.ogg",
+      "design": "Original deeper twelve-beat danger pulse at 98 BPM with distinct soft lub-dub lobes and 2.7 seconds of quiet recovery. No respiratory noise or hurt syllables.",
+      "seconds": 10.286938775510205,
+      "sha256": "6e8a9c2098f233a7e0740ed4740ea1b31d0fed52ae6651591a8613b3506abb8e",
+      "rms": 0.021935192796337197
     },
     {
       "file": "chapter1/hospital_hum.ogg",

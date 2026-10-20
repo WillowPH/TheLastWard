@@ -2,7 +2,7 @@
    the baseline; no room, map or renderer from the rejected pilot is imported. */
 (function(){
 'use strict';
-const BUILD='last-ward-ch1-chapter-review-7';
+const BUILD='last-ward-ch1-chapter-review-8';
 const ROOMS=['lobby','security','eastcorridor','ward','wardnorth','wardservice','room12','isoward','archive','pharmacy','laundry','generator','powercontrol','boiler','tunnel','morgue','chapel','children','residence','stafflounge','records','surgery','observation','specimen','isolation','coldstore','lift'];
 window.WardChapter={BUILD,rooms:ROOMS};
 for(const id of Object.keys(R))if(!ROOMS.includes(id))delete R[id];
@@ -100,14 +100,14 @@ window.wardExportCompletion=function(){if(!S?.f.chapter1Complete)return;const bl
 const positions={lobby:[45,330],security:[45,280],eastcorridor:[110,300],ward:[170,300],wardnorth:[230,300],wardservice:[290,260],room12:[230,345],isoward:[290,345],residence:[170,345],stafflounge:[110,345],children:[350,345],archive:[220,210],records:[290,210],coldstore:[350,210],chapel:[150,210],generator:[220,145],lift:[150,145],pharmacy:[350,260],laundry:[290,145],surgery:[350,145],powercontrol:[290,80],specimen:[350,80],observation:[220,80],isolation:[290,30],morgue:[150,80],tunnel:[85,80],boiler:[150,30]};
 for(const [id,[x,y]] of Object.entries(positions)){R[id].x=x;R[id].y=y;}
 for(const id of ['wardnorth','wardservice'])FIRST_MAP.add(id);
-// Accept the current topology and recognized v5/v6 records; preserve the existing save namespace.
-const baseValid=valid;valid=function(o){return !!(baseValid(o)&&[BUILD,'last-ward-ch1-chapter-review-6','last-ward-ch1-survival-review-5'].includes(o.buildId)&&R[o.room]&&o.inv.every(x=>x&&typeof x.n==='string'&&Number.isFinite(x.c)&&x.c>0))};
-for(const name of ['loadGame','loadCheckpoint','loadFirstFloorCheckpoint']){const previous=window[name];if(typeof previous==='function')window[name]=function(...args){const result=previous.apply(this,args);if(['last-ward-ch1-chapter-review-6','last-ward-ch1-survival-review-5'].includes(S?.buildId))S.buildId=BUILD;return result;};}
+// Accept the current topology and recognized v5/v6/v7 records; preserve the existing save namespace.
+const baseValid=valid;valid=function(o){return !!(baseValid(o)&&[BUILD,'last-ward-ch1-chapter-review-7','last-ward-ch1-chapter-review-6','last-ward-ch1-survival-review-5'].includes(o.buildId)&&R[o.room]&&o.inv.every(x=>x&&typeof x.n==='string'&&Number.isFinite(x.c)&&x.c>0))};
+for(const name of ['loadGame','loadFirstFloorCheckpoint']){const previous=window[name];if(typeof previous==='function')window[name]=function(...args){const result=previous.apply(this,args);if(['last-ward-ch1-chapter-review-7','last-ward-ch1-chapter-review-6','last-ward-ch1-survival-review-5'].includes(S?.buildId))S.buildId=BUILD;return result;};}
 const baseNew=newGame;newGame=function(){baseNew();S.buildId=BUILD;S.bat=S.m<1?12:S.m>1?7:10;S.presentation.hints=false;render()};
 // Capture a final-route checkpoint without consuming ribbons; explicit recovery stays separate from saves.
 const baseArrival=chapterArrival;
 chapterArrival=function(from,to){if(to==='lift'){S.f.liftSeen=1;try{localStorage.setItem('lw_ch1_finale_checkpoint',JSON.stringify(S))}catch(e){}inspectLiftControls();return true}return baseArrival(from,to)};
-window.wardLoadFinale=function(){try{const data=JSON.parse(localStorage.getItem('lw_ch1_finale_checkpoint'));if(!valid(data))return toast('No compatible finale checkpoint.');S=data;S.buildId=BUILD;S.hp=Math.max(35,S.hp);S.f.chapter1Complete=0;S.f.pursuerEncounter=0;S.pursuer.cooldown=3;configureWorld(S.seed,true);placeTelephones(S.seed);$('m').innerHTML='';$('setup').classList.add('hid');$('game').classList.remove('hid');render()}catch(e){toast('The finale checkpoint is unavailable.')}};
+window.wardLoadFinale=function(){try{const data=JSON.parse(localStorage.getItem('lw_ch1_finale_checkpoint'));if(!valid(data))return toast('No compatible finale checkpoint.');S=data;S.hp=Math.max(35,S.hp);S.f.chapter1Complete=0;S.f.pursuerEncounter=0;S.pursuer.cooldown=3;configureWorld(S.seed,true);S.buildId=BUILD;placeTelephones(S.seed);$('m').innerHTML='';$('setup').classList.add('hid');$('game').classList.remove('hid');render()}catch(e){toast('The finale checkpoint is unavailable.')}};
 // Persistent journal leads reflect obstacles actually discovered, without exposing code solutions.
 journal=function(){const leads=[];if(!S.mapParts)leads.push('An evacuation plan may be in Security.');if(S.vis.generator&&!S.f.power)leads.push('The generator needs its contacts repaired and a ceramic fuse. Read Heller’s maintenance notes.');if(S.f.power&&!S.f.photoPuzzleSolved)leads.push('The restored Security portrait lamp may reveal something new.');if(S.vis.observation&&!S.f.finalSecurityClearance)leads.push('The archive drive belongs in a containment authorization terminal.');if(S.f.pursuerStarted&&!(S.f.pursuerEscapes>0))leads.push('I need to break contact with the masked pursuer.');modal('Journal','<h3>Unresolved leads</h3>'+leads.map(x=>'<p>'+htmlSafe(x)+'</p>').join('')+'<h3>Thoughts and discoveries</h3>'+(S.th2||[]).slice(-12).map(x=>'<p>'+htmlSafe(x)+'</p>').join(''))};
 })();

@@ -6,7 +6,8 @@ Keep the launcher window open while playing. No external internet is required.
 macOS/Linux: run python3 start_game.py (Python 3 standard library).
 Opening index.html directly can block game data/audio; use the launcher.
 
-Existing v5 and v6 saves can CONTINUE in this v7 update. A NEW GAME also works.
+Existing v5, v6 and v7 saves can CONTINUE in this v8 update.
+A NEW GAME gives the complete revised encounter and puzzle progression.
 Keep the same browser and local port to access those saves.
 CLICK visible objects. DRAG sideways to see the other side.
 No keyboard controls are required. There is no bottom navigation toolbar.

@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "four real horizontal drags retain pointer ownership through repeated scheduled scene refreshes and change facing exactly once",
+    "a short drag does not turn the camera and replays its pending status refresh after release",
+    "losing focus cancels a held pointer and releases the pending refresh instead of freezing rendering"
+  ],
+  "javascript_errors": []
+}
