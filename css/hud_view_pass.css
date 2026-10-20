@@ -4,6 +4,10 @@ body.ward-playing .right-rail .vital-card[data-health=caution],body.ward-playing
 body.ward-playing .right-rail .vital-card[data-health=danger],body.ward-playing .right-rail .vital-card[data-health=danger] .hud-condition-row{color:#d8665c!important}
 body.ward-playing .right-rail .vital-card .hud-condition-row svg,body.ward-playing .right-rail .vital-card .hud-condition-row strong{color:inherit!important}
 body.ward-playing .left-rail,body.ward-playing .right-rail{background:linear-gradient(110deg,#0b0a0a,#080808)!important}
+body.ward-playing .ward-center .stage-world,body.ward-playing .ward-center .interactive-scene{background:#080808!important}
+#hudFeedbackSources{display:none!important}
+body.ward-playing .story-caption>.narration-block,body.ward-playing .story-caption>.scene-thought{box-shadow:none!important}
+.reading-focus .winter-finding-art img.surveillance-finding-preview{filter:grayscale(1) contrast(1.12)!important;object-fit:contain!important;border:1px solid #655f53;border-radius:2px}
 body.ward-playing .stage-heading{background:#111010e8!important;color:#cbc3b6!important}
 body.ward-playing .winter-combat-modal,.ward-playing .medical-modal,.ward-playing .inventory-menu,.ward-playing .inventory-action-menu{background:#141212f7!important;border-color:#71685a!important}
 body.ward-playing .ward-center #sceneFocusOverlay:has(.hiding-physical){background:transparent!important;padding:0!important;overflow:hidden!important}

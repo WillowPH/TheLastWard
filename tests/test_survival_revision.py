@@ -3,6 +3,7 @@ from pathlib import Path
 import json
 import sys
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:8010'
@@ -173,7 +174,7 @@ with sync_playwright() as p:
     room('archive', True)
     ev('S.san=86;S.f.doctorWallSeen=1;WardWinter.sanityEpisode()')
     assert ev('S.sceneDisturbance?.kind') == 'hanged'
-    page.get_by_role('button', name='Look right', exact=True).click()
+    turn_room(page)
     ready()
     assert ev('S.roomView') == 'rear'
     assert page.locator('.winter-hallucinated-body').count() == 1

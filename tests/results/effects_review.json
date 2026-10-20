@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "all six distinct room feeds reach the visible CRTs on backup, generator power and temporary outage",
+    "camera sources follow authored room-state artwork rather than stale base images",
+    "real valve action stops rain, preserves wet/cold consequences, and leaves no full-scene green overlay",
+    "sanity visions retain elapsed fade time and are suppressed during active sprinkler water",
+    "Mercer breathes in a chest-only native patch; Pause, reduced motion and covered death stop it without moving the bed"
+  ],
+  "javascript_errors": []
+}

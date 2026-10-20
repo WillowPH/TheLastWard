@@ -121,6 +121,46 @@
       ],
       "change": "Distinct game-rendered infected orderly with pallor, visible veins, clouded eyes and torn stained uniform; native transparent background retained",
       "export": "Native PNG without resizing"
+    },
+    "egg_umbrella": {
+      "generated": "exec-e9779d44-7500-472e-b450-937ff2c0371d.png",
+      "output": "assets/room_views/egg_umbrella.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Native game-art red-and-white segmented umbrella inspection",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
+    },
+    "egg_sweet_tooth": {
+      "generated": "exec-5c20e345-b9d9-467e-a2a3-87d6d01b6221.png",
+      "output": "assets/room_views/egg_sweet_tooth.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Native game-art Sweet Tooth clown and battered ice-cream toy inspection",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
+    },
+    "egg_dragon_medallion": {
+      "generated": "exec-c4dbd9c9-6e60-4fb4-9aec-b63f95f2b100.png",
+      "output": "assets/room_views/egg_dragon_medallion.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Native game-art Mortal Kombat dragon medallion and staff arcade flyer inspection",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
+    },
+    "egg_hero_mug": {
+      "generated": "exec-34f17053-db07-437c-a2dc-3536fcb7bddc.png",
+      "output": "assets/room_views/egg_hero_mug.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Native game-art Overwatch emblem mug inspection",
+      "export": "WebP quality95; original native dimensions preserved without resizing"
     }
   }
 }

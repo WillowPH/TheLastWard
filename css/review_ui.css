@@ -61,14 +61,8 @@ body.ward-playing .scene-thought>span{font-size:11px!important;font-weight:400!i
 .caption-controls{display:flex;align-items:center;gap:8px;margin-top:auto;height:23px;flex-shrink:0}.caption-controls[hidden]{display:none}.caption-controls button{background:transparent;border:1px solid #88857466;color:#c9c3b6;border-radius:3px;cursor:pointer;padding:1px 8px;font:12px Roboto,sans-serif}.caption-controls button:disabled{opacity:.3}.caption-controls span{font-size:10px;color:#9b968b}.caption-controls .caption-room{margin-left:auto;border:0;font-size:10px}#thoughtCaptionControls{justify-content:flex-end}
 .c1-tooltip{left:var(--tip-x,50%)!important;top:var(--tip-y,50%)!important;transform:none!important;max-width:230px!important;background:#0b0b0be8!important;border:1px solid #9b8b6b88!important;color:#e2d8c4!important;pointer-events:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-/* Mouse-only scene navigation. Edge controls appear when the pointer approaches. */
-.mouse-look-edge{position:absolute!important;top:50%!important;transform:translateY(-50%);width:48px;height:156px;z-index:20!important;padding:0;border:0!important;border-radius:0!important;background:none!important;color:#e4d6b9!important;font:300 48px/1 Roboto,Arial,sans-serif!important;opacity:0;cursor:pointer;transition:opacity .16s ease;touch-action:manipulation}
-.mouse-look-edge.left{left:0;background:linear-gradient(90deg,#0008,transparent)!important}.mouse-look-edge.right{right:0;background:linear-gradient(270deg,#0008,transparent)!important}
-.mouse-look-edge:hover,.mouse-look-edge:focus-visible{opacity:.95;outline:none!important}.mouse-look-edge:focus-visible{box-shadow:inset 0 0 0 1px #d0b98c66!important}
-.panorama-frame:hover .mouse-look-edge,.room-view-frame:hover .mouse-look-edge{opacity:.45}.panorama-frame:hover .mouse-look-edge:hover,.room-view-frame:hover .mouse-look-edge:hover{opacity:.95}
-.panorama-frame.camera-gliding .mouse-look-edge,.room-view-frame.camera-gliding .mouse-look-edge,.panorama-frame[data-loading=true] .mouse-look-edge,.room-view-frame[data-loading=true] .mouse-look-edge,.panorama-frame:has(.c1-locker) .mouse-look-edge,body:has(.panorama-locker) .mouse-look-edge,body:has(#m .ov) .mouse-look-edge,body:has(#sceneFocusOverlay .c1-focus) .mouse-look-edge{opacity:0!important;pointer-events:none!important}
-.mouse-looking,.panorama-frame.mouse-looking{cursor:grabbing!important;touch-action:none!important}.mouse-looking .mouse-look-edge{opacity:0!important;pointer-events:none!important}
-@media(hover:none){.mouse-look-edge{opacity:.55;width:40px;height:120px}}
+/* Horizontal dragging is the only scene-facing control. */
+.mouse-looking,.panorama-frame.mouse-looking{cursor:grabbing!important;touch-action:none!important}
 /* Projection and hit regions share one sphere. These rules never add scenery. */
 .panorama-frame{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;perspective:none!important;overflow:hidden!important;touch-action:manipulation;z-index:1!important;background:#080808!important}
 .panorama-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}

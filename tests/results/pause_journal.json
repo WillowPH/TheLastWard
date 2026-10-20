@@ -4,7 +4,7 @@
     "the Night Attendant Journal ends on its first readable sheet, and Pause preserves the exact open document",
     "real-time hallucination, blackout and Subject X stagger deadlines retain their remaining duration across Pause",
     "pausing during a camera fade defers its facing change until Resume",
-    "tablet/mobile journal retains all text without clipping; mouse Pause remains available above its full-screen reader"
+    "tablet/mobile journal retains all text without clipping; mouse Pause retains its exact menu position and never covers the actual mouse Close control"
   ],
   "javascript_errors": []
 }

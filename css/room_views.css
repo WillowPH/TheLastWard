@@ -10,3 +10,9 @@
 
 /* Navigation lives in the matte, so it cannot intercept edge cupboards or doors. */
 .room-view-frame.winter-look-frame{overflow:visible!important}.room-view-targets.c1-plane.c1-reverse-plane{overflow:hidden!important}.room-view-frame .mouse-look-edge{width:24px!important;height:140px!important;font-size:36px!important}.room-view-frame .mouse-look-edge.left{left:-24px!important}.room-view-frame .mouse-look-edge.right{right:-24px!important}
+
+/* Cold is a local, neutral edge cue, never a green wash over the whole HUD. */
+.interactive-scene.winter-cold:after{content:none!important;display:none!important}
+.interactive-scene.winter-cold .room-view-frame:after{content:'';position:absolute;inset:0;z-index:12;pointer-events:none;box-shadow:inset 0 0 24px 3px #d4d4d413;border:1px solid #ddd1;box-sizing:border-box}
+.room-view-targets .winter-hallucinated-body[data-sanity-vision]{filter:brightness(.6) saturate(.25);animation-name:room-sanity-fade;animation-duration:15s;animation-fill-mode:forwards;opacity:0}
+@keyframes room-sanity-fade{0%{opacity:0}10%,75%{opacity:.9}100%{opacity:0}}

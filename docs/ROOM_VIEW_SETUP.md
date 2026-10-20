@@ -11,11 +11,11 @@ death, door-transition locking and pause consistently.
   scale no larger than1. Never use cover-cropping, fake4K resizing or a 360° texture crop.
 - Place targets in the same fitted plane. Rectangles are centered percentages `[x,y,w,h]`.
   Edit `data/room_views.json`, then run `python3 tools/build_room_views.py`.
-- `WardWinter.orbit.setView('front'|'rear')` changes facing. Side arrows and a55px
-  horizontal mouse drag call this. Input locks during the short optional fade; drag
+- `WardWinter.orbit.setView('front'|'rear')` changes facing. A55px
+  horizontal mouse drag calls this. Input locks during the short optional fade; drag
   release cannot click the object beneath it. Ordinary object clicks never move artwork.
-- Keep navigation arrows in the side matte, outside the paintings, so edge objects
-  remain clickable. No bottom labels or POI picker is rendered.
+- Do not add view-arrow buttons, bottom labels or a POI picker. Object clicks stay
+  separate from the turning gesture. Pause remains in left navigation, not dialogs.
 - Mark each door's real view and rectangle. On arrival, choose the opposite facing
   from the door used unless `entryFacing[doorId]` explicitly authors another facing.
   East Corridor looks toward Patient Wing from Lobby/Security. Preserve `roomView` on load.

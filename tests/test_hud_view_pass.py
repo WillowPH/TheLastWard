@@ -1,6 +1,7 @@
 """Regressions for physical PEEK, clinical colour, local CRT light and mouse HUD."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 import json,sys
 ROOT=Path(__file__).resolve().parents[1]
 URL=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8010'
@@ -13,6 +14,10 @@ with sync_playwright() as p:
  page.goto(URL);page.get_by_role('button',name='BEGIN INVESTIGATION').click();page.evaluate('nextIntro();nextIntro();nextIntro()')
  def ready():page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
  ready();page.wait_for_function('!!WardWinter.playDoorTransition')
+ def clean_captions():
+  result=page.evaluate('''()=>{const hidden=id=>{const n=document.getElementById(id),r=n.getBoundingClientRect();return r.width===0&&r.height===0;};return {cards:document.querySelector('.story-caption').children.length,legacyInCards:!!document.querySelector('.narrative-focus .message-stream'),sourceHidden:getComputedStyle(hudFeedbackSources).display==='none'&&hudFeedbackSources.inert&&hudFeedbackSources.contains(document.querySelector('.message-stream')),legacyHidden:['feedbackBox','ev','sceneDrawer'].every(hidden),narration:getComputedStyle(document.querySelector('.narration-block')).backgroundColor,thoughts:getComputedStyle(sceneThought).backgroundColor};}''')
+  assert result=={'cards':2,'legacyInCards':False,'sourceHidden':True,'legacyHidden':True,'narration':'rgba(9, 9, 9, 0.91)','thoughts':'rgba(16, 13, 8, 0.91)'},result
+ clean_captions()
  for health,label,color in [(90,'FINE','rgb(131, 183, 154)'),(50,'CAUTION','rgb(210, 170, 99)'),(15,'DANGER','rgb(216, 102, 92)')]:
   value=page.evaluate('''hp=>{S.hp=hp;WardWinter.updateStatus();return {label:conditionLabel.textContent,line:getComputedStyle(heartLine).color,text:getComputedStyle(conditionLabel).color};}''',health)
   assert value=={'label':label,'line':color,'text':color},value
@@ -26,7 +31,7 @@ with sync_playwright() as p:
  # Current front and rear bearings must differ by exactly 180 degrees; the mini
  # map refreshes without requiring a travel or another click on the map.
  page.evaluate('S.mapParts=3;render()');ready();before=page.locator('.floorplan-player-arrow').first.get_attribute('transform')
- page.get_by_role('button',name='Look right',exact=True).click();ready();after=page.locator('.floorplan-player-arrow').first.get_attribute('transform')
+ turn_room(page);ready();after=page.locator('.floorplan-player-arrow').first.get_attribute('transform')
  assert before!=after,(before,after)
  a,b=[int(x.removeprefix('rotate(').removesuffix(')')) for x in (before,after)];assert (b-a)%360==180
  report['checks'].append('A mouse facing change immediately rotates the map arrow by 180 degrees.')
@@ -50,13 +55,34 @@ with sync_playwright() as p:
  assert pixels['opaque']>1000 and pixels['bad']==0 and pixels['bright']>200,pixels
  page.screenshot(path=str(OUT/'hud-security-crt.png'))
  report['checks'].append('Standby security feeds show monochrome rooms, and all emissive pixels remain strictly inside six authored CRT rectangles.')
+ page.locator('[data-fixture="monitors"]').click()
+ page.get_by_role('button',name='Camera feed',exact=True).click()
+ preview=page.locator('.surveillance-finding-preview')
+ preview.wait_for(state='visible');page.wait_for_function("document.querySelector('.surveillance-finding-preview')?.complete&&document.querySelector('.surveillance-finding-preview')?.naturalWidth>1000")
+ assert preview.get_attribute('src').endswith('assets/room_views/lobby_front.webp')
+ assert 'grayscale(1)' in preview.evaluate('e=>getComputedStyle(e).filter')
+ page.get_by_role('button',name='Return to room ×',exact=True).click()
+ report['checks'].append('Camera feed inspection uses a clear monochrome Lobby thumbnail rather than a generic document or pouch icon.')
  page.locator('[data-fixture="cabinet"]').click()
  page.get_by_role('button',name='Folding utility knife',exact=True).click()
  page.get_by_role('button',name='Take Utility Knife',exact=True).click()
  page.get_by_role('button',name='Return to room ×',exact=True).click()
  clean=page.evaluate('''()=>({focus:S.sceneFocus,hidden:sceneFocusOverlay.classList.contains('hid'),children:sceneFocusOverlay.children.length,background:getComputedStyle(sceneFocusOverlay).backgroundColor,canvasFilter:getComputedStyle(document.querySelector('.room-view-canvas')).filter})''')
  assert clean=={'focus':None,'hidden':True,'children':0,'background':'rgba(0, 0, 0, 0)','canvasFilter':'none'},clean
+ clean_captions()
  report['checks'].append('Taking the Security utility knife and returning to the room clears the contents overlay and leaves no colour filter or stale focus container.')
+
+ # Trigger and stop the once-only sprinkler through its actual fixture card.
+ page.evaluate("S.room='eastcorridor';S.prev='lobby';S.roomView='front';S.roomViewRoom=S.room;add('Flashlight',1);S.lightOn=true;render()")
+ ready();page.locator('[data-fixture="valve"]').click()
+ page.get_by_role('button',name='Interact',exact=True).click()
+ page.get_by_role('button',name='Reach for the shutoff',exact=True).click()
+ page.get_by_role('button',name='Interact',exact=True).click();ready()
+ assert page.evaluate('S.f.sprinklerStopped&&S.f.wet&&S.f.shivering')
+ clean_captions()
+ assert page.evaluate("document.querySelector('.room-view-viewport').getBoundingClientRect().bottom<document.querySelector('.narrative-focus').getBoundingClientRect().top")
+ page.screenshot(path=str(OUT/'hud-after-sprinkler.png'))
+ report['checks'].append('After triggering and closing the sprinkler, narration and thoughts remain two neutral cards with no extra feedback panels beneath them.')
 
  # Completion is exactly once; exposure changes duration without timer drift.
  durations=page.evaluate('''()=>{S.f.wet=0;S.f.shivering=0;S.f.coldExposure=0;let a=WardWinter.playDoorTransition({from:'security',to:'lobby',duration:1000});const dry=a.duration;a.cancel();S.f.wet=1;let b=WardWinter.playDoorTransition({from:'security',to:'lobby',duration:1000});const wet=b.duration;b.cancel();S.f.wet=0;return {dry,wet};}''')
@@ -75,12 +101,14 @@ with sync_playwright() as p:
  page.evaluate("sceneDoorTravel('eastcorridor');mapTravel('lobby');go('lobby');WardWinter.orbit.look();invModal()")
  assert page.locator('.ward-door-passage').count()==1
  assert page.evaluate("S.room==='security'&&S.roomView==='front'&&!document.querySelector('#m .md')")
- page.get_by_role('button',name='Look right',exact=True).dispatch_event('click')
+ frame=page.locator('.room-view-frame').bounding_box();assert frame
+ page.mouse.move(frame['x']+frame['width']*.75,frame['y']+frame['height']*.12);page.mouse.down();page.mouse.move(frame['x']+frame['width']*.25,frame['y']+frame['height']*.12,steps=2);page.mouse.up()
  assert page.evaluate("S.roomView==='front'")
  page.get_by_role('button',name='Pause game',exact=True).click()
  assert page.get_by_role('heading',name='PAUSED',exact=True).is_visible()
  page.wait_for_timeout(1250)
- assert page.evaluate("WardWinter.travelling&&S.room==='security'")
+ state=page.evaluate("({travelling:!!WardWinter.travelling,room:S.room,paused:WardWinter.isPaused(),hp:S.hp,door:!!document.querySelector('.ward-door-passage'),modal:m.innerHTML.slice(0,200)})")
+ assert state['travelling'] and state['room']=='security',state
  page.get_by_role('button',name='Resume game',exact=True).click()
  page.wait_for_function("!WardWinter.travelling&&S.room==='eastcorridor'")
  assert page.locator('.ward-door-passage').count()==0

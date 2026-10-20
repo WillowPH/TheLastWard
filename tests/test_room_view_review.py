@@ -1,6 +1,7 @@
 """Native mouse controls, full-image fidelity and persistent inspection presentation."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 import json,sys
 ROOT=Path(__file__).resolve().parents[1];URL=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8010';checks=[];errors=[];failed=[]
 with sync_playwright() as p:
@@ -8,10 +9,10 @@ with sync_playwright() as p:
  def ev(s,a=None):return q.evaluate(s,a)
  def ready():q.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
  def front():
-  if ev('S.roomView')!='front':q.get_by_role('button',name='Look right',exact=True).click();ready()
- ready();front();assert not q.get_by_role('combobox',name='Look at a point of interest').count();assert not q.locator('.winter-look-controls button').count();assert not q.get_by_role('button',name='Turn around',exact=True).count();checks.append('no bottom navigation/hint strip, POI dropdown or Turn Around button')
+  if ev('S.roomView')!='front':turn_room(q);ready()
+ ready();front();assert not q.locator('.mouse-look-edge').count();assert not q.get_by_role('combobox',name='Look at a point of interest').count();assert not q.locator('.winter-look-controls button').count();assert not q.get_by_role('button',name='Turn around',exact=True).count();checks.append('no bottom navigation/hint strip, POI dropdown or Turn Around button')
  before=ev('({view:S.roomView,pose:[S.cameraYaw,S.cameraPitch],src:WardWinter.roomViewRenderer().sourceSize,size:WardWinter.roomViewRenderer().size})');assert before['src']=={'width':1448,'height':1086};assert before['size']['width']<=1448 and abs(before['size']['width']/before['size']['height']-4/3)<.01;assert ev('document.querySelector(".room-view-canvas").getContext("webgl")===null');checks.append('whole native 1448×1086 art fits its aspect ratio without cropping, enlargement or a WebGL panorama crop')
- target=q.locator('[data-fixture=portraits]').bounding_box();x=target['x']+target['width']/2;y=target['y']+target['height']/2;q.mouse.move(x,y);q.mouse.down();q.mouse.move(x-180,y,steps=15);q.mouse.up();ready();assert ev('S.roomView')=='rear';assert not q.locator('#m .md').count();assert not ev('S.sceneFocus');q.wait_for_timeout(420);q.get_by_role('button',name='Look left',exact=True).click();ready();assert ev('S.roomView')=='front';checks.append('native mouse drag and side-arrow clicks change views without firing object clicks')
+ target=q.locator('[data-fixture=portraits]').bounding_box();x=target['x']+target['width']/2;y=target['y']+target['height']/2;q.mouse.move(x,y);q.mouse.down();q.mouse.move(x-180,y,steps=15);q.mouse.up();ready();assert ev('S.roomView')=='rear';assert not q.locator('#m .md').count();assert not ev('S.sceneFocus');q.wait_for_timeout(420);turn_room(q,direction=1);ready();assert ev('S.roomView')=='front';checks.append('native mouse drags in both directions change views without firing object clicks')
  ev('S.f.power=0;render()');ready();q.locator('[data-fixture=portraits]').click();assert q.get_by_role('button',name='Inspect photograph',exact=True).count()==3;assert q.get_by_role('button',name='Place Dr. Kessler',exact=True).is_disabled();q.get_by_role('button',name='Inspect photograph',exact=True).first.click();q.get_by_role('button',name='Turn over',exact=True).click();assert 'Appointed' in q.locator('#m').inner_text();ev('closeModal();S.f.power=1;portraitPuzzle()')
  for name in ev('portraitOrder()'):q.get_by_role('button',name='Place '+name,exact=True).click()
  ev('closeModal();render()');ready();assert not q.locator('[data-fixture=portraits]').count();checks.append('portraits remain inspectable before power, reveal photo backs, solve after power and then lose their target')

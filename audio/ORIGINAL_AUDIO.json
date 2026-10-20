@@ -6,24 +6,24 @@
   "files": [
     {
       "file": "chapter1/breath_calm.ogg",
-      "design": "Four quiet 6.2\u20136.7 second shaped-air breath cycles, no voice/grunt recording.",
-      "seconds": 25.9,
-      "sha256": "aa22975c8f05baaa203e50fa725cdefd55e567dc53ae1395401709418f4646d9",
-      "rms": 0.026128524304755086
+      "design": "Twelve quiet irregular 5.3\u20136.3 second close-air cycles: nasal inhale, warmer mouth exhale, asymmetric airflow and changing rests. No voice/grunt recording.",
+      "seconds": 69.8,
+      "sha256": "663ba42d7dab5a3b29e28378e85005bf9ea669c1f8e3acc413a1c685b252f2fc",
+      "rms": 0.01447122299540627
     },
     {
       "file": "chapter1/breath_caution.ogg",
-      "design": "Four moderately paced 4.3\u20134.7 second shaped-air breath cycles.",
-      "seconds": 17.899977324263038,
-      "sha256": "46cee6030261166c92319e8fdb3e81f6f00bd6fc14e576a74535402a85ec399d",
-      "rms": 0.032889506201808416
+      "design": "Twelve moderately paced irregular 3.5\u20134.2 second cycles with independent inhale/exhale resonances and breathing depth.",
+      "seconds": 46.35,
+      "sha256": "51e4cc7adb52a9676dfd59b71403f8c86d1ba8909e0ef10e9380a6a64b4359d1",
+      "rms": 0.026136318435725586
     },
     {
       "file": "chapter1/breath_danger.ogg",
-      "design": "Four strained 2.8\u20133.15 second shaped-air breath cycles; no repeated pain vocalization.",
-      "seconds": 11.9,
-      "sha256": "fc657d5679b10f34ec58c5a6b3469ee143b2554683f0f4c7fd67dff9b649e186",
-      "rms": 0.04282083814136149
+      "design": "Twelve strained irregular 2.6\u20133.1 second cycles: audible close breath with short rests, no voiced groans or pain syllables.",
+      "seconds": 34.25,
+      "sha256": "a88eca406bec48a8551bf72cfa1a4cf81f646b333d2b81dc805df45dfd235670",
+      "rms": 0.037315133071674014
     },
     {
       "file": "chapter1/hospital_hum.ogg",

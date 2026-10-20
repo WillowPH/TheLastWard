@@ -1,6 +1,6 @@
 /* Persistent interaction beats layered over the base chapter engine. */
 const PHONE_BEATS=[
- {title:'An unanswered line',text:'The receiver lifts from its cradle. The bell dies. Nothing follows—not a dial tone, not breathing, not even static. Three knocks come from the wall behind the booth.',thought:'Who could ring a telephone with no wires?'},
+ {title:'An unanswered line',text:'The receiver lifts from its cradle. The bell dies. Nothing follows—not a dial tone, not breathing, not even static. Three knocks come from the wall behind the booth.',thought:'Who is calling this place? Why are they waiting for me to answer?'},
  {title:'The accusation',text:'A voice with a cracked, tired edge says: “Murderer.” Before you can ask who is speaking, the line goes dead. A faint click repeats in an adjoining room.',thought:'That voice knows something about me. I need to know what.'},
  {title:'The wrong voice',text:'An old tape hiss. A woman says “Bela is not the question.” A voice that sounds exactly like yours replies, “Then why did you keep asking?” The line disconnects.',thought:'That cannot be me. Unless someone recorded me before I woke up.'}
 ];
@@ -36,7 +36,7 @@ function answerPayphone(id){const step=S.f.phoneStep||0,room=S.room,target=phone
  const beat=PHONE_BEATS[step],variant=hashSeed(S.seed+'::phone-variation-'+step)%3;
  S.f.phoneRinging=false;S.f.ringingPhoneRoom=null;S.f.phoneStep=step+1;
  S.f['answeredPhone_'+room]=1;S.ob[id]='read';
- const additions=['A distant set of footsteps falls out of rhythm.','Water trickles down the disconnected line.','A cabinet latch clicks in the room behind you.'];
+ const additions=['A distant set of footsteps falls out of rhythm.','A faint trickling sound comes through the receiver.','A cabinet latch clicks in the room behind you.'];
  const extra=additions[variant];S.th2=S.th2||[];S.th2.push('Telephone: '+beat.thought);
  interaction(beat.text+' '+extra);lg('The telephone in '+R[room].n+' fell silent.');soundEffect('click');advanceTime(1);render();
  modal(beat.title,`<div class="unique-event"><p>${beat.text}</p><p>${extra}</p><p class="unique-thought">${beat.thought}</p><p class="micro">This telephone will not ring again.</p></div><button class="btn p" onclick="closeModal()">Hang up</button>`);

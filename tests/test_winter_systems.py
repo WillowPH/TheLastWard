@@ -2,6 +2,7 @@
 from pathlib import Path
 import json,hashlib
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 ROOT=Path(__file__).resolve().parents[1];checks=[]
 def passed(s):checks.append(s);print('PASS',s,flush=True)
 with sync_playwright() as p:
@@ -126,8 +127,8 @@ with sync_playwright() as p:
    ev('r=>{S.room=r;S.roomView="front";S.roomViewRoom=r;S.sceneView="front";S.sceneViewRoom=r;renderScene()}',room)
    ready();assert ev('document.documentElement.scrollWidth<=innerWidth+1')
    assert not page.get_by_role('button',name='Turn around',exact=True).count()
-   ev("WardWinter.orbit.face('rear')");ready();assert ev('S.sceneView==="rear"&&S.roomView==="rear"')
- passed('54 distinct native room views, all pickup icons, and working mouse view arrows at desktop, tablet and mobile widths')
+   assert not page.locator('.mouse-look-edge').count();turn_room(page);ready();assert ev('S.sceneView==="rear"&&S.roomView==="rear"')
+ passed('54 distinct native room views, all pickup icons, and actual mouse drag turning at desktop, tablet and mobile widths')
  assert not errors,errors
  b.close()
 (ROOT/'tests/results/winter_systems.json').write_text(json.dumps({'checks':checks,'directed_arrivals':arrivals,'javascript_errors':errors},indent=2))

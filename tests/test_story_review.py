@@ -1,6 +1,7 @@
 """Story evidence, legacy save-item migration and one-use purge reward regressions."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 import json
 import sys
 
@@ -24,7 +25,7 @@ with sync_playwright() as p:
         f = ev('id=>WardScene.sites().find(f=>f.objects.some(o=>o[0]===id))', object_id)
         assert f, ('Missing authored object', object_id)
         if ev('S.roomView') != f.get('view', 'front'):
-            page.get_by_role('button', name='Look right', exact=True).click()
+            turn_room(page)
             ready()
         page.locator('[data-fixture="' + f['id'] + '"]').click()
         choice = page.locator('button[onclick="wardSelectFinding(\'' + object_id + '\')"]')

@@ -10,6 +10,11 @@ optionsModal=function(...args){const result=options(...args);for(const button of
 const menu=saveMenu;
 saveMenu=function(...args){const result=menu(...args),title=document.querySelector('#m .mh h2');if(title)title.textContent='Save records';return result;};
 
+// A camera recording is a room image, not a generic document or supply pouch.
+// Reuse the same authored Lobby painting that is sent to the surveillance CRTs.
+const findingIcon=WW.findingIcon;
+WW.findingIcon=function(object){const id=object?.[0];if(id==='cam'||id==='rep2')return '<img class="item-art surveillance-finding-preview" src="'+e(WW.asset(WW.roomViewAsset('lobby','front')))+'" alt="Monochrome Emergency Lobby camera feed">';if(id==='clara')return '<img class="item-art" src="'+e(WW.asset('assets/props/terminal.png'))+'" alt="Security message recorder">';return findingIcon(object);};
+
 // The old focus overlay was opaque even when its child SVG had transparent
 // slits. Openings now show the live room canvas and actors behind the mask.
 WW.sceneUI.locker=function(){

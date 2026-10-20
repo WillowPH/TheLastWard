@@ -93,20 +93,18 @@ with sync_playwright() as p:
     passed('supply stacks have an explicit permanent-loss warning; stale/closed confirmations and protected-item requests cannot remove items')
 
     ev('confirmSave()')
-    # v6 deliberately keeps the delivered v5 save namespace and schema. Model
-    # that record's exact version marker before launching the updated reader.
-    ev('''const saved=JSON.parse(localStorage.getItem(K));
-        saved.buildId='last-ward-ch1-survival-review-5';
-        localStorage.setItem(K,JSON.stringify(saved));''')
-    page.reload()
-    if not page.evaluate('!!WardWinter.inventoryDiscard'):
-        page.add_script_tag(url=URL.rstrip('/')+'/js/inventory_discard.js')
-    ev('loadGame()')
-    page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
-    assert ev('S.buildId===WardChapter.BUILD')
-    assert ev('!has("Cabinet Key")&&!has("Battery")&&S.discardedItems.length===2&&has("Power Fuse")')
-    assert ev('S.inv.length===7')
-    passed('discarded inventory and freed capacity persist through an actual Terminal save and v5-to-v6 reload migration')
+    # Both delivered save versions must preserve a used/discarded inventory.
+    for version in ['last-ward-ch1-survival-review-5', 'last-ward-ch1-chapter-review-6']:
+        ev('''version=>{const saved=JSON.parse(localStorage.getItem(K));
+            saved.buildId=version;localStorage.setItem(K,JSON.stringify(saved));}''', version)
+        page.reload()
+        assert page.evaluate('!!WardWinter.inventoryDiscard'), 'Inventory module must load through the production index'
+        ev('loadGame()')
+        page.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
+        assert ev('S.buildId===WardChapter.BUILD')
+        assert ev('!has("Cabinet Key")&&!has("Battery")&&S.discardedItems.length===2&&has("Power Fuse")')
+        assert ev('S.inv.length===7')
+    passed('discarded inventory and freed capacity persist through actual Terminal saves and both v5/v6 reload migrations')
 
     ev('''S.room='wardnorth';S.prev='wardnorth';S.roomViewRoom=null;S.sceneFocus=null;S.f.power=0;S.lightOn=false;S.bat=60;S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.pursuer.active=false;S.contextThought=null;$('m').innerHTML='';render()''')
     page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')

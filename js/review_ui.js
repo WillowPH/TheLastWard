@@ -9,4 +9,14 @@ const vital=document.querySelector('.vital-card'),mental=document.querySelector(
 const right=document.querySelector('.right-rail');right.insertAdjacentHTML('afterbegin','<div class="hud-local-art"><span aria-hidden="true">◉</span> Offline Artwork Mode</div>');map.querySelector('.ph').insertAdjacentHTML('afterend','<div id="hudMapLocation"></div>');map.querySelector('.bd').insertAdjacentHTML('beforeend','<div class="hud-map-key"><span><i class="explored"></i>Explored</span><span><i></i>Unexplored</span><span><b>◂</b>Current Location</span></div>');
 WW.hudSync=function(){if(!S)return;document.querySelector('.ward-brand span').innerHTML='THE LAST <em>WARD</em>';document.querySelector('.ward-brand small').innerHTML='CHAPTER 1<br>Blackridge Medical Complex<br>1998';const light=$('winterFlashlightStatus');if(light&&light.previousElementSibling!==mental)mental.after(light);let ammo=$('hudAmmo');if(!ammo){ammo=document.createElement('section');ammo.id='hudAmmo';ammo.innerHTML='<span class="hud-status-label">Ammo</span><div><span aria-hidden="true">▥</span><strong></strong></div>';document.querySelector('.status-panel .bd').append(ammo);}ammo.querySelector('strong').textContent=W[S.eq]&&has(S.eq)?String(S.ld[S.eq]||0):'0';$('hudMapLocation').textContent=R[S.room].n+' (1F)';$('mapTitle').textContent='AREA MAP';$('mc').textContent='';$('mentalLabel').dataset.state=S.san>=75?'stable':S.san>=50?'uneasy':'disturbed';const health=S.hp>75?'fine':S.hp>25?'caution':'danger';vital.dataset.health=health;$('conditionLabel').className=health;const trace=vital.querySelector('svg');if(trace)trace.setAttribute('aria-label','Physical condition: '+$('conditionLabel').textContent.toLowerCase());};
 const host=$('interactiveScene');host.addEventListener('pointermove',ev=>{const tip=$('sceneTooltip');if(!tip)return;const r=host.getBoundingClientRect();tip.style.setProperty('--tip-x',Math.min(r.width-240,Math.max(8,ev.clientX-r.left+16))+'px');tip.style.setProperty('--tip-y',Math.max(8,ev.clientY-r.top+18)+'px');},{passive:true});
+// Keep legacy feedback sources for the game logic, outside the visible caption
+// tree. Their old event styles must never create a third panel under the two
+// reference cards after an interaction or condition update.
+const sources=document.createElement('div');sources.id='hudFeedbackSources';sources.hidden=true;sources.inert=true;sources.setAttribute('aria-hidden','true');document.body.append(sources);
+const stream=document.querySelector('.message-stream');
+function retainFeedbackSources(){if(stream)sources.append(stream);for(const id of ['ev','sceneDrawer']){const node=$(id);if(node)sources.append(node);}}
+retainFeedbackSources();
+// Retain the hidden source location if preparation is invoked again while a
+// renderer or condition update rebuilds the visible interface.
+const prepare=wardPrepareUi;wardPrepareUi=function(...args){const result=prepare(...args);retainFeedbackSources();return result;};
 })();

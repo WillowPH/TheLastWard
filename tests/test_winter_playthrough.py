@@ -2,6 +2,7 @@
 from pathlib import Path
 import json,sys
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 ROOT=Path(__file__).resolve().parents[1]
 URL=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8010'
 OUT=ROOT/'tests/results';OUT.mkdir(exist_ok=True)
@@ -14,16 +15,16 @@ with sync_playwright() as p:
  errors=[];page.on('pageerror',lambda error:errors.append(str(error)))
  def ev(code,arg=None):return page.evaluate(code,arg)
  def aim_point(point_id):
-  """Use a native side-arrow click to expose the authored object's full view."""
+  """Use a native mouse drag to expose the authored object's full view."""
   if page.locator('#m .md').count():close()
   page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy&&!WardWinter.travelling')
   point=ev('id=>WardWinter.orbit.points().find(p=>p.id===id)',point_id)
   if not point and point_id=='fixture:dropped-light':point={'view':'front'}
   assert point,('Missing authored mouse target',ev('S.room'),point_id)
   if ev('S.roomView')!=point['view']:
-   page.get_by_role('button',name='Look right',exact=True).click()
+   turn_room(page)
    page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
-  assert ev('S.roomView')==point['view'],('Side arrow did not expose requested view',point_id)
+  assert ev('S.roomView')==point['view'],('Mouse drag did not expose requested view',point_id)
  def click_visible(selector):
   # A live enemy may cover part of a visible object. Click a genuinely exposed
   # part of the target, exactly as a player can; never click through the enemy.
@@ -172,4 +173,4 @@ with sync_playwright() as p:
  assert not errors,errors
  browser.close()
 (OUT/'winter_progression.json').write_text(json.dumps({'runs':seeds,'transport':URL,'multi_file':True,'trace':report},indent=2))
-print('PASS: two complete all-27-room routes using earned progression, native side-arrow turns and ordinary object clicks.')
+print('PASS: two complete all-27-room routes using earned progression, native mouse drags and ordinary object clicks.')

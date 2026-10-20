@@ -12,8 +12,36 @@ WW.pursuerPresent=present;
 WW.pursuerBlocksExit=to=>!!(actionable()&&WardNavigation.edge(S.room,to)&&present()&&!down()&&!opening());
 WW.enemyVisual=function(actor){
  const i=Number(String(actor?.id||'').match(/\d+/)?.[0]||0)%3;
- if(actor?.id==='window-breach')return {image:'assets/characters/infected_patient.png',variant:'breach',sheet:false};
- return i===0?{image:'assets/room_views/infected_orderly.png',variant:'orderly',sheet:false}:i===1?{image:'assets/characters/nurse_walk.webp',variant:'nurse',sheet:true,still:'assets/characters/infected_nurse.png'}:{image:'assets/characters/patient_walk.webp',variant:'patient',sheet:true,still:'assets/characters/infected_patient.png'};
+ if(actor?.id==='window-breach')return {image:'assets/characters/infected_patient.png',variant:'breach',sheet:false,aspect:2/3,opaqueTop:7/1536,opaqueBottom:1520/1536};
+ return i===0?{image:'assets/room_views/infected_orderly.png',variant:'orderly',sheet:false,aspect:2/3,opaqueTop:14/1536,opaqueBottom:1516/1536}:i===1?{image:'assets/characters/nurse_walk.webp',variant:'nurse',sheet:true,still:'assets/characters/infected_nurse.png',aspect:.5,opaqueTop:10/887,opaqueBottom:877/887}:{image:'assets/characters/patient_walk.webp',variant:'patient',sheet:true,still:'assets/characters/infected_patient.png',aspect:.5,opaqueTop:28/887,opaqueBottom:867/887};
+};
+// Positions are on the foreground floor of each authored front painting, not
+// the shared old panorama anchor. The third value is visible head-to-boot
+// height. In particular, the generator's clear right aisle is not its plinth.
+const actorFloor={
+ lobby:[43,97,74],security:[23,98,75],eastcorridor:[51,97,72],
+ ward:[57,97,75],wardnorth:[55,97,74],wardservice:[43,98,76],
+ room12:[79,98,77],isoward:[42,98,78],archive:[24,98,76],
+ pharmacy:[77,98,78],laundry:[54,98,75],generator:[85,98,74],
+ powercontrol:[45,98,76],boiler:[38,98,76],tunnel:[51,98,77],
+ morgue:[76,98,77],chapel:[49,98,78],children:[76,98,77],
+ residence:[62,98,78],stafflounge:[58,98,76],records:[48,98,76],
+ surgery:[49,98,77],observation:[55,98,77],specimen:[68,98,77],
+ isolation:[66,98,78],coldstore:[36,98,77],lift:[50,98,80]
+};
+WW.enemyStaging=function(room,subject=false,visual={}){
+ const [left,foot,ordinary]=actorFloor[room]||[50,98,76];
+ const height=subject?Math.min(90,Math.max(84,ordinary*1.18)):ordinary;
+ const top=visual.opaqueTop||0,bottom=visual.opaqueBottom||1;
+ // Keep source proportions and compensate transparent top/bottom margins;
+ // object-fit in a narrower box previously made the orderly look miniature.
+ const boxHeight=height/(bottom-top);
+ return {left:subject?Math.max(25,Math.min(75,left)):left,foot,height,boxHeight,bottom:100-foot-boxHeight*(1-bottom),aspect:visual.aspect||(subject ? .75 : 2/3)};
+};
+WW.enemyLight=function(){
+ const dark=WardNavigation.isDark(S.room);
+ if(dark)return has('Flashlight')&&S.lightOn&&S.bat>0&&!S.f.flashlightDropped ? .68 : .22;
+ return S.f.power&&!S.f.powerOut ? .86 : .7;
 };
 // Correct the near-opaque source alpha in the renderer, without filling the
 // surrounding transparent cutout or fading a real enemy into the room artwork.

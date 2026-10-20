@@ -176,7 +176,7 @@
           "feed": "wardnorth"
         }
       ],
-      "reviewNote": "Six monitor glass rectangles are inset from the painted CRT bezels. Scanlines and monochrome feeds are local to each screen."
+      "reviewNote": "Six monochrome game-room feeds run on a dedicated surveillance UPS. Main power restores their full brightness; scanlines and emissive light stay inside the painted CRT glass."
     },
     "rear": {
       "source": "assets/reverse/security.webp",
@@ -1165,8 +1165,28 @@
       "source": "assets/rooms/isoward.webp",
       "reviewed": true,
       "glass": [],
-      "screens": [],
-      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+      "screens": [
+        {
+          "rect": [
+            66.65,
+            30.0,
+            3.7,
+            3.8
+          ],
+          "kind": "patient"
+        }
+      ],
+      "reviewNote": "Restrained breathing moves only Mercer\u2019s chest through a feathered native-art patch. Bedside ECG light stays on its small painted glass. Motion ceases in the covered aftermath.",
+      "patientMotion": {
+        "rect": [
+          59.5,
+          40.3,
+          17.5,
+          11.2
+        ],
+        "rise": 2.6,
+        "cycle": 4.8
+      }
     },
     "rear": {
       "source": "assets/reverse/isoward.webp",

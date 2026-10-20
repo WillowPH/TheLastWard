@@ -1,7 +1,7 @@
 {
   "checks": [
     "Reference, tablet and mobile layouts retain all Thoughts text, no narration scrolling, no bottom control bar, and fit whole native art without cropping, stretching or enlargement.",
-    "Native mouse clicks on left and right edge chevrons change room-facing views and return; no keyboard input is required.",
+    "Mouse drags change room-facing views and return; no arrow buttons or keyboard input is required.",
     "Options/modal surfaces use neutral charcoal instead of a dark green fill.",
     "Real handwritten and typed records retain dark readable text on damaged parchment; modal colours do not leak into document ink."
   ],
@@ -52,7 +52,7 @@
         "height": 743,
         "scrollHeight": 743,
         "width": 991,
-        "scrollWidth": 1015,
+        "scrollWidth": 991,
         "x": 339.25,
         "y": 23,
         "right": 1330.25,
@@ -135,7 +135,7 @@
         "height": 422,
         "scrollHeight": 422,
         "width": 562,
-        "scrollWidth": 586,
+        "scrollWidth": 562,
         "x": 204,
         "y": 109,
         "right": 766,
@@ -218,7 +218,7 @@
         "height": 257,
         "scrollHeight": 257,
         "width": 342,
-        "scrollWidth": 366,
+        "scrollWidth": 342,
         "x": 24,
         "y": 122,
         "right": 366,
@@ -261,7 +261,7 @@
       "title": "Heller\u2019s winter maintenance note",
       "background": "rgb(203, 191, 168)",
       "color": "rgb(40, 35, 30)",
-      "font": "22.56px / 28.2px Caveat, cursive",
+      "font": "22.56px / 27px Caveat, cursive",
       "textLength": 1070
     },
     {

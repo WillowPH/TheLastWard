@@ -36,7 +36,18 @@ for name in ['breath_calm', 'breath_caution', 'breath_danger']:
     windows = np.array([np.sqrt(np.mean(w ** 2)) for w in np.array_split(values, 160)])
     assert np.count_nonzero(windows < .003) > 20, name
     assert np.max(np.abs(values[:400])) < .01 and np.max(np.abs(values[-400:])) < .01, name
-passed('all 8 original assets decode, match provenance, avoid clipping and contain paced breath/rest cycles')
+    assert len(values) / 44100 >= 30, name
+    # Inhalation and exhalation must have different air colours, rather than
+    # one unchanging hiss rhythmically gated on/off. Ignore silent windows.
+    frames = values[:len(values) // 2205 * 2205].reshape(-1, 2205)
+    power = np.abs(np.fft.rfft(frames * np.hanning(2205), axis=1)) ** 2
+    energy = power.sum(axis=1)
+    frequencies = np.fft.rfftfreq(2205, 1 / 44100)
+    centroids = (power * frequencies).sum(axis=1) / np.maximum(energy, 1e-10)
+    audible = centroids[energy > energy.max() * .20]
+    assert np.percentile(audible, 90) - np.percentile(audible, 10) > 800, name
+assert np.sqrt(np.mean(decoded['breath_calm'] ** 2)) < np.sqrt(np.mean(decoded['breath_caution'] ** 2)) < np.sqrt(np.mean(decoded['breath_danger'] ** 2))
+passed('all 8 original assets decode, match provenance, avoid clipping and contain long breath/rest cycles with changing inhale/exhale colour and increasing health-tier intensity')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(executable_path='/usr/bin/chromium', args=['--no-sandbox'])
@@ -69,6 +80,7 @@ with sync_playwright() as playwright:
     assert not ev("WardSound.snapshot().some(a=>a.clip==='breathing'||a.clip==='impact')")
     passed('HP selects calm/caution/danger; low sanity never selects hurt grunts; 100 syncs create no duplicate loops')
 
+    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel==='breathing-release')")
     ev("WardSound.pauseAll('manual')")
     snapshot = ev('WardSound.snapshot()')
     page.wait_for_timeout(800)
@@ -84,6 +96,18 @@ with sync_playwright() as playwright:
     assert len(resumed) == len(snapshot), resumed
     assert all(not a['paused'] and a['time'] > b['time'] + .15 for a, b in zip(resumed, snapshot)), (resumed, snapshot)
     passed('pause freezes every channel and blocks new sounds; tab visibility cannot resume manual Pause; resume preserves playheads without duplicates')
+
+    ev("S.hp=75;WardSound.sync();WardSound.pauseAll('breath-transition')")
+    release = ev("WardSound.snapshot().filter(a=>a.channel==='breathing-release')")
+    assert release, ev('WardSound.snapshot()')
+    page.wait_for_timeout(500)
+    frozen = ev("WardSound.snapshot().filter(a=>a.channel==='breathing-release')")
+    assert len(frozen) == len(release) and all(a['paused'] for a in frozen)
+    assert all(abs(a['time'] - b['time']) < .025 for a, b in zip(frozen, release))
+    ev("WardSound.resumeAll('breath-transition')")
+    page.wait_for_function("!WardSound.snapshot().some(a=>a.channel==='breathing-release')")
+    assert ev("WardSound.snapshot().filter(a=>a.channel==='breathing').map(a=>a.clip)") == ['breath_caution']
+    passed('health changes release the outgoing breath smoothly; Pause also freezes that fade, and resume leaves exactly one breath loop')
 
     ev("soundEffect('pickup')")
     assert ev("WardSound.history.at(-1).name") == 'pickup_chime'

@@ -17,11 +17,17 @@ for(const name of ['advance','onEnter','onLeave'])if(typeof WW.enemies?.[name]==
 for(const name of ['setView','snapTo','look','reveal','face','pointOfInterest'])if(typeof WW.orbit?.[name]==='function')WW.orbit[name]=guard(WW.orbit[name]);
 for(const name of ['newGame','loadGame','loadCheckpoint','loadFirstFloorCheckpoint','wardLoadFinale']){const base=window[name];if(typeof base==='function')window[name]=function(...args){if(paused)setPaused(false);return base.apply(this,args);};}
 function button(){const nav=document.querySelector('.nav-list');if(!nav||$('wardPauseButton'))return;const b=document.createElement('button');b.id='wardPauseButton';b.type='button';b.className='btn';b.dataset.pauseAction='pause';b.setAttribute('aria-label','Pause game');b.setAttribute('aria-pressed','false');b.innerHTML='<span class="hud-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4v16M17 4v16" fill="none" stroke="currentColor" stroke-width="3"/></svg></span><span>Pause</span>';nav.append(b);}
-const modalBase=modal;modal=function(...args){const result=modalBase(...args);if(S?.hp>0&&!S.f.dead&&!S.f.chapter1Complete){const header=document.querySelector('#m .mh'),b=document.createElement('button');b.type='button';b.className='btn modal-pause-button';b.dataset.pauseAction='pause';b.setAttribute('aria-label','Pause game');b.textContent='Pause';header?.append(b);}return result;};
+// Keep the same left-menu control reachable above full-screen readers. The
+// placeholder retains its exact menu position; no Pause control is put in a
+// finding, document, puzzle or inventory dialog.
+let pauseSlot=null;
+function positionPause(){const b=$('wardPauseButton');if(!b)return;const modalOpen=!!document.querySelector('#m .md');if(modalOpen){if(!pauseSlot){pauseSlot=b.cloneNode(true);pauseSlot.removeAttribute('id');pauseSlot.removeAttribute('data-pause-action');pauseSlot.classList.add('pause-nav-slot');pauseSlot.setAttribute('aria-hidden','true');pauseSlot.tabIndex=-1;pauseSlot.disabled=true;b.before(pauseSlot);document.body.append(b);b.classList.add('pause-menu-floating');}const rect=pauseSlot.getBoundingClientRect();Object.assign(b.style,{left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px'});}else if(pauseSlot){pauseSlot.replaceWith(b);pauseSlot=null;b.classList.remove('pause-menu-floating');b.removeAttribute('style');}}
 // Window capture runs before the room input lock, so Pause remains available
 // during an opening door or a short camera fade.
 window.addEventListener('click',event=>{const action=event.target.closest?.('[data-pause-action]');if(action){event.preventDefault();event.stopImmediatePropagation();setPaused(action.dataset.pauseAction!=='resume');return;}if(paused){event.preventDefault();event.stopImmediatePropagation();}},true);
 window.addEventListener('keydown',event=>{if(event.key==='Escape'&&S&&S.hp>0&&!S.f.chapter1Complete){event.preventDefault();event.stopImmediatePropagation();setPaused(!paused);return;}if(paused&&!event.target.closest?.('#wardPauseOverlay')){event.preventDefault();event.stopImmediatePropagation();}},true);
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&S&&S.f.introComplete)setPaused(true);});
 button();
+new MutationObserver(positionPause).observe($('m'),{childList:true,subtree:true});
+window.addEventListener('resize',positionPause);document.addEventListener('scroll',positionPause,true);
 })();

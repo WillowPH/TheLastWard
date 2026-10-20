@@ -1,6 +1,7 @@
 """Actual HUD, paper contrast and mouse navigation at the supported reference sizes."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 import json,sys
 ROOT=Path(__file__).resolve().parents[1]
 URL=sys.argv[1] if len(sys.argv)>1 else 'http://127.0.0.1:8010'
@@ -12,7 +13,7 @@ with sync_playwright() as p:
  page=context.new_page();page.set_default_timeout(12000);page.on('pageerror',lambda err:report['javascript_errors'].append(str(err)))
  page.goto(URL);page.get_by_role('button',name='BEGIN INVESTIGATION').click();page.evaluate('nextIntro();nextIntro();nextIntro()')
  def ready():page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
- ready();page.evaluate('S.mapParts=3;S.vis.security=1;render();WardWinter.think("I need to switch on the flashlight before searching this dark room.")');ready()
+ ready();assert not page.locator('.mouse-look-edge').count();page.evaluate('S.mapParts=3;S.vis.security=1;render();WardWinter.think("I need to switch on the flashlight before searching this dark room.")');ready()
  for width,height in [(1672,941),(1000,800),(390,844)]:
   page.set_viewport_size({'width':width,'height':height});page.wait_for_timeout(200)
   row=page.evaluate('''()=>{const box=s=>{const n=document.querySelector(s),r=n.getBoundingClientRect(),c=getComputedStyle(n);return {display:c.display,height:n.clientHeight,scrollHeight:n.scrollHeight,width:n.clientWidth,scrollWidth:n.scrollWidth,x:r.x,y:r.y,right:r.right,bottom:r.bottom,background:c.backgroundColor};};const renderer=WardWinter.roomViewRenderer();return {width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,thought:box('.scene-thought'),narration:box('.narration-block'),heading:box('.unified-inventory-panel .panel-heading'),frame:box('.room-view-frame'),viewport:box('.room-view-viewport'),center:box('.ward-center'),source:renderer.sourceSize,toolbar:getComputedStyle(document.querySelector('.winter-look-controls')).display};}''')
@@ -29,9 +30,9 @@ with sync_playwright() as p:
   assert row['center']['bottom']<=height+1,row
   path=OUT/f'reference-theme-{width}.png';page.screenshot(path=str(path));report['screens'].append({'path':path.name,**row})
  report['checks'].append('Reference, tablet and mobile layouts retain all Thoughts text, no narration scrolling, no bottom control bar, and fit whole native art without cropping, stretching or enlargement.')
- page.set_viewport_size({'width':1672,'height':941});ready();before=page.evaluate('S.roomView');page.get_by_role('button',name='Look right',exact=True).hover();page.get_by_role('button',name='Look right',exact=True).click();ready();assert page.evaluate('S.roomView')!=before
- page.get_by_role('button',name='Look left',exact=True).click();ready();assert page.evaluate('S.roomView')==before
- report['checks'].append('Native mouse clicks on left and right edge chevrons change room-facing views and return; no keyboard input is required.')
+ page.set_viewport_size({'width':1672,'height':941});ready();before=page.evaluate('S.roomView');turn_room(page);ready();assert page.evaluate('S.roomView')!=before
+ turn_room(page,direction=1);ready();assert page.evaluate('S.roomView')==before
+ report['checks'].append('Mouse drags change room-facing views and return; no arrow buttons or keyboard input is required.')
  page.get_by_role('button',name='Options',exact=True).click();surfaces=page.evaluate('''()=>['#m .md','#m .mh','.options-violence'].map(s=>({selector:s,bg:getComputedStyle(document.querySelector(s)).backgroundColor}))''')
  for entry in surfaces:
   rgb=[int(v) for v in entry['bg'].replace('rgba(','').replace('rgb(','').split(')')[0].split(',')[:3]]

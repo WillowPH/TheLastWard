@@ -1,12 +1,13 @@
 """Native whole-room artwork: every active object/door center accepts a mouse hit.
 
 The filename is retained for existing validation commands. No panoramic camera
-test hooks or keyboard controls are used: side-arrow mouse clicks expose views.
+test hooks or keyboard controls are used: real mouse drags expose views.
 """
 from pathlib import Path
 import json
 import sys
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:8010'
@@ -35,7 +36,7 @@ with sync_playwright() as p:
         points = page.evaluate('WardWinter.orbit.points()')
         for point in points:
             if page.evaluate('S.roomView') != point['view']:
-                page.get_by_role('button', name='Look right', exact=True).click()
+                turn_room(page)
                 page.wait_for_function('WardWinter.roomViewRenderer()?.loaded&&!WardWinter.orbit.busy')
             assert page.evaluate('S.roomView') == point['view'], (room, point)
             result = page.evaluate('''p=>{

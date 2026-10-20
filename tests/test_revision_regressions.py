@@ -8,6 +8,7 @@ import json
 import re
 import sys
 from playwright.sync_api import sync_playwright
+from mouse_controls import turn_room
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:8010'
@@ -52,7 +53,7 @@ with sync_playwright() as playwright:
         point = ev('id=>WardWinter.orbit.points().find(p=>p.id==="fixture:"+id)', fixture)
         assert point, ('Missing facing point', object_id)
         if ev('S.roomView') != point['view']:
-            page.get_by_role('button', name='Look right', exact=True).click()
+            turn_room(page)
             ready()
         page.locator('[data-fixture="' + fixture + '"]').click()
         if page.locator('.finding-choices button').count():

@@ -4,6 +4,7 @@ from playwright.sync_api import sync_playwright
 from PIL import Image
 import json
 import sys
+from mouse_controls import turn_room
 
 ROOT = Path(__file__).resolve().parents[1]
 URL = sys.argv[1] if len(sys.argv) > 1 else 'http://127.0.0.1:8010'
@@ -21,6 +22,10 @@ for view in ['front', 'rear']:
         cold = sum(b > r + 12 and b > g + 5 and b > 55 for r, g, b in pixels.get_flattened_data())
         assert cold / (pixels.width * pixels.height) < .002, (view, cold)
 checks.append('both native closed-shutter paintings exclude bright blue exterior floor reflections')
+for name in ['umbrella', 'sweet_tooth', 'dragon_medallion', 'hero_mug']:
+    with Image.open(ROOT / f'assets/room_views/egg_{name}.webp') as art:
+        assert art.size == (1448, 1086), (name, art.size)
+checks.append('four graphical Easter eggs retain sharp native 1448×1086 inspection artwork')
 
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path='/usr/bin/chromium', args=['--no-sandbox'])
@@ -46,7 +51,7 @@ with sync_playwright() as p:
         f = ev('id=>WardScene.sites().find(f=>f.objects.some(o=>o[0]===id))', object_id)
         assert f, object_id
         if ev('S.roomView') != f.get('view', 'front'):
-            page.get_by_role('button', name='Look right', exact=True).click()
+            turn_room(page)
             ready()
         target = page.locator('[data-fixture="' + f['id'] + '"]')
         target.click()
@@ -94,6 +99,39 @@ with sync_playwright() as p:
         ready()
         assert not page.locator('[data-fixture="' + fixture + '"]').count()
     checks.append('three sparse rooms have useful rear supplies in painted containers and lose their pickup targets after collection')
+
+    ev('S.slots=12;S.f.photoPuzzleSolved=1;render()')
+    for name, fixture, object_id, item in [
+        ('ward', 'rearMedicine', 'pistolRounds', 'Handgun Ammo'),
+        ('boiler', 'rearTrolley', 'fur', 'Stabilizer Part'),
+        ('specimen', 'rearBench', 'wire', 'Wire Spool'),
+        ('surgery', 'rearSupply', 'shotShells', 'Shotgun Shells')
+    ]:
+        room(name)
+        before = ev('n=>cnt(n)', item)
+        expected = ev('id=>WardWinter.find(id)[4].give[0][1]', object_id)
+        action(object_id)
+        assert ev('S.roomView') == 'rear'
+        assert ev('n=>cnt(n)', item) == before + expected, (name, object_id)
+        assert ev('id=>S.ob[id]==="done"', object_id)
+        ev('wardCloseFocus();renderScene()')
+        ready()
+        assert not page.locator('[data-fixture="' + fixture + '"]').count()
+    checks.append('real rear-view clicks collect existing ammunition, service part, wire and shells from their painted furniture')
+
+    for name, object_id in [('lobby', 'umbrella'), ('children', 'icecreamToy'),
+                            ('stafflounge', 'arcadeMedallion'), ('stafflounge', 'heroMug')]:
+        room(name)
+        action(object_id)
+        picture = page.locator('#m .winter-object-inspect img')
+        picture.wait_for(state='visible')
+        assert picture.evaluate('(img)=>img.complete&&img.naturalWidth>=1400'), object_id
+        assert ev('id=>S.ob[id]==="read"', object_id)
+        assert ev('id=>WardWinter.findingIcon(WardWinter.find(id)).includes(WardWinter.inspectionArt[id])', object_id)
+        page.get_by_role('button', name='Return', exact=True).click()
+        ev('wardCloseFocus();renderScene()')
+        assert not ev('id=>WardScene.sites().some(f=>f.objects.some(o=>o[0]===id&&S.ob[id]!=="read"))', object_id)
+    checks.append('Umbrella, Sweet Tooth, dragon medallion and hero mug open graphical inspections once with matching finding previews')
 
     assert ev('WardScenes.records.fixtures.find(f=>f.id==="researchBinder").ids.includes("mimiResearch")')
     assert ev('WardScenes.residence.fixtures.find(f=>f.id==="nightDesk").ids.includes("attendantDiary3")')

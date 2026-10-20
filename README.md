@@ -9,10 +9,10 @@ Extract the entire `The_Last_Ward_Chapter_1_Project.zip` folder.
 Windows 10/11: double-click **START_GAME.exe** or **START_GAME.bat**. No Python
 installation or external internet connection is needed. Keep the launcher window open.
 macOS/Linux: `python3 start_game.py` (Python 3 standard library only).
-Use the same local port/browser for saved games. Existing v5 saves can continue in
-this v6 update; a new game also works. Older incompatible builds remain separate.
+Use the same local port/browser for saved games. Existing v5 and v6 saves can continue in
+this v7 update; a new game also works. Older incompatible builds remain separate.
 
-**Click objects to examine them. Drag sideways or click a side arrow to see the
+**Click objects to examine them. Drag sideways to see the
 other side of the room. No keyboard is needed.** Hints (Subtle/Strong), motion and
 flashes are in Options. The right-side flashlight button shows its battery percentage.
 Select an item in the right inventory to use, inspect or discard it. Select Combine,
@@ -31,7 +31,7 @@ a pretend continuous panorama. This is game artwork, not native 4K or walkable 3
 - Neutral charcoal HUD, warm grey text, brass rules and amber Thoughts follow the
   supplied three-column reference. Green is reserved for physical health feedback.
 - No bottom navigation/hint strip or required keyboard controls. Ordinary inspection
-  preserves the same image and scale. Side arrows sit outside the artwork and targets.
+  preserves the same image and scale. There are no view-arrow buttons.
 - Corrected lobby furniture barricade, integrated laundry stove and actual 1998 CRT.
   Shutters fit real glass, with local snow beyond windows and scanlines inside screens.
 - Practical light, power, key and supply requirements appear in Thoughts. Story and
@@ -57,9 +57,9 @@ saves and nonlethal in imaginary combat. The optional one-time window purge rele
 supplies after all three catches are closed. Save at a **Terminal** using a **Floppy
 Disk**; additional **Storage boxes** share equipment along the route.
 
-## Gameplay and audio follow-up — v6
+## Gameplay and audio follow-up
 
-Pause from the left navigation or any open dialog. Resume preserves the record,
+Pause from the left navigation, including while a dialog is open. Resume preserves the record,
 world time, battery, exposure and encounter deadlines. Normal, caution and danger
 use distinct quiet air-breath loops; longer machine/wind beds and an original pickup
 cue replace the repeated hurt and bottle sounds.
@@ -78,7 +78,14 @@ the map arrow follows the current facing. Closed shutters remove snowy reflectio
 Sister Mimi's early notes portray someone helpful; experimentation and instability
 are revealed later. Chapter 2 encounters remain deferred.
 
-See [the v6 correction notes](docs/REVISION_V6.md) and [the prior pass](docs/REVISION_2026-10-19.md).
+The latest pass removes view-arrow and dialog Pause buttons, keeps Pause below
+Options, removes the cold-status colour wash and extra caption panels, and runs
+all six surveillance feeds on their own backup supply. Mercer has local breathing
+motion; enemy scale and floor placement follow each room. Rear furniture carries
+more useful finds. Four optional graphic references and longer varied breath beds
+are included. See the correction notes for their exact scope.
+
+See [the v7 correction notes](docs/REVISION_V7.md), [v6 notes](docs/REVISION_V6.md) and [the prior pass](docs/REVISION_2026-10-19.md).
 
 Finite noise-responsive enemies, later Subject X pursuit, confirmed traps, once-only
 story/cold/sprinkler incidents, handwritten records, generator outages, lighter/fluid,

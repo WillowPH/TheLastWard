@@ -1,13 +1,28 @@
 /* Real enemies retain solid silhouettes throughout an approach. */
-.winter-actor,.winter-actor.approaching{opacity:1!important;animation:ward-solid-breathe 4s ease-in-out infinite;filter:brightness(.86) saturate(.85)}
+.winter-actor,.winter-actor.approaching{opacity:1!important;animation:ward-solid-breathe 4s ease-in-out infinite}
+.room-view-targets .winter-actor,.room-view-targets .winter-actor.approaching{filter:brightness(var(--enemy-light,.86)) saturate(.85)}
 .winter-actor .winter-walk-sheet,.winter-actor .winter-enemy-still{opacity:1!important;filter:url(#ward-solid-enemy) drop-shadow(2px 8px 6px #0009)}
 .winter-actor .winter-enemy-still{display:block;width:100%;height:100%;object-fit:contain}
-.winter-actor.enemy-orderly{aspect-ratio:.55}.winter-actor.enemy-nurse{aspect-ratio:.5}.winter-actor.enemy-breach{aspect-ratio:.56}
+.winter-actor.enemy-orderly,.winter-actor.enemy-breach{aspect-ratio:2/3}.winter-actor.enemy-nurse{aspect-ratio:.5}
+.winter-actor:before{left:34%;right:31%;bottom:1%;height:3%;filter:blur(4px)}
+.winter-actor.subject-x:before{left:18%;right:18%}
+.room-view-targets .winter-actor-hit{inset:2% 22% 1%;clip-path:polygon(25% 0,75% 0,90% 26%,100% 52%,80% 63%,78% 100%,20% 100%,19% 65%,0 52%,10% 26%)}
+.room-view-targets .winter-actor.enemy-orderly .winter-actor-hit{inset:1% 24% 1%}
+.room-view-targets .winter-actor.subject-x .winter-actor-hit{inset:1% 12% 1%}
 .winter-actor.enemy-patient .winter-walk-sheet{animation-duration:2.1s}.winter-actor.enemy-nurse .winter-walk-sheet{animation-duration:1.9s}
-.winter-actor.knocked-down{height:30%!important;width:39%;aspect-ratio:auto;animation:none!important;transform:translateX(-50%) rotate(73deg);transform-origin:50% 90%;filter:brightness(.72)}
+.winter-actor.knocked-down{height:30%!important;width:39%;aspect-ratio:auto;animation:none!important;transform:translateX(-50%) rotate(73deg);transform-origin:50% 90%}
+.room-view-targets .winter-actor.knocked-down{filter:brightness(calc(var(--enemy-light,.86)*.83)) saturate(.85)}
 .winter-actor.knocked-down .winter-walk-sheet{animation:none!important;background-position:0 0}
 .winter-actor.knocked-down .winter-actor-hit{pointer-events:none}
 .winter-actor.knocked-down:after{content:'Recovering';position:absolute;bottom:8px;left:35%;font:10px/1.4 Roboto,sans-serif;color:#d8c6a5;transform:rotate(-73deg);text-shadow:0 1px 3px #000}
+.room-view-targets .winter-falling-enemy{width:auto;z-index:200;pointer-events:none;transform:translateX(-50%);transform-origin:50% 98%;filter:brightness(var(--enemy-light,.86)) saturate(.85);animation:ward-grounded-fall 1s ease-in forwards}
+.winter-falling-enemy .winter-walk-sheet{animation:none!important}
+.winter-falling-enemy .winter-enemy-still{display:block;width:100%;height:100%;object-fit:contain}
+.winter-falling-enemy .winter-walk-sheet,.winter-falling-enemy .winter-enemy-still{filter:url(#ward-solid-enemy) drop-shadow(2px 8px 6px #0009)}
+@keyframes ward-grounded-fall{0%{transform:translateX(-50%) rotate(0);opacity:1}75%{transform:translateX(-50%) rotate(78deg);opacity:1}100%{transform:translateX(-50%) rotate(82deg);opacity:0}}
+@keyframes ward-grounded-fall-reduced{to{opacity:0}}
 @keyframes ward-solid-breathe{0%,100%{transform:translateX(-50%) rotate(-.35deg)}50%{transform:translateX(-50%) rotate(.35deg) scaleY(1.008)}}
 .c1-reduced-motion .winter-actor{animation:none!important}
+.c1-reduced-motion .room-view-targets .winter-falling-enemy{animation:ward-grounded-fall-reduced .4s ease-out forwards}
 @media(prefers-reduced-motion:reduce){.winter-actor{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.room-view-targets .winter-falling-enemy{animation:ward-grounded-fall-reduced .4s ease-out forwards}}

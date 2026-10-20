@@ -6,12 +6,13 @@ Keep the launcher window open while playing. No external internet is required.
 macOS/Linux: run python3 start_game.py (Python 3 standard library).
 Opening index.html directly can block game data/audio; use the launcher.
 
-Existing v5 saves can CONTINUE in this v6 update. A NEW GAME also works.
+Existing v5 and v6 saves can CONTINUE in this v7 update. A NEW GAME also works.
 Keep the same browser and local port to access those saves.
-CLICK visible objects. DRAG sideways or click a SIDE ARROW to see the other side.
+CLICK visible objects. DRAG sideways to see the other side.
 No keyboard controls are required. There is no bottom navigation toolbar.
 Hints default to SUBTLE; hint strength, motion and flashes are in OPTIONS.
-PAUSE is available from navigation and open dialogs; RESUME preserves their state.
+PAUSE stays in the left navigation below Options, also while reading or inspecting.
+RESUME preserves the exact open document or dialog.
 Practical requirements appear in THOUGHTS.
 Select an item in the RIGHT INVENTORY for USE, INSPECT, COMBINE or DISCARD.
 To combine: select the first item, choose COMBINE, then select the second item.

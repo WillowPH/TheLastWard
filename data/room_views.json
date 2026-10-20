@@ -133,6 +133,16 @@
           17
         ],
         "reviewed": true
+      },
+      "returnStand": {
+        "view": "rear",
+        "rect": [
+          7,
+          55,
+          12,
+          18
+        ],
+        "reviewed": true
       }
     },
     "threat": [
@@ -544,6 +554,16 @@
           39,
           6,
           3
+        ],
+        "reviewed": true
+      },
+      "rearMedicine": {
+        "view": "rear",
+        "rect": [
+          15,
+          38,
+          17,
+          25
         ],
         "reviewed": true
       }
@@ -1390,6 +1410,16 @@
           20
         ],
         "reviewed": true
+      },
+      "rearShelf": {
+        "view": "rear",
+        "rect": [
+          15,
+          43,
+          22,
+          26
+        ],
+        "reviewed": true
       }
     },
     "threat": [
@@ -1526,6 +1556,16 @@
           67,
           4,
           6
+        ],
+        "reviewed": true
+      },
+      "rearWorkbench": {
+        "view": "rear",
+        "rect": [
+          92,
+          53,
+          14,
+          18
         ],
         "reviewed": true
       }
@@ -1683,6 +1723,16 @@
           7
         ],
         "reviewed": true
+      },
+      "rearTrolley": {
+        "view": "rear",
+        "rect": [
+          24,
+          57,
+          18,
+          22
+        ],
+        "reviewed": true
       }
     },
     "threat": [
@@ -1822,6 +1872,16 @@
           64,
           7,
           22
+        ],
+        "reviewed": true
+      },
+      "rearTrolley": {
+        "view": "rear",
+        "rect": [
+          17,
+          57,
+          21,
+          15
         ],
         "reviewed": true
       }
@@ -2173,6 +2233,16 @@
           13.5
         ],
         "reviewed": true
+      },
+      "rearTable": {
+        "view": "rear",
+        "rect": [
+          11,
+          70,
+          18,
+          13
+        ],
+        "reviewed": true
       }
     },
     "threat": [
@@ -2383,6 +2453,16 @@
           41
         ],
         "reviewed": true
+      },
+      "rearSupply": {
+        "view": "rear",
+        "rect": [
+          20,
+          52,
+          17,
+          15
+        ],
+        "reviewed": true
       }
     },
     "threat": [
@@ -2543,6 +2623,16 @@
           52,
           5,
           7
+        ],
+        "reviewed": true
+      },
+      "rearBench": {
+        "view": "rear",
+        "rect": [
+          87,
+          48,
+          21,
+          14
         ],
         "reviewed": true
       }

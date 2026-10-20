@@ -3,8 +3,8 @@
 'use strict';
 const WW=WardWinter,W=1448,H=1086,fx=document.createElement('canvas'),snow=document.createElement('canvas'),screensLight=document.createElement('canvas');
 fx.width=snow.width=screensLight.width=W;fx.height=snow.height=screensLight.height=H;
-const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),crt=screensLight.getContext('2d'),images=new Map();
-let data={},raf=0,revision=0,frames=0,running=false;
+const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),crt=screensLight.getContext('2d'),images=new Map(),patient=document.createElement('canvas'),pc=patient.getContext('2d');
+let data={},raf=0,revision=0,frames=0,running=false,patientFrame=null;
 const state=()=>typeof S==='undefined'?null:S;
 const renderer=()=>WW.roomViewRenderer?.();
 function image(path){
@@ -43,22 +43,45 @@ function paintSnow(glass,time,moving){
 }
 function paintScreens(screens,time,moving){
  for(const [i,screen]of (screens||[]).entries()){
-  const [x,y,w,h]=bounds(screen.rect),s=state(),online=!!(screen.feed&&(s.f.power&&!s.f.powerOut||i<2)),standby=!screen.feed||online;
+  // Security has its own surveillance UPS. All six cameras remain useful
+  // before the generator starts; its power changes brightness, not coverage.
+  const [x,y,w,h]=bounds(screen.rect),s=state(),online=!!screen.feed,standby=!screen.feed||online,backup=!s.f.power||s.f.powerOut;
   crt.save();crt.beginPath();crt.roundRect(x,y,w,h,Math.max(2,w*.06));crt.clip();crt.fillStyle=standby?'#19191b':'#080809';crt.fillRect(x,y,w,h);
   if(online){
    const source=WW.roomViewAsset?.(screen.feed,'front')||data[screen.feed]?.front?.source;
-   if(source){const im=image(source);if(im.complete&&im.naturalWidth){crt.filter='grayscale(1) brightness(1.2) contrast(.85)';crt.drawImage(im,0,0,im.naturalWidth,im.naturalHeight,x,y,w,h);crt.filter='none';crt.fillStyle='#d1d1d118';crt.fillRect(x,y,w,h);}}
+   if(source){const im=image(source);if(im.complete&&im.naturalWidth){crt.filter='grayscale(1) brightness('+(backup?1.35:1.55)+') contrast(.85)';crt.drawImage(im,0,0,im.naturalWidth,im.naturalHeight,x,y,w,h);crt.filter='none';crt.fillStyle='#d1d1d118';crt.fillRect(x,y,w,h);}}
+  }else if(screen.kind==='patient'){
+   crt.fillStyle='#060c0b';crt.fillRect(x,y,w,h);crt.strokeStyle='#83b99c';crt.lineWidth=Math.max(.7,w*.018);crt.beginPath();
+   const alive=s.f.beggingPatientChoice!=='killed';
+   for(let step=0;step<=80;step++){const q=step/80,phase=((q+(moving?time*.22:0))%1+1)%1,pulse=alive?(phase>.42&&phase<.45?-.18:phase>=.45&&phase<.48?.42:phase>=.48&&phase<.51?-.12:0):0,px=x+q*w,py=y+h*(.53+pulse);if(!step)crt.moveTo(px,py);else crt.lineTo(px,py);}crt.stroke();
   }
-  if(standby){
+  if(standby&&screen.kind!=='patient'){
    for(let n=0;n<100;n++){crt.fillStyle='rgba(220,220,222,'+(.04+.13*Math.abs(Math.sin(n*7+(moving?time*13:0))))+')';crt.fillRect(x+(n*13.7)%w,y+(n*7.7+(moving?time*15:0))%h,1+n%2,1);}
    crt.fillStyle='#11111333';for(let line=0;line<h;line+=3)crt.fillRect(x,y+line,w,.6);
    if(moving){crt.fillStyle='#d1d1d124';crt.fillRect(x,y+(time*7)%h,w,1);}
   }
-  if(s.sceneDisturbance?.room===s.room&&s.san<65&&standby){
+  if(s.sceneDisturbance?.room===s.room&&s.san<65&&standby&&screen.kind!=='patient'){
    crt.fillStyle='#151516';crt.fillRect(x,y,w,h);crt.fillStyle='#e2e0d8';crt.font=Math.max(6,w*.075)+'px monospace';crt.textAlign='center';crt.fillText(['WE REMEMBER','YOU WERE AWAKE','DO NOT LOOK AWAY'][i%3],x+w/2,y+h/2);
   }else if(online){crt.fillStyle='#e3e2de';crt.font=Math.max(5,w*.065)+'px monospace';crt.textAlign='left';crt.fillText('CAM '+(i+1)+' 1998',x+3,y+h-3);}
   crt.restore();
  }
+}
+function paintPatient(spec,time,moving){
+ patientFrame=null;
+ if(!spec||!moving||state().f.beggingPatientChoice==='killed')return;
+ const source=WW.roomViewAsset?.('isoward','front'),im=source&&image(source);
+ if(!im?.complete||!im.naturalWidth)return;
+ const [x,y,w,h]=bounds(spec.rect),pw=Math.ceil(w),ph=Math.ceil(h);
+ if(patient.width!==pw||patient.height!==ph){patient.width=pw;patient.height=ph;}
+ pc.clearRect(0,0,pw,ph);pc.globalCompositeOperation='source-over';
+ pc.drawImage(im,x/W*im.naturalWidth,y/H*im.naturalHeight,w/W*im.naturalWidth,h/H*im.naturalHeight,0,0,pw,ph);
+ // The native gown patch feathers into the stationary painting. Only the
+ // chest rises; the bed, face, restraints and interaction target stay fixed.
+ pc.save();pc.translate(pw/2,ph/2);pc.scale(pw/2,ph/2);
+ const mask=pc.createRadialGradient(0,0,.38,0,0,1);mask.addColorStop(0,'#fff');mask.addColorStop(1,'#fff0');pc.globalCompositeOperation='destination-in';pc.fillStyle=mask;pc.fillRect(-1,-1,2,2);pc.restore();pc.globalCompositeOperation='source-over';
+ const phase=time*(Math.PI*2/(spec.cycle||4.8)),breath=(1-Math.cos(phase))*.5,rise=breath*(spec.rise||2.6);
+ ctx.drawImage(patient,x,y-rise,w,h+rise*.4);
+ patientFrame={rect:spec.rect.slice(),rise,phase,source};
 }
 function paintFire(rect,time,moving){
  if(!rect)return;const [x,y,w,h]=bounds(rect);ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,Math.min(w,h)*.07);ctx.clip();
@@ -86,6 +109,7 @@ function draw(now){
  const dip=moving&&WardScene.options.flashes!==false?WW.flicker(s.room,t):0;
  if(dip){const interior=new Path2D();interior.rect(0,0,W,H);interior.addPath(polygons(physicalGlass));ctx.save();ctx.clip(interior,'evenodd');ctx.fillStyle='rgba(0,0,0,'+dip+')';ctx.fillRect(0,0,W,H);ctx.restore();}
  paintSnow(glass,t,moving);ctx.drawImage(snow,0,0);paintScreens(spec.screens,t,moving);
+ paintPatient(s.room==='isoward'&&view==='front'?spec.patientMotion:null,t,motionEnabled());
  if(s.room==='laundry'&&s.f.stoveLit)paintFire(spec.firebox,t,moving);
  if(s.room==='eastcorridor'&&s.f.sprinklerTriggered&&!s.f.sprinklerStopped&&spec.sprinkler){
   const p=spec.sprinkler,x=p.origin[0]/100*W,y=p.origin[1]/100*H;ctx.save();ctx.strokeStyle='rgba(182,215,223,.25)';
@@ -100,7 +124,7 @@ function mount(){
  function frame(now){if(own!==revision||!renderer()?.loaded)return;if(now-last>=1000/24){draw(now);last=now;}if(motionEnabled()){running=true;raf=requestAnimationFrame(frame);}else running=false;}
  frame(performance.now());
 }
-const api={mount,stop,draw,canvas:fx,snowCanvas:snow,screenCanvas:screensLight,get frames(){return frames;},get data(){return data;}};
+const api={mount,stop,draw,canvas:fx,snowCanvas:snow,screenCanvas:screensLight,get frames(){return frames;},get data(){return data;},get patientFrame(){return patientFrame;}};
 WW.roomViewEffects=api;
 api.ready=fetch(WW.asset('data/room_view_effects.json')).then(response=>{if(!response.ok)throw Error('Room effect definitions could not load.');return response.json();}).then(value=>{data=value;WardMotion.glazing=data;mount();return data;}).catch(error=>{console.error(error);return null;});
 WardMotion.mount=mount;

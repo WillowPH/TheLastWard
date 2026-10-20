@@ -153,6 +153,38 @@ for(const [id,room,fixture]of [
 ])relocate(id,room,fixture);
 W.find('attendantDiary3')[3]='The final loose page of the night attendant’s notebook, left on his quarters desk.';
 W.find('earlyBattery')[3]='A sealed flashlight cell remains in the desk supply pouch.';
+// Rear-facing furniture carries useful finds throughout the chapter. Moving the
+// existing IDs preserves each run's pickup flags, resource totals and lock logic.
+for(const [room,id,label,rect]of [
+ ['lobby','returnStand','Cloakroom return counter',[7,55,12,18]],
+ ['ward','rearMedicine','Rear medicine cupboard',[15,38,17,25]],
+ ['laundry','rearShelf','Laundry supply shelves',[15,43,22,26]],
+ ['generator','rearWorkbench','Maintenance charging bench',[92,53,14,18]],
+ ['boiler','rearTrolley','Heatproof service trolley',[24,57,18,22]],
+ ['morgue','rearTrolley','Mortuary work trolley',[17,57,21,15]],
+ ['specimen','rearBench','Laboratory rear workbench',[87,48,21,14]],
+ ['surgery','rearSupply','Theatre preparation drawer',[20,52,17,15]],
+ ['stafflounge','rearTable','Staff recreation table',[11,70,18,13]]
+])W.fixture(room,id,label,rect,'rear',{drawer:!['returnStand','rearWorkbench','rearTable'].includes(id)});
+for(const [id,room,fixture]of [
+ ['umbrella','lobby','returnStand'],['pistolRounds','ward','rearMedicine'],
+ ['pouch','laundry','rearShelf'],['attendantDiary2','laundry','rearShelf'],
+ ['charger','generator','rearWorkbench'],['handCharge','generator','rearWorkbench'],
+ ['fur','boiler','rearTrolley'],['aut','morgue','rearTrolley'],
+ ['wire','specimen','rearBench'],['shotShells','surgery','rearSupply']
+])relocate(id,room,fixture);
+W.find('pistolRounds')[3]='A sealed ammunition sleeve is tucked inside the medicine cupboard behind the entry door.';
+W.find('pouch')[3]='A compact belt-and-pouch kit is tucked inside the rear laundry supply shelves.';
+W.find('charger')[3]='A battery charging cradle sits on the maintenance bench behind the generator.';
+W.find('handCharge')[3]='A manual dynamo shares the rear charging bench. It can recover a nearly empty flashlight without mains power.';
+W.find('fur')[1]='Heatproof service-part tin';W.find('fur')[3]='A heatproof tin on the boiler service trolley holds one usable precision part.';
+W.find('aut')[3]='An autopsy report lies on the work trolley beside the mortuary sink.';
+W.find('wire')[3]='A spool of dry insulated wire rests on the laboratory rear workbench.';
+W.find('shotShells')[3]='Four sealed shotgun shells remain in the theatre preparation drawer behind the operating table.';
+register('stafflounge','rearTable','arcadeMedallion','Dragon tournament medallion','A brass dragon token rests on an old staff arcade-night flyer.',{look:1});
+register('stafflounge','rearTable','heroMug','Heroes’ mug','A repaired ceramic mug bears a dark circular emblem and an orange arc.',{look:1});
+W.find('umbrella')[3]='A red-and-white umbrella has been left on the cloakroom return counter behind reception.';
+W.find('icecreamToy')[1]='Sweet Tooth ice-cream truck';W.find('icecreamToy')[3]='The battered toy carries a sculpted grinning clown head with flame-shaped hair.';
 register('children','nightDrawer','childNightCell','Night-light battery','A sealed torch battery was set aside in the bedside drawer for night rounds.',{give:[['Battery',1]]});
 register('isolation','dressingShelf','isolationDressing','Sealed isolation dressing','An unopened sterile dressing survived inside the glass-fronted cabinet.',{give:[['Trauma Dressing',1]]});
 register('coldstore','courierCrate','courierCell','Courier’s spare battery','A spare torch cell is sealed in the insulated delivery crate beside the cold-room door.',{give:[['Battery',1]]});
