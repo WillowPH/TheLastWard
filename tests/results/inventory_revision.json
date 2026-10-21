@@ -6,7 +6,7 @@
     "A stabilizer can be applied to a selected firearm directly; the old inventory modal stays closed",
     "An incompatible pair never consumes resources and has an explicit cancel action",
     "A full pack rolls both ingredient counts back when neither stack frees an output slot",
-    "A key remains protected while a matching lock is unfinished; discarding the spent key closes confirmation and stays in the room",
+    "An unused key can be left in the room with confirmation; useful/spent classification remains truthful and discarding closes the dialog without opening the inventory",
     "Dead players cannot heal, recharge, craft, refill or discard through any inventory entrypoint, even if another caller changes HP",
     "First Wire Spool acquisition explains its battery use in Thoughts",
     "A direct Recharge action uses the selected supply and leaves the room visible",

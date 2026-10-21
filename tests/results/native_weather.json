@@ -3,13 +3,13 @@
     {
       "room": "lobby",
       "view": "front",
-      "painted": 172,
+      "painted": 720,
       "outside": 0
     },
     {
       "room": "lobby",
       "view": "rear",
-      "painted": 218,
+      "painted": 542,
       "outside": 0
     },
     {
@@ -39,7 +39,7 @@
     {
       "room": "room12",
       "view": "front",
-      "painted": 122,
+      "painted": 154,
       "outside": 0
     },
     {
@@ -123,7 +123,7 @@
     {
       "room": "residence",
       "view": "front",
-      "painted": 194,
+      "painted": 256,
       "outside": 0
     },
     {
@@ -207,7 +207,7 @@
     {
       "room": "isolation",
       "view": "front",
-      "painted": 182,
+      "painted": 489,
       "outside": 0
     },
     {
@@ -243,7 +243,7 @@
     {
       "room": "stafflounge",
       "view": "front",
-      "painted": 52,
+      "painted": 83,
       "outside": 0
     },
     {
@@ -309,13 +309,13 @@
     {
       "room": "wardnorth",
       "view": "rear",
-      "painted": 284,
+      "painted": 359,
       "outside": 0
     },
     {
       "room": "wardservice",
       "view": "front",
-      "painted": 196,
+      "painted": 502,
       "outside": 0
     },
     {

@@ -7,7 +7,23 @@ const repeat=new Set(['save','box','charger','handCharge','lobbyCharge','shutter
 const done=o=>(o[4].act==='portrait'&&S.f.photoPuzzleSolved)||(o[4].act==='payphone'&&S.ob[o[0]]==='read')||(S.ob[o[0]]==='done'&&!repeat.has(o[4].act))||((o[4].doc||o[4].look||o[4].act==='egg')&&S.ob[o[0]]==='read');
 function art(room,view){if(view==='rear')return room==='tunnel'&&S.f.drained?'assets/states/tunnel_rear_drained.webp':'assets/reverse/'+room+'.webp';const state=room==='laundry'&&S.f.trapUsed?'laundry_trap_spent':room==='laundry'&&S.f.trapArmed?'laundry_trap_armed':room==='isoward'&&S.f.beggingPatientChoice==='killed'?'isoward_after':room==='surgery'&&S.f.doctorWallSeen?'surgery_after':room==='tunnel'&&S.f.drained?'tunnel_drained':null;return state?(window.WardPanoramaStates?.[state]||'assets/states/'+state+'.webp'):(window.WardPanoramaAssets?.[room]||'assets/rooms/'+room+'.webp');}
 WW.roomArt=art;
-function actor(){const p=initPursuer(),x=p.active&&p.room===S.room,a=WW.enemies.actorAt(),hall=WW.hallActive();if(!x&&!a&&!hall)return '';const name=x?'Subject X':a?.name||'Infected orderly',visual=x?{image:'assets/characters/subject_walk.webp',sheet:true,variant:'subject-x',aspect:.75,opaqueTop:7/724,opaqueBottom:709/724}:WW.enemyVisual?.(a)||{image:'assets/characters/patient_walk.webp',sheet:true,variant:'patient',aspect:.5},stage=WW.enemyStaging?.(S.room,x,visual)||{left:55,bottom:3,boxHeight:x?88:74,aspect:visual.aspect},fallen=x&&WW.pursuerDown?.(),source=asset(visual.image),solid=WardRoomViewRenderer.opaqueSource(source),body=visual.sheet?`<span class="winter-walk-sheet" data-solid-source="${e(source)}" style="background-image:url('${solid}')"></span>`:`<img class="winter-enemy-still" data-solid-source="${e(source)}" src="${solid}" alt="">`;return `<div class="winter-actor ${x?'subject-x':'infected'} enemy-${visual.variant} ${fallen?'knocked-down':cm?'approaching':'watching'}" data-enemy-id="${e(x?'subject-x':a?.id||'hallucination')}" data-floor="${stage.foot||97}" data-visible-height="${stage.height||stage.boxHeight}" style="left:${stage.left}%;bottom:${stage.bottom}%;height:${stage.boxHeight}%;aspect-ratio:${stage.aspect};--enemy-light:${WW.enemyLight?.()||.86}" role="img" aria-label="${e(name)}${fallen?' · temporarily down':''}">${body}<button class="winter-actor-hit" onclick="${x?'pursuerEncounter()':'combat()'}" aria-label="Face ${e(name)}"></button></div>`;}
+function actor(){
+ const p=initPursuer(),x=p.active&&p.room===S.room,a=WW.enemies.actorAt(),hall=WW.hallActive();
+ if(!x&&!a&&!hall)return '';
+ const fallen=!!(x&&WW.pursuerDown?.()),name=x?'Subject X':a?.name||'Infected orderly';
+ // The stagger has its own anatomically authored pose. Source margins and the
+ // visible-height ratio preserve scale and boot/knee contact with the floor.
+ const visual=x?{
+  image:'assets/characters/subject_x_'+(fallen?'kneeling':'standing')+'.webp',sheet:false,
+  variant:'subject-x',aspect:2/3,opaqueTop:(fallen?381:16)/1536,
+  opaqueBottom:(fallen?1430:1517)/1536
+ }:WW.enemyVisual?.(a)||{image:'assets/characters/patient_walk.webp',sheet:true,variant:'patient',aspect:.5};
+ const stage=WW.enemyStaging?.(S.room,x,visual)||{left:55,foot:97,bottom:3,boxHeight:x?88:74,height:x?88:74,aspect:visual.aspect};
+ if(fallen){stage.height*=.7;stage.boxHeight*=.7;stage.bottom=100-stage.foot-stage.boxHeight*(1-visual.opaqueBottom);}
+ const source=asset(visual.image),solid=WardRoomViewRenderer.opaqueSource(source);
+ const body=visual.sheet?`<span class="winter-walk-sheet" data-solid-source="${e(source)}" style="background-image:url('${solid}')"></span>`:`<img class="winter-enemy-still" data-solid-source="${e(source)}" src="${solid}" alt="">`;
+ return `<div class="winter-actor ${x?'subject-x':'infected'} enemy-${visual.variant} ${fallen?'knocked-down':cm?'approaching':'watching'}" data-enemy-id="${e(x?'subject-x':a?.id||'hallucination')}" data-pose="${fallen?'kneeling':'standing'}" data-floor="${stage.foot||97}" data-visible-height="${stage.height||stage.boxHeight}" style="left:${stage.left}%;bottom:${stage.bottom}%;height:${stage.boxHeight}%;aspect-ratio:${stage.aspect};--enemy-light:${WW.enemyLight?.()||.86}" role="img" aria-label="${e(name)}${fallen?' · kneeling and recovering':''}">${body}<button class="winter-actor-hit" onclick="${x?'pursuerEncounter()':'combat()'}" aria-label="Face ${e(name)}"></button></div>`;
+}
 
 function physical(f){let s='';if(f.actor)s+=`<img class="c1-physical c1-npc" style="${style(f.actorRect||f.rect)}" src="${asset('assets/characters/'+f.actor+'.png')}" alt="">`;
  if(f.art)s+=`<img class="c1-physical winter-fixture-art" style="${style(f.rect)}" src="${asset(f.art)}" alt="">`;
@@ -33,7 +49,7 @@ function plane(view,groups){const room=S.room,bp=WardScenes[room],doors=roomConn
  if(room==='lobby'&&S.f.lobbyShutters)s+='<div class="winter-shutters '+view+'" aria-label="Closed exterior shutters"></div>';
  if(room==='observation'&&view==='front'&&S.f.plexiIncidentSeen)s+='<div class="winter-glass-aftermath" aria-label="Cracked observation glass"></div>';
  if(view==='front')s+=actor();
- if(S.sceneDisturbance?.room===room)s+=`<div class="winter-hallucinated-body ${S.sceneDisturbance.kind}" aria-hidden="true"><img src="${asset('assets/characters/shrouded_figure.webp')}" alt=""></div>`;
+ if(WW.visionMarkup)s+=WW.visionMarkup();
  s+=`<div class="c1-lighting ${WardNavigation.isDark(room)?'unlit':''} ${has('Flashlight')&&S.lightOn&&S.bat>0&&!S.f.flashlightDropped?'torch':''}"></div><div class="winter-local-fx" aria-hidden="true"></div>`;
  return s;
 }

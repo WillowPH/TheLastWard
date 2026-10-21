@@ -9,7 +9,8 @@
     "Taking the Security utility knife and returning to the room clears the contents overlay and leaves no colour filter or stale focus container.",
     "After triggering and closing the sprinkler, narration and thoughts remain two transparent cards over the artwork with no extra feedback panels beneath them.",
     "Hinged door/latch animation completes once and takes longer with wet hands.",
-    "Rapid real door clicks and direct map/turn/inventory commands stay locked to one transition; Pause remains available and completion waits for Resume."
+    "Rapid real door clicks and direct map/turn/inventory commands stay locked to one native transition; room-facing drags cannot bypass it.",
+    "Pause remains available during a fresh native door transition; completion waits for Resume and removes its passage overlay."
   ],
   "errors": []
 }

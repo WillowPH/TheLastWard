@@ -4,10 +4,12 @@ import json,sys,re,itertools,argparse
 from playwright.sync_api import sync_playwright
 from mouse_controls import turn_room
 ROOT=Path(__file__).resolve().parents[1]
+BUILD='last-ward-ch1-chapter-review-9'
 parser=argparse.ArgumentParser();parser.add_argument('url',nargs='?',default='http://127.0.0.1:8010');parser.add_argument('--mode',choices=['both','normal','story'],default='both');args=parser.parse_args();URL=args.url
 OUT=ROOT/'tests/results';OUT.mkdir(exist_ok=True)
 result_path=OUT/'winter_progression.json'
 report=json.loads(result_path.read_text()).get('trace',[]) if args.mode!='both' and result_path.exists() else []
+report=[entry for entry in report if entry.get('build')==BUILD]
 selected_prefix='winter-story-complete' if args.mode=='story' else 'winter-standard-a'
 if args.mode!='both':report=[entry for entry in report if not entry['step'].startswith(selected_prefix)]
 with sync_playwright() as p:
@@ -175,7 +177,8 @@ with sync_playwright() as p:
    close()
  def note(label):
   state=ev('({build:WardChapter.BUILD,room:S.room,hp:S.hp,sanity:S.san,charge:S.bat,visited:Object.keys(S.vis).length,loadedRounds:S.ld.Handgun||0,reserveRounds:cnt("Handgun Ammo"),pursuerStaggers:S.f.pursuerStaggers||0,pursuerEscapes:S.f.pursuerEscapes||0,remaining:WardChapter.requirements()})')
-  state.update(metrics);state['infectedKilled']=ev('S.enemyActors.filter(a=>!a.dormant&&a.hp<=0).length');state['visualEpisodes']=ev('S.f.visualEpisodes||0');state['falseEncounterResolved']=ev('!!S.f.falseEncounterResolved');state['collectedClues']=list(clues);state['shotgunObtained']=ev('has("Shotgun")||S.ob.restrictedShotgun==="done"');report.append({'step':label,**state});print(label,state,flush=True)
+  assert state['build']==BUILD,state
+  state.update(metrics);state['infectedKilled']=ev('S.enemyActors.filter(a=>!a.dormant&&a.hp<=0).length');state['visualEpisodes']=ev('S.f.visualEpisodes||0');state['falseEncounterResolved']=ev('!!S.f.falseEncounterResolved');state['collectedClues']=list(clues);state['shotgunObtained']=ev('has("Shotgun")||S.ob.restrictedShotgun==="done"');state['patientOutcome']=ev('S.f.patientOutcome');state['kesslerResponse']=ev('S.f.kesslerResponse');state['evidence']='Captured directly from this earned route invocation.';report.append({'step':label,**state});print(label,state,flush=True)
  all_seeds=['winter-standard-a','winter-story-complete'];seeds=all_seeds if args.mode=='both' else [selected_prefix]
  for seed in seeds:
   metrics={'shots':0,'reloads':0,'heals':0,'knife_finishers':0,'hallucination_choices':0};clues={}
@@ -187,12 +190,13 @@ with sync_playwright() as p:
   assert not ev('has("Flashlight")');take('coat','Flashlight');use('payphone');close();take('desk','Cabinet Key')
   move('security');use('clara');close();read_object('ros');read_object('winterJournal');use('mapboard');close()
   take('drw','Staff Access Card');take('utilityKnife','Utility Knife');take('petrolLighter','Lighter');take('lighterFluid','Lighter Fluid')
-  combine('Lighter','Lighter Fluid');assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
+  combine('Lighter','Lighter Fluid');assert ev('S.lighterFuel===2&&!has("Lighter Fluid")')
   take('earlyBattery','Battery')
   move('ward');take('nightPistol','Handgun');take('pistolRounds','Handgun Ammo');ev("equipWeapon('Handgun');reload()")
   move('laundry');use('dryingStove');close();assert ev('S.f.stoveLit&&!S.f.wet');metrics['deliberate_warmups']=1;use('pouch');close();assert ev('carryLimit()===10')
   if ev('has("Battery")&&S.bat<100'):
    page.get_by_role('button',name='Select Battery',exact=True).click();page.locator('#inventoryCarryActions').get_by_role('button',name='Use',exact=True).click();close()
+  move('ward');take('clinicDressing','Trauma Dressing')
   move('wardservice');take('serviceAmmo','Handgun Ammo')
   move('room12');take('cab','Archive Key');take('shf2','Trauma Dressing');use('file');close()
   move('isoward');use('beggingPatient');page.get_by_role('button',name='Try to treat him',exact=True).click();close();assert ev('S.f.beggingPatientChoice==="helped"')
@@ -208,7 +212,7 @@ with sync_playwright() as p:
   # Collect the Archives interlock plug while this early route is still clear.
   # Returning for it after Subject X appears can leave the shelf physically blocked.
   move('archive');take('elevatorFuseA','Rook Interlock Fuse');move('generator')
-  move('stafflounge');use('harness');close();take('loungeFirstAid','Field Medkit');use('shawHandover');close();use('loungeNote');close();assert ev('carryLimit()===12')
+  move('stafflounge');use('harness');close();use('shawHandover');close();use('loungeNote');close();assert ev('carryLimit()===12')
   move('residence');diary=read_object('dia');use('brk')
   colors=re.search(r'exit signs: ([^.]+)',diary).group(1);breaker=['R' if c=='red' else 'G' if c=='green' else 'B' if c=='blue' else 'Y' for c in re.findall('red|green|blue|yellow',colors)]
   for color in breaker:page.get_by_role('button',name=color,exact=True).click()
@@ -220,6 +224,9 @@ with sync_playwright() as p:
   page.get_by_role('button',name='Turn the crank',exact=True).click();assert ev('!!S.f.winchPrimed&&!S.f.drained')
   page.locator('[data-winch=relief]').click();page.get_by_role('button',name='Turn the crank',exact=True).click();close();assert ev('S.f.drained&&!has("Crank Handle")');take('tk','Boiler Key')
   move('boiler');use('fl');close();move('generator');store(['Boiler Key','Utility Knife']);use('charger');close()
+  # The second first-aid kit is now in Observation's rear desk. Reach it through
+  # the powered generator door before committing to the theatre and records.
+  move('observation');close();assert ev('!!S.f.plexiIncidentSeen');take('loungeFirstAid','Field Medkit')
   move('surgery');close();assert ev('!!S.f.doctorWallSeen')
   move('security');use('staffPortraits')
   photos=[]
@@ -259,7 +266,8 @@ with sync_playwright() as p:
   page.get_by_role('button',name='Descend · End Chapter 1',exact=True).click();assert ev('S.f.chapter1Complete&&S.room==="lift"&&!S.pursuer.active')
   assert page.get_by_role('heading',name='CHAPTER 1 COMPLETE',exact=True).is_visible();assert ev('Object.keys(S.vis).length===27');assert not ev('has("Shotgun")||S.ob.restrictedShotgun==="done"');assert ev('S.f.drained&&S.f.transferBusReady&&S.f.elevatorFusesInstalled');assert metrics['shots']>0;assert ev('S.enemyActors.some(a=>!a.dormant&&a.hp<=0)')
   note(seed+' elevator ending');page.screenshot(path=str(OUT/(seed+'-ending.png')))
+  assert ev('S.f.patientOutcome==="stabilized"&&S.f.kesslerResponse==="speak"')
  assert not errors,errors
  browser.close()
-result_path.write_text(json.dumps({'runs':[seed for seed in ['winter-standard-a','winter-story-complete'] if any(e['step']==seed+' elevator ending' for e in report)],'executed_this_invocation':seeds,'transport':URL,'multi_file':True,'trace':report},indent=2))
+result_path.write_text(json.dumps({'runs':[seed for seed in ['winter-standard-a','winter-story-complete'] if any(e['step']==seed+' elevator ending' for e in report)],'executed_this_invocation':seeds,'transport':URL,'multi_file':True,'javascript_errors':errors,'trace':report},indent=2))
 print('PASS: '+str(len(seeds))+' complete all-27-room route(s) using earned progression, native mouse drags and ordinary object clicks.')

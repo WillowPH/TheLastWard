@@ -2,6 +2,26 @@
 (function(){'use strict';
 const WW=WardWinter,e=htmlSafe;let record=null,filePage=0,fileTab='leads',fileQuery='',fromFiles=false;
 WW.isReadingRecord=()=>!!document.querySelector('#m .record-reader,#m .winter-object-modal,#m .winter-portrait-grid');
+// Documents and open mechanisms stop encounter clocks as well as the turn
+// clock. Rebase saved real deadlines once when reading ends; do not charge the
+// same time again when the player uses the separate game Pause over a reader.
+let clockState=null,readingStarted=null;
+function shiftReadingDeadlines(object,delta){if(!object||typeof object!=='object'||!delta)return;for(const [key,value]of Object.entries(object)){if(value&&typeof value==='object')shiftReadingDeadlines(value,delta);else if(typeof value==='number'&&value>1e12&&/deadline|Real$|UntilReal$/i.test(key))object[key]=value+delta;}}
+WW.readingClock=function(){
+ const now=Date.now();
+ if(clockState!==S){clockState=S;readingStarted=null;}
+ if(WW.isPaused?.()){
+  if(readingStarted!==null)shiftReadingDeadlines(S,now-readingStarted);
+  readingStarted=null;return {paused:true,now};
+ }
+ const reading=!!(WW.isSurvivalPaused?.()||WW.isReadingRecord());
+ if(reading){if(readingStarted===null)readingStarted=now;return {paused:true,now:readingStarted};}
+ if(readingStarted!==null){shiftReadingDeadlines(S,now-readingStarted);readingStarted=null;}
+ return {paused:false,now};
+};
+new MutationObserver(()=>WW.readingClock()).observe($('m'),{childList:true,subtree:true});
+document.addEventListener('ward:pause',()=>WW.readingClock());
+document.addEventListener('ward:resume',()=>WW.readingClock());
 WW.sceneWarning=function(text){const host=$('interactiveScene');if(!host)return;let banner=host.querySelector('.scene-warning-banner');if(!banner){banner=document.createElement('p');banner.className='scene-warning-banner';banner.setAttribute('role','status');host.append(banner);}banner.textContent=text;clearTimeout(WW.warningTimer);WW.warningTimer=setTimeout(()=>banner.remove(),4500);};
 function rows(text,width,font){const ctx=document.createElement('canvas').getContext('2d');ctx.font=font;const out=[];for(const paragraph of text.split('\n')){let row='';for(const word of paragraph.split(/\s+/).filter(Boolean)){const next=row?row+' '+word:word;if(row&&ctx.measureText(next).width>width){out.push(row);row=word;}else row=next;}out.push(row);}return out;}
 function paginate(){const paper=document.querySelector('.record-reader .winter-paper-text');if(!paper||!record)return;

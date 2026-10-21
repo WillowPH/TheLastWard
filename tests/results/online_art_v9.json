@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "Online preferred is default, native fallback is truthful and playable, explicit Offline persists with no artwork service requests, and re-enabling updates status",
+    "mocked connected host supplies decoded same-origin imagery once per room/seed/power; ceiling clipping cannot intercept input or relocate authored art/targets, and cached mode switches do not generate again",
+    "turning Offline cancels pending generation and a late response cannot start an image download or overwrite the Offline status",
+    "a late failure for a previous room cannot overwrite the active current-room artwork state",
+    "room changes while capability discovery is pending do not request artwork for stale room contexts",
+    "unavailable service and cross-origin image responses retain complete local art without retry storms or external image requests"
+  ],
+  "javascript_errors": [],
+  "hosted_service": "Local browser mock only; no live provider is configured or claimed."
+}

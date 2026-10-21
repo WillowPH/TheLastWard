@@ -13,7 +13,7 @@ function awakenPursuer(){
  lg('Three heavy impacts buckle a service shutter. The footsteps begin.');
  soundEffect('door');
  modal('Something has been released',
-  '<div class="unique-event"><p>From the laundry wing: <b>THUD. THUD. THUD.</b></p><p>A reinforced service door bends outward. A large figure in torn clinical restraints stoops through the opening. Its face is hidden by an opaque recovery mask. It pauses, listening.</p><p class="unique-thought">That thing is not wandering. It is looking for someone. I think it knows where I am.</p><p>Stay quiet, change routes, or hide behind room furnishings. Its heavy steps give you warning. You are not expected to kill it.</p></div><button class="btn p" onclick="closeModal();pursuerEncounter()">Move carefully</button>');
+  '<div class="unique-event"><p>From the laundry wing: <b>THUD. THUD. THUD.</b></p><p>A reinforced service door bends outward. A huge bald patient in torn institutional trousers stoops through the opening. Broken restraints hang from his thick wrists. His scarred face turns toward the corridor. He pauses, listening.</p><p class="unique-thought">That thing is not wandering. It is looking for someone. I think it knows where I am.</p><p>Stay quiet, change routes, or hide behind room furnishings. Its heavy steps give you warning. You are not expected to kill it.</p></div><button class="btn p" onclick="closeModal();pursuerEncounter()">Move carefully</button>');
  render();return true;
 }
 // Telephone system lives in chapter_events.js; no duplicate handlers here.
@@ -97,7 +97,7 @@ function pursuerEncounter(){
  soundEffect('door');
  const w=W[S.eq],loaded=w?(S.ld[S.eq]||0):0;
  const hide=HIDING_AREAS.has(S.room)?'<button class="btn p" onclick="escapePursuer(\'hide\')">Hide quietly</button>':'';
- modal('Heavy footsteps', '<div class="unique-event"><p>The figure in the opaque recovery mask fills the doorway. It stops. A slow breath rattles behind the plastic.</p><p class="unique-thought">It has seen the light. Don’t move. Don’t breathe.</p><p>It can be delayed, not defeated. Retreat, hide, or force your way past.</p></div>'+hide+'<button class="btn p" onclick="escapePursuer(\'retreat\')">Retreat through an open door</button><button class="btn" onclick="escapePursuer(\'push\')">Push past (risk injury)</button>'+(loaded?'<button class="btn" onclick="escapePursuer(\'shoot\')">Fire once to stagger ('+loaded+' loaded)</button>':'') );
+ modal('Heavy footsteps', '<div class="unique-event"><p>The hulking patient fills the doorway. His broad scarred face turns toward me. A slow breath rattles in his chest.</p><p class="unique-thought">It has seen the light. Don’t move. Don’t breathe.</p><p>It can be delayed, not defeated. Retreat, hide, or force your way past.</p></div>'+hide+'<button class="btn p" onclick="escapePursuer(\'retreat\')">Retreat through an open door</button><button class="btn" onclick="escapePursuer(\'push\')">Push past (risk injury)</button>'+(loaded?'<button class="btn" onclick="escapePursuer(\'shoot\')">Fire once to stagger ('+loaded+' loaded)</button>':'') );
  // No generic Close control to bypass this encounter.
  const x=$('m').querySelector('.mh button');if(x)x.remove();
  return true;
@@ -109,7 +109,7 @@ function escapePursuer(how){
  if(how==='shoot'){
   const w=W[S.eq];if(!w||!has(S.eq)||(S.ld[S.eq]||0)<=0)return pursuerEncounter();
   S.ld[S.eq]--;soundEffect('shot');p.noise=1;
-  description='Your shot staggers the masked figure against a trolley. It rises again, but you have a head start. Ammo: '+S.ld[S.eq]+' / '+w.mag+'.';
+  description='Your shot staggers the hulking figure against a trolley. It rises again, but you have a head start. Ammo: '+S.ld[S.eq]+' / '+w.mag+'.';
  }else if(how==='hide'){
   description='You slip behind the furniture and stop breathing. The heavy steps pass, then fade into the corridor.';
  }else if(how==='push'){

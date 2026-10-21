@@ -43,7 +43,7 @@ with sync_playwright() as p:
   ev('closeModal()')
  checks.append('every Progression page keeps its real clue Read buttons visible and clickable without dialog scrolling at desktop, tablet and mobile sizes')
  for difficulty in [1,1.3]:
-  ev('m=>{S.m=m;S.f.stoveLit=0;S.f.chapelCandles=0;delete S.ob.chapelCandles;S.inv=[{n:"Flashlight",c:1},{n:"Lighter",c:1},{n:"Lighter Fluid",c:1}];S.lighterFuel=0;render()}',difficulty);ev('wardCombineLighter()');assert ev('S.lighterFuel===6&&has("Lighter")&&!has("Lighter Fluid")')
+  ev('m=>{S.m=m;S.f.stoveLit=0;S.f.chapelCandles=0;delete S.ob.chapelCandles;S.inv=[{n:"Flashlight",c:1},{n:"Lighter",c:1},{n:"Lighter Fluid",c:1}];S.lighterFuel=0;render()}',difficulty);ev('wardCombineLighter()');assert ev('S.lighterFuel===2&&has("Lighter")&&!has("Lighter Fluid")')
   room('laundry');action('dryingStove');assert ev('S.f.stoveLit&&has("Lighter")&&!S.f.chapelCandles');ev('closeModal();wardCloseFocus()');room('chapel');action('chapelCandles');assert ev('S.f.stoveLit&&S.f.chapelCandles')
   assert ev('has("Lighter")')==(difficulty>1),(difficulty,ev('S.inv'))
   if difficulty>1:assert ev('WardWinter.inventoryDiscard.policy("Lighter").spent')

@@ -48,7 +48,7 @@ with sync_playwright() as p:
  reset('security');ev('hideInRoom()');assert not ev('S.f.hidingRoom');page.get_by_role('button',name='Hide here',exact=True).click();assert ev('S.f.hidingRoom===S.room&&!S.lightOn');assert page.locator('.panorama-hiding-mask path').first.get_attribute('d').count('M')==1;ev('wardPeek()');assert page.locator('.panorama-hiding-mask path').first.get_attribute('d').count('M')==(2 if ev('S.f.hidingType')=='desk' else 4);ev('wardExitHiding()');passed('hiding asks first, is dark while concealed and uses narrow slits when peeking')
  reset('security');ev('S.f.power=1;S.lightOn=true;renderScene();window.__roomImage=document.querySelector(".room-view-canvas");window.__roomPose=[S.roomView,S.cameraYaw,S.cameraPitch];S.sceneFocus="diary";wardFixtureAction("winterJournal")');assert ev('window.__roomImage===document.querySelector(".room-view-canvas")&&JSON.stringify(window.__roomPose)===JSON.stringify([S.roomView,S.cameraYaw,S.cameraPitch])');close();passed('reading a document preserves the existing room image and camera')
  reset('wardnorth');ev("add('Lighter',1);add('Lighter Fluid',1);wardCombineLighter();S.lightOn=true;S.f.power=1;render()")
- assert ev('S.lighterFuel===6&&!has("Lighter Fluid")')
+ assert ev('S.lighterFuel===2&&!has("Lighter Fluid")')
  ev("WardWinter.orbit.face('rear');act('windowLever')");assert not ev('WardWinter.windowState().triggered')
  page.get_by_role('button',name='Pull the handle',exact=True).click();assert ev('WardWinter.windowState().closed.every(v=>!v)')
  ev('advanceTime(18)');assert ev('S.hp<100&&S.san<100&&S.f.shivering')
@@ -58,7 +58,7 @@ with sync_playwright() as p:
  assert ev('S.windows.resolved&&S.windows.closed.every(Boolean)')
  hp=ev('S.hp');ev('wardOpenWindows();advanceTime(4)');assert ev('S.hp')==hp
  ev("S.room='laundry';S.roomView='rear';S.roomViewRoom=S.room;S.sceneView='rear';S.sceneViewRoom=S.room;render();act('dryingStove')")
- assert ev('S.f.stoveLit&&S.lighterFuel===5&&!S.f.wet&&!S.f.shivering')
+ assert ev('S.f.stoveLit&&S.lighterFuel===1&&!S.f.wet&&!S.f.shivering')
  passed('window confirmation, individual catches, local health/sanity exposure, one-use resolution and lighter recovery')
  reset('eastcorridor');ev('wardSprinkler()');assert ev('S.f.wet&&S.f.flashlightDropped&&!S.lightOn');close()
  ev('wardSprinkler();wardRecoverFlashlight()');assert ev('S.f.sprinklerStopped&&S.f.flashlightRecovered&&!S.f.flashlightDropped')

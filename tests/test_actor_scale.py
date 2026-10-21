@@ -9,7 +9,7 @@ SOURCES={
     'orderly':('assets/room_views/infected_orderly.png',False),
     'nurse':('assets/characters/nurse_walk.webp',True),
     'patient':('assets/characters/patient_walk.webp',True),
-    'subject-x':('assets/characters/subject_walk.webp',True),
+    'subject-x':('assets/characters/subject_x_standing.webp',False),
 }
 bounds={}
 for name,(src,sheet) in SOURCES.items():

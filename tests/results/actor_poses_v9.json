@@ -1,0 +1,242 @@
+{
+  "checks": [
+    "three real firearm clicks switch from an upright brute to a separately authored bent-knee pose, without rotating, compressing or stretching the standing art",
+    "both opaque bodies keep their natural source proportions, consistent canvas scale and foreground boot/knee contact",
+    "Pause preserves the kneeling deadline, and real recovery restores the full upright pose and its original height",
+    "upright and kneeling bodies remain grounded and undistorted at desktop, tablet and mobile widths"
+  ],
+  "bounds": {
+    "standing": {
+      "size": [
+        1024,
+        1536
+      ],
+      "opaque": [
+        128,
+        16,
+        917,
+        1517
+      ],
+      "sha256": "ba48259122f42c9c346ac76687f70359187fb40a57f61f07c122bfdcc40361ed"
+    },
+    "kneeling": {
+      "size": [
+        1024,
+        1536
+      ],
+      "opaque": [
+        40,
+        381,
+        1012,
+        1430
+      ],
+      "sha256": "804da484c440d2a1ea8302429af731643122b9e760716deefdf8d033bc066058"
+    }
+  },
+  "samples": [
+    {
+      "pose": "standing",
+      "source": "assets/characters/subject_x_standing.webp",
+      "rect": {
+        "x": 663,
+        "y": 164.03125,
+        "width": 442.59375,
+        "height": 663.90625,
+        "top": 164.03125,
+        "right": 1105.59375,
+        "bottom": 827.9375,
+        "left": 663
+      },
+      "frame": {
+        "x": 339.25,
+        "y": 99,
+        "width": 991,
+        "height": 743,
+        "top": 99,
+        "right": 1330.25,
+        "bottom": 842,
+        "left": 339.25
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -221.297, 0)",
+      "opacity": "1",
+      "body_height": 0.8731667684193094,
+      "body_foot": 0.9700100925697132
+    },
+    {
+      "pose": "kneeling",
+      "source": "assets/characters/subject_x_kneeling.webp",
+      "rect": {
+        "x": 662.640625,
+        "y": 200.609375,
+        "width": 443.3125,
+        "height": 664.984375,
+        "top": 200.609375,
+        "right": 1105.953125,
+        "bottom": 865.59375,
+        "left": 662.640625
+      },
+      "frame": {
+        "x": 339.25,
+        "y": 99,
+        "width": 991,
+        "height": 743,
+        "top": 99,
+        "right": 1330.25,
+        "bottom": 842,
+        "left": 339.25
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -221.656, 0)",
+      "opacity": "1",
+      "body_height": 0.6112187874589923,
+      "body_foot": 0.9699813822236709
+    },
+    {
+      "pose": "standing",
+      "source": "assets/characters/subject_x_standing.webp",
+      "rect": {
+        "x": 663,
+        "y": 164.03125,
+        "width": 442.59375,
+        "height": 663.90625,
+        "top": 164.03125,
+        "right": 1105.59375,
+        "bottom": 827.9375,
+        "left": 663
+      },
+      "frame": {
+        "x": 339.25,
+        "y": 99,
+        "width": 991,
+        "height": 743,
+        "top": 99,
+        "right": 1330.25,
+        "bottom": 842,
+        "left": 339.25
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -221.297, 0)",
+      "opacity": "1",
+      "body_height": 0.8731667684193094,
+      "body_foot": 0.9700100925697132
+    },
+    {
+      "pose": "standing",
+      "source": "assets/characters/subject_x_standing.webp",
+      "rect": {
+        "x": 387.40625,
+        "y": 225.9375,
+        "width": 251.375,
+        "height": 377.078125,
+        "top": 225.9375,
+        "right": 638.78125,
+        "bottom": 603.015625,
+        "left": 387.40625
+      },
+      "frame": {
+        "x": 204,
+        "y": 189,
+        "width": 562,
+        "height": 422,
+        "top": 189,
+        "right": 766,
+        "bottom": 611,
+        "left": 204
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -125.688, 0)",
+      "opacity": "1",
+      "body_height": 0.8731530356746149,
+      "body_foot": 0.9700085969897808
+    },
+    {
+      "pose": "kneeling",
+      "source": "assets/characters/subject_x_kneeling.webp",
+      "rect": {
+        "x": 387.203125,
+        "y": 246.703125,
+        "width": 251.78125,
+        "height": 377.6875,
+        "top": 246.703125,
+        "right": 638.984375,
+        "bottom": 624.390625,
+        "left": 387.203125
+      },
+      "frame": {
+        "x": 204,
+        "y": 189,
+        "width": 562,
+        "height": 422,
+        "top": 189,
+        "right": 766,
+        "bottom": 611,
+        "left": 204
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -125.891, 0)",
+      "opacity": "1",
+      "body_height": 0.6112043914071756,
+      "body_foot": 0.9699514669264663
+    },
+    {
+      "pose": "standing",
+      "source": "assets/characters/subject_x_standing.webp",
+      "rect": {
+        "x": 135.546875,
+        "y": 144.5,
+        "width": 153.09375,
+        "height": 229.640625,
+        "top": 144.5,
+        "right": 288.640625,
+        "bottom": 374.140625,
+        "left": 135.546875
+      },
+      "frame": {
+        "x": 24,
+        "y": 122,
+        "width": 342,
+        "height": 257,
+        "top": 122,
+        "right": 366,
+        "bottom": 379,
+        "left": 24
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -76.5469, 0)",
+      "opacity": "1",
+      "body_height": 0.8731826010381202,
+      "body_foot": 0.9700389817531007
+    },
+    {
+      "pose": "kneeling",
+      "source": "assets/characters/subject_x_kneeling.webp",
+      "rect": {
+        "x": 135.421875,
+        "y": 157.140625,
+        "width": 153.34375,
+        "height": 230.015625,
+        "top": 157.140625,
+        "right": 288.765625,
+        "bottom": 387.15625,
+        "left": 135.421875
+      },
+      "frame": {
+        "x": 24,
+        "y": 122,
+        "width": 342,
+        "height": 257,
+        "top": 122,
+        "right": 366,
+        "bottom": 379,
+        "left": 24
+      },
+      "fit": "contain",
+      "transform": "matrix(1, 0, 0, 1, -76.6719, 0)",
+      "opacity": "1",
+      "body_height": 0.6112353848112233,
+      "body_foot": 0.9699718905794017
+    }
+  ],
+  "javascript_errors": []
+}

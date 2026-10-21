@@ -100,16 +100,29 @@ with sync_playwright() as p:
     passed('one optional purge opens three dangerous windows; closing all catches and warming deliberately resolves local exposure')
 
     fresh()
+    room('archive')
+    ev('S.san=74;WardWinter.sanityEpisode()')
+    assert ev('WardWinter.incidentStress()===0&&!S.sceneDisturbance&&!S.hallCombat')
+    assert not q.locator('[data-sanity-vision]').count()
+    passed('low composure without witnessed incident trauma cannot produce a vision or imaginary encounter')
+
+    fresh()
     room('surgery')
-    ev('doctorAtWall()')
+    # This focused scenario begins already distressed; the actual fourteen-point
+    # Kessler choice reaches the visual threshold without mutating his outcome.
+    ev('S.san=88;doctorAtWall()')
     q.get_by_role('button', name='Call his name', exact=True).click()
     q.wait_for_timeout(950)
-    assert ev('S.f.doctorWallSeen&&S.san===86&&S.f.pendingSanityEpisode&&!S.sceneDisturbance&&!S.hallCombat')
+    assert ev('S.f.doctorWallSeen&&S.san===74&&S.f.pendingSanityEpisode&&!S.sceneDisturbance&&!S.hallCombat')
     q.get_by_role('button', name='Step back', exact=True).click()
     q.wait_for_function('!!S.sceneDisturbance', timeout=3000)
     assert ev('S.sceneDisturbance.room==="surgery"&&S.sceneDisturbance.view==="front"&&S.f.visualEpisodes===1')
     # The pending episode is visible in the facing the player already has.
     assert q.locator('[data-sanity-vision]').count() == 1
+    q.wait_for_function('document.querySelector("[data-sanity-vision] img")?.complete&&document.querySelector("[data-sanity-vision] img")?.naturalWidth>0')
+    memory = q.locator('[data-sanity-vision]').evaluate('''n=>({className:n.className,source:n.querySelector('img').dataset.solidSource,before:getComputedStyle(n,':before').content,transform:getComputedStyle(n).transform})''')
+    assert 'sanity-memory' in memory['className'] and 'infected_patient.png' in memory['source'], memory
+    assert memory['before'] == 'none' and memory['transform'] == 'none', memory
     assert ev('S.roomView') == 'front'
     ev('window.__visionPause=[];document.addEventListener("ward:pause",e=>window.__visionPause.push({paused:e.detail.paused,now:Date.now(),deadline:S.sceneDisturbance?.deadline}))')
     q.get_by_role('button', name='Pause game', exact=True).click()
@@ -125,7 +138,7 @@ with sync_playwright() as p:
     before = ev('[S.san,S.f.visualEpisodes]')
     ev('doctorAtWall()')
     assert ev('[S.san,S.f.visualEpisodes]') == before
-    passed('an actual Kessler choice records pending trauma during its modal, then automatically shows a current-facing vision after close; Pause preserves its remaining life and the event cannot repeat')
+    passed('an actual Kessler choice while pre-distressed records pending trauma during its modal, then shows a decoded grounded infected memory in the current facing; Pause preserves its fifteen-second life and the event cannot repeat')
 
     room('isoward')
     ev('add("Utility Knife");add("Handgun");S.eq="Handgun";S.ld.Handgun=6;beggingPatient()')

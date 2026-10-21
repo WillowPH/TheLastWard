@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "an actual record freezes knockdown, visual episode and blackout deadlines as well as turn/battery costs; each resumes with its remaining duration",
+    "opening game Pause over a record neither consumes the encounter opening nor double-counts its paused duration",
+    "imaginary combat does not expire behind a record and resolves only after the preserved real deadline resumes",
+    "Continue preserves its existing checkpoint; only genuine New Game clears all three old run checkpoints while retaining the manual save"
+  ],
+  "javascript_errors": []
+}

@@ -1,0 +1,185 @@
+{
+  "checks": [
+    "all eight exterior views visibly animate in the fitted game canvas at desktop, tablet and mobile sizes",
+    "the unobstructed main Lobby panes receive visible snowfall as well as the high transoms",
+    "real-time snow advances by itself; Pause freezes both RAF and incidental redraws, and Resume restarts it",
+    "scene-animation Off and OS reduced motion give stable winter stills; changing the OS preference restarts a stopped animation without a room change",
+    "both painted closed-shutter states remove exterior snowfall completely",
+    "moon-free overcast winter plates load at native resolution and alter only authored window openings, leaving indoor room geometry untouched",
+    "sprinkler jets visibly move while active and clear immediately when the real stopped state is set",
+    "the lit physical stove animates its firebox instead of an unrelated full-room tint",
+    "security CRT feeds retain moving static/scan effects in their dedicated screen compositor",
+    "occasional interior light dips reach rendered pixels, and disabling flashes still permits exterior snow motion"
+  ],
+  "fitted_views": [
+    {
+      "width": 1672,
+      "room": "lobby",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 1014
+    },
+    {
+      "width": 1672,
+      "room": "lobby",
+      "view": "rear",
+      "visible_changes": true,
+      "snow_pixels": 684
+    },
+    {
+      "width": 1672,
+      "room": "room12",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 237
+    },
+    {
+      "width": 1672,
+      "room": "residence",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 385
+    },
+    {
+      "width": 1672,
+      "room": "isolation",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 681
+    },
+    {
+      "width": 1672,
+      "room": "stafflounge",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 132
+    },
+    {
+      "width": 1672,
+      "room": "wardnorth",
+      "view": "rear",
+      "visible_changes": true,
+      "snow_pixels": 524
+    },
+    {
+      "width": 1672,
+      "room": "wardservice",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 671
+    },
+    {
+      "width": 1000,
+      "room": "lobby",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 2422
+    },
+    {
+      "width": 1000,
+      "room": "lobby",
+      "view": "rear",
+      "visible_changes": true,
+      "snow_pixels": 1635
+    },
+    {
+      "width": 1000,
+      "room": "room12",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 552
+    },
+    {
+      "width": 1000,
+      "room": "residence",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 896
+    },
+    {
+      "width": 1000,
+      "room": "isolation",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 1580
+    },
+    {
+      "width": 1000,
+      "room": "stafflounge",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 300
+    },
+    {
+      "width": 1000,
+      "room": "wardnorth",
+      "view": "rear",
+      "visible_changes": true,
+      "snow_pixels": 1258
+    },
+    {
+      "width": 1000,
+      "room": "wardservice",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 1441
+    },
+    {
+      "width": 390,
+      "room": "lobby",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 2594
+    },
+    {
+      "width": 390,
+      "room": "lobby",
+      "view": "rear",
+      "visible_changes": true,
+      "snow_pixels": 1742
+    },
+    {
+      "width": 390,
+      "room": "room12",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 616
+    },
+    {
+      "width": 390,
+      "room": "residence",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 961
+    },
+    {
+      "width": 390,
+      "room": "isolation",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 1773
+    },
+    {
+      "width": 390,
+      "room": "stafflounge",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 333
+    },
+    {
+      "width": 390,
+      "room": "wardnorth",
+      "view": "rear",
+      "visible_changes": true,
+      "snow_pixels": 1357
+    },
+    {
+      "width": 390,
+      "room": "wardservice",
+      "view": "front",
+      "visible_changes": true,
+      "snow_pixels": 1599
+    }
+  ],
+  "javascript_errors": []
+}

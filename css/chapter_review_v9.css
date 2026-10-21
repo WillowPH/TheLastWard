@@ -1,0 +1,9 @@
+.art-mode-choices{grid-template-columns:repeat(2,minmax(0,1fr))}
+.hud-local-art{font-size:11px!important}
+.room-online-atmosphere{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;z-index:1;opacity:.09;mix-blend-mode:screen;clip-path:polygon(35% 0,65% 0,60% 9%,40% 9%)}
+.winter-hallucinated-body.sanity-memory{top:auto;aspect-ratio:2/3;transform:none!important;transform-origin:50% 100%;filter:brightness(var(--enemy-light,.65)) saturate(.7);opacity:1}
+.winter-hallucinated-body.sanity-memory:before{content:none!important}
+.winter-hallucinated-body.sanity-memory img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.room-view-targets .winter-hallucinated-body.sanity-memory[data-sanity-vision]{animation-name:room-memory-fade!important}
+@keyframes room-memory-fade{0%{opacity:0}8%,75%{opacity:1}100%{opacity:0}}
+@media(max-width:650px){.art-mode-choices{grid-template-columns:1fr}}

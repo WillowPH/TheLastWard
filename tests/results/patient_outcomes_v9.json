@@ -1,0 +1,199 @@
+{
+  "checks": [
+    "actual treatment consumes one dressing, preserves a lucid stable patient, gives a practical warning, retires his target and survives a real Terminal save/load",
+    "leaving starts one saved deterioration window; revisiting cannot reset it, and a dressing can still help before the infection takes his lucidity",
+    "three difficulties: real departure/return door clicks cause one visible deterioration and distinct sanity cost; securing the restraint has one bounded physical cost, creates no roaming enemy and cannot repeat on another real return or after save/load",
+    "keeping distance is a real zero-injury option, with no hidden repeat damage or repeated deterioration event",
+    "knife and firearm mercy have different ammunition/noise costs; both permanently cover the body, preserve the bedside chronology and reject later alive/kill replays after actual save/load",
+    "mercy after abandonment retains the earlier living decision and infection aftermath in chronological evidence",
+    "Kessler choices have distinct saved evidence and sanity costs; only the warned approach risks injury, and every aftermath explicitly shows infected collapse rather than an unexplained sit-down",
+    "Pause blocks all new patient decision and follow-up mutations without closing the pending choice",
+    "stabilized, transformed, resecured and covered-dead outcomes load four distinct authored room images and visibly different rendered patient pixels"
+  ],
+  "outcomes": [
+    {
+      "choice": "helped",
+      "outcome": "stabilized",
+      "sanity": 95,
+      "hp": 100,
+      "history": [
+        "I cleaned his wounds, applied a Trauma Dressing and secured both restraints. Daniel remained lucid. The dressing bought time; it did not cure him.",
+        "Daniel warned me that the corridor purge handle opens three exterior windows, and that spare patrol equipment was left behind the ward entry rather than on the bedside shelves."
+      ],
+      "method": null,
+      "injury": null
+    },
+    {
+      "choice": "left",
+      "outcome": "contained",
+      "sanity": 87,
+      "hp": 91,
+      "history": [
+        "I left Daniel alive and untreated. The right wrist restraint was fraying. I could still return with a Trauma Dressing while he remained lucid.",
+        "I returned after leaving him untreated. Daniel no longer recognized me. His right restraint had snapped; his left wrist still held him on the bed.",
+        "I secured Daniel\u2019s broken restraint. Reaching inside his grasp cost me 9 health. The repaired strap keeps him away from the doorway; he cannot follow me."
+      ],
+      "method": null,
+      "injury": 9
+    },
+    {
+      "choice": "killed",
+      "outcome": "dead",
+      "sanity": 83,
+      "hp": 100,
+      "history": [
+        "I ended Daniel\u2019s life while he could still understand me with the utility knife. I covered him with the bed sheet. This cannot be undone."
+      ],
+      "method": "knife",
+      "injury": null
+    },
+    {
+      "choice": "killed",
+      "outcome": "dead",
+      "sanity": 83,
+      "hp": 100,
+      "history": [
+        "I ended Daniel\u2019s life while he could still understand me with one firearm round. I covered him with the bed sheet. This cannot be undone."
+      ],
+      "method": "firearm",
+      "injury": null
+    }
+  ],
+  "kessler": [
+    {
+      "choice": "speak",
+      "condition": "lucid",
+      "hp": 100,
+      "sanity": 86,
+      "record": "DR. ADRIAN KESSLER / THEATRE OBSERVATION\n\nHis eyes briefly find mine. \u201cYou were awake the first time.\u201d The recognition breaks into a wet cough. A spasm takes his legs, and he collapses against the tiles, one hand still clawing at the wall.\n\nI chose to call his name. The encounter is over; his infected aftermath remains in the theatre."
+    },
+    {
+      "choice": "approach",
+      "condition": "seizing",
+      "hp": 94,
+      "sanity": 88,
+      "record": "DR. ADRIAN KESSLER / THEATRE OBSERVATION\n\nKessler turns before I can touch his shoulder. His hand rakes my arm. I recoil as a convulsion folds him against the wall; dark veins tighten along his neck. His grasp cost me 6 health.\n\nI chose to approach him. The encounter is over; his infected aftermath remains in the theatre."
+    },
+    {
+      "choice": "inspect",
+      "condition": "seizing",
+      "hp": 100,
+      "sanity": 84,
+      "record": "DR. ADRIAN KESSLER / THEATRE OBSERVATION\n\nI keep watching. The impacts lose their rhythm. Dark veins spread along his jaw; his teeth work against an empty mouth. His legs finally buckle, but the twitching does not stop.\n\nI chose to watch from the doorway. The encounter is over; his infected aftermath remains in the theatre."
+    },
+    {
+      "choice": "leave",
+      "condition": "unresponsive",
+      "hp": 100,
+      "sanity": 92,
+      "record": "DR. ADRIAN KESSLER / THEATRE OBSERVATION\n\nI back out of reach. Two final impacts come from the alcove, then a scraping collapse. From the doorway I can still see his jaw working and the dark veins above his collar.\n\nI chose to back away. The encounter is over; his infected aftermath remains in the theatre."
+    }
+  ],
+  "visuals": {
+    "stabilized": {
+      "loaded_asset": "assets/room_views/isoward_stabilized.webp",
+      "rendered_patient_pixel_digest": 730464877,
+      "geometry": {
+        "source": {
+          "width": 1448,
+          "height": 1086
+        },
+        "frame": {
+          "x": 339.25,
+          "y": 99,
+          "width": 991,
+          "height": 743,
+          "top": 99,
+          "right": 1330.25,
+          "bottom": 842,
+          "left": 339.25
+        },
+        "patient": [
+          66,
+          43,
+          27,
+          22
+        ]
+      }
+    },
+    "transformed": {
+      "loaded_asset": "assets/room_views/isoward_transformed.webp",
+      "rendered_patient_pixel_digest": 28238037,
+      "geometry": {
+        "source": {
+          "width": 1448,
+          "height": 1086
+        },
+        "frame": {
+          "x": 339.25,
+          "y": 99,
+          "width": 991,
+          "height": 743,
+          "top": 99,
+          "right": 1330.25,
+          "bottom": 842,
+          "left": 339.25
+        },
+        "patient": [
+          66,
+          43,
+          27,
+          22
+        ]
+      }
+    },
+    "contained": {
+      "loaded_asset": "assets/room_views/isoward_contained.webp",
+      "rendered_patient_pixel_digest": 611406789,
+      "geometry": {
+        "source": {
+          "width": 1448,
+          "height": 1086
+        },
+        "frame": {
+          "x": 339.25,
+          "y": 99,
+          "width": 991,
+          "height": 743,
+          "top": 99,
+          "right": 1330.25,
+          "bottom": 842,
+          "left": 339.25
+        },
+        "patient": [
+          66,
+          43,
+          27,
+          22
+        ]
+      }
+    },
+    "dead": {
+      "loaded_asset": "assets/states/isoward_after.webp",
+      "rendered_patient_pixel_digest": 2780205264,
+      "geometry": {
+        "source": {
+          "width": 1448,
+          "height": 1086
+        },
+        "frame": {
+          "x": 339.25,
+          "y": 99,
+          "width": 991,
+          "height": 743,
+          "top": 99,
+          "right": 1330.25,
+          "bottom": 842,
+          "left": 339.25
+        },
+        "patient": [
+          66,
+          43,
+          27,
+          22
+        ]
+      }
+    }
+  },
+  "javascript_errors": []
+}

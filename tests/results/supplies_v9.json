@@ -1,0 +1,63 @@
+{
+  "checks": [
+    "128 seeds on each difficulty retain fixed cell/save/medical budgets, unchanged optional ammunition bonuses and noncumulative reconfiguration",
+    "an empty Terminal gives a concrete reception-rear Thought, and a two-disk Story package stays intact when a full pack cannot fit both disks",
+    "a real cell pickup restores exactly40% once, and reconfiguration neither respawns it nor grants another cell",
+    "six actual Normal disk pickups are distributed across the chapter, five require rear views, Cancel costs nothing and one successful Terminal save consumes exactlyone disk",
+    "the actual rear cradle has one65% reserve; exhausted supply stays exhausted, while the slow12% dynamo remains a cooldown-limited emergency fallback",
+    "early clinic dressing and later Observation first aid are genuine rear-container pickups, heal20/45HP and are not bundled into the Staff locker",
+    "the newly useful Corridor, Treatment and Chapel rear furniture has real clickable records rather than empty scenery or door-overlapping targets",
+    "continued records retain carried/stored supplies, collected legacy IDs and already-used charger reserves; the new world budget does not refill them"
+  ],
+  "budgets": [
+    {
+      "summary": {
+        "mode": "story",
+        "cells": 4,
+        "disks": 8,
+        "dressings": 5,
+        "medkits": 3,
+        "healing": 235,
+        "cradleCharges": 1
+      },
+      "variants": 1,
+      "ammo": [
+        91,
+        99
+      ]
+    },
+    {
+      "summary": {
+        "mode": "normal",
+        "cells": 3,
+        "disks": 6,
+        "dressings": 4,
+        "medkits": 2,
+        "healing": 170,
+        "cradleCharges": 1
+      },
+      "variants": 1,
+      "ammo": [
+        72,
+        78
+      ]
+    },
+    {
+      "summary": {
+        "mode": "nightmare",
+        "cells": 2,
+        "disks": 4,
+        "dressings": 3,
+        "medkits": 2,
+        "healing": 150,
+        "cradleCharges": 1
+      },
+      "variants": 1,
+      "ammo": [
+        58,
+        62
+      ]
+    }
+  ],
+  "javascript_errors": []
+}

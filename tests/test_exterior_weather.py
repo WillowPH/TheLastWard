@@ -1,7 +1,7 @@
 """Real room-effect module/assets in an isolated native-resolution compositor.
 
 This checks all 54 source views independently of HUD layout and input tests.
-Eight exterior views and 71 glass cells were manually reviewed against the source
+Eight exterior views and 75 glass cells were manually reviewed against the source
 artwork, including the generated barricaded lobby and physical laundry stove.
 """
 from pathlib import Path
@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1];URL=sys.argv[1] if len(sys.argv)>1 else
 html='''<!doctype html><html><style>body{margin:0;background:black}#base,#effects{position:absolute;left:0;top:0;width:1448px;height:1086px}#effects{pointer-events:none}</style><canvas id="base" width="1448" height="1086"></canvas><canvas id="effects" width="1448" height="1086"></canvas><script>window.S={room:'lobby',roomView:'front',hp:100,san:100,f:{power:1,powerOut:0}};window.WardWinter={asset:p=>'/'+p,flicker:()=>0,roomViewRenderer:()=>({loaded:true,room:S.room,view:S.roomView,effects:canvas=>{let c=document.querySelector('#effects').getContext('2d');c.clearRect(0,0,1448,1086);c.drawImage(canvas,0,0);}})};window.WardScene={options:{motion:true,flashes:false}};window.WardMotion={enabled:options=>options.motion!==false};</script><script src="/js/room_view_effects.js"></script></html>'''
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path='/usr/bin/chromium',args=['--no-sandbox']);q=b.new_page(viewport={'width':1448,'height':1086},service_workers='block');q.on('pageerror',lambda error:errors.append(str(error)));q.on('response',lambda response:failures.append(str(response.status)+' '+response.url) if response.status>=400 else None);q.route('**/effect-probe',lambda route:route.fulfill(content_type='text/html',body=html));q.goto(URL+'/effect-probe');q.evaluate('WardWinter.roomViewEffects.ready');q.evaluate('WardWinter.roomViewEffects.stop()')
- data=json.load(open(ROOT/'data/room_view_effects.json'));assert len(data)==27;assert sum(len(views) for views in data.values())==54;assert sum(bool(v['glass']) for views in data.values() for v in views.values())==8;assert sum(len(v['glass']) for views in data.values() for v in views.values())==71
+ data=json.load(open(ROOT/'data/room_view_effects.json'));assert len(data)==27;assert sum(len(views) for views in data.values())==54;assert sum(bool(v['glass']) for views in data.values() for v in views.values())==8;assert sum(len(v['glass']) for views in data.values() for v in views.values())==75
  for room,views in data.items():
   for view,spec in views.items():
    q.evaluate('''async a=>{S.room=a.room;S.roomView=a.view;let im=new Image();im.src='/'+a.source;await im.decode();document.querySelector('#base').getContext('2d').drawImage(im,0,0,1448,1086);WardWinter.roomViewEffects.draw(1000)}''',{'room':room,'view':view,'source':spec['source']})
@@ -36,4 +36,4 @@ with sync_playwright() as p:
  q.evaluate('''async()=>{S.room='laundry';S.roomView='rear';S.f.stoveLit=true;let im=new Image();im.src='/assets/room_views/laundry_rear.webp';await im.decode();document.querySelector('#base').getContext('2d').drawImage(im,0,0,1448,1086);WardWinter.roomViewEffects.draw(1000)}''');q.screenshot(path=str(ROOT/'tests/results/native-stove-fire.png'))
  assert not errors,errors;assert not failures,failures;
  b.close()
-(ROOT/'tests/results/native_weather.json').write_text(json.dumps({'views':report,'window_states':window_checks,'javascript_errors':errors,'resource_errors':failures},indent=2)+'\n');print('PASS 54 native room views: moving snow only in the 8 confirmed exterior views, 71 strict glass cells; no pixels outside the glass masks')
+(ROOT/'tests/results/native_weather.json').write_text(json.dumps({'views':report,'window_states':window_checks,'javascript_errors':errors,'resource_errors':failures},indent=2)+'\n');print('PASS 54 native room views: moving snow only in the 8 confirmed exterior views, 75 strict glass cells; no pixels outside the glass masks')

@@ -1,7 +1,10 @@
 # Optional atmospheric texture service
 
-The game is complete offline. Automatic/Online modes may request `/api/ward-art` from
-the optional Python server. No provider is configured or claimed live in this build.
+The game is complete offline. Online is the default preference and discovers an
+optional service through `/data/art_service.json` before requesting `/api/ward-art`.
+No provider or credentials are included, and no service is claimed live in this build.
+The normal native Windows build uses the bundled unavailable-service manifest and
+complete local artwork; it does not require Python.
 
 An online response supplies an abstract dust/light texture. The client accepts only a
 same-origin image and confines it to a faint noninteractive ceiling area. It cannot

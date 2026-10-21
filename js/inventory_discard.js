@@ -1,4 +1,4 @@
-/* Carry management and practical thoughts. Progression items stay protected until their last use. */
+/* Carry management: any item may be left behind and recovered in that room. */
 (function(){
 'use strict';
 const WW=WardWinter,e=htmlSafe;
@@ -15,29 +15,29 @@ function unfinishedUse(name){
 function policy(name){
  if(!S)return {allowed:false,status:'Keep',reason:'No active investigation.'};
  name=canonicalItem(name);
- const protect=reason=>({allowed:false,status:'Keep',reason}),spent=reason=>({allowed:true,spent:true,status:'Spent',reason});
- if(name==='Flashlight')return protect('Keep the flashlight. Dark rooms and later blackouts still require it.');
- if(WW.fuses?.includes(name))return S.f.elevatorInserted?.includes(name)?spent('This interlock plug is already installed.'):protect('Keep this plug for the final elevator interlock.');
- if(name==='Power Fuse')return S.f.power?spent('The generator is already powered.'):protect('Keep the ceramic fuse until the generator is restored.');
- if(unfinishedUse(name))return protect('This item still opens a lock or completes an unfinished task.');
- if(name==='Maintenance Tools'&&!S.f.maintenancePrepared)return protect('The generator contacts still need these insulated tools.');
- if(name==='Encrypted Drive'&&!S.f.finalSecurityClearance)return protect('The archive drive is still needed for transfer authorization.');
+ const useful=reason=>({allowed:true,needed:true,status:'Useful',reason}),spent=reason=>({allowed:true,spent:true,status:'Spent',reason});
+ if(name==='Flashlight')return useful('Dark rooms and later blackouts still require the flashlight.');
+ if(WW.fuses?.includes(name))return S.f.elevatorInserted?.includes(name)?spent('This interlock plug is already installed.'):useful('This plug is still needed for the final elevator interlock.');
+ if(name==='Power Fuse')return S.f.power?spent('The generator is already powered.'):useful('The generator still needs this ceramic fuse.');
+ if(unfinishedUse(name))return useful('This item still opens a lock or completes an unfinished task.');
+ if(name==='Maintenance Tools'&&!S.f.maintenancePrepared)return useful('The generator contacts still need these insulated tools.');
+ if(name==='Encrypted Drive'&&!S.f.finalSecurityClearance)return useful('The archive drive is still needed for transfer authorization.');
  if(accessItems.has(name))return spent('All matching locks and tasks have been completed.');
- if(['Photographic Negative','Developing Fluid'].includes(name))return S.f.photo?spent('The photograph has already been developed.'):protect('Keep this until the hidden photograph has been developed.');
- if(name==='Developed Photograph')return S.f.photo&&S.vis.coldstore?spent('The photograph has revealed and opened its hidden route.'):protect('Keep the developed photograph until its hidden route has been used.');
- if(name==='Lighter')return S.f.stoveLit&&S.f.chapelCandles?spent('Both permanent ignition points are lit.'):protect('Keep the lighter for the laundry stove and chapel candles.');
+ if(['Photographic Negative','Developing Fluid'].includes(name))return S.f.photo?spent('The photograph has already been developed.'):useful('The hidden photograph has not yet been developed.');
+ if(name==='Developed Photograph')return S.f.photo&&S.vis.coldstore?spent('The photograph has revealed and opened its hidden route.'):useful('The developed photograph still reveals a hidden route.');
+ if(name==='Lighter')return S.f.stoveLit&&S.f.chapelCandles?spent('Both permanent ignition points are lit.'):useful('The lighter ignites the laundry stove and chapel candles.');
  if(name==='Lighter Fluid'&&S.f.stoveLit&&S.f.chapelCandles)return spent('Both permanent ignition points are already lit.');
  if(name==='Wooden Plank'&&S.f.windowBarricaded)return spent('The service opening is already secured.');
- if(name==='Lighter Fluid'&&!S.lighterFuel&&!S.f.stoveLit&&!S.f.chapelCandles)return protect('Keep this first refill until the lighter has fuel.');
- if(name==='Lighter Fluid'||resources.has(name)||HEALS[name]||Object.values(W).some(w=>w.ammo===name))return {allowed:true,spent:false,status:'Supply',reason:'This supply can still be useful. Discarding it is permanent.'};
+ if(name==='Lighter Fluid'&&!WW.fuel()&&!S.f.stoveLit&&!S.f.chapelCandles)return useful('This measured refill prepares the two permanent ignition points.');
+ if(name==='Lighter Fluid'||resources.has(name)||HEALS[name]||Object.values(W).some(w=>w.ammo===name))return {allowed:true,spent:false,status:'Supply',reason:'This supply can still be useful. Items left behind remain in this room.'};
  if(keepsakes.has(name))return {allowed:true,spent:false,status:'Keepsake',reason:'This keepsake has no remaining lock or task in Chapter 1.'};
- return protect('Keep this equipment. It may still be needed. Use a storage box to store it safely.');
+ return useful('This equipment may still be useful. Items left behind remain in this room.');
 }
 function actions(index){const slot=S.inv[index];if(!slot)return '';const p=policy(slot.n);return '<div class="inventory-discard-actions"><p class="inventory-discard-note">'+(p.spent?'<b>Spent item</b> · ':'')+e(p.reason)+'</p>'+(p.allowed?'<button type="button" class="btn" onclick="wardRequestDiscard('+index+')">Discard'+(slot.c>1?' stack':'')+'</button>':'<span class="inventory-protected" aria-label="Protected item">Keep</span>')+'</div>';}
 window.wardInspectInventory=function(index){
  if(!usable())return;pending=null;const slot=S.inv[index];if(!slot)return;clearSelection();
  const n=slot.n,p=policy(n),uses=W[n]?'Equip':HEALS[n]?'Use':n==='Flashlight'?'Toggle flashlight':['Battery','Reinforced Battery'].includes(n)?'Recharge':Object.values(W).some(w=>w.ammo===n)?'Load compatible weapon':n==='Stabilizer Part'?'Upgrade equipped weapon':null;
- modal(e(n),'<div class="c1-item-examine">'+itemIconMarkup(n)+'<p>'+e(desc(n))+'</p>'+(slot.c>1?'<p>Quantity · '+slot.c+'</p>':'')+(n==='Lighter'?'<p>Fuel · '+WW.fuel()+' / 6 ignitions</p>':'')+'</div>'+(uses?'<button class="btn p" onclick="wardUseManagedItem('+index+')">'+e(uses)+'</button>':'')+(has('Lighter')&&has('Lighter Fluid')&&['Lighter','Lighter Fluid'].includes(n)?'<button class="btn p" onclick="wardCombineLighter();closeModal()">Combine lighter + fluid</button>':'')+actions(index)+'<button class="btn" onclick="invModal()">All carried items</button>');
+ modal(e(n),'<div class="c1-item-examine">'+itemIconMarkup(n)+'<p>'+e(desc(n))+'</p>'+(slot.c>1?'<p>Quantity · '+slot.c+'</p>':'')+(n==='Lighter'?'<p>Ignitions remaining · '+WW.fuel()+'</p>':'')+'</div>'+(uses?'<button class="btn p" onclick="wardUseManagedItem('+index+')">'+e(uses)+'</button>':'')+(has('Lighter')&&has('Lighter Fluid')&&['Lighter','Lighter Fluid'].includes(n)?'<button class="btn p" onclick="wardCombineLighter();closeModal()">Combine lighter + fluid</button>':'')+actions(index)+'<button class="btn" onclick="invModal()">All carried items</button>');
 };
 window.wardUseManagedItem=function(index){if(!usable()||!S.inv[index])return;$('m').innerHTML='';useInventorySlot(index);};
 window.wardRequestDiscard=function(index){
@@ -45,15 +45,49 @@ window.wardRequestDiscard=function(index){
  if(!p.allowed){WW.think(p.reason);return;}
  clearSelection();
  pending={slot,index,room:S.room,token:++serial};
- modal('Discard '+e(slot.n)+'?', '<div class="c1-item-examine">'+itemIconMarkup(slot.n)+'<p>'+e(slot.n)+(slot.c>1?' × '+slot.c:'')+'</p></div><p>'+e(p.spent?'This item has no remaining use. Discard it to free one carry slot?':'Discard this whole stack to free one carry slot? You may want to store it in a storage box instead.')+'</p><p><b>This is permanent. It cannot be picked up again.</b></p><button class="btn" onclick="wardInspectInventory('+index+')">Keep item</button><button class="btn p" onclick="wardConfirmDiscard('+pending.token+')">Discard permanently</button>');
+ modal('Discard '+e(slot.n)+'?', '<div class="c1-item-examine">'+itemIconMarkup(slot.n)+'<p>'+e(slot.n)+(slot.c>1?' × '+slot.c:'')+'</p></div><p>Leave '+(slot.c>1?'this whole stack':'this item')+' in '+e(R[S.room].n)+' to free a carry slot?</p>'+(p.needed?'<p>'+e(p.reason)+'</p>':'')+'<p><b>It stays in this room.</b> Return here and choose “Left in this room” beneath your inventory to recover it. This does not move it into a Storage box.</p><button class="btn" onclick="wardInspectInventory('+index+')">Keep item</button><button class="btn p" onclick="wardConfirmDiscard('+pending.token+')">Leave item here</button>');
  pending.modal=document.querySelector('#m .md');
 };
 window.wardConfirmDiscard=function(token){
  const request=pending;pending=null;
  if(!usable()||!request||request.token!==token||request.modal!==document.querySelector('#m .md')||request.room!==S.room||S.inv[request.index]!==request.slot||!policy(request.slot.n).allowed)return;
- const slot=request.slot;S.inv.splice(request.index,1);S.discardedItems=S.discardedItems||[];S.discardedItems.push({n:slot.n,c:slot.c,room:S.room,time:S.t});S.discardedItems=S.discardedItems.slice(-100);
- selected=null;combineArmed=false;lg('Discarded '+slot.n+(slot.c>1?' ×'+slot.c:'')+'.');soundEffect('pickup');$('m').innerHTML='';render();WW.think('I leave '+(slot.c>1?'the remaining ':'the ')+slot.n.toLowerCase()+' behind. There is space in my pack now.');
+ const slot=request.slot;S.inv.splice(request.index,1);
+ S.leftItemSerial=(Number(S.leftItemSerial)||0)+1;
+ const drop={id:S.leftItemSerial,n:slot.n,c:slot.c,room:S.room,time:S.t};
+ if(W[slot.n]){drop.loaded=S.ld[slot.n]||0;S.ld[slot.n]=0;if(S.eq===slot.n)S.eq=S.inv.find(s=>W[s.n])?.n||null;}
+ if(slot.n==='Flashlight')S.lightOn=false;
+ (S.roomDrops||(S.roomDrops=[])).push(drop);
+ S.discardedItems=S.discardedItems||[];S.discardedItems.push({...drop,recoverable:true});S.discardedItems=S.discardedItems.slice(-100);
+ selected=null;combineArmed=false;lg('Left '+slot.n+(slot.c>1?' ×'+slot.c:'')+' in '+R[S.room].n+'.');soundEffect('pickup');$('m').innerHTML='';render();WW.think('I leave '+(slot.c>1?'the remaining ':'the ')+slot.n.toLowerCase()+' here. I can recover it from “Left in this room” when I return.');
 };
+const leftHere=()=>Array.isArray(S?.roomDrops)?S.roomDrops.filter(drop=>drop.room===S.room):[];
+window.wardLeftItems=function(page=0){
+ if(!usable())return;clearSelection();pending=null;
+ const list=leftHere(),pages=Math.max(1,Math.ceil(list.length/4));
+ page=Math.max(0,Math.min(pages-1,Math.floor(Number(page)||0)));
+ const cards=list.slice(page*4,page*4+4).map(drop=>'<article class="left-item-card"><div class="left-item-icon">'+itemIconMarkup(drop.n)+'</div><div><b>'+e(drop.n)+'</b><small>'+(drop.c>1?'Quantity × '+drop.c:'Quantity 1')+(W[drop.n]?' · '+(drop.loaded||0)+' loaded':'')+'</small></div><button type="button" class="btn" onclick="wardRecoverLeftItem('+drop.id+','+page+')">Take</button></article>').join('');
+ modal('Left in '+e(R[S.room].n),'<p>These are the items I left in this room. They are not in a shared Storage box.</p><p id="leftItemsStatus" role="status" hidden></p><div class="left-items-list">'+(cards||'<p>Nothing remains here.</p>')+'</div>'+(pages>1?'<div class="storage-pager"><button class="btn" '+(!page?'disabled':'')+' onclick="wardLeftItems('+(page-1)+')">Previous</button><span>Page '+(page+1)+' / '+pages+'</span><button class="btn" '+(page>=pages-1?'disabled':'')+' onclick="wardLeftItems('+(page+1)+')">Next</button></div>':'')+'<button class="btn" onclick="closeModal()">Return to room</button>');
+};
+window.wardRecoverLeftItem=function(id,page=0){
+ if(!usable())return;
+ const drop=leftHere().find(drop=>drop.id===id);if(!drop)return;
+ // Do not merge two loaded guns into one global magazine. Their own rounds
+ // remain with the left weapon until the carried copy has been put down.
+ const failure=text=>{const status=$('leftItemsStatus');if(status){status.hidden=false;status.textContent=text;}WW.think(text,'space');};
+ if(W[drop.n]&&has(drop.n))return failure('I am already carrying this weapon. Leave that copy here first to recover the other one with its loaded rounds.');
+ if(!add(drop.n,drop.c))return failure('There is no room in my pack. The item stays here.');
+ if(W[drop.n]){S.ld[drop.n]=Math.max(0,Math.min(W[drop.n].mag,Number(drop.loaded)||0));if(!W[S.eq]||!has(S.eq))S.eq=drop.n;}
+ S.roomDrops.splice(S.roomDrops.indexOf(drop),1);
+ const history=S.discardedItems?.find(entry=>entry.recoverable&&entry.id===drop.id);if(history)history.recovered=true;
+ soundEffect('pickup');lg('Recovered '+drop.n+' from '+R[S.room].n+'.');render();
+ if(leftHere().length)wardLeftItems(page);else{$('m').innerHTML='';WW.think('I recover the last item I left here.');}
+};
+function syncLeftItems(){
+ const host=document.querySelector('.unified-inventory-panel');if(!host||!S)return;
+ let button=$('leftItemsButton');
+ if(!button){button=document.createElement('button');button.type='button';button.id='leftItemsButton';button.className='btn left-items-action';button.onclick=()=>wardLeftItems();host.append(button);}
+ const count=leftHere().length;button.hidden=!count;button.textContent='Left in this room ('+count+')';button.setAttribute('aria-label','Recover items left in '+R[S.room].n);
+}
 const baseInventory=invModal;
 invModal=function(category='all'){
  pending=null;const result=baseInventory(category);if(!S)return result;
@@ -127,8 +161,8 @@ function syncCarryActions(){
   const slot=S.inv[i];cell.dataset.inventoryIndex=String(i);cell.onclick=()=>wardSelectInventory(i);cell.setAttribute('aria-label',(combineArmed?'Combine with ':'Select ')+slot.n+(slot.c>1?' × '+slot.c:''));cell.setAttribute('aria-pressed',String(i===index));cell.classList.toggle('inventory-selected',i===index);cell.classList.toggle('combine-compatible',combineArmed&&!!pairAction(selected?.slot,slot));cell.title=combineArmed?'Combine with '+slot.n:'Select '+slot.n;
   const quantity=document.createElement('span');quantity.className='inventory-quantity-badge';quantity.setAttribute('aria-hidden','true');
   const ammo=Object.values(W).some(w=>w.ammo===slot.n),weapon=W[slot.n];
-  quantity.textContent=weapon?String(S.ld[slot.n]||0)+' / '+cnt(weapon.ammo):ammo?String(slot.c):slot.c>1?'×'+slot.c:'';
-  quantity.title=weapon?'Loaded / reserve rounds':ammo?'Rounds in this stack':'Quantity';
+  quantity.textContent=weapon?String(S.ld[slot.n]||0)+' / '+cnt(weapon.ammo):ammo?String(slot.c):slot.n==='Lighter'?WW.fuel()+' / 2':slot.c>1?'×'+slot.c:'';
+  quantity.title=weapon?'Loaded / reserve rounds':ammo?'Rounds in this stack':slot.n==='Lighter'?'Ignitions remaining / original measured fill':'Quantity';
   cell.querySelector('.inventory-quantity-badge')?.remove();cell.append(quantity);
   const meta=cell.querySelector('.inv-meta');if(meta)meta.textContent=weapon?(S.eq===slot.n?'Equipped':''):'';
  }
@@ -167,7 +201,7 @@ function discardSpent(){
  if(selected&&discarded.includes(selected.slot)){selected=null;combineArmed=false;}
  return discarded;
 }
-const baseRender=render;render=function(){discardSpent();const result=baseRender();manageButton();return result;};manageButton();
+const baseRender=render;render=function(){discardSpent();const result=baseRender();manageButton();syncLeftItems();return result;};manageButton();
 
 // Practical observations belong in the existing thought card. The room and its targets stay available.
 WW.think=function(text,requirement=null){if(!S)return;S.contextThought={room:S.room,text:String(text||''),requirement};renderSceneThought();};
@@ -238,7 +272,7 @@ function practicalHint(value){
 const baseInteraction=interaction;interaction=function(value){const requirement=practicalHint(value);if(requirement){WW.think(value,requirement);return;}if(S?.contextThought&&(!S.contextThought.requirement||S.contextThought.requirement==='practical')){delete S.contextThought;renderSceneThought();}return baseInteraction(value);};
 const baseToast=toast;toast=function(value){const requirement=practicalHint(value);if(requirement){WW.think(value,requirement);return;}return baseToast(value);};
 const baseMessage=msg;msg=function(value,good){const requirement=good?null:practicalHint(value);if(requirement){S.msg=null;WW.think(value,requirement);return;}return baseMessage(value,good);};
-WW.inventoryDiscard={policy,unfinishedUse,discardSpent};
+WW.inventoryDiscard={policy,unfinishedUse,discardSpent,leftHere};
 const baseAdd=add;add=function(name,count=1,inventory=S?.inv,limit=null){
  const carried=inventory===S?.inv,had=carried?cnt('Wire Spool'):0,result=baseAdd(name,count,inventory,limit);
  if(result&&carried&&canonicalItem(name)==='Wire Spool'&&!had&&!S.f.wireCombineExplained){
@@ -247,5 +281,5 @@ const baseAdd=add;add=function(name,count=1,inventory=S?.inv,limit=null){
  return result;
 };
 const carryStyle=document.createElement('style');carryStyle.textContent='.inventory-carry-actions{position:fixed;box-sizing:border-box;max-width:calc(100vw - 20px);margin:0;padding:11px;border:1px solid #716c61;border-radius:4px;background:#141313fa;color:#e2dcd2;font:12px/1.45 Roboto,Arial,sans-serif;z-index:130;box-shadow:0 8px 28px #000b;overflow:visible}.inventory-carry-actions[hidden]{display:none!important}.carry-selection-heading{display:flex;align-items:flex-start;gap:8px}.carry-selection-heading strong{font-weight:400;font-size:13px;overflow-wrap:anywhere;flex:1;min-width:0}.carry-selection-close{border:0;background:transparent;color:#bdb5a7;cursor:pointer;font-size:20px;line-height:1;padding:0 2px}.inventory-carry-actions p{margin:7px 0;color:#c0b9ac;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.carry-selection-buttons{display:grid;grid-template-columns:1fr 1fr;gap:5px}.inventory-carry-actions .btn{min-height:31px!important;padding:5px 8px!important;font-size:11px!important;letter-spacing:0!important;margin:0!important}.inventory-carry-actions .btn:disabled{opacity:.4;cursor:default}.ward-playing .right-rail .inventory-cell.inventory-selected{border-color:#d6ba81!important;box-shadow:inset 0 0 0 1px #d6ba81!important;background:#a995651a!important}.ward-playing .right-rail .inventory-cell.combine-compatible{border-color:#c6b58b!important;background:#bca27422!important}.ward-playing .right-rail .inventory-cell.combine-compatible:after{content:"+";position:absolute;right:4px;top:1px;color:#dfcfaa;font-size:16px}.inventory-carry-actions .item-art{display:none}.inventory-quantity-badge{position:absolute;right:4px;bottom:3px;border-radius:2px;background:#111e;padding:1px 4px;font:600 12px/1.25 Roboto,Arial,sans-serif;color:#f1e7d3;pointer-events:none}.inventory-quantity-badge:empty{display:none}.ward-playing .right-rail .inventory-cell .inv-meta{right:auto!important;left:4px!important;font-size:9px!important;bottom:3px!important}.ward-playing .right-rail .inventory-cell:has(.inventory-quantity-badge:not(:empty)) .inv-meta{bottom:20px!important}@media(max-width:650px){.inventory-carry-actions p{font-size:11px}.inventory-quantity-badge{font-size:10px;padding:1px 3px;right:2px;bottom:2px}}';document.head.append(carryStyle);
-const style=document.createElement('style');style.textContent='.inventory-discard-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:20px 0;padding:16px 0;border-top:1px solid var(--ln,#444);border-bottom:1px solid var(--ln,#444)}.inventory-discard-note{flex:1 1 200px;margin:0;line-height:1.5}.inventory-protected{font-size:12px;opacity:.7}.inventory-spent-label{color:var(--mu,#aaa)}.inventory-manage-button{margin-left:auto;padding:4px 8px!important;font-size:11px!important;min-height:26px}.unified-inventory-panel .panel-heading:has(.inventory-manage-button){display:flex;align-items:center;gap:8px}';document.head.append(style);
+const style=document.createElement('style');style.textContent='.inventory-discard-actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:20px 0;padding:16px 0;border-top:1px solid var(--ln,#444);border-bottom:1px solid var(--ln,#444)}.inventory-discard-note{flex:1 1 200px;margin:0;line-height:1.5}.inventory-protected{font-size:12px;opacity:.7}.inventory-spent-label{color:var(--mu,#aaa)}.inventory-manage-button{margin-left:auto;padding:4px 8px!important;font-size:11px!important;min-height:26px}.unified-inventory-panel .panel-heading:has(.inventory-manage-button){display:flex;align-items:center;gap:8px}.left-items-action{width:100%;margin:8px 0 0!important;padding:6px 8px!important;font-size:11px!important;min-height:30px!important}.left-items-action[hidden]{display:none!important}.left-items-list{display:grid;gap:8px;margin:12px 0}.left-item-card{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:10px;padding:9px;border:1px solid #625a4b;border-radius:4px;background:#171613}.left-item-card b{font-size:13px;font-weight:400;overflow-wrap:anywhere}.left-item-card small{display:block;margin-top:4px;font-size:11px;color:#b9b0a0}.left-item-icon,.left-item-icon .item-art{width:40px!important;height:40px!important;max-width:40px!important;max-height:40px!important;object-fit:contain}.left-item-card .btn{font-size:12px!important;padding:6px 10px!important;min-height:32px!important;margin:0!important}@media(max-width:650px){.left-item-card{gap:7px;padding:7px;grid-template-columns:34px minmax(0,1fr) auto}.left-item-icon,.left-item-icon .item-art{width:32px!important;height:32px!important}.left-item-card b{font-size:12px}.left-item-card small{font-size:10px}}';document.head.append(style);
 })();

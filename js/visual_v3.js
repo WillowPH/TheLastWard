@@ -163,10 +163,10 @@ shoot=function(){let w=W[S?.eq],old=w?.hit;try{if(w&&S?.f?.steadyAim){w.hit=Math
 window.wardSteadyShot=function(){if(!S||!W[S.eq]||!has(S.eq))return;if((S.ld[S.eq]||0)<=0)return combat('The chamber is empty.');S.f.steadyAim=true;advanceTime(2);if(S.hp<=25&&rnd()<.22){S.f.steadyAim=false;return foe('Pain throws your aim off before you can fire.');}shoot()};
 
 // Start menu artwork modes are preferences, never a network requirement.
-function chosenArtMode(){return document.querySelector('input[name="artMode"]:checked')?.value||'auto'}
-function artModeApply(){let m=chosenArtMode();try{localStorage.setItem('lw_art_mode',m)}catch(e){};if(window.WardArt)WardArt.update(m!=='offline')}
+function chosenArtMode(){return document.querySelector('input[name="artMode"]:checked')?.value||'online'}
+function artModeApply(){const m=chosenArtMode()==='offline'?'offline':'online';if(window.WardArt)WardArt.setMode(m)}
 for(const i of document.querySelectorAll('input[name="artMode"]'))i.addEventListener('change',artModeApply);
-try{const v=localStorage.getItem('lw_art_mode');const choice=document.querySelector(`input[name="artMode"][value="${v}"]`);if(choice)choice.checked=true;}catch(e){}
+try{const v=localStorage.getItem('lw_art_mode')==='offline'?'offline':'online';const choice=document.querySelector(`input[name="artMode"][value="${v}"]`);if(choice)choice.checked=true;}catch(e){}
 artModeApply();
 const stageWorld=document.querySelector('.stage-world');if(stageWorld&&$('m'))stageWorld.appendChild($('m'));
 const oldNewGame=newGame;

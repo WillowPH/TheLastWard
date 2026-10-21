@@ -5,7 +5,7 @@ const WW=WardWinter,escape=htmlSafe;
 const paused=()=>!!WW.isPaused?.();
 const actionable=()=>!!(S&&S.hp>0&&!S.f.dead&&!WW.isDead?.()&&!S.f.chapter1Complete&&!paused());
 function present(){return !!(S?.pursuer?.active&&S.pursuer.room===S.room&&!SAFE_FROM_PURSUER.has(S.room));}
-function down(){const p=S?.pursuer;return !!(p&&((p.trappedUntil||0)>S.t||((p.staggerUntil||0)>S.t&&(p.staggerDeadline||0)>Date.now())));}
+function down(){const p=S?.pursuer,now=WW.readingClock?.().now??Date.now();return !!(p&&((p.trappedUntil||0)>S.t||((p.staggerUntil||0)>S.t&&(p.staggerDeadline||0)>now)));}
 function opening(){return !!(S?.pursuer&&(S.pursuer.openingUntil||0)>S.t);}
 WW.pursuerDown=down;
 WW.pursuerPresent=present;
@@ -53,7 +53,7 @@ document.body.append(filters);
 
 function clearEncounter(){S.f.pursuerEncounter=0;cm=0;$('m').innerHTML='';}
 function stagger(){const p=initPursuer(),turns=S.m<1?15:S.m>1?9:12;p.staggerUntil=S.t+turns;p.staggerDeadline=Date.now()+30000;p.evadeUntil=p.staggerUntil;p.lastMoveAt=S.t;p.posture=0;p.cooldown=0;S.f.pursuerStaggers=(S.f.pursuerStaggers||0)+1;clearEncounter();soundEffect('impact');interaction('Subject X drops to one knee. It is still moving. I have a brief opening to leave.');render();}
-function recover(){if(!actionable())return false;const p=S?.pursuer;if(!p?.staggerUntil||down())return false;delete p.staggerUntil;delete p.staggerDeadline;p.evadeUntil=0;p.posture=0;p.lastMoveAt=S.t;S.f.pursuerEncounter=0;if(present()){interaction('The heavy boots scrape the tiles. Subject X is standing again.');renderScene();}return true;}
+function recover(){if(!actionable()||WW.readingClock?.().paused)return false;const p=S?.pursuer;if(!p?.staggerUntil||down())return false;delete p.staggerUntil;delete p.staggerDeadline;p.evadeUntil=0;p.posture=0;p.lastMoveAt=S.t;S.f.pursuerEncounter=0;if(present()){interaction('The heavy boots scrape the tiles. Subject X is standing again.');renderScene();}return true;}
 WW.updatePursuerRecovery=recover;
 
 pursuerEncounter=function(note){

@@ -5,7 +5,11 @@
     "wardLoadFinale preserves last-ward-ch1-chapter-review-6 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
     "loadCheckpoint preserves last-ward-ch1-chapter-review-6 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
     "wardLoadFinale preserves last-ward-ch1-chapter-review-7 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
-    "loadCheckpoint preserves last-ward-ch1-chapter-review-7 earned sump/supply/pursuit clearance, ammunition and cleared enemies"
+    "loadCheckpoint preserves last-ward-ch1-chapter-review-7 earned sump/supply/pursuit clearance, ammunition and cleared enemies",
+    "wardLoadFinale preserves a Terminal-saved v8 completed mechanical clearance and two earned staggers, ammunition and cleared enemies",
+    "loadCheckpoint preserves a Terminal-saved v8 completed mechanical clearance and two earned staggers, ammunition and cleared enemies",
+    "wardLoadFinale preserves a Terminal-saved v8 unfinished mechanical clearance without compatibility grants, ammunition and cleared enemies",
+    "loadCheckpoint preserves a Terminal-saved v8 unfinished mechanical clearance without compatibility grants, ammunition and cleared enemies"
   ],
   "javascript_errors": []
 }

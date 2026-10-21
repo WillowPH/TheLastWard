@@ -6,7 +6,7 @@ Keep the launcher window open while playing. No external internet is required.
 macOS/Linux: run python3 start_game.py (Python 3 standard library).
 Opening index.html directly can block game data/audio; use the launcher.
 
-Existing v5, v6 and v7 saves can CONTINUE in this v8 update.
+Existing v5, v6, v7 and v8 saves can CONTINUE in this v9 update.
 A NEW GAME gives the complete revised encounter and puzzle progression.
 Keep the same browser and local port to access those saves.
 CLICK visible objects. DRAG sideways to see the other side.
@@ -17,9 +17,11 @@ RESUME preserves the exact open document or dialog.
 Practical requirements appear in THOUGHTS.
 Select an item in the RIGHT INVENTORY for USE, INSPECT, COMBINE or DISCARD.
 To combine: select the first item, choose COMBINE, then select the second item.
-Discard asks for confirmation and returns directly to the room.
+Discard asks for confirmation and leaves the item in the current room.
+Use LEFT IN THIS ROOM in the right inventory to recover it there later.
 Story/Normal automatically remove truly SPENT keys/tools. Nightmare keeps manual discard.
-Keys/tools still needed for progression remain protected.
+All carried items can be left, including unused keys, weapons and flashlight.
+Shared STORAGE BOXES remain separate from room-local dropped items.
 
 The FLASHLIGHT is in the lobby coat pocket. Reading records pauses its battery.
 Lighted rooms save battery automatically. Cold and wet clothes now hurt:
@@ -28,6 +30,10 @@ or use the lit laundry stove. Death requires loading a save/checkpoint or restar
 Use a FLOPPY DISK at a TERMINAL to save. STORAGE BOXES share stored equipment.
 SUBJECT X blocks exits. Shoot to knock it down briefly, or use cover/a risky escape.
 It will recover; do not spend all ammunition trying to kill it.
+The filled LIGHTER has TWO ignitions: laundry stove and chapel candles.
+Treating, leaving and killing Mercer have different persistent outcomes.
+Online preferred is the default; the HUD says when bundled local art is active.
+Online atmosphere needs a separately connected service. No paid provider is included.
 
 Room paintings fit whole and retain their native detail (mostly 1448x1086), without a zoomed
 panorama crop. All files remain separate; this is not one embedded HTML document.

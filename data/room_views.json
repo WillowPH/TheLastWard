@@ -439,6 +439,17 @@
           7
         ],
         "reviewed": true
+      },
+      "rearTrolley": {
+        "view": "rear",
+        "rect": [
+          90,
+          66,
+          18,
+          44
+        ],
+        "reviewed": true,
+        "reviewNote": "Right linen/radio trolley against the rear wall; clear of the central return door."
       }
     },
     "threat": [
@@ -971,6 +982,28 @@
           7
         ],
         "reviewed": true
+      },
+      "rearCabinet": {
+        "view": "rear",
+        "rect": [
+          19,
+          30,
+          18,
+          26
+        ],
+        "reviewed": true,
+        "reviewNote": "Glass-fronted chart cabinet above the rear care trolley, left of the return door."
+      },
+      "rearTrolley": {
+        "view": "rear",
+        "rect": [
+          21,
+          55.5,
+          23,
+          25
+        ],
+        "reviewed": true,
+        "reviewNote": "Physical steel care trolley below the cabinet, left of the central door."
       }
     },
     "threat": [
@@ -1993,6 +2026,17 @@
           9
         ],
         "reviewed": true
+      },
+      "rearVestry": {
+        "view": "rear",
+        "rect": [
+          10,
+          49,
+          16,
+          11
+        ],
+        "reviewed": true,
+        "reviewNote": "Carved vestry cabinet beneath the framed portrait, behind the pews and clear of the door."
       }
     },
     "threat": [

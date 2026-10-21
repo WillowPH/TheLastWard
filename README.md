@@ -17,8 +17,9 @@ Hints default to Subtle; strength, motion, flashes and sound are in Options.
 
 Select an item in the right inventory to use, inspect, combine or discard it.
 Choose Combine, then a compatible second item. Normal/Story automatically retire
-truly spent tools; Nightmare keeps manual discard. Items needed for unfinished
-progress remain protected. Save at a Terminal using a Floppy Disk; Storage boxes
+truly spent tools; Nightmare keeps manual discard. Every item can also be left
+with confirmation, including unused keys and weapons. “Left in this room” recovers
+those items only in the room where they were dropped. Save at a Terminal using a Floppy Disk; Storage boxes
 share stored equipment. Saving and the optional shotgun are not mandatory.
 
 ## Survival and progression
@@ -44,6 +45,12 @@ The active sound design uses room ambience and restrained condition/threat heart
 cues. Reading quiets the pulse; Pause stops all playback. Major horror incidents
 remain once-only, with bounded later hallucinations and nonlethal imaginary combat.
 
+Normal has three fixed battery cells and six guaranteed save disks. Health supplies
+are distributed along early and later routes; generator charging has one full reserve
+and a slow emergency fallback. A filled lighter has two ignitions, for the laundry
+stove and chapel candles. Treatment, abandonment and mercy produce different saved
+patient outcomes; leaving Mercer allows time to return before deterioration.
+
 ## Presentation
 
 There are 54 distinct native room paintings across 27 rooms, mostly 1448×1086.
@@ -51,24 +58,32 @@ The user chose these sharp front/rear views over limited-resolution continuous 3
 artwork. Complete paintings fit without cropping, stretching or fake 4K enlargement.
 Mouse turns use a brief optional fade. Real enemies have opaque bodies and grounded
 scale; PEEK shows the live room through physical openings. Snow stays outside glass.
+Subject X uses independently authored standing and kneeling artwork. His knockdown
+never rotates or squeezes an upright image. Kessler visibly deteriorates, and Mercer
+has distinct stabilized, transformed, contained and covered aftermath paintings.
 
 The charcoal HUD follows the supplied reference. Narration and Thoughts sit over
 artwork without an opaque backing fill. Useful finds and clues occupy rear furniture.
 Optional graphical references and Chapter 2 foreshadowing remain in Chapter 1.
 
+Online preferred is the default artwork setting. The native download clearly reports
+when it uses bundled artwork because no service is connected. A separately configured
+host can supply faint ceiling atmosphere; the authored room, doors and targets remain
+fixed. No paid provider or credentials are included. See [online artwork](ONLINE_ART.md).
+
 ## Continued saves
 
-Use the same browser/local port. Recognized v5/v6/v7 saves can continue in v8,
+Use the same browser/local port. Recognized v5–v8 saves can continue in v9,
 preserving collected items and cleared enemies. Previously earned late clearance
 remains valid. A new run gives the entire revised balance and puzzle sequence.
 
-See [v8 changes](docs/REVISION_V8.md), [verified checks](VALIDATION.md) and
+See [v9 changes](docs/REVISION_V9.md), [verified checks](VALIDATION.md) and
 [the prior correction pass](docs/REVISION_V7.md).
 
 ## Development
 
 Run `python3 start_game.py --no-browser --port 8010`. Author native targets in
 `data/room_views.json`, then regenerate with `python3 tools/build_room_views.py`.
-Effects use `data/room_view_effects.json`. The late v8 balance, puzzle, survival and
-UI modules load before `pause.js`, which remains last. See
+Effects use `data/room_view_effects.json`. The late v9 supply, outcome and presentation
+modules load after the v8 modules and before `pause.js`, which remains last. See
 [view setup](docs/ROOM_VIEW_SETUP.md) for native geometry and interaction contracts.

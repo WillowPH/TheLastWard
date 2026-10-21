@@ -38,7 +38,8 @@ register('security','cabinet','petrolLighter','Empty petrol lighter','A scratche
 register('security','drawer','lighterFluid','Lighter fluid tin','A small capped tin of petrol lighter fluid.',{give:[['Lighter Fluid',1]]});
 register('security','cabinet','earlyBattery','Sealed flashlight cell','One sealed replacement battery remains behind the cabinet divider.',{give:[['Battery',1]]});
 register('wardnorth','trolley','linenBattery','Battery in the linen trolley','A dry torch battery is tucked into the trolley pocket.',{give:[['Battery',1]]});
-register('pharmacy','returns','pharmacyBattery','Returned torch cell','A sealed replacement battery lies among the empty wrappers.',{give:[['Battery',1]]});
+// Keep the collected-object ID for older saves; this reserve now supports saving.
+register('pharmacy','returns','pharmacyBattery','Clerk’s unused record disk','A sealed blank disk was left in the pharmacy returns box.',{give:[['Floppy Disk',1]]});
 register('security','roster','mimiPersonnel','Redacted nursing roster','One name has been heavily blacked out.',{doc:'Nursing personnel amendment'});
 register('room12','drawer','mimiNote','Unsigned nursing note','A folded personal note tucked beneath the drawer lining.',{doc:'Mimi’s unsigned note'});
 register('archive','folder','mimiTransfer','Restricted nursing transfer','A clinical transfer form with its name field removed.',{doc:'Redacted treatment transfer'});
@@ -64,7 +65,7 @@ register('children','rabbit','icecreamToy','Clown ice-cream truck','A battered t
 register('residence','diary','fogPostcard','Postcard from a foggy town','The lake on this postcard has almost disappeared into fog.',{doc:'A postcard from a foggy town'});
 register('eastcorridor','radio','staticNote','Note beneath the radio','Someone has taped a warning beneath the receiver.',{doc:'A note on the discarded radio'});
 register('stafflounge','note','herbMemo','Medicinal herb memo','A staff note describes green and red medicinal herbs. Nothing usable remains.',{look:1,th:'The author signed only R.P.D. Someone has underlined “do not mix the red ones alone.”'});
-register('security','cabinet','umbrella','Red-and-white umbrella','An abandoned umbrella carries a red-and-white segmented emblem.',{look:1,th:'The supplier’s name has rubbed off. This was not a Monolith delivery.'});
+register('security','cabinet','umbrella','Supplier insignia','A red-and-white segmented corporate badge is tucked inside a discarded supplier dossier on the rear staff table.',{look:1,th:'The supplier’s name has rubbed off. This was not a Monolith delivery.'});
 W.fixture('powercontrol','markerGraffiti','Red wall graffiti',[28,35,12,24],'rear',{graffiti:true});
 register('powercontrol','markerGraffiti','markerGraffiti','Red wall graffiti','MAKE US WHOLE is painted beside a twisted double-spire sketch.',{look:1,th:'Someone kept drawing the same shape until the paint ran out.'});
 for(const [room,fixture,id,name]of [
@@ -80,7 +81,7 @@ for(const [name,art]of Object.entries({Lighter:'lighter.png','Lighter Fluid':'li
  ITEM_ART[name]='assets/items/'+art;ICON[name]='';STK[name]=1;
 }
 const oldDesc=desc;
-desc=function(n){if(n==='Lighter')return 'Reusable petrol lighter. Combine with Lighter Fluid to refill; ignites the laundry drying stove and chapel candles.';if(n==='Lighter Fluid')return 'Refills the petrol lighter. Combine the two in Inventory.';if(W.fuses.includes(n))return 'One of four shaped plugs for the elevator interlock in Emergency Power Control. Reusable until installed.';return oldDesc(n);};
+desc=function(n){if(n==='Lighter')return 'A petrol lighter. One measured fill provides two ignitions: the laundry drying stove and chapel candles.';if(n==='Lighter Fluid')return 'A measured refill for the lighter’s two ignition points. Combine the tin with the lighter.';if(W.fuses.includes(n))return 'One of four shaped plugs for the elevator interlock in Emergency Power Control. Reusable until installed.';return oldDesc(n);};
 // Early objects stay on the accessible Security route. Later supplies use real containers.
 W.fixture('stafflounge','television','Staff room television',[24,35,20,20],'rear',{art:'assets/props/crt.svg',television:true});
 register('stafflounge','television','staffTV','Staff television','An old CRT television hisses with interference.',{look:1,th:'The antenna socket is empty. The static continues anyway.'});
@@ -109,7 +110,7 @@ for(const [room,fixture,id]of [['stafflounge','harness','loungeStorage'],['pharm
 register('wardnorth','trolley','purgeSupplies','Emergency linen-return compartment','The purge shaft has released a sealed maintenance pouch. Close the windows before opening it.',{give:[['Handgun Ammo',8],['Battery',1]],after:'windowHazardResolved'});
 W.chargerStatus=function(id){
  if(!['emergencyDynamo','handCharge','charger'].includes(id))return null;
- if(!S||!has('Flashlight'))return {available:false,label:'Battery charger · no flashlight',reason:S?.ob.coat==='done'?'Retrieve the flashlight from a Storage box before charging.':'Take the flashlight from the coat beside reception first.'};
+ if(!S||!has('Flashlight'))return {available:false,label:'Battery charger · no flashlight',reason:S?.ob.coat==='done'?'Retrieve the flashlight from where you left it or from a Storage box before charging.':'Take the flashlight from the coat beside reception first.'};
  if(S.f.flashlightDropped)return {available:false,label:'Battery charger · flashlight dropped',reason:'Recover the flashlight from the East Corridor floor first.'};
  if(id==='charger'){
   if(!S.f.power||S.f.powerOut)return {available:false,label:'Battery charger · no power',reason:'The generator must be running.'};
@@ -148,7 +149,7 @@ const relocate=(id,room,fixture)=>{
 for(const [id,room,fixture]of [
  ['winterJournal','security','winterNotice'],['petrolLighter','security','personalEffects'],
  ['drw','security','personalEffects'],['lighterFluid','security','drawer'],
- ['earlyBattery','security','cache'],['umbrella','lobby','locker'],
+ ['earlyBattery','security','cache'],
  ['mimiResearch','records','researchBinder'],['attendantDiary3','residence','nightDesk']
 ])relocate(id,room,fixture);
 W.find('attendantDiary3')[3]='The final loose page of the night attendant’s notebook, left on his quarters desk.';
@@ -164,14 +165,21 @@ for(const [room,id,label,rect]of [
  ['morgue','rearTrolley','Mortuary work trolley',[17,57,21,15]],
  ['specimen','rearBench','Laboratory rear workbench',[87,48,21,14]],
  ['surgery','rearSupply','Theatre preparation drawer',[20,52,17,15]],
- ['stafflounge','rearTable','Staff recreation table',[11,70,18,13]]
+ ['stafflounge','rearTable','Staff recreation table',[11,70,18,13]],
+ ['eastcorridor','rearTrolley','Rear linen and radio trolley',[90,66,18,44]],
+ ['isoward','rearCabinet','Treatment chart cabinet',[19,30,18,26]],
+ ['isoward','rearTrolley','Care equipment trolley',[21,55.5,23,25]],
+ ['chapel','rearVestry','Chapel vestry cabinet',[10,49,16,11]]
 ])W.fixture(room,id,label,rect,'rear',{drawer:!['returnStand','rearWorkbench','rearTable'].includes(id)});
 for(const [id,room,fixture]of [
- ['umbrella','lobby','returnStand'],['pistolRounds','ward','rearMedicine'],
+ ['umbrella','stafflounge','rearTable'],['pistolRounds','ward','rearMedicine'],['gur','ward','rearMedicine'],
  ['pouch','laundry','rearShelf'],['attendantDiary2','laundry','rearShelf'],
  ['charger','generator','rearWorkbench'],['handCharge','generator','rearWorkbench'],
  ['fur','boiler','rearTrolley'],['aut','morgue','rearTrolley'],
- ['wire','specimen','rearBench'],['shotShells','surgery','rearSupply']
+ ['wire','specimen','rearBench'],['shotShells','surgery','rearSupply'],
+ ['trolley','eastcorridor','rearTrolley'],['radioHall','eastcorridor','rearTrolley'],['staticNote','eastcorridor','rearTrolley'],
+ ['patientFile','isoward','rearCabinet'],['patientTherapy','isoward','rearTrolley'],
+ ['let','chapel','rearVestry'],['box3','chapel','rearVestry']
 ])relocate(id,room,fixture);
 W.find('pistolRounds')[3]='A sealed ammunition sleeve is tucked inside the medicine cupboard behind the entry door.';
 W.find('pouch')[3]='A compact belt-and-pouch kit is tucked inside the rear laundry supply shelves.';
@@ -183,7 +191,13 @@ W.find('wire')[3]='A spool of dry insulated wire rests on the laboratory rear wo
 W.find('shotShells')[3]='A sealed shotgun shell sleeve remains in the theatre preparation drawer behind the operating table.';
 register('stafflounge','rearTable','arcadeMedallion','Dragon tournament medallion','A brass dragon token rests on an old staff arcade-night flyer.',{look:1});
 register('stafflounge','rearTable','heroMug','Heroes’ mug','A repaired ceramic mug bears a dark circular emblem and an orange arc.',{look:1});
-W.find('umbrella')[3]='A red-and-white umbrella has been left on the cloakroom return counter behind reception.';
+W.find('umbrella')[3]='A red-and-white segmented corporate badge is tucked inside a discarded supplier dossier on the rear staff table.';
+W.find('gur')[1]='Night-round record disk';W.find('gur')[3]='A sealed blank disk remains beside the patrol ammunition in the rear medicine cupboard.';
+W.find('radioHall')[3]='A portable staff receiver sits on the rear linen trolley. A folded warning is tucked beneath it.';
+W.find('staticNote')[3]='A warning is folded beneath the portable receiver on the rear linen trolley.';
+W.find('patientFile')[3]='Daniel Mercer’s admission chart is filed in the glass-fronted cabinet behind the treatment bed.';
+W.find('patientTherapy')[3]='A care trolley stands behind the treatment bed. Its clean equipment could support basic care, but no sedative remains.';
+W.find('let')[3]='The chaplain’s folded letter is kept inside the vestry cabinet behind the pews.';
 W.find('icecreamToy')[1]='Sweet Tooth ice-cream truck';W.find('icecreamToy')[3]='The battered toy carries a sculpted grinning clown head with flame-shaped hair.';
 register('children','nightDrawer','childNightCell','Night-light battery','A sealed torch battery was set aside in the bedside drawer for night rounds.',{give:[['Battery',1]]});
 register('isolation','dressingShelf','isolationDressing','Sealed isolation dressing','An unopened sterile dressing survived inside the glass-fronted cabinet.',{give:[['Trauma Dressing',1]]});
@@ -219,6 +233,15 @@ for(const [room,id,label]of [['security','drawer','Security filing drawer'],['st
 R.stafflounge.o.find(o=>o[0]==='harness')[3]='A durable medical utility harness hangs inside the open staff locker.';
 // A finite mid-route first-aid kit supports the longer authored encounter route.
 register('stafflounge','harness','loungeFirstAid','Staff first-aid kit','A sealed first-aid kit remains in the rear staff locker beside the utility harness.',{give:[['Field Medkit',1]]});
+// Recovery is spread across the route rather than bundled into the early locker.
+relocate('loungeFirstAid','observation','rearDesk');
+W.find('loungeFirstAid')[1]='Observation first-aid kit';W.find('loungeFirstAid')[3]='An unopened first-aid kit is sealed in the rear observation desk, beside the archive drive.';
+register('ward','rearMedicine','clinicDressing','Night clinic dressing','A sealed dressing was kept with the night patrol equipment in the rear medicine cupboard.',{give:[['Trauma Dressing',1]]});
+register('children','nightDrawer','childrenDressing','Pediatric night dressing','A small sealed dressing remains in the bedside night-round drawer.',{give:[['Trauma Dressing',1]]});
+register('isolation','dressingShelf','isolationFirstAid','Isolation emergency kit','A sealed first-aid kit is stored behind the clean dressing shelf.',{give:[['Field Medkit',1]]});
+register('lobby','returnStand','securityRecordDisks','Reception record disks','Unused blank disks remain on the cloakroom return counter behind reception, ready for a Terminal.',{give:[['Floppy Disk',1]]});
+register('generator','rearWorkbench','generatorRecordDisks','Maintenance record disks','Unused blank disks are kept in the rear maintenance bench drawer beside the charging equipment.',{give:[['Floppy Disk',1]]});
+register('residence','nightDesk','residenceRecordDisks','Night attendant’s blank disk','An unused blank disk lies inside the rear night attendant’s desk.',{give:[['Floppy Disk',1]]});
 const baselineObjects=Object.fromEntries(Object.entries(R).map(([r,v])=>[r,structuredClone(v.o)]));
 const baselineScenes=structuredClone(WardScenes);
 const configure=configureWorld;

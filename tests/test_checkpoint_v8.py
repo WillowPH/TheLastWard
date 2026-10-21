@@ -1,4 +1,4 @@
-"""Actual legacy checkpoint loaders retain earned late-run mechanical clearance."""
+"""Legacy checkpoint loaders migrate old clearance and preserve actual v8 records."""
 from pathlib import Path
 import json
 from playwright.sync_api import sync_playwright
@@ -15,5 +15,21 @@ with sync_playwright() as p:
    assert got['build']==got['expected'] and got['drained'] and got['transfer'] and got['proof'] and got['revision']==8,(loader,version,got)
    assert got['ammo']==9 and got['dead']==got['actors'],(loader,version,got)
    checks.append(loader+' preserves '+version+' earned sump/supply/pursuit clearance, ammunition and cleared enemies')
+ # A v8 record already has mechanical progress and pursuit evidence. Save the
+ # fixture through the real Terminal before checking both checkpoint loaders;
+ # unlike pre-v8 compatibility cases, it must not receive inferred clearance.
+ q.evaluate('''S=structuredClone(window.legacyCheckpoint);S.buildId='last-ward-ch1-chapter-review-8';S.balanceVersion=8;S.room='lobby';S.roomView='front';S.roomViewRoom='lobby';S.f.puzzleRevision=8;S.f.drained=1;S.f.transferBusReady=1;S.f.pursuerStaggers=2;S.ob.wnc='done';S.inv.push({n:'Floppy Disk',c:1});render();saveGame()''')
+ q.get_by_role('button',name='Save record',exact=True).click()
+ q.evaluate('window.v8Record=JSON.parse(localStorage.getItem(K))')
+ assert q.evaluate('window.v8Record.buildId==="last-ward-ch1-chapter-review-8"&&window.v8Record.saves===1&&!window.v8Record.inv.some(x=>x.n==="Floppy Disk")')
+ for earned in [True,False]:
+  for loader,key in [('wardLoadFinale','lw_ch1_finale_checkpoint'),('loadCheckpoint','lw_ch1_cinematic_glass_checkpoint')]:
+   q.evaluate('''([key,earned])=>{const s=structuredClone(window.v8Record);s.room='observation';s.roomViewRoom=s.room;if(!earned){delete s.f.drained;delete s.f.transferBusReady;delete s.f.pursuerStaggers;delete s.ob.wnc;}localStorage.setItem(key,JSON.stringify(s));}''',[key,earned])
+   q.evaluate(loader+'()');q.wait_for_function('WardWinter.roomViewRenderer()?.loaded')
+   got=q.evaluate('({build:S.buildId,expected:WardChapter.BUILD,drained:!!S.f.drained,transfer:!!S.f.transferBusReady,proof:!!S.f.legacyPursuitProof,revision:S.f.puzzleRevision,staggers:S.f.pursuerStaggers||0,ammo:cnt("Handgun Ammo"),saves:S.saves,dead:S.enemyActors.filter(a=>a.hp<=0).length,actors:S.enemyActors.length})')
+   assert got['build']==got['expected'] and got['revision']==8 and not got['proof'],(loader,earned,got)
+   assert got['drained']==earned and got['transfer']==earned and got['staggers']==(2 if earned else 0),(loader,earned,got)
+   assert got['ammo']==9 and got['saves']==1 and got['dead']==got['actors'],(loader,earned,got)
+   checks.append(loader+' preserves a Terminal-saved v8 '+('completed mechanical clearance and two earned staggers' if earned else 'unfinished mechanical clearance without compatibility grants')+', ammunition and cleared enemies')
  assert not errors,errors;b.close()
 (ROOT/'tests/results/checkpoint_v8.json').write_text(json.dumps({'checks':checks,'javascript_errors':errors},indent=2)+'\n');print('\n'.join('PASS '+v for v in checks))

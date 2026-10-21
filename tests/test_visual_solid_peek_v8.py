@@ -67,9 +67,31 @@ with sync_playwright() as p:
  q.get_by_role('button',name='Exit',exact=True).click();ready()
  checks.append('physical hiding apertures stay aligned with the fitted room across live desktop, tablet and mobile resizes')
 
- stage(0,'surgery');ev('S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.f.doctorWallSeen=0;render()');ready();before=ev('WardWinter.roomViewAsset("surgery","front")');assert before.endswith('surgery_front.webp');ev('doctorAtWall()');assert q.get_by_role('button',name='Call his name',exact=True).is_visible();q.get_by_role('button',name='Call his name',exact=True).click();assert ev('S.f.doctorWallSeen&&S.ob.kessler==="read"');ev('closeModal()');ready();assert ev('WardWinter.roomViewAsset("surgery","front")').endswith('surgery_after.webp');assert not q.locator('[data-fixture="kessler"]').count();assert ev('!WardWinter.orbit.points().some(p=>p.id==="fixture:kessler")')
- checks.append('Kessler uses coherent standing/attached-hands encounter art and persistent seated aftermath; completed person target is retired')
- ev('S.sceneDisturbance={room:S.room,view:"front",kind:"hanged",deadline:Date.now()+15000};renderScene()');assert q.locator('[data-sanity-vision]').count()==1;assert ev('S.roomView')=='front';ev('WardWinter.orbit.face("rear")');ready();assert not q.locator('[data-sanity-vision]').count()
- checks.append('earned sanity vision renders in its saved current-facing view without forcing a camera turn')
+ stage(0,'surgery');ev('S.enemyActors.forEach(a=>a.hp=0);WardWinter.enemies.project();S.f.doctorWallSeen=0;S.san=88;render()');ready();before=ev('WardWinter.roomViewAsset("surgery","front")');assert before.endswith('surgery_front.webp');ev('doctorAtWall()');assert q.get_by_role('button',name='Call his name',exact=True).is_visible();q.get_by_role('button',name='Call his name',exact=True).click();assert ev('S.f.doctorWallSeen&&S.ob.kessler==="read"&&S.san===74');ev('closeModal()');ready();assert ev('WardWinter.roomViewAsset("surgery","front")').endswith('surgery_after.webp');assert not q.locator('[data-fixture="kessler"]').count();assert ev('!WardWinter.orbit.points().some(p=>p.id==="fixture:kessler")')
+ checks.append('actual Kessler choice while pre-distressed preserves coherent infected encounter art and lasting aftermath; completed person target is retired')
+ ev('WardWinter.sanityEpisode()');q.wait_for_function('!!S.sceneDisturbance');assert q.locator('[data-sanity-vision]').count()==1;assert ev('S.roomView')=='front'
+ q.wait_for_function('document.querySelector("[data-sanity-vision] img")?.complete&&document.querySelector("[data-sanity-vision] img")?.naturalWidth>0')
+ memory=ev('''()=>{const n=document.querySelector('[data-sanity-vision]'),s=getComputedStyle(n);return {source:n.querySelector('img').dataset.solidSource,hasMemory:n.classList.contains('sanity-memory'),before:getComputedStyle(n,':before').content,transform:s.transform,bottom:parseFloat(s.bottom),frameHeight:n.parentElement.clientHeight};}''')
+ assert memory['hasMemory'] and memory['source'].endswith('infected_patient.png') and memory['before']=='none' and memory['transform']=='none',memory
+ assert 0<=memory['bottom']<memory['frameHeight']*.25,memory
+ ev('source=>WardRoomViewRenderer.opaqueReady(source)',memory['source'])
+ alpha=ev('''source=>{const c=WardRoomViewRenderer.opaqueCanvas(source),a=c.getContext('2d').getImageData(0,0,c.width,c.height).data,points=[];let core=0,empty=0;for(let y=60;y<c.height-40;y+=9)for(let x=c.width*.25|0;x<c.width*.75;x+=7){const v=a[(y*c.width+x)*4+3];if(v===255){core++;if(a[(y*c.width+x-1)*4+3]===255&&a[(y*c.width+x+1)*4+3]===255)points.push([x/c.width,y/c.height]);}else if(!v)empty++;}return {core,empty,points};}''',memory['source'])
+ assert alpha['core']>300 and alpha['empty']>50,alpha
+ # Exercise the actual faded DOM element at its authored fully visible middle,
+ # rather than only trusting the processed source canvas's alpha channel.
+ ev('S.sceneDisturbance.deadline=Date.now()+8000;renderScene()')
+ q.wait_for_function('document.querySelector("[data-sanity-vision] img")?.complete&&document.querySelector("[data-sanity-vision] img")?.naturalWidth>0')
+ node=q.locator('[data-sanity-vision]');body=node.locator('img');r=node.bounding_box();br=body.bounding_box()
+ assert node.evaluate('n=>Number(getComputedStyle(n).opacity)')==1
+ ev("document.querySelector('.room-view-canvas').style.visibility='hidden';document.querySelector('.room-view-frame').style.backgroundColor='#ff00ff'");a=np.array(Image.open(BytesIO(node.screenshot())).convert('RGB'))
+ ev("document.querySelector('.room-view-frame').style.backgroundColor='#00ff00'");z=np.array(Image.open(BytesIO(node.screenshot())).convert('RGB'))
+ difference=[]
+ for x,y in alpha['points']:
+  px=int(br['x']-r['x']+x*br['width']);py=int(br['y']-r['y']+y*br['height'])
+  if 2<=px<a.shape[1]-2 and 2<=py<a.shape[0]-2:difference.append(np.max(np.abs(a[py,px].astype(int)-z[py,px].astype(int))))
+ assert len(difference)>80 and np.quantile(difference,.8)<=2,(len(difference),np.quantile(difference,[.5,.8,.95]))
+ ev("document.querySelector('.room-view-canvas').style.visibility='';document.querySelector('.room-view-frame').style.backgroundColor=''")
+ ev('WardWinter.orbit.face("rear")');ready();assert not q.locator('[data-sanity-vision]').count()
+ checks.append('earned sanity vision decodes an opaque grounded infected body without a rope, follows its saved current facing and never forces a camera turn')
  assert not errors,errors;b.close()
 (ROOT/'tests/results/visual_solid_peek_v8.json').write_text(json.dumps({'checks':checks,'javascript_errors':errors},indent=2)+'\n');print('\n'.join('PASS '+c for c in checks))

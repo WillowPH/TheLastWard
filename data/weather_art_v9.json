@@ -1,0 +1,27 @@
+{
+  "description": "Generated overcast winter exterior plates; renderer composites strictly inside previously authored glass cells. Indoor pixels and input geometry remain from the original room painting.",
+  "edits": {
+    "room12_winter": {
+      "source": "assets/rooms/room12.webp",
+      "generated": "exec-580cc218-3db0-4d8f-ab6a-261459b9fb85.png",
+      "output": "assets/room_views/room12_winter.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Overcast snowy night with snow-covered bare trees; removes moon disk and clear blue sky. Used only behind the original glass masks.",
+      "export": "WebP quality95, no resizing"
+    },
+    "isolation_winter": {
+      "source": "assets/rooms/isolation.webp",
+      "generated": "exec-e31bab55-28bb-4800-8e74-77f557beaaef.png",
+      "output": "assets/room_views/isolation_winter.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Overcast snowy night with snow-covered bare trees; removes moon disk and clear blue sky. Used only behind the original glass masks.",
+      "export": "WebP quality95, no resizing"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-21",
+  "tool": "image_gen.imagegen",
+  "source": "assets/room_views/isoward_transformed.webp",
+  "source_sha256": "7202f6ad4fb9b4a7096118147fae453b0e9e015d335b05940cae86765611e0dd",
+  "generated_source": "/workspace/generated_images/exec-25776532-71d1-4cbf-96d1-2b090c304f9b.png",
+  "output": "assets/room_views/isoward_contained.webp",
+  "output_sha256": "95a456ec3b7272d31f9f01e3ba1ceafafa36e35f0ec58590c8ce554c4f5703ca",
+  "native_dimensions": [
+    1448,
+    1086
+  ],
+  "edit": "Repaired wrist-restraint aftermath: both wrists physically attached to the bed, torso lowered, same visibly infected patient. Full room camera, furniture, lighting and target geometry preserved; no gore or interface.",
+  "export": "WebP quality93, Lanczos normalization1447x1087 to1448x1086 to match room coordinate contract; no cropping or other creative manipulation after generation.",
+  "generated_native_dimensions": [
+    1447,
+    1087
+  ],
+  "source_sha256_role": "Historical transformed WebP used for the contained image generation; retained after later normalization of that source asset.",
+  "source_current_sha256": "61cd863a49bbdda92b13df6fdb2d01b2189d1bf12be69cd8591f8d4084b77102",
+  "native_room_contract": {
+    "dimensions": [
+      1448,
+      1086
+    ],
+    "verification": "All active native front/outcome paintings and the reverse return-door painting decode at the same dimensions. Existing 1447x1087 generated paintings were normalized with Lanczos scaling; the complete composition and all percent coordinates are retained without cropping.",
+    "assets": [
+      {
+        "state": "untreated",
+        "asset": "assets/room_views/isoward_front.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "9af04d084b71dbf6a073569eae3b3c34a5dc8bcdcd8949a680d77b413537b8c0",
+        "generated_source": "/workspace/generated_images/exec-9ac4c3c1-c94f-4164-9cb4-aff6e3724dc5.png",
+        "generated_native_dimensions": [
+          1447,
+          1087
+        ],
+        "generated_source_sha256": "646cad96aa910c57e3f0cee64b04bd7adb7f331ac1ba3463b3bf4b51086a6431",
+        "export": "Existing full generated painting normalized from1447x1087 to room contract1448x1086 without cropping; WebP quality95"
+      },
+      {
+        "state": "stabilized",
+        "asset": "assets/room_views/isoward_stabilized.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "c932a100823cddbe083d0e386756edcef5b6438cf69580bd4e3c85cb83541802",
+        "generated_source": "/workspace/generated_images/exec-db508351-31d1-46ae-a9de-4322dc5b64e8.png",
+        "generated_native_dimensions": [
+          1447,
+          1087
+        ],
+        "generated_source_sha256": "a7c6a2bfa9c4b1da4c69aefefacd223848ffdb5b0da4a03bb23e470848509441",
+        "export": "WebP quality95; complete generated painting normalized from1447x1087 to room contract1448x1086 without cropping"
+      },
+      {
+        "state": "transformed",
+        "asset": "assets/room_views/isoward_transformed.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "61cd863a49bbdda92b13df6fdb2d01b2189d1bf12be69cd8591f8d4084b77102",
+        "generated_source": "/workspace/generated_images/exec-9f02d052-cbcc-4372-a374-d5246ca0752a.png",
+        "generated_native_dimensions": [
+          1447,
+          1087
+        ],
+        "generated_source_sha256": "82968aa2d199467e0dec87180d004d53f328b69411770eabac1cc0f76a2c8ad5",
+        "export": "WebP quality95; complete generated painting normalized from1447x1087 to room contract1448x1086 without cropping"
+      },
+      {
+        "state": "contained",
+        "asset": "assets/room_views/isoward_contained.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "95a456ec3b7272d31f9f01e3ba1ceafafa36e35f0ec58590c8ce554c4f5703ca",
+        "generated_source": "/workspace/generated_images/exec-25776532-71d1-4cbf-96d1-2b090c304f9b.png",
+        "generated_native_dimensions": [
+          1447,
+          1087
+        ],
+        "generated_source_sha256": "9779fe0152ac5c18b4e9b98ac163cef925c48e554df930abfc627a0e16c7a67b",
+        "export": "WebP quality93, Lanczos normalization1447x1087 to1448x1086 to match room coordinate contract; no cropping or other creative manipulation after generation."
+      },
+      {
+        "state": "covered-dead",
+        "asset": "assets/states/isoward_after.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "3621f4b66d9fd4c35b3e8d475691975718bc6d49133fe028fb75c8bf1e93959b",
+        "export": "Existing native1448x1086 painting retained byte-for-byte; no normalization needed."
+      },
+      {
+        "state": "rear-return-door",
+        "asset": "assets/reverse/isoward.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "85eeb6bad837c1eb7d3e4d4867566e9de1129712cc8205149debe2c0d8ca61a8",
+        "export": "Existing native1448x1086 painting retained byte-for-byte; no normalization needed."
+      },
+      {
+        "state": "original-front-fallback",
+        "asset": "assets/rooms/isoward.webp",
+        "native_dimensions": [
+          1448,
+          1086
+        ],
+        "sha256": "12425e8a9f1b78395a47c5573ad722094f44b6a144004866e013215f1fbef4cd",
+        "export": "Existing native1448x1086 painting retained byte-for-byte; no normalization needed."
+      }
+    ]
+  }
+}

@@ -61,5 +61,5 @@ WW.sanityEpisode=function(){
  return false;
 };
 const arrive=chapterArrival;chapterArrival=function(from,to){const result=arrive(from,to);if(result)return result;return WW.sanityEpisode();};
-setInterval(()=>{if(WW.isPaused?.()||!S||S.hp<=0||S.f.dead||S.f.chapter1Complete)return;if(WW.hallActive()&&Date.now()>=S.hallCombat.deadline)WW.resolveHall('wait');if(S.sceneDisturbance&&Date.now()>S.sceneDisturbance.deadline){S.sceneDisturbance=null;renderScene();}},350);
+setInterval(()=>{if(WW.isPaused?.()||!S||S.hp<=0||S.f.dead||S.f.chapter1Complete)return;const clock=WW.readingClock?.();if(clock?.paused)return;const now=clock?.now??Date.now();if(WW.hallActive()&&now>=S.hallCombat.deadline)WW.resolveHall('wait');if(S.sceneDisturbance&&now>S.sceneDisturbance.deadline){S.sceneDisturbance=null;renderScene();}},350);
 })();

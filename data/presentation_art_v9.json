@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-21",
+  "tool": "image_gen.imagegen",
+  "edits": [
+    {
+      "output": "assets/room_views/egg_umbrella.webp",
+      "source": "95d95633ad05ff4dc0fc7f6f8097734c59e30d08:assets/room_views/egg_umbrella.webp",
+      "generated": "exec-e699230f-cb1a-4eab-b6fa-f568d81e4822.png",
+      "change": "Replace large physical umbrella with a precise four-red/four-white segmented corporate enamel badge and supplier dossier in staff lounge inspection art. Existing umbrella object ID relocates to rear staff table; no lobby prop remains.",
+      "sha256": "2eb990ce10a2169178b365767b831e25bb4d01fed4aa5641aa4cb6da2fde8421",
+      "native_dimensions": [
+        1448,
+        1086
+      ],
+      "export": "Generated game art exported as native WebP; no enlarged scene crop."
+    },
+    {
+      "output": "assets/room_views/surgery_after.webp",
+      "source_sha256": "8da831e4692872b4484e4ab729679795e7aa4256fac5cf456177e9399f427e9f",
+      "generated": "exec-7fee4276-03a7-40e3-a900-a722cf82b095.png",
+      "change": "Refine infected Kessler with uncovered face turned toward player, cloudy eyes, contorted visible jaw, ashen veined skin and rigid attached hands. Preserve collapsed location and surgical-room architecture.",
+      "sha256": "fc6f24dc68a0111a5c5c622e76dfa4e12fcff280c0f945736faffb3a8de27656",
+      "native_dimensions": [
+        1448,
+        1086
+      ],
+      "export": "Generated game art exported as native WebP; no enlarged scene crop."
+    }
+  ]
+}

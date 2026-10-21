@@ -6,7 +6,7 @@
     "infected flee and Subject X retreat each invoke the new room\u2019s scripted incident exactly once, with one original movement cost",
     "Subject X evasion buys a finite twelve-turn Normal recovery interval including travel; repeated arrival checks cannot burn it in one turn",
     "two saved incidents earn visible imaginary combat despite partial composure recovery; it spends real ammo, never health, and cannot replay",
-    "earned body visions are actually drawn, expire, have a cooldown, and stop after two episodes"
+    "stable composure and unwitnessed trauma suppress visions; earned grounded infected memories decode, follow the current facing, expire, have a cooldown, and stop after two episodes"
   ],
   "balance": [
     {
@@ -38,8 +38,8 @@
         "san": 94
       },
       "after_four_exposure_turns": {
-        "hp": 78.35,
-        "san": 90.38749999999999,
+        "hp": 78.8,
+        "san": 90.6,
         "wet": 1
       }
     },

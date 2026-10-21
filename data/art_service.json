@@ -1,0 +1,5 @@
+{
+  "available": false,
+  "endpoint": null,
+  "description": "The native download contains complete local artwork. A configured hosted artwork server may advertise its optional same-origin atmosphere service here."
+}

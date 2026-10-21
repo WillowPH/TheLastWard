@@ -104,6 +104,16 @@ with sync_playwright() as p:
  frame=page.locator('.room-view-frame').bounding_box();assert frame
  page.mouse.move(frame['x']+frame['width']*.75,frame['y']+frame['height']*.12);page.mouse.down();page.mouse.move(frame['x']+frame['width']*.25,frame['y']+frame['height']*.12,steps=2);page.mouse.up()
  assert page.evaluate("S.roomView==='front'")
+ page.wait_for_function("!WardWinter.travelling&&S.room==='eastcorridor'")
+ assert page.locator('.ward-door-passage').count()==0
+ report['checks'].append('Rapid real door clicks and direct map/turn/inventory commands stay locked to one native transition; room-facing drags cannot bypass it.')
+ # Keep the Pause probe independent of the rapid-input probe. The native door
+ # takes about one second; under browser load that whole input sequence may
+ # legitimately finish before its last click reaches Pause.
+ page.evaluate("S.room='security';S.prev='lobby';S.roomView='front';S.roomViewRoom=S.room;S.dr.es=1;render()")
+ ready();box=page.locator('[data-door="es"]').bounding_box();assert box
+ page.mouse.click(x=box['x']+box['width']/2,y=box['y']+box['height']/2)
+ assert page.evaluate("WardWinter.travelling&&S.room==='security'")
  page.get_by_role('button',name='Pause game',exact=True).click()
  assert page.get_by_role('heading',name='PAUSED',exact=True).is_visible()
  page.wait_for_timeout(1250)
@@ -112,7 +122,7 @@ with sync_playwright() as p:
  page.get_by_role('button',name='Resume game',exact=True).click()
  page.wait_for_function("!WardWinter.travelling&&S.room==='eastcorridor'")
  assert page.locator('.ward-door-passage').count()==0
- report['checks'].append('Rapid real door clicks and direct map/turn/inventory commands stay locked to one transition; Pause remains available and completion waits for Resume.')
+ report['checks'].append('Pause remains available during a fresh native door transition; completion waits for Resume and removes its passage overlay.')
 
  assert not report['errors'],report['errors'];browser.close()
 (OUT/'hud_view_pass.json').write_text(json.dumps(report,indent=2)+'\n')

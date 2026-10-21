@@ -91,27 +91,36 @@
       "prior_generated": "exec-824d3f24-0618-4c91-b816-fc81c08173ca.png"
     },
     "surgery_after": {
-      "source": "assets/room_views/surgery_front.webp",
-      "generated": "exec-50b82743-3ee1-4e5e-88de-89d595c08be9.png",
+      "source": "v8 assets/room_views/surgery_after.webp",
+      "generated": "exec-13303b3f-fbc2-4030-888b-a039d02134ec.png",
       "output": "assets/room_views/surgery_after.webp",
       "native_size": [
         1448,
         1086
       ],
-      "change": "Anatomically coherent slumped seated aftermath with both hands resting naturally; removes isolated hand-shaped wall mark",
-      "export": "WebP quality95; original size preserved without resizing",
-      "prior_generated": "exec-2d769fca-cdd8-426e-8050-97a9b68664d3.png"
+      "change": "Visibly ill, ashen/dark-veined doctor collapsed in a tense posture, one palm braced against floor; preserves theatre architecture and furniture",
+      "export": "WebP quality95; native1448x1086 preserved without resizing",
+      "prior_generated": "exec-50b82743-3ee1-4e5e-88de-89d595c08be9.png",
+      "sha256": "fc6f24dc68a0111a5c5c622e76dfa4e12fcff280c0f945736faffb3a8de27656",
+      "refinement_generated": "exec-7fee4276-03a7-40e3-a900-a722cf82b095.png",
+      "refinement": "Uncovered visibly infected face; updated generated room painting."
     },
     "isoward_front": {
       "source": "assets/rooms/isoward.webp",
       "generated": "exec-9ac4c3c1-c94f-4164-9cb4-aff6e3724dc5.png",
       "output": "assets/room_views/isoward_front.webp",
       "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Conscious restrained Daniel Mercer has visible pallor, branching facial and forearm veins, torn gown and mild dried blood stains; covered death state retained",
+      "export": "Existing full generated painting normalized from1447x1087 to room contract1448x1086 without cropping; WebP quality95",
+      "generated_size": [
         1447,
         1087
       ],
-      "change": "Conscious restrained Daniel Mercer has visible pallor, branching facial and forearm veins, torn gown and mild dried blood stains; covered death state retained",
-      "export": "WebP quality95; original native dimensions preserved without resizing"
+      "prior_export_sha256": "ab1adbfe1fbe0de777109e7c8ba0c228ab9fa08f4a5a79861141d2cd88e164cb",
+      "sha256": "9af04d084b71dbf6a073569eae3b3c34a5dc8bcdcd8949a680d77b413537b8c0"
     },
     "infected_orderly": {
       "source_generated": "exec-1c54c6d0-164f-4f8e-bb8b-dc0dc3e96292.png",
@@ -163,6 +172,60 @@
       ],
       "change": "Native game-art Overwatch emblem mug inspection",
       "export": "WebP quality95; original native dimensions preserved without resizing"
+    },
+    "subject_x_standing": {
+      "generated": "exec-818a7413-60cf-4174-a3b2-26864eb9f125.png",
+      "output": "assets/characters/subject_x_standing.webp",
+      "native_size": [
+        1024,
+        1536
+      ],
+      "change": "Bulky bald asylum brute with opaque skin, torn institutional trousers and broken wrist restraints; independent upright pose",
+      "export": "WebP quality94; native dimensions retained; transparent exterior",
+      "sha256": "ba48259122f42c9c346ac76687f70359187fb40a57f61f07c122bfdcc40361ed"
+    },
+    "subject_x_kneeling": {
+      "generated": "exec-37ff7d39-e639-4dbc-b845-bc848bcadad1.png",
+      "output": "assets/characters/subject_x_kneeling.webp",
+      "native_size": [
+        1024,
+        1536
+      ],
+      "change": "Matching character physically kneeling with bent knee and one fist grounded; authored pose rather than scaled/rotated upright art",
+      "export": "WebP quality94; native dimensions retained; transparent exterior",
+      "sha256": "804da484c440d2a1ea8302429af731643122b9e760716deefdf8d033bc066058"
+    },
+    "isoward_transformed": {
+      "source": "assets/room_views/isoward_front.webp",
+      "generated": "exec-9f02d052-cbcc-4372-a374-d5246ca0752a.png",
+      "output": "assets/room_views/isoward_transformed.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Untreated Mercer visibly deteriorates: clouded eyes, ashen skin/dark veins and strain against the bed restraints; preserves room geometry",
+      "export": "WebP quality95; complete generated painting normalized from1447x1087 to room contract1448x1086 without cropping",
+      "generated_size": [
+        1447,
+        1087
+      ],
+      "sha256": "61cd863a49bbdda92b13df6fdb2d01b2189d1bf12be69cd8591f8d4084b77102"
+    },
+    "isoward_stabilized": {
+      "source": "assets/room_views/isoward_front.webp",
+      "generated": "exec-db508351-31d1-46ae-a9de-4322dc5b64e8.png",
+      "output": "assets/room_views/isoward_stabilized.webp",
+      "native_size": [
+        1448,
+        1086
+      ],
+      "change": "Treated Mercer rests with relaxed hands and a clean forearm dressing; infection remains, room geometry preserved",
+      "export": "WebP quality95; complete generated painting normalized from1447x1087 to room contract1448x1086 without cropping",
+      "generated_size": [
+        1447,
+        1087
+      ],
+      "sha256": "c932a100823cddbe083d0e386756edcef5b6438cf69580bd4e3c85cb83541802"
     }
   }
 }

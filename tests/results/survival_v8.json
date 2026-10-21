@@ -2,7 +2,8 @@
   "checks": [
     "three difficulties: once-only sprinkler shock, real sustained HP/sanity loss, ongoing wet travel cost, explicit recovery; reading and Pause freeze costs",
     "one optional purge opens three dangerous windows; closing all catches and warming deliberately resolves local exposure",
-    "an actual Kessler choice records pending trauma during its modal, then automatically shows a current-facing vision after close; Pause preserves its remaining life and the event cannot repeat",
+    "low composure without witnessed incident trauma cannot produce a vision or imaginary encounter",
+    "an actual Kessler choice while pre-distressed records pending trauma during its modal, then shows a decoded grounded infected memory in the current facing; Pause preserves its fifteen-second life and the event cannot repeat",
     "actual Kessler plus irreversible Mercer knife decision earn imaginary combat after a cooldown; firing spends real ammunition, observing resolves it without injury, and it cannot replay",
     "Rourke evidence and scientist incident remain once-only; records suppress episodes, later trauma produces the second visible vision, and two visions plus one false fight is the per-run cap"
   ],
@@ -16,11 +17,11 @@
         "dropped": true
       },
       "ten_spray_turns": [
-        82.7012,
-        87.72699999999999,
-        13.225
+        82.928,
+        87.88,
+        13
       ],
-      "recovered_hp": 78.82039999999999
+      "recovered_hp": 79.04719999999999
     },
     {
       "mode": "1",

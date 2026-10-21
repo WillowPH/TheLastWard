@@ -173,11 +173,20 @@ with sync_playwright() as p:
     fresh()
     room('archive', True)
     ev('S.san=86;S.f.doctorWallSeen=1;WardWinter.sanityEpisode()')
+    assert ev('!S.sceneDisturbance&&!S.hallCombat'), 'Stable composure must suppress even an earned visual memory.'
+    assert not page.locator('[data-sanity-vision]').count()
+    ev('S.f.doctorWallSeen=0;S.san=74;WardWinter.sanityEpisode()')
+    assert ev('WardWinter.incidentStress()===0&&!S.sceneDisturbance&&!S.hallCombat'), 'Low composure alone must not invent witnessed trauma.'
+    assert not page.locator('[data-sanity-vision]').count()
+    ev('S.f.doctorWallSeen=1;WardWinter.sanityEpisode()')
     assert ev('S.sceneDisturbance?.kind') == 'hanged'
     assert ev('S.roomView') == 'front'
     assert ev('S.sceneDisturbance.view') == 'front'
     assert page.locator('.winter-hallucinated-body').count() == 1
-    page.wait_for_function('document.querySelector(".winter-hallucinated-body img")?.naturalWidth>0')
+    page.wait_for_function('document.querySelector(".winter-hallucinated-body img")?.complete&&document.querySelector(".winter-hallucinated-body img")?.naturalWidth>0')
+    memory = page.locator('[data-sanity-vision]').evaluate('''n=>({className:n.className,source:n.querySelector('img').dataset.solidSource,before:getComputedStyle(n,':before').content,transform:getComputedStyle(n).transform})''')
+    assert 'sanity-memory' in memory['className'] and 'infected_patient.png' in memory['source'], memory
+    assert memory['before'] == 'none' and memory['transform'] == 'none', memory
     turn_room(page);ready();assert ev('S.roomView') == 'rear'
     assert page.locator('.winter-hallucinated-body').count() == 0
     turn_room(page);ready();assert ev('S.roomView') == 'front'
@@ -189,11 +198,13 @@ with sync_playwright() as p:
     assert not ev('S.sceneDisturbance'), 'Visual episodes need a quiet interval.'
     ev('S.t+=46;WardWinter.sanityEpisode()')
     assert ev('S.sceneDisturbance?.kind') == 'body'
+    page.wait_for_function('document.querySelector("[data-sanity-vision] img")?.complete&&document.querySelector("[data-sanity-vision] img")?.naturalWidth>0')
+    assert page.locator('[data-sanity-vision] img').evaluate("n=>n.dataset.solidSource.endsWith('infected_orderly.png')")
     ev('S.sceneDisturbance.deadline=0')
     page.wait_for_timeout(500)
     ev('S.t+=100;WardWinter.sanityEpisode()')
     assert not ev('S.sceneDisturbance')
-    passed('earned body visions are actually drawn, expire, have a cooldown, and stop after two episodes')
+    passed('stable composure and unwitnessed trauma suppress visions; earned grounded infected memories decode, follow the current facing, expire, have a cooldown, and stop after two episodes')
     assert not errors, errors
     browser.close()
 

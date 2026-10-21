@@ -1,0 +1,97 @@
+{
+  "checks": [
+    "infected Kessler has a brief native head jerk and uneven shoulder breath; all changed pixels remain in two feathered patches, with no whole-body or room transform",
+    "the saved lucid, seizing and unresponsive aftermath conditions retain their identity and appropriate motion intensity",
+    "Pause freezes the exact aftermath motion; reduced motion and the uncompleted encounter never animate the collapse state"
+  ],
+  "conditions": {
+    "lucid": {
+      "source": "assets/room_views/surgery_after.webp",
+      "condition": "lucid",
+      "spasm": 0.25142612480832377,
+      "motion": [
+        {
+          "part": "head",
+          "rect": [
+            14.6,
+            42,
+            5.6,
+            6.6
+          ],
+          "dx": 0.25720892567891523,
+          "dy": 0.07014788882152234
+        },
+        {
+          "part": "shoulders",
+          "rect": [
+            13.2,
+            47.1,
+            7.2,
+            9
+          ],
+          "dx": 0.07794209869058037,
+          "dy": 0.19197699788647477
+        }
+      ]
+    },
+    "seizing": {
+      "source": "assets/room_views/surgery_after.webp",
+      "condition": "seizing",
+      "spasm": 0.25142612480832377,
+      "motion": [
+        {
+          "part": "head",
+          "rect": [
+            14.6,
+            42,
+            5.6,
+            6.6
+          ],
+          "dx": 0.4148531059337342,
+          "dy": 0.1131417561637457
+        },
+        {
+          "part": "shoulders",
+          "rect": [
+            13.2,
+            47.1,
+            7.2,
+            9
+          ],
+          "dx": 0.12571306240416188,
+          "dy": 0.25407925071413073
+        }
+      ]
+    },
+    "unresponsive": {
+      "source": "assets/room_views/surgery_after.webp",
+      "condition": "unresponsive",
+      "spasm": 0.25142612480832377,
+      "motion": [
+        {
+          "part": "head",
+          "rect": [
+            14.6,
+            42,
+            5.6,
+            6.6
+          ],
+          "dx": 0.3318824847469874,
+          "dy": 0.09051340493099656
+        },
+        {
+          "part": "shoulders",
+          "rect": [
+            13.2,
+            47.1,
+            7.2,
+            9
+          ],
+          "dx": 0.10057044992332952,
+          "dy": 0.22139385448904866
+        }
+      ]
+    }
+  },
+  "javascript_errors": []
+}

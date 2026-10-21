@@ -71,9 +71,10 @@ function canShowEpisode(){
  return !activeWindows()&&!activeSpray();
 }
 function quietOver(){
+ const clock=WW.readingClock?.();if(clock?.paused)return false;
  const turn=S.f.nextSanityEpisodeAt||0,real=S.f.sanityEpisodeDeadline||0;
  if(!turn&&!real)return true;
- return turn>0&&S.t>=turn||real>0&&Date.now()>=real;
+ return turn>0&&S.t>=turn||real>0&&(clock?.now||Date.now())>=real;
 }
 function quiet(turns=16,seconds=35){
  S.f.nextSanityEpisodeAt=S.t+turns;S.f.sanityEpisodeDeadline=Date.now()+seconds*1000;
@@ -92,21 +93,22 @@ WW.sanityEpisode=function(){
  if(!canShowEpisode()||!quietOver()||S.sceneDisturbance)return false;
  // A witnessed second major incident remains consequential after a little
  // composure recovery. Severe current distress can also earn the encounter.
- const falseEligible=stress>=24&&S.san<=92||S.san<=50;
+ const falseEligible=stress>=24&&S.san<=82||stress>0&&S.san<=50;
  if(!S.f.falseEncounterSeen&&falseEligible){
   const shown=wardFalseEncounter();
   if(shown){S.f.pendingSanityEpisode=0;quiet(20,45);}
   return shown;
  }
  const count=S.f.visualEpisodes||0;
- const visualEligible=stress>=12&&S.san<=95||S.san<=70;
+ const visualEligible=stress>=12&&S.san<=74;
  if(count<2&&visualEligible&&(!count||S.t>=(S.f.nextVisualEpisodeAt||0)||Date.now()>=(S.f.sanityVisualDeadline||Infinity))){
   S.f.visualEpisodes=count+1;S.f.nextVisualEpisodeAt=S.t+30;
   S.f.sanityVisualDeadline=Date.now()+60000;S.f.pendingSanityEpisode=0;
   S.sceneDisturbance={room:S.room,view:S.roomView||'front',kind:count===0?'hanged':'body',deadline:Date.now()+15000};
   quiet(16,35);
-  const thought=count===0?'For a moment the room feels occupied. I cannot trust what I just saw.':'That shape was not here a moment ago. I need to keep my bearings.';
-  (S.th2||(S.th2=[])).push(thought);if(!S.contextThought?.requirement)WW.think?.(thought);
+  const memory=S.f.beggingPatientChoice==='killed'?'Mercer’s last breath':S.f.doctorWallSeen?'those impacts against the tiles':'the scene behind the observation glass';
+  const thought=count===0?'I keep hearing '+memory+'. Something moved at the edge of my sight.':'My hands are shaking. The patients’ faces keep following me into other rooms.';
+  (S.th2||(S.th2=[])).push(thought);WW.think?.(thought,'sanity');
   renderScene();return true;
  }
  return false;

@@ -57,14 +57,87 @@
             22.85912,
             10.95764
           ]
+        ],
+        [
+          [
+            0.35,
+            11.0
+          ],
+          [
+            7.1,
+            12.7
+          ],
+          [
+            7.1,
+            28.8
+          ],
+          [
+            0.35,
+            28.2
+          ]
+        ],
+        [
+          [
+            10.7,
+            13.2
+          ],
+          [
+            19.7,
+            15.0
+          ],
+          [
+            19.7,
+            30.1
+          ],
+          [
+            10.7,
+            29.3
+          ]
+        ],
+        [
+          [
+            22.9,
+            17.1
+          ],
+          [
+            28.7,
+            18.5
+          ],
+          [
+            28.7,
+            28.9
+          ],
+          [
+            22.9,
+            28.7
+          ]
+        ],
+        [
+          [
+            30.8,
+            15.8
+          ],
+          [
+            32.1,
+            16.2
+          ],
+          [
+            32.1,
+            27.3
+          ],
+          [
+            30.8,
+            27.0
+          ]
         ]
       ],
       "screens": [],
-      "reviewNote": "Native fitted shutter state behind matching chair/cabinet barricade; only unobstructed upper exterior glass receives snow.",
+      "reviewNote": "Seven visible exterior regions: three transoms and four unobstructed main window panes. Mullions, furniture barricade, chair stacks and the foreground plant stay outside all snow masks.",
       "shutters": {
         "asset": "assets/room_views/lobby_shutters_front.webp",
         "native": true
-      }
+      },
+      "weather": "snowstorm-night"
     },
     "rear": {
       "source": "assets/room_views/lobby_rear.webp",
@@ -112,7 +185,8 @@
       "shutters": {
         "asset": "assets/room_views/lobby_shutters_rear.webp",
         "native": true
-      }
+      },
+      "weather": "snowstorm-night"
     }
   },
   "security": {
@@ -281,7 +355,85 @@
         ]
       ],
       "screens": [],
-      "reviewNote": "Four true panes; cross rails, vertical mullion, curtain, plant and lower sill excluded."
+      "reviewNote": "Four true panes; cross rails, vertical mullion, curtain, plant and lower sill excluded.",
+      "winterExterior": {
+        "asset": "assets/room_views/room12_winter.webp",
+        "masks": [
+          [
+            [
+              17.2,
+              3.2
+            ],
+            [
+              20.75,
+              3.9
+            ],
+            [
+              20.75,
+              12.2
+            ],
+            [
+              17.2,
+              12
+            ]
+          ],
+          [
+            [
+              22.65,
+              4.4
+            ],
+            [
+              27.3,
+              5
+            ],
+            [
+              27.3,
+              13
+            ],
+            [
+              22.65,
+              12.4
+            ]
+          ],
+          [
+            [
+              17.2,
+              13.4
+            ],
+            [
+              20.75,
+              13.8
+            ],
+            [
+              20.75,
+              35.8
+            ],
+            [
+              17.2,
+              35.9
+            ]
+          ],
+          [
+            [
+              22.65,
+              14
+            ],
+            [
+              27.3,
+              14
+            ],
+            [
+              27.3,
+              27.2
+            ],
+            [
+              22.65,
+              27.2
+            ]
+          ]
+        ]
+      },
+      "weather": "snowstorm-night"
     },
     "rear": {
       "source": "assets/reverse/room12.webp",
@@ -430,7 +582,8 @@
         ]
       ],
       "screens": [],
-      "reviewNote": "Two tall exterior panes; curtain, central sash, sill and lamp are excluded."
+      "reviewNote": "Two tall exterior panes; curtain, central sash, sill and lamp are excluded.",
+      "weather": "snowstorm-night"
     },
     "rear": {
       "source": "assets/reverse/residence.webp",
@@ -532,7 +685,24 @@
       "reviewed": true,
       "glass": [],
       "screens": [],
-      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow."
+      "reviewNote": "No confirmed exterior glass. Interior observation glass, cabinet fronts and door glazing do not receive snow.",
+      "doctorMotion": {
+        "cycle": 5.8,
+        "parts": {
+          "head": [
+            14.6,
+            42,
+            5.6,
+            6.6
+          ],
+          "shoulders": [
+            13.2,
+            47.1,
+            7.2,
+            9
+          ]
+        }
+      }
     },
     "rear": {
       "source": "assets/reverse/surgery.webp",
@@ -981,7 +1151,31 @@
         ]
       ],
       "screens": [],
-      "reviewNote": "Twenty-four inset cells exclude all horizontal/vertical metal bars, wall, curtain and bed."
+      "reviewNote": "Twenty-four inset cells exclude all horizontal/vertical metal bars, wall, curtain and bed.",
+      "winterExterior": {
+        "asset": "assets/room_views/isolation_winter.webp",
+        "masks": [
+          [
+            [
+              56.25,
+              6.8
+            ],
+            [
+              73.9,
+              6.8
+            ],
+            [
+              73.9,
+              24.3
+            ],
+            [
+              56.25,
+              24.3
+            ]
+          ]
+        ]
+      },
+      "weather": "snowstorm-night"
     },
     "rear": {
       "source": "assets/reverse/isolation.webp",
@@ -1084,7 +1278,8 @@
         ]
       ],
       "screens": [],
-      "reviewNote": "Only clear glass below the existing blind and beside the plants; all leaves, pots, blind slats and sill are protected."
+      "reviewNote": "Only clear glass below the existing blind and beside the plants; all leaves, pots, blind slats and sill are protected.",
+      "weather": "snowstorm-night"
     },
     "rear": {
       "source": "assets/room_views/stafflounge_rear.webp",
@@ -1619,7 +1814,8 @@
             ]
           ]
         ]
-      }
+      },
+      "weather": "snowstorm-night"
     }
   },
   "wardservice": {
@@ -2115,7 +2311,8 @@
         ]
       ],
       "screens": [],
-      "reviewNote": "Confirmed exterior trees behind a barred back-wall window. Twenty-seven narrow inset cells protect each vertical/horizontal bar, the outer frame, sill, radiator and lower-left medical trolley/tube silhouettes. The indoor doors are on separate side walls."
+      "reviewNote": "Confirmed exterior trees behind a barred back-wall window. Twenty-seven narrow inset cells protect each vertical/horizontal bar, the outer frame, sill, radiator and lower-left medical trolley/tube silhouettes. The indoor doors are on separate side walls.",
+      "weather": "snowstorm-night"
     },
     "rear": {
       "source": "assets/reverse/wardservice.webp",

@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "every carried item is discardable, including unused progression items; confirmation/Keep/stale tokens are safe, capacity frees and the item remains local rather than entering shared Storage",
+    "only the original room exposes reclaim; a full pack leaves the item untouched with visible feedback, and a real Take click recovers it exactly once",
+    "leaving an equipped weapon clears its equipped slot and magazine; its four loaded rounds persist with the left weapon through an actual Terminal save/load and return exactly once without adding reserve ammunition",
+    "leaving the flashlight switches it off and stops battery use; it can be recovered from the dark room without needing light to access its reclaim control",
+    "one actual carry-grid combine prepares exactly two ignitions; stove and chapel each use one, repeated interaction uses none, and Normal retires the finished lighter while Nightmare had retained it",
+    "actual saved legacy fuel of six/five/four normalizes to two/one/zero from the real ignition flags on load, without refilling empty fuel or resetting completed ignitions",
+    "actual Pause preserves discard confirmation and blocks leave/reclaim/refill; death also blocks all new item commands",
+    "room-local reclaim uses four readable item rows and real pagination at desktop, tablet and mobile sizes without nested modal scrolling"
+  ],
+  "javascript_errors": []
+}

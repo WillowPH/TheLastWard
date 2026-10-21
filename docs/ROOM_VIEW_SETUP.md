@@ -25,7 +25,9 @@ death, door-transition locking and pause consistently.
   Place CRT scanlines/messages inside actual screens and state patches in their fixtures.
   Native state overlays are composited before lighting, so they cannot bypass darkness.
 - Practical blocked actions call `WardWinter.think(text)`; puzzle choices stay in dialogs.
-  Discard policy belongs in inventory_discard.js and must protect unfinished item uses.
+  Discard policy belongs in inventory_discard.js. Every item can be left locally
+  with confirmation and recovered in that room; manual discard never prohibits an
+  unfinished item. Automatic retirement still waits for genuinely completed uses.
 
 Historical spherical-camera helpers remain in the repository but are not the active presentation.
 The old snap-camera mathematical tests do not validate the current room-view navigation;
@@ -35,3 +37,9 @@ V8 captions overlay the fitted native painting with no opaque backing. The UI la
 uses pointer-transparent cards and active caption buttons; preserve target access.
 Solid enemy textures and PEEK adaptation are runtime renderer concerns, not
 background painting edits. Keep new rear fixtures in authoritative metadata.
+
+V9 adds chapter_supplies_v9.js, chapter_outcomes_v9.js and chapter_review_v9.js
+after the v8 modules and before pause.js. There are 186 authored fixtures. Subject X
+standing/kneeling are separate native transparent sprites; preserve floor contact
+and source proportions. Patient room states share 1448×1086 geometry. Online
+atmosphere is a noninteractive ceiling-only layer; it never replaces native rooms.

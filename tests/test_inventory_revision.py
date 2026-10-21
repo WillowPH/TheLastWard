@@ -46,7 +46,7 @@ with sync_playwright() as p:
 
     inventory([{'n':'Lighter','c':1},{'n':'Lighter Fluid','c':1}], 'S.lighterFuel=0')
     combine('Lighter','Lighter Fluid')
-    assert ev('has("Lighter")&&!has("Lighter Fluid")&&WardWinter.fuel()===6')
+    assert ev('has("Lighter")&&!has("Lighter Fluid")&&WardWinter.fuel()===2')
     assert page.locator('#m .md').count()==0
     passed('Lighter + fluid refills the reusable lighter directly from the HUD')
 
@@ -62,7 +62,7 @@ with sync_playwright() as p:
     assert page.locator('#m .md').count()==0
     passed('A stabilizer can be applied to a selected firearm directly; the old inventory modal stays closed')
 
-    inventory([{'n':'Battery','c':1},{'n':'Lighter Fluid','c':1}])
+    inventory([{'n':'Battery','c':1},{'n':'Lighter Fluid','c':1},{'n':'Flashlight','c':1}])
     before = ev('JSON.stringify(S.inv)')
     combine('Battery','Lighter Fluid')
     assert ev('JSON.stringify(S.inv)')==before
@@ -80,26 +80,27 @@ with sync_playwright() as p:
     assert ev('S.contextThought.requirement')=='space'
     passed('A full pack rolls both ingredient counts back when neither stack frees an output slot')
 
-    inventory([{'n':'Archive Key','c':1},{'n':'Flashlight','c':1}], 'for(const [id,d]of Object.entries(D))if(d.need==="Archive Key")delete S.dr[id]')
+    inventory([{'n':'Archive Key','c':1},{'n':'Flashlight','c':1}], 'S.m=1.3;for(const [id,d]of Object.entries(D))if(d.need==="Archive Key")delete S.dr[id]')
     select('Archive Key')
-    assert panel.get_by_role('button', name='Discard', exact=True).count()==0
+    assert panel.get_by_role('button', name='Discard', exact=True).count()==1
     ev('wardRequestDiscard(0)')
-    assert page.get_by_role('button', name='Discard permanently', exact=True).count()==0
-    ev('for(const [id,d]of Object.entries(D))if(d.need==="Archive Key")S.dr[id]=1;render()')
+    assert page.get_by_role('button', name='Leave item here', exact=True).count()==1
+    page.get_by_role('button', name='Keep item', exact=True).click()
+    ev('closeModal();for(const [id,d]of Object.entries(D))if(d.need==="Archive Key")S.dr[id]=1;render()')
     select('Archive Key')
     assert 'Spent' in panel.inner_text()
     panel.get_by_role('button', name='Discard', exact=True).click()
-    page.get_by_role('button', name='Discard permanently', exact=True).click()
+    page.get_by_role('button', name='Leave item here', exact=True).click()
     assert not ev('has("Archive Key")')
     assert page.locator('#m .md').count()==0
     assert panel.is_hidden()
-    passed('A key remains protected while a matching lock is unfinished; discarding the spent key closes confirmation and stays in the room')
+    passed('An unused key can be left in the room with confirmation; useful/spent classification remains truthful and discarding closes the dialog without opening the inventory')
 
     inventory([{'n':'Field Medkit','c':1},{'n':'Battery','c':1},{'n':'Wire Spool','c':1},{'n':'Lighter','c':1},{'n':'Lighter Fluid','c':1}], 'S.hp=0;S.f.dead=1;S.bat=0;S.lighterFuel=0;render()')
     before = ev('JSON.stringify({hp:S.hp,inv:S.inv,bat:S.bat,fuel:S.lighterFuel})')
     ev('wardSelectInventory(0);wardUseManagedItem(0);useInventorySlot(0);wardCombineInventory(1,2);wardCombineInventory(3,4);wardRequestDiscard(0)')
     assert ev('JSON.stringify({hp:S.hp,inv:S.inv,bat:S.bat,fuel:S.lighterFuel})')==before
-    assert page.get_by_role('button', name='Discard permanently', exact=True).count()==0
+    assert page.get_by_role('button', name='Leave item here', exact=True).count()==0
     ev('S.hp=30')
     ev('wardUseManagedItem(0);useInventorySlot(0);wardCombineInventory(1,2);wardRequestDiscard(0)')
     assert ev('S.hp===0&&S.f.dead&&cnt("Field Medkit")===1&&cnt("Battery")===1&&cnt("Wire Spool")===1')

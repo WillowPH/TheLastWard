@@ -72,14 +72,18 @@ with sync_playwright() as p:
 
     # A saved vision does not restart its fade on every render and cannot
     # compete with the scripted sprinkler incident.
-    page.evaluate('S.roomView="rear";S.sceneDisturbance={room:S.room,kind:"hanged",deadline:Date.now()+7000};renderScene()')
+    page.evaluate('S.san=74;S.f.doctorWallSeen=1;S.roomView="rear";S.sceneDisturbance={room:S.room,view:"rear",kind:"hanged",deadline:Date.now()+7000};renderScene()')
     ready()
+    page.wait_for_function('document.querySelector("[data-sanity-vision] img")?.complete&&document.querySelector("[data-sanity-vision] img")?.naturalWidth>0')
     delay = page.locator('[data-sanity-vision]').evaluate('(n)=>parseFloat(n.style.animationDelay)')
     assert delay < -7
+    page.evaluate('renderScene()')
+    later_delay = page.locator('[data-sanity-vision]').evaluate('(n)=>parseFloat(n.style.animationDelay)')
+    assert later_delay <= delay, (delay, later_delay)
     page.evaluate('S.f.sprinklerStopped=0;renderScene()')
     assert not page.locator('[data-sanity-vision]').count()
     page.evaluate('S.f.sprinklerStopped=1;S.sceneDisturbance=null;renderScene()')
-    checks.append('sanity visions retain elapsed fade time and are suppressed during active sprinkler water')
+    checks.append('decoded earned infected memories retain elapsed fifteen-second fade across re-renders and are suppressed during active sprinkler water')
 
     room('isoward')
     page.evaluate('S.f.beggingPatientChoice=null;WardScene.options.motion=true;renderScene()')

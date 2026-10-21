@@ -66,7 +66,7 @@ with sync_playwright() as p:
         report['layouts'].append({'width': width, 'height': height, 'popover': bounds})
     report['checks'].append('At 1672, 1000 and 390 pixels: select, combine and use work through actual mouse clicks; actions remain in the viewport without scrolling or opening the inventory modal. Supply and ammo badges show exact counts.')
 
-    # Reusing the shared access card is protected until both authored locks open.
+    # The shared access card is auto-retired only after both authored locks open.
     page.evaluate('''S.m=1;S.inv=[{n:'Staff Access Card',c:1},{n:'Lighter',c:1},
         {n:'Battery',c:2},{n:'Handgun',c:1}];delete S.dr.ew;delete S.dr.wr;render()''')
     assert page.evaluate('has("Staff Access Card")')
@@ -78,11 +78,11 @@ with sync_playwright() as p:
     assert page.evaluate('has("Staff Access Card")&&WardWinter.inventoryDiscard.policy("Staff Access Card").spent')
     page.get_by_role('button', name='Select Staff Access Card', exact=True).click()
     page.locator('#inventoryCarryActions').get_by_role('button', name='Discard', exact=True).click()
-    page.get_by_role('button', name='Discard permanently', exact=True).click()
+    page.get_by_role('button', name='Leave item here', exact=True).click()
     assert page.evaluate('!has("Staff Access Card")')
     assert page.locator('#m .md').count() == 0
     assert not page.locator('#inventoryCarryActions').is_visible()
-    report['checks'].append('Normal automatically removes the access card only after both matching locks open, preserving useful supplies, lighter and weapon. Nightmare retains the spent card until confirmed manual discard; discard returns to the room.')
+    report['checks'].append('Normal automatically removes the access card only after both matching locks open, preserving useful supplies, lighter and weapon. Nightmare retains the spent card until confirmed room-local discard; discard returns to the room and leaves it recoverable.')
 
     # The pause contract is checked at the carry command boundary, not just by an overlay.
     page.evaluate('''window.inventoryPauseOriginal=WardWinter.isPaused;WardWinter.isPaused=()=>true;

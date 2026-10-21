@@ -3,8 +3,8 @@
 'use strict';
 const WW=WardWinter,W=1448,H=1086,fx=document.createElement('canvas'),snow=document.createElement('canvas'),screensLight=document.createElement('canvas');
 fx.width=snow.width=screensLight.width=W;fx.height=snow.height=screensLight.height=H;
-const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),crt=screensLight.getContext('2d'),images=new Map(),patient=document.createElement('canvas'),pc=patient.getContext('2d');
-let data={},raf=0,revision=0,frames=0,running=false,patientFrame=null;
+const ctx=fx.getContext('2d'),flakes=snow.getContext('2d'),crt=screensLight.getContext('2d'),images=new Map(),patient=document.createElement('canvas'),pc=patient.getContext('2d'),doctorPatches=new Map();
+let data={},raf=0,revision=0,frames=0,running=false,patientFrame=null,weatherFrame=null,doctorFrame=null;
 const state=()=>typeof S==='undefined'?null:S;
 const renderer=()=>WW.roomViewRenderer?.();
 function image(path){
@@ -28,18 +28,32 @@ function shutterSurface(spec){
  if(!spec?.asset)return null;
  const native=image(spec.asset);return native.complete&&native.naturalWidth?native:null;
 }
+function paintWinterExterior(spec,glass){
+ if(!glass.length)return;
+ const exterior=spec.winterExterior,plate=exterior?.asset&&image(exterior.asset);
+ // Only the window opening is replaced. The native room, foreground furniture,
+ // doors and input targets retain the original painting and coordinates.
+ if(plate?.complete&&plate.naturalWidth){ctx.save();ctx.clip(polygons(exterior.masks||glass));ctx.drawImage(plate,0,0,W,H);ctx.restore();}
+ ctx.save();ctx.clip(polygons(glass));
+ const haze=ctx.createLinearGradient(0,0,0,H*.65);
+ haze.addColorStop(0,exterior?'#40516116':'#45566b38');
+ haze.addColorStop(1,'#26343e0a');
+ ctx.fillStyle=haze;ctx.fillRect(0,0,W,H);ctx.restore();
+}
 function paintSnow(glass,time,moving){
  flakes.clearRect(0,0,W,H);if(!glass.length)return;
  flakes.save();flakes.clip(polygons(glass));
+ const size=renderer()?.size?.width||W,visibleRadius=Math.max(1,Math.min(2.4,W/Math.max(1,size)*.9));let particles=0;
  for(let pane=0;pane<glass.length;pane++){
   const poly=glass[pane],xs=poly.map(p=>p[0]/100*W),ys=poly.map(p=>p[1]/100*H),left=Math.min(...xs),top=Math.min(...ys),width=Math.max(...xs)-left,height=Math.max(...ys)-top;
-  const count=Math.max(2,Math.min(36,Math.round(width*height/500)));
+  const count=Math.max(3,Math.min(52,Math.round(width*height/750)));particles+=count;
   for(let i=0;i<count;i++){
-   const depth=.35+i%4*.14,t=moving?time:0,x=left+((i*17.71+pane*11+t*(.5+depth))%width+width)%width,y=top+((i*11.19+pane*5+t*(2+depth*2))%height+height)%height;
-   flakes.fillStyle='rgba(214,225,235,'+(.18+depth*.25)+')';flakes.beginPath();flakes.ellipse(x,y,.3+depth*.35,.45+depth*.55,.12,0,Math.PI*2);flakes.fill();
+   const depth=.45+i%3*.38,t=moving?time:0,x=left+((i*37.71+pane*11+t*(6+depth*12)+Math.sin(t*.45+i)*3)%width+width)%width,y=top+((i*29.19+pane*5+t*(16+depth*26))%height+height)%height,radius=visibleRadius*(.68+depth*.55);
+   flakes.fillStyle='rgba(225,233,241,'+(.43+depth*.22)+')';flakes.beginPath();flakes.ellipse(x,y,radius*.78,radius, -.2,0,Math.PI*2);flakes.fill();
   }
  }
  flakes.restore();
+ weatherFrame={room:state().room,view:renderer()?.view||state().roomView,time:moving?time:0,moving,glassCells:glass.length,particles};
 }
 function paintScreens(screens,time,moving){
  for(const [i,screen]of (screens||[]).entries()){
@@ -48,7 +62,7 @@ function paintScreens(screens,time,moving){
   const [x,y,w,h]=bounds(screen.rect),s=state(),online=!!screen.feed,standby=!screen.feed||online,backup=!s.f.power||s.f.powerOut;
   crt.save();crt.beginPath();crt.roundRect(x,y,w,h,Math.max(2,w*.06));crt.clip();crt.fillStyle=standby?'#19191b':'#080809';crt.fillRect(x,y,w,h);
   if(online){
-   const source=WW.roomViewAsset?.(screen.feed,'front')||data[screen.feed]?.front?.source;
+   const source=data[screen.feed]?.front?.winterExterior?.asset||WW.roomViewAsset?.(screen.feed,'front')||data[screen.feed]?.front?.source;
    if(source){const im=image(source);if(im.complete&&im.naturalWidth){crt.filter='grayscale(1) brightness('+(backup?1.35:1.55)+') contrast(.85)';crt.drawImage(im,0,0,im.naturalWidth,im.naturalHeight,x,y,w,h);crt.filter='none';crt.fillStyle='#d1d1d118';crt.fillRect(x,y,w,h);}}
   }else if(screen.kind==='patient'){
    crt.fillStyle='#060c0b';crt.fillRect(x,y,w,h);crt.strokeStyle='#83b99c';crt.lineWidth=Math.max(.7,w*.018);crt.beginPath();
@@ -83,6 +97,31 @@ function paintPatient(spec,time,moving){
  ctx.drawImage(patient,x,y-rise,w,h+rise*.4);
  patientFrame={rect:spec.rect.slice(),rise,phase,source};
 }
+function paintDoctor(spec,time,moving){
+ doctorFrame=null;
+ if(!spec||!moving||!state().f.doctorWallSeen)return;
+ const source=WW.roomViewAsset?.('surgery','front'),im=source&&image(source);
+ if(!im?.complete||!im.naturalWidth)return;
+ const severity=state().f.kesslerCondition==='seizing'?1:state().f.kesslerCondition==='lucid'?.62:.8;
+ const phase=time%(spec.cycle||5.8),spasm=phase<.46?Math.sin(phase/.46*Math.PI*4)*Math.sin(phase/.46*Math.PI):0;
+ const breath=Math.sin(time*1.9)*.48;
+ const motion=[];
+ for(const [part,rect]of Object.entries(spec.parts)){
+  const [x,y,w,h]=bounds(rect),key=source+':'+part;let patch=doctorPatches.get(key);
+  if(!patch){
+   patch=document.createElement('canvas');patch.width=Math.ceil(w);patch.height=Math.ceil(h);const c=patch.getContext('2d');
+   c.drawImage(im,x/W*im.naturalWidth,y/H*im.naturalHeight,w/W*im.naturalWidth,h/H*im.naturalHeight,0,0,patch.width,patch.height);
+   c.save();c.translate(patch.width/2,patch.height/2);c.scale(patch.width/2,patch.height/2);
+   const feather=c.createRadialGradient(0,0,.32,0,0,1);feather.addColorStop(0,'#fff');feather.addColorStop(1,'#fff0');c.globalCompositeOperation='destination-in';c.fillStyle=feather;c.fillRect(-1,-1,2,2);c.restore();
+   doctorPatches.set(key,patch);
+  }
+  // A sub-two-pixel native head jerk and uneven shoulder breath. The fixed
+  // silhouette, palm on the floor, legs, bed and tiled room never transform.
+  const dx=part==='head'?spasm*severity*1.65:spasm*severity*.5,dy=part==='head'?spasm*severity*.45:breath+Math.abs(spasm)*severity*.65;
+  ctx.drawImage(patch,x+dx,y+dy,w,h);motion.push({part,rect:rect.slice(),dx,dy});
+ }
+ doctorFrame={source,condition:state().f.kesslerCondition||'unresponsive',spasm,motion};
+}
 function paintFire(rect,time,moving){
  if(!rect)return;const [x,y,w,h]=bounds(rect);ctx.save();ctx.beginPath();ctx.roundRect(x,y,w,h,Math.min(w,h)*.07);ctx.clip();
  // Keep the painted smoky firebox visible under a restrained ember glow.
@@ -95,9 +134,9 @@ function paintFire(rect,time,moving){
  ctx.restore();
 }
 function draw(now){
- const s=state(),r=renderer();if(!s||!r?.loaded||r.room!==s.room)return;
+ const s=state(),r=renderer();if(!s||!r?.loaded||r.room!==s.room||WW.isPaused?.())return;
  const view=r.view||s.roomView||'front',spec=data[s.room]?.[view];ctx.clearRect(0,0,W,H);flakes.clearRect(0,0,W,H);crt.clearRect(0,0,W,H);if(!spec){r.effects(fx,screensLight);return;}
- const t=(WW.presentationTime?.(now)??now)/1000,moving=motionEnabled()&&!WW.isPaused?.(),closed=s.room==='lobby'&&s.f.lobbyShutters;
+ const t=(WW.presentationTime?.(now)??now)/1000,moving=motionEnabled(),closed=s.room==='lobby'&&s.f.lobbyShutters;
  const windows=spec.windowGlass&&WW.windowState?.(),physicalGlass=windows?.triggered?spec.windowGlass.flatMap((pane,i)=>pane[windows.closed[i]?'closed':'open']):spec.glass||[],glass=closed?[]:physicalGlass;
  if(windows?.triggered&&spec.windowState){
   const opening=image(spec.windowState.asset);
@@ -108,8 +147,9 @@ function draw(now){
  if(closed){const surface=shutterSurface(spec.shutters);if(surface)ctx.drawImage(surface,0,0,W,H);}
  const dip=moving&&WardScene.options.flashes!==false?WW.flicker(s.room,t):0;
  if(dip){const interior=new Path2D();interior.rect(0,0,W,H);interior.addPath(polygons(physicalGlass));ctx.save();ctx.clip(interior,'evenodd');ctx.fillStyle='rgba(0,0,0,'+dip+')';ctx.fillRect(0,0,W,H);ctx.restore();}
- paintSnow(glass,t,moving);ctx.drawImage(snow,0,0);paintScreens(spec.screens,t,moving);
+ paintWinterExterior(spec,glass);weatherFrame=null;paintSnow(glass,t,moving);ctx.drawImage(snow,0,0);paintScreens(spec.screens,t,moving);
  paintPatient(s.room==='isoward'&&view==='front'?spec.patientMotion:null,t,motionEnabled());
+ paintDoctor(s.room==='surgery'&&view==='front'?spec.doctorMotion:null,t,moving);
  if(s.room==='laundry'&&s.f.stoveLit)paintFire(spec.firebox,t,moving);
  if(s.room==='eastcorridor'&&s.f.sprinklerTriggered&&!s.f.sprinklerStopped&&spec.sprinkler){
   const p=spec.sprinkler,x=p.origin[0]/100*W,y=p.origin[1]/100*H;ctx.save();ctx.strokeStyle='rgba(182,215,223,.25)';
@@ -124,9 +164,12 @@ function mount(){
  function frame(now){if(own!==revision||!renderer()?.loaded)return;if(now-last>=1000/24){draw(now);last=now;}if(motionEnabled()){running=true;raf=requestAnimationFrame(frame);}else running=false;}
  frame(performance.now());
 }
-const api={mount,stop,draw,canvas:fx,snowCanvas:snow,screenCanvas:screensLight,get frames(){return frames;},get data(){return data;},get patientFrame(){return patientFrame;}};
+const api={mount,stop,draw,canvas:fx,snowCanvas:snow,screenCanvas:screensLight,get frames(){return frames;},get data(){return data;},get patientFrame(){return patientFrame;},get weatherFrame(){return weatherFrame;},get doctorFrame(){return doctorFrame;}};
 WW.roomViewEffects=api;
 api.ready=fetch(WW.asset('data/room_view_effects.json')).then(response=>{if(!response.ok)throw Error('Room effect definitions could not load.');return response.json();}).then(value=>{data=value;WardMotion.glazing=data;mount();return data;}).catch(error=>{console.error(error);return null;});
 WardMotion.mount=mount;
 WardMotion.snapshot=()=>({room:state()?.room,view:renderer()?.view||state()?.roomView,frames,running});
+// Respect an OS preference change immediately; a stopped RAF otherwise never
+// notices when motion is permitted again until the next room render.
+matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',mount);
 })();
